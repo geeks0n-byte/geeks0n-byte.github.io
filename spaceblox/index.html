@@ -145,10 +145,136 @@
       border-radius: 22px;
       overflow: hidden;
       border: 2px solid var(--line);
-      background: var(--panel);
+      background: #00123a;
       box-shadow: 0 20px 50px #0007;
+      aspect-ratio: 1024 / 500;
+      position: relative;
+      isolation: isolate;
     }
-    .hero-art img { display: block; width: 100%; height: auto; }
+    .space-banner {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #00123a;
+    }
+    .space-banner .sb-layer {
+      position: absolute;
+      inset: -20%;
+      background-repeat: repeat;
+      background-size: 45% auto;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      will-change: transform, opacity;
+      pointer-events: none;
+    }
+    .space-banner .sb-void {
+      position: absolute;
+      inset: 0;
+      background: #00123a;
+    }
+    .space-banner .sb-dust {
+      background-image: url("assets/bg_1_far_dust.svg");
+      opacity: 0.85;
+      animation: sb-parallax-a 90s linear infinite;
+    }
+    .space-banner .sb-stars {
+      background-image: url("assets/bg_2_medium_stars.svg");
+      animation: sb-parallax-b 55s linear infinite, sb-twinkle 6s ease-in-out infinite;
+    }
+    .space-banner .sb-accents {
+      background-image: url("assets/bg_3_foreground_accents.svg");
+      animation: sb-parallax-c 38s linear infinite, sb-twinkle-alt 6s ease-in-out infinite;
+    }
+    .space-banner .sb-sparks {
+      background-image: url("assets/bg_4_sparkler_crosses.svg");
+      background-size: 38% auto;
+      animation: sb-parallax-d 22s linear infinite;
+    }
+    @keyframes sb-parallax-a {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(-12%, -8%, 0); }
+    }
+    @keyframes sb-parallax-b {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(-18%, -12%, 0); }
+    }
+    @keyframes sb-parallax-c {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(-26%, -16%, 0); }
+    }
+    @keyframes sb-parallax-d {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(-34%, -20%, 0); }
+    }
+    @keyframes sb-twinkle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    @keyframes sb-twinkle-alt {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    .space-banner .sb-title {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .space-banner .sb-word-wrap {
+      position: relative;
+      display: inline-block;
+      padding: 0.35em 0.15em;
+    }
+    .space-banner .sb-word {
+      font-family: "PressStart2P", monospace;
+      font-size: clamp(1.05rem, 4.2vw, 2.35rem);
+      color: #facc15;
+      letter-spacing: 0.02em;
+      text-shadow:
+        0 0 0 #04111f,
+        3px 0 0 #04111f,
+        -3px 0 0 #04111f,
+        0 3px 0 #04111f,
+        0 -3px 0 #04111f,
+        3px 3px 0 #04111f,
+        -3px 3px 0 #04111f,
+        3px -3px 0 #04111f,
+        -3px -3px 0 #04111f,
+        0 0 18px #facc1544;
+      line-height: 1;
+      margin: 0;
+      white-space: nowrap;
+    }
+    /* Tile holes: P (2nd letter) and O (8th) of SPACEBLOX */
+    .space-banner .sb-tile {
+      position: absolute;
+      width: 0.42em;
+      height: 0.42em;
+      image-rendering: pixelated;
+      filter: drop-shadow(0 1px 0 #0008);
+      pointer-events: none;
+    }
+    .space-banner .sb-tile-p {
+      left: 14.2%;
+      top: 28%;
+    }
+    .space-banner .sb-tile-o1 {
+      left: 80.6%;
+      top: 22%;
+    }
+    .space-banner .sb-tile-o2 {
+      left: 80.6%;
+      top: 48%;
+    }
+    @media (max-width: 860px) {
+      .space-banner .sb-word { font-size: clamp(1.15rem, 8.5vw, 1.85rem); }
+      .space-banner .sb-layer { background-size: 70% auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .space-banner .sb-layer { animation: none !important; opacity: 1 !important; }
+    }
 
     section { margin: 2.5rem 0; }
     h2 {
@@ -257,6 +383,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .shots-track { animation: none; }
+      .space-banner .sb-layer { animation: none !important; }
     }
 
   </style>
@@ -296,8 +423,22 @@
           <a class="btn btn-ghost" href="#how">HOW TO PLAY</a>
         </div>
       </div>
-      <div class="hero-art">
-        <img src="assets/feature.png" alt="Spaceblox feature art" width="1024" height="500" />
+      <div class="hero-art" role="img" aria-label="SPACEBLOX title over animated space background">
+        <div class="space-banner" aria-hidden="true">
+          <div class="sb-void"></div>
+          <div class="sb-layer sb-dust"></div>
+          <div class="sb-layer sb-stars"></div>
+          <div class="sb-layer sb-accents"></div>
+          <div class="sb-layer sb-sparks"></div>
+          <div class="sb-title">
+            <div class="sb-word-wrap">
+              <p class="sb-word">SPACEBLOX</p>
+              <img class="sb-tile sb-tile-p" src="assets/tile_green.svg" alt="" width="28" height="28" />
+              <img class="sb-tile sb-tile-o1" src="assets/tile_yellow.svg" alt="" width="28" height="28" />
+              <img class="sb-tile sb-tile-o2" src="assets/tile_blue.svg" alt="" width="28" height="28" />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
