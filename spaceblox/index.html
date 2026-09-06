@@ -92,9 +92,15 @@
       color: #f8fafc;
     }
     .lead { font-size: 1.08rem; color: var(--muted); margin: 0 0 1.4rem; max-width: 36rem; }
+    .tiles-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem 1rem;
+      margin: 0 0 1.5rem;
+    }
     .tiles {
       display: flex; align-items: center; gap: 0.45rem;
-      margin: 0 0 1.5rem;
       image-rendering: pixelated;
     }
     .tiles img {
@@ -102,44 +108,20 @@
       display: block;
       filter: drop-shadow(0 4px 0 #0006);
     }
-
     .play-badge {
       display: inline-flex;
       align-items: center;
       line-height: 0;
-      margin: -0.35rem 0 -0.35rem -0.55rem; /* badge PNG has built-in padding */
+      margin: -0.55rem 0 -0.55rem -0.45rem; /* badge PNG has built-in padding */
     }
     .play-badge img {
       display: block;
-      width: min(215px, 70vw);
+      width: 168px;
       height: auto;
     }
     @media (max-width: 860px) {
-      .play-badge { margin-left: -0.35rem; align-self: flex-start; }
-      .play-badge img { width: min(200px, 75vw); }
+      .play-badge img { width: min(168px, 52vw); }
     }
-
-    .cta { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-    .cta { align-items: center; }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      padding: 0 1.15rem; border-radius: 10px;
-      text-decoration: none; font-weight: 700; font-size: 0.92rem;
-      border: 2px solid transparent;
-      height: 56px; /* match visible Play badge height at ~215px width */
-      box-sizing: border-box;
-    }
-    .btn-primary {
-      background: linear-gradient(180deg, #38bdf8, #0284c7);
-      color: #04111f;
-      box-shadow: 0 10px 28px #0284c766;
-    }
-    .btn-ghost {
-      background: #0f172a99;
-      color: var(--text);
-      border-color: var(--line);
-    }
-    .btn:hover { filter: brightness(1.06); }
 
     .hero-art {
       border-radius: 22px;
@@ -214,6 +196,18 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.6; }
     }
+    .space-banner .sb-fx {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .space-banner .sb-fx-item {
+      position: absolute;
+      image-rendering: pixelated;
+      will-change: transform;
+    }
     .space-banner .sb-title {
       position: absolute;
       inset: 0;
@@ -222,58 +216,68 @@
       z-index: 2;
       pointer-events: none;
     }
-    .space-banner .sb-word-wrap {
+    /* Exact game title crop coords: 1080x180 (from capture_title.gd) */
+    .space-banner .sb-title-stage {
+      width: min(94%, 920px);
+      aspect-ratio: 1080 / 180;
       position: relative;
-      display: inline-block;
-      padding: 0.35em 0.15em;
+      container-type: size;
+    }
+    .space-banner .sb-title-design {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 180px;
+      transform-origin: top left;
+      transform: scale(calc(100cqw / 1080));
     }
     .space-banner .sb-word {
+      position: absolute;
+      left: 24px;
+      top: 20px;
+      width: 1032px;
+      height: 160px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-family: "PressStart2P", monospace;
-      font-size: clamp(1.05rem, 4.2vw, 2.35rem);
+      font-size: 96px;
       color: #facc15;
-      letter-spacing: 0.02em;
+      letter-spacing: 0;
       text-shadow:
-        0 0 0 #04111f,
-        3px 0 0 #04111f,
-        -3px 0 0 #04111f,
-        0 3px 0 #04111f,
-        0 -3px 0 #04111f,
-        3px 3px 0 #04111f,
-        -3px 3px 0 #04111f,
-        3px -3px 0 #04111f,
-        -3px -3px 0 #04111f,
+        4px 0 0 #04111f,
+        -4px 0 0 #04111f,
+        0 4px 0 #04111f,
+        0 -4px 0 #04111f,
+        4px 4px 0 #04111f,
+        -4px 4px 0 #04111f,
+        4px -4px 0 #04111f,
+        -4px -4px 0 #04111f,
         0 0 18px #facc1544;
       line-height: 1;
-      margin: 0;
       white-space: nowrap;
     }
-    /* Tile holes: P (2nd letter) and O (8th) of SPACEBLOX */
+    /* Tile holes from main_menu.tscn — 28px @ scale 1.15, crop y -= 220 */
     .space-banner .sb-tile {
       position: absolute;
-      width: 0.35em;
-      height: 0.35em;
+      width: 28px;
+      height: 28px;
+      transform: scale(1.15);
+      transform-origin: top left;
       image-rendering: pixelated;
-      filter: drop-shadow(0 1px 0 #0008);
       pointer-events: none;
     }
-    .space-banner .sb-tile-p {
-      left: 14.2%;
-      top: 28%;
-    }
-    .space-banner .sb-tile-o1 {
-      left: 80.6%;
-      top: 28%;
-    }
-    .space-banner .sb-tile-o2 {
-      left: 80.6%;
-      top: 46%;
-    }
+    .space-banner .sb-tile-p { left: 230px; top: 66px; }
+    .space-banner .sb-tile-o1 { left: 806px; top: 66px; }
+    .space-banner .sb-tile-o2 { left: 806px; top: 93px; }
     @media (max-width: 860px) {
-      .space-banner .sb-word { font-size: clamp(1.15rem, 8.5vw, 1.85rem); }
       .space-banner .sb-layer { background-size: 70% auto; }
     }
     @media (prefers-reduced-motion: reduce) {
       .space-banner .sb-layer { animation: none !important; opacity: 1 !important; }
+      .space-banner .sb-fx { display: none; }
     }
 
     section { margin: 2.5rem 0; }
@@ -364,8 +368,6 @@
       .hero { padding: 0.5rem 0 1.75rem; gap: 1.35rem; }
       h1 { font-size: clamp(0.92rem, 4.6vw, 1.2rem); }
       .lead { font-size: 1rem; margin-bottom: 1.1rem; }
-      .cta { flex-direction: column; align-items: stretch; }
-      .btn { width: 100%; height: 52px; }
       .panel { padding: 1rem 1.05rem; border-radius: 14px; }
       .rules { padding-left: 1rem; font-size: 0.98rem; }
       section { margin: 1.75rem 0; }
@@ -410,17 +412,16 @@
           Fill every empty cell with yellow, blue, or green tiles.
           Never place three of the same color in a row or column.
         </p>
-        <div class="tiles" aria-label="In-game tiles">
-          <img src="assets/tile_yellow.svg" alt="Yellow tile" width="40" height="40" />
-          <img src="assets/tile_blue.svg" alt="Blue tile" width="40" height="40" />
-          <img src="assets/tile_green.svg" alt="Green tile" width="40" height="40" />
-          <img src="assets/tile_shifter.svg" alt="Special purple tile" width="40" height="40" />
-        </div>
-        <div class="cta">
+        <div class="tiles-row">
+          <div class="tiles" aria-label="In-game tiles">
+            <img src="assets/tile_yellow.svg" alt="Yellow tile" width="40" height="40" />
+            <img src="assets/tile_blue.svg" alt="Blue tile" width="40" height="40" />
+            <img src="assets/tile_green.svg" alt="Green tile" width="40" height="40" />
+            <img src="assets/tile_shifter.svg" alt="Special purple tile" width="40" height="40" />
+          </div>
           <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" aria-label="Get it on Google Play">
             <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" />
           </a>
-          <a class="btn btn-ghost" href="#how">HOW TO PLAY</a>
         </div>
       </div>
       <div class="hero-art" role="img" aria-label="SPACEBLOX title over animated space background">
@@ -430,12 +431,15 @@
           <div class="sb-layer sb-stars"></div>
           <div class="sb-layer sb-accents"></div>
           <div class="sb-layer sb-sparks"></div>
+          <div class="sb-fx" id="space-fx"></div>
           <div class="sb-title">
-            <div class="sb-word-wrap">
-              <p class="sb-word">SPACEBLOX</p>
-              <img class="sb-tile sb-tile-p" src="assets/tile_green.svg" alt="" width="28" height="28" />
-              <img class="sb-tile sb-tile-o1" src="assets/tile_yellow.svg" alt="" width="28" height="28" />
-              <img class="sb-tile sb-tile-o2" src="assets/tile_blue.svg" alt="" width="28" height="28" />
+            <div class="sb-title-stage">
+              <div class="sb-title-design">
+                <p class="sb-word">SPACEBLOX</p>
+                <img class="sb-tile sb-tile-p" src="assets/tile_green.svg" alt="" width="28" height="28" />
+                <img class="sb-tile sb-tile-o1" src="assets/tile_yellow.svg" alt="" width="28" height="28" />
+                <img class="sb-tile sb-tile-o2" src="assets/tile_blue.svg" alt="" width="28" height="28" />
+              </div>
             </div>
           </div>
         </div>
@@ -503,5 +507,75 @@
       </div>
     </footer>
   </div>
+
+  <script>
+  (function () {
+    var fx = document.getElementById("space-fx");
+    if (!fx || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    var ASSETS = {
+      star: "assets/fx_shooting_star.svg",
+      comet: "assets/fx_comet_1.svg",
+      asteroids: [
+        "assets/fx_asteroid_1.svg",
+        "assets/fx_asteroid_2.svg",
+        "assets/fx_asteroid_3.svg"
+      ]
+    };
+
+    function rand(a, b) { return a + Math.random() * (b - a); }
+    function pick(arr) { return arr[(Math.random() * arr.length) | 0]; }
+
+    function spawn(kind) {
+      var img = document.createElement("img");
+      img.className = "sb-fx-item";
+      img.alt = "";
+      var w, h, dur, src;
+      if (kind === "star") {
+        src = ASSETS.star; w = rand(28, 48); h = w; dur = rand(0.8, 1.6);
+      } else if (kind === "comet") {
+        src = ASSETS.comet; w = rand(72, 110); h = w * 0.5; dur = rand(2.2, 4.0);
+      } else {
+        src = pick(ASSETS.asteroids); w = rand(36, 64); h = w; dur = rand(6, 14);
+      }
+      img.src = src;
+      img.style.width = w + "px";
+      img.style.height = h + "px";
+
+      var startX = fx.clientWidth + w + 20;
+      var endX = -w - 40;
+      var startY = rand(-40, fx.clientHeight * 0.75);
+      var endY = startY + (startX - endX) * rand(0.08, 0.55);
+      var rot0 = rand(0, 360);
+      var rot1 = rot0 + (kind === "asteroid" ? rand(180, 720) * (Math.random() < 0.5 ? 1 : -1) : 0);
+
+      img.style.left = "0";
+      img.style.top = "0";
+      img.style.transform = "translate(" + startX + "px," + startY + "px) rotate(" + rot0 + "deg)";
+      fx.appendChild(img);
+
+      var anim = img.animate([
+        { transform: "translate(" + startX + "px," + startY + "px) rotate(" + rot0 + "deg)" },
+        { transform: "translate(" + endX + "px," + endY + "px) rotate(" + rot1 + "deg)" }
+      ], { duration: dur * 1000, easing: "linear", fill: "forwards" });
+      anim.onfinish = function () { img.remove(); };
+    }
+
+    function schedule() {
+      // Simplified weights vs game: mostly stars, some asteroids, rare comets
+      var roll = Math.random();
+      var kind = roll < 0.62 ? "star" : (roll < 0.92 ? "asteroid" : "comet");
+      if (kind === "asteroid" && Math.random() < 0.28) {
+        var n = 2 + ((Math.random() * 3) | 0);
+        for (var i = 0; i < n; i++) setTimeout(function () { spawn("asteroid"); }, i * rand(80, 220));
+      } else {
+        spawn(kind);
+      }
+      setTimeout(schedule, rand(1800, 5200));
+    }
+    setTimeout(schedule, rand(600, 1600));
+  })();
+  </script>
+
 </body>
 </html>

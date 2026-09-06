@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 16" width="128" height="64" shape-rendering="crispEdges">
+  <!-- Bright Core -->
+  <rect x="2" y="7" width="3" height="2" fill="#ffffff" />
+  
+  <!-- Inner bright tail (Yellow-Orange) -->
+  <path d="M5 7h5v2H5z M10 8h6v1h-6z" fill="#ff9900" />
+  
+  <!-- Mid tail spreading out (Red-Orange) -->
+  <path d="M7 6h4v1H7z M7 9h4v1H7z M11 7h6v1h-6z M16 8h8v1h-8z" fill="#ff3300" opacity="0.8" />
+  
+  <!-- Outer trailing wisps (Deep Red) -->
+  <path d="M10 5h4v1h-4z M10 10h4v1h-4z M15 6h6v1h-6z M15 9h6v1h-6z M22 7h6v1h-6z M24 8h5v1h-5z" fill="#cc0000" opacity="0.6" />
+</svg>
