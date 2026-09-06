@@ -149,14 +149,21 @@
     }
     .hero-copy { max-width: 40rem; }
     @media (min-width: 900px) {
+      /* Same 700px rail as banner/header; columns asymmetric under it */
       .hero {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: minmax(0, 1fr) auto;
         grid-template-areas: "art art" "copy side";
-        gap: 1.75rem 2.5rem;
+        gap: 1.5rem 1.25rem;
         align-items: start;
+        width: 100%;
+        max-width: min(100%, 700px);
+        margin-inline: auto;
       }
-      .hero-art { grid-area: art; }
+      .hero-art {
+        grid-area: art;
+        max-width: none; /* hero already caps width */
+      }
       .hero-copy {
         grid-area: copy;
         max-width: none;
@@ -164,6 +171,7 @@
         justify-self: stretch;
         margin-inline: 0;
         text-align: center;
+        min-width: 0;
       }
       .hero-copy h1,
       .hero-copy .lead {
@@ -180,7 +188,8 @@
         justify-content: center;
         gap: 1rem;
         padding-top: 0.35rem;
-        width: 100%;
+        width: auto;
+        justify-self: end;
       }
       .hero-copy .tiles-row { display: none; }
       .hero-side .tiles-row {
