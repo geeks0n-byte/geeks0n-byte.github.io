@@ -57,6 +57,7 @@
     }
     .wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 1.25rem 1.25rem 4rem; }
     header {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -67,7 +68,7 @@
       margin-inline: auto;
       padding: 0.85rem 0 1.35rem;
     }
-    .brand { display: inline-flex; align-items: center; text-decoration: none; flex: 0 0 auto; }
+    .brand { display: inline-flex; align-items: center; text-decoration: none; flex: 0 0 auto; z-index: 1; }
     .brand img {
       width: 52px;
       height: 52px;
@@ -83,6 +84,7 @@
       flex: 0 0 auto;
       width: auto;
       min-width: 0;
+      z-index: 1;
     }
     nav a {
       flex: 0 0 auto;
@@ -111,6 +113,94 @@
       background-repeat: no-repeat;
       box-shadow: 0 3px 0 #0008;
     }
+
+    /* Compact SPACEBLOX title (with tiles) centered in header */
+    .header-title {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: block;
+      text-decoration: none;
+      z-index: 0;
+      pointer-events: auto;
+    }
+    .header-title .sb-title-stage {
+      width: min(52vw, 280px);
+      aspect-ratio: 1080 / 180;
+      height: auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .header-title .sb-title-design {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 180px;
+      transform-origin: top left;
+      transform: scale(0.25);
+    }
+    .header-title .sb-word {
+      position: absolute;
+      left: 24px;
+      top: 20px;
+      width: 1032px;
+      height: 160px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "PressStart2P", monospace;
+      font-size: 96px;
+      color: #facc15;
+      letter-spacing: 0;
+      text-shadow:
+        3px 0px 0 #04111f,
+        -3px 0px 0 #04111f,
+        0px 3px 0 #04111f,
+        0px -3px 0 #04111f,
+        3px 3px 0 #04111f,
+        -3px 3px 0 #04111f,
+        3px -3px 0 #04111f,
+        -3px -3px 0 #04111f,
+        5px 0px 0 #04111f,
+        -5px 0px 0 #04111f,
+        0px 5px 0 #04111f,
+        0px -5px 0 #04111f,
+        5px 5px 0 #04111f,
+        -5px 5px 0 #04111f,
+        5px -5px 0 #04111f,
+        -5px -5px 0 #04111f,
+        7px 0px 0 #04111f,
+        -7px 0px 0 #04111f,
+        0px 7px 0 #04111f,
+        0px -7px 0 #04111f,
+        7px 7px 0 #04111f,
+        -7px 7px 0 #04111f,
+        7px -7px 0 #04111f,
+        -7px -7px 0 #04111f,
+        0 0 10px #facc1544;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .header-title .sb-tile {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      transform: scale(1.15);
+      transform-origin: 0 0;
+      image-rendering: pixelated;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .header-title .sb-tile-p { left: 230px; top: 66px; }
+    .header-title .sb-tile-o1 { left: 806px; top: 65px; }
+    .header-title .sb-tile-o2 { left: 806px; top: 93px; }
+    @media (max-width: 640px) {
+      .header-title .sb-title-stage { width: min(46vw, 200px); }
+    }
+
     nav a:hover { filter: brightness(1.12); color: #ffffff; }
     nav a:active { filter: brightness(0.92); transform: translateY(1px); box-shadow: 0 1px 0 #0008; }
 
@@ -316,6 +406,16 @@
       <a class="brand" href="./" aria-label="Spaceblox home">
         <img src="assets/icon_512.png" alt="Spaceblox" width="44" height="44" />
       </a>
+      <a class="header-title" href="./" aria-label="SPACEBLOX">
+        <div class="sb-title-stage">
+          <div class="sb-title-design">
+            <p class="sb-word">SPACEBLOX</p>
+            <img class="sb-tile sb-tile-p" src="assets/tile_green.svg" alt="" width="28" height="28" />
+            <img class="sb-tile sb-tile-o1" src="assets/tile_yellow.svg" alt="" width="28" height="28" />
+            <img class="sb-tile sb-tile-o2" src="assets/tile_blue.svg" alt="" width="28" height="28" />
+          </div>
+        </div>
+      </a>
       <nav>
         <a href="./">BACK</a>
       </nav>
@@ -471,5 +571,29 @@
     </footer>
     </div>
   </div>
+
+  <script>
+  (function () {
+    var DESIGN_W = 1080;
+    var DESIGN_H = 180;
+    function fitHeaderTitle() {
+      var stage = document.querySelector(".header-title .sb-title-stage");
+      var design = document.querySelector(".header-title .sb-title-design");
+      if (!stage || !design) return;
+      var w = stage.clientWidth || 1;
+      stage.style.height = (w * (DESIGN_H / DESIGN_W)) + "px";
+      design.style.transform = "scale(" + (w / DESIGN_W) + ")";
+    }
+    function fitSoon() {
+      fitHeaderTitle();
+      requestAnimationFrame(fitHeaderTitle);
+    }
+    fitSoon();
+    window.addEventListener("resize", fitSoon);
+    if (window.visualViewport) window.visualViewport.addEventListener("resize", fitSoon);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitSoon);
+    window.addEventListener("load", fitSoon);
+  })();
+  </script>
 </body>
 </html>
