@@ -159,7 +159,11 @@
         margin-inline: auto;
         text-align: center;
       }
-      .hero-copy .lead { margin-inline: auto; }
+      .hero-copy h1,
+      .hero-copy .lead {
+        text-align: center;
+        margin-inline: auto;
+      }
       .hero-side {
         grid-area: side;
         display: flex;
@@ -181,6 +185,9 @@
     }
     @media (max-width: 899px) {
       .hero-side { display: none; }
+      .hero-copy h1 { text-align: center; }
+      .hero-copy .lead { text-align: left; }
+      .lead-break { display: none; }
     }
     h1 {
       font-family: "PressStart2P", monospace;
@@ -553,7 +560,7 @@ footer {
       <div class="hero-copy">
         <h1>Calm color logic<br>in deep space</h1>
         <p class="lead">
-          Fill every empty cell with yellow, blue, or green tiles.<br />
+          Fill every empty cell with yellow, blue, or green tiles.<br class="lead-break" />
           Never place three of the same color in a row or column.
         </p>
         <div class="tiles-row">
