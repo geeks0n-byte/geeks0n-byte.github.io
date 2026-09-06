@@ -1,3 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 16" width="256" height="64" shape-rendering="crispEdges" preserveAspectRatio="none">
   <rect x="0" y="0" width="64" height="16" fill="#1a1a1a"/>
+  <rect x="0" y="0" width="64" height="15" fill="#2a2a2a"/>
+  <rect x="0" y="0" width="63" height="1" fill="#4a4a4a"/>
+  <rect x="0" y="1" width="1" height="13" fill="#4a4a4a"/>
+  <rect x="1" y="14" width="63" height="1" fill="#121212"/>
+  <rect x="63" y="1" width="1" height="14" fill="#121212"/>
 </svg>
