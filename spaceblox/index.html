@@ -576,6 +576,14 @@
       max-width: 100%;
       text-align: left;
     }
+    #how .rule-tile {
+      display: inline-block;
+      width: 1.05em;
+      height: 1.05em;
+      vertical-align: -0.15em;
+      margin-right: 0.28em;
+      image-rendering: pixelated;
+    }
     #shots h2 { text-align: center; }
     #shots {
       width: 100%;
@@ -776,10 +784,10 @@ footer {
       <h2>HOW TO PLAY</h2>
       <div class="panel">
         <ol class="rules">
-          <li>Fill empty cells with <strong style="color:var(--yellow)">yellow</strong>, <strong style="color:var(--blue)">blue</strong> or <strong style="color:var(--green)">green</strong> tiles.</li>
+          <li>Fill empty cells with <img class="rule-tile" src="assets/tile_yellow.svg" alt="" width="18" height="18" /><strong style="color:var(--yellow)">yellow</strong>, <img class="rule-tile" src="assets/tile_blue.svg" alt="" width="18" height="18" /><strong style="color:var(--blue)">blue</strong> or <img class="rule-tile" src="assets/tile_green.svg" alt="" width="18" height="18" /><strong style="color:var(--green)">green</strong> tiles.</li>
           <li>Never place three of the same color in a row or column.</li>
           <li>Keep the colors balanced on every line.</li>
-          <li><strong style="color:var(--purple)">Purple</strong> tiles add extra twists as you go.</li>
+          <li><img class="rule-tile" src="assets/tile_shifter.svg" alt="" width="18" height="18" /><strong style="color:var(--purple)">Purple</strong> tiles add extra twists as you go.</li>
           <li>A full, valid board wins the level.</li>
         </ol>
       </div>
