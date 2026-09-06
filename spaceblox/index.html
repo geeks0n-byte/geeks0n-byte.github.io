@@ -64,9 +64,9 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      padding: 0.75rem 0 1.5rem;
+      gap: 0.55rem;
+      flex-wrap: nowrap;
+      padding: 0.75rem 0 1.25rem;
     }
     .brand {
       display: inline-flex;
@@ -75,48 +75,51 @@
       flex: 0 0 auto;
     }
     .brand img {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
       box-shadow: 0 0 0 2px #334155, 0 8px 24px #0008;
     }
     nav {
       display: flex;
-      gap: 0.45rem;
-      flex-wrap: wrap;
+      gap: 0.35rem;
+      flex-wrap: nowrap;
       align-items: center;
+      min-width: 0;
     }
     nav a {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-family: "PressStart2P", monospace;
-      font-size: clamp(0.36rem, 2.1vw, 0.5rem);
+      font-size: clamp(0.28rem, 1.35vw, 0.45rem);
       letter-spacing: 0.02em;
       color: #ffffff;
       text-decoration: none;
       text-shadow: 1px 1px 0 #000;
       white-space: nowrap;
-      padding: 0.62rem 1.05rem;
-      min-height: 2.4rem;
+      padding: 0.55rem 0.95rem;
       line-height: 1;
       image-rendering: pixelated;
+      /* Stretch the square tile into a wide button (9-slice-like) */
+      border: 3px solid transparent;
+      border-image: url("assets/button_tile_gray_dark.svg") 2 / 3px / 0 stretch;
       background-color: #1a1a1a;
       background-image: url("assets/button_tile_gray_dark.svg");
       background-size: 100% 100%;
       background-repeat: no-repeat;
-      border: none;
+      background-clip: padding-box;
       box-shadow: none;
     }
     nav a:hover { filter: brightness(1.15); color: #ffffff; }
     nav a:active { filter: brightness(0.9); transform: translateY(1px); }
-    @media (max-width: 420px) {
-      nav { gap: 0.35rem; width: calc(100% - 60px); }
+    @media (max-width: 560px) {
+      .brand img { width: 40px; height: 40px; border-radius: 10px; }
       nav a {
-        flex: 1 1 auto;
-        padding: 0.55rem 0.55rem;
-        font-size: clamp(0.32rem, 2.8vw, 0.42rem);
-        min-height: 2.15rem;
+        padding: 0.45rem 0.55rem;
+        font-size: clamp(0.24rem, 2.4vw, 0.34rem);
+        border-width: 2px;
+        border-image: url("assets/button_tile_gray_dark.svg") 2 / 2px / 0 stretch;
       }
     }
 
@@ -173,9 +176,10 @@
       border: 2px solid var(--line);
       background: #00123a;
       box-shadow: 0 20px 50px #0007;
-      aspect-ratio: 1024 / 500;
       position: relative;
       isolation: isolate;
+      width: 100%;
+      height: clamp(150px, 24vw, 260px);
     }
     .space-banner {
       position: absolute;
@@ -405,20 +409,6 @@
       padding: 1rem max(1rem, env(safe-area-inset-right)) 3.5rem max(1rem, env(safe-area-inset-left));
     }
     @media (max-width: 860px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.85rem;
-        padding-bottom: 1rem;
-      }
-      nav {
-        width: 100%;
-        gap: 0.65rem 1rem;
-      }
-      nav a {
-        font-size: 0.9rem;
-        padding: 0.35rem 0;
-      }
       .hero { padding: 0.5rem 0 1.75rem; gap: 1.35rem; }
       h1 { font-size: clamp(0.92rem, 4.6vw, 1.2rem); }
       .lead { font-size: 1rem; margin-bottom: 1.1rem; }
