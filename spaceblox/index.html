@@ -149,6 +149,53 @@
     .rules { display: grid; gap: 0.75rem; padding-left: 1.1rem; margin: 0; color: var(--muted); }
     .rules li::marker { color: var(--yellow); }
 
+    .shots-wheel {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: color-mix(in srgb, var(--panel) 88%, transparent);
+      padding: 0.85rem 0.6rem;
+    }
+    .shots-track {
+      display: flex;
+      gap: 0.75rem;
+      width: max-content;
+      animation: shots-marquee 28s linear infinite;
+    }
+    .shots-wheel:hover .shots-track { animation-play-state: paused; }
+    @keyframes shots-marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    .shots-track figure {
+      margin: 0;
+      width: 120px;
+      flex: 0 0 120px;
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .shots-track img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+    }
+    .shots-track figcaption {
+      padding: 0.4rem 0.45rem 0.55rem;
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    @media (max-width: 560px) {
+      .shots-track figure { width: 100px; flex-basis: 100px; }
+    }
 
     footer {
       margin-top: 3rem;
@@ -171,8 +218,9 @@
         <span>SPACEBLOX</span>
       </a>
       <nav>
-        <a href="#how">How it works</a>
-                <a href="privacy-policy.html">Privacy</a>
+        <a href="#how">How to play</a>
+        <a href="#shots">Screenshots</a>
+        <a href="privacy-policy.html">Privacy</a>
       </nav>
     </header>
 
@@ -200,7 +248,7 @@
     </section>
 
     <section id="how">
-      <h2>HOW IT WORKS</h2>
+      <h2>HOW TO PLAY</h2>
       <div class="panel">
         <ol class="rules">
           <li>Fill empty cells with <strong style="color:var(--yellow)">yellow</strong>, <strong style="color:var(--blue)">blue</strong>, or <strong style="color:var(--green)">green</strong>.</li>
@@ -212,6 +260,54 @@
       </div>
     </section>
 
+    <section id="shots">
+      <h2>SCREENSHOTS</h2>
+      <div class="shots-wheel" aria-label="Screenshot carousel">
+        <div class="shots-track">
+          <figure>
+            <img src="assets/shot_menu.png" alt="Spaceblox main menu" />
+            <figcaption>Main menu</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/shot_tutorial.png" alt="Spaceblox tutorial" />
+            <figcaption>Tutorial</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/shot_gameplay.png" alt="Spaceblox gameplay board" />
+            <figcaption>Gameplay</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/shot_levels.png" alt="Spaceblox level select" />
+            <figcaption>Levels</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/shot_victory.png" alt="Spaceblox victory screen" />
+            <figcaption>Victory</figcaption>
+          </figure>
+          <!-- duplicate set for seamless loop -->
+          <figure>
+            <img src="assets/shot_menu.png" alt="" aria-hidden="true" />
+            <figcaption>Main menu</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/shot_tutorial.png" alt="" aria-hidden="true" />
+            <figcaption>Tutorial</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/shot_gameplay.png" alt="" aria-hidden="true" />
+            <figcaption>Gameplay</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/shot_levels.png" alt="" aria-hidden="true" />
+            <figcaption>Levels</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/shot_victory.png" alt="" aria-hidden="true" />
+            <figcaption>Victory</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
 
     <footer>
       <div>© Spaceblox · Giga Sichinava</div>
