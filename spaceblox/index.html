@@ -221,7 +221,7 @@
       width: min(68%, 520px);
       aspect-ratio: 1080 / 180;
       position: relative;
-      container-type: size;
+      overflow: hidden;
     }
     .space-banner .sb-title-design {
       position: absolute;
@@ -230,7 +230,7 @@
       width: 1080px;
       height: 180px;
       transform-origin: top left;
-      transform: scale(calc(100cqw / 1080));
+      transform: scale(0.48); /* JS overrides to fit stage */
     }
     .space-banner .sb-word {
       position: absolute;
@@ -575,6 +575,24 @@
       setTimeout(schedule, rand(1800, 5200));
     }
     setTimeout(schedule, rand(600, 1600));
+  })();
+  </script>
+
+
+  <script>
+  (function () {
+    function fitSpaceTitle() {
+      var stage = document.querySelector(".sb-title-stage");
+      var design = document.querySelector(".sb-title-design");
+      if (!stage || !design) return;
+      var w = stage.clientWidth || 1;
+      design.style.transform = "scale(" + (w / 1080) + ")";
+    }
+    fitSpaceTitle();
+    window.addEventListener("resize", fitSpaceTitle);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(fitSpaceTitle);
+    }
   })();
   </script>
 
