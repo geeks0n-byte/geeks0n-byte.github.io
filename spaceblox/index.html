@@ -60,6 +60,7 @@
       z-index: 0;
     }
     .wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 1.25rem 1.25rem 4rem; }
+    /* Match animated banner width so icon/nav edges line up with it */
     header {
       display: flex;
       align-items: center;
@@ -67,6 +68,8 @@
       gap: 0.75rem;
       flex-wrap: nowrap;
       width: 100%;
+      max-width: min(100%, 700px);
+      margin-inline: auto;
       padding: 0.85rem 0 1.35rem;
     }
     .brand {
