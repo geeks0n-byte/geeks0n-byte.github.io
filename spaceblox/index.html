@@ -543,65 +543,102 @@
 
     var ASSETS = {
       star: "assets/fx_shooting_star.svg",
-      comet: "assets/fx_comet_1.svg",
+      comets: [
+        "assets/fx_comet_1.svg",
+        "assets/fx_comet_2.svg",
+        "assets/fx_comet_3.svg"
+      ],
       asteroids: [
         "assets/fx_asteroid_1.svg",
         "assets/fx_asteroid_2.svg",
         "assets/fx_asteroid_3.svg"
       ]
     };
+    // Match Godot SpaceBackgroundFx: star base 3π/4, comet base π
+    var STAR_BASE_DEG = 135;
+    var COMET_BASE_DEG = 180;
+    var COMET_FPS = 12;
 
     function rand(a, b) { return a + Math.random() * (b - a); }
     function pick(arr) { return arr[(Math.random() * arr.length) | 0]; }
 
     function spawn(kind) {
-      var img = document.createElement("img");
-      img.className = "sb-fx-item";
-      img.alt = "";
-      var w, h, dur, src;
+      var el = document.createElement(kind === "comet" ? "div" : "img");
+      el.className = "sb-fx-item";
+      var w, h, dur, startX, endX, startY, endY, dx, dy, travelDeg, rot0, rot1;
+      var hostW = fx.clientWidth || 1;
+      var hostH = fx.clientHeight || 1;
+
       if (kind === "star") {
-        src = ASSETS.star; w = rand(22, 34); h = w; dur = rand(0.85, 1.5);
+        w = rand(22, 34); h = w; dur = rand(0.85, 1.5);
+        el.alt = "";
+        el.src = ASSETS.star;
+        el.style.width = w + "px";
+        el.style.height = h + "px";
       } else if (kind === "comet") {
-        src = ASSETS.comet; w = rand(56, 88); h = w * 0.5; dur = rand(2.2, 4.0);
+        w = rand(56, 88); h = w * 0.5; dur = rand(2.2, 4.0);
+        el.style.width = w + "px";
+        el.style.height = h + "px";
+        el.style.backgroundImage = "url(" + ASSETS.comets[0] + ")";
+        el.style.backgroundSize = "100% 100%";
+        el.style.backgroundRepeat = "no-repeat";
+        el.style.imageRendering = "pixelated";
+        var frame = 0;
+        var frameTimer = setInterval(function () {
+          frame = (frame + 1) % ASSETS.comets.length;
+          el.style.backgroundImage = "url(" + ASSETS.comets[frame] + ")";
+        }, 1000 / COMET_FPS);
+        el._frameTimer = frameTimer;
       } else {
-        src = pick(ASSETS.asteroids); w = rand(14, 24); h = w; dur = rand(7, 16);
+        w = rand(14, 24); h = w; dur = rand(7, 16);
+        el.alt = "";
+        el.src = pick(ASSETS.asteroids);
+        el.style.width = w + "px";
+        el.style.height = h + "px";
       }
-      img.src = src;
-      img.style.width = w + "px";
-      img.style.height = h + "px";
 
-      // Travel right -> left (same as in-game), with a mild downward drift.
-      var startX = fx.clientWidth + w + 20;
-      var endX = -w - 40;
-      var startY = rand(-20, fx.clientHeight * 0.7);
-      var endY = startY + (startX - endX) * rand(0.12, 0.45);
-      var dx = endX - startX;
-      var dy = endY - startY;
+      // Right -> left, stars fall steeper (game: 0.5–1.5 * travel)
+      startX = hostW + w + 20;
+      endX = -w - 40;
+      var travelX = startX - endX;
+      if (kind === "star") {
+        startY = rand(-40, hostH * 0.4);
+        endY = startY + travelX * rand(0.5, 1.2);
+      } else if (kind === "comet") {
+        startY = rand(-30, hostH * 0.55);
+        endY = startY + travelX * rand(0.2, 0.8);
+      } else {
+        startY = rand(-20, hostH * 0.7);
+        endY = startY + travelX * rand(0.1, 0.55);
+      }
+      dx = endX - startX;
+      dy = endY - startY;
+      travelDeg = Math.atan2(dy, dx) * 180 / Math.PI;
 
-      // Sprite facing: shooting star SVG head is bottom-left (~225deg), comet head is left (180deg).
-      var travelDeg = Math.atan2(dy, dx) * 180 / Math.PI;
-      var rot0, rot1;
       if (kind === "asteroid") {
         rot0 = rand(0, 360);
         rot1 = rot0 + rand(120, 480) * (Math.random() < 0.5 ? 1 : -1);
       } else if (kind === "star") {
-        rot0 = travelDeg - 225;
+        rot0 = travelDeg - STAR_BASE_DEG;
         rot1 = rot0;
       } else {
-        rot0 = travelDeg - 180;
+        rot0 = travelDeg - COMET_BASE_DEG;
         rot1 = rot0;
       }
 
-      img.style.left = "0";
-      img.style.top = "0";
-      img.style.transform = "translate(" + startX + "px," + startY + "px) rotate(" + rot0 + "deg)";
-      fx.appendChild(img);
+      el.style.left = "0";
+      el.style.top = "0";
+      el.style.transform = "translate(" + startX + "px," + startY + "px) rotate(" + rot0 + "deg)";
+      fx.appendChild(el);
 
-      var anim = img.animate([
+      var anim = el.animate([
         { transform: "translate(" + startX + "px," + startY + "px) rotate(" + rot0 + "deg)" },
         { transform: "translate(" + endX + "px," + endY + "px) rotate(" + rot1 + "deg)" }
       ], { duration: dur * 1000, easing: "linear", fill: "forwards" });
-      anim.onfinish = function () { img.remove(); };
+      anim.onfinish = function () {
+        if (el._frameTimer) clearInterval(el._frameTimer);
+        el.remove();
+      };
     }
 
     function schedule() {
