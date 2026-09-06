@@ -126,10 +126,9 @@
       pointer-events: auto;
     }
     .header-title .sb-title-stage {
-      /* Fallback; JS sizes glyph≈icon and expands for outline/tiles */
-      height: calc(52px * 122 / 96);
-      width: calc(52px * 1080 / 96);
-      max-width: none;
+      width: min(52vw, 280px);
+      aspect-ratio: 1080 / 180;
+      height: auto;
       position: relative;
       overflow: hidden;
     }
@@ -199,10 +198,7 @@
     .header-title .sb-tile-o1 { left: 806px; top: 64px; }
     .header-title .sb-tile-o2 { left: 806px; top: 93px; }
     @media (max-width: 640px) {
-      .header-title .sb-title-stage {
-        height: calc(44px * 122 / 96);
-        width: calc(44px * 1080 / 96);
-      }
+      .header-title .sb-title-stage { width: min(46vw, 200px); }
     }
 
     nav a:hover { filter: brightness(1.12); color: #ffffff; }
@@ -408,7 +404,7 @@
   <div class="wrap">
     <header>
       <a class="brand" href="./" aria-label="Spaceblox home">
-        <img src="assets/icon_512.png" alt="Spaceblox" width="52" height="52" />
+        <img src="assets/icon_512.png" alt="Spaceblox" width="44" height="44" />
       </a>
       <a class="header-title" href="./" aria-label="SPACEBLOX">
         <div class="sb-title-stage">
@@ -583,37 +579,10 @@
     function fitHeaderTitle() {
       var stage = document.querySelector(".header-title .sb-title-stage");
       var design = document.querySelector(".header-title .sb-title-design");
-      var icon = document.querySelector(".brand img");
-      var btn = document.querySelector("nav a");
-      var header = document.querySelector("header");
-      var brand = document.querySelector(".brand");
-      var nav = document.querySelector("nav");
       if (!stage || !design) return;
-      // Size letters to icon height; stage taller so outline + O tiles are not clipped
-      var GLYPH_H = 96;
-      var GLYPH_TOP = 20;
-      var OUTLINE = 8; // text-shadow extent in design px
-      var TILE_BOTTOM = 93 + 28 * 1.15; // blue tile bottom
-      var contentTop = GLYPH_TOP - OUTLINE;
-      var contentBottom = Math.max(GLYPH_TOP + GLYPH_H + OUTLINE, TILE_BOTTOM) + 2;
-      var contentH = contentBottom - contentTop;
-      var targetH = 52;
-      if (icon && icon.clientHeight) targetH = Math.max(targetH, icon.clientHeight);
-      if (btn && btn.offsetHeight) targetH = Math.max(targetH, btn.offsetHeight);
-      var scale = targetH / GLYPH_H;
-      var w = DESIGN_W * scale;
-      if (header && brand && nav) {
-        var avail = header.clientWidth - brand.offsetWidth - nav.offsetWidth - 16;
-        if (avail > 80 && w > avail) {
-          w = avail;
-          scale = w / DESIGN_W;
-        }
-      }
-      var stageH = contentH * scale;
-      stage.style.width = w + "px";
-      stage.style.height = stageH + "px";
-      var ty = -contentTop * scale;
-      design.style.transform = "translateY(" + ty + "px) scale(" + scale + ")";
+      var w = stage.clientWidth || 1;
+      stage.style.height = (w * (DESIGN_H / DESIGN_W)) + "px";
+      design.style.transform = "scale(" + (w / DESIGN_W) + ")";
     }
     function fitSoon() {
       fitHeaderTitle();
