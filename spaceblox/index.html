@@ -252,18 +252,15 @@
     }
     .space-banner .sb-layer {
       position: absolute;
-      /* Oversized so a 90° rotate still covers the landscape banner */
-      inset: -60%;
+      inset: 0;
       background-repeat: repeat;
-      /* Portrait game tiles (360:640); rotated 90° for the wide banner */
+      /* Exact tile size — parallax steps by whole tiles so the loop is seamless */
       --sb-tw: 1100px;
-      --sb-th: 1956px;
+      --sb-th: 1956px; /* 360:640 aspect */
       background-size: var(--sb-tw) var(--sb-th);
       background-position: 0 0;
       image-rendering: pixelated;
       image-rendering: crisp-edges;
-      transform: rotate(90deg);
-      transform-origin: center center;
       will-change: background-position, opacity;
       pointer-events: none;
     }
@@ -289,22 +286,22 @@
       background-image: url("assets/bg_4_sparkler_crosses.svg");
       animation: sb-parallax-d 22s linear infinite;
     }
-    /* Drift left + up by whole tiles so start/end frames match (no reset pop) */
+    /* Same tile-step loop, drift direction rotated 90° CW from left+up */
     @keyframes sb-parallax-a {
       from { background-position: 0 0; }
-      to { background-position: calc(-2 * var(--sb-tw)) calc(-1 * var(--sb-th)); }
+      to { background-position: calc(-1 * var(--sb-th)) calc(2 * var(--sb-tw)); }
     }
     @keyframes sb-parallax-b {
       from { background-position: 0 0; }
-      to { background-position: calc(-2 * var(--sb-tw)) calc(-1 * var(--sb-th)); }
+      to { background-position: calc(-1 * var(--sb-th)) calc(2 * var(--sb-tw)); }
     }
     @keyframes sb-parallax-c {
       from { background-position: 0 0; }
-      to { background-position: calc(-3 * var(--sb-tw)) calc(-2 * var(--sb-th)); }
+      to { background-position: calc(-2 * var(--sb-th)) calc(3 * var(--sb-tw)); }
     }
     @keyframes sb-parallax-d {
       from { background-position: 0 0; }
-      to { background-position: calc(-3 * var(--sb-tw)) calc(-2 * var(--sb-th)); }
+      to { background-position: calc(-2 * var(--sb-th)) calc(3 * var(--sb-tw)); }
     }
     @keyframes sb-twinkle {
       0%, 100% { opacity: 1; }
