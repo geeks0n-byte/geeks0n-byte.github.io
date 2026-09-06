@@ -218,7 +218,7 @@
     }
     /* Exact game title crop coords: 1080x180 (from capture_title.gd) */
     .space-banner .sb-title-stage {
-      width: min(94%, 920px);
+      width: min(68%, 520px);
       aspect-ratio: 1080 / 180;
       position: relative;
       container-type: size;
@@ -273,6 +273,7 @@
     .space-banner .sb-tile-o1 { left: 806px; top: 66px; }
     .space-banner .sb-tile-o2 { left: 806px; top: 93px; }
     @media (max-width: 860px) {
+      .space-banner .sb-title-stage { width: min(88%, 420px); }
       .space-banner .sb-layer { background-size: 70% auto; }
     }
     @media (prefers-reduced-motion: reduce) {
