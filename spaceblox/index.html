@@ -676,6 +676,28 @@ footer {
 
   <script>
   (function () {
+    /* Randomize parallax (and twinkle) phase so each visit starts mid-scroll */
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var layers = document.querySelectorAll(".space-banner .sb-layer");
+    for (var i = 0; i < layers.length; i++) {
+      var el = layers[i];
+      var durs = (getComputedStyle(el).animationDuration || "").split(",");
+      var delays = [];
+      for (var j = 0; j < durs.length; j++) {
+        var sec = parseFloat(durs[j]);
+        if (!isFinite(sec) || sec <= 0) {
+          delays.push("0s");
+        } else {
+          delays.push((-Math.random() * sec).toFixed(3) + "s");
+        }
+      }
+      if (delays.length) el.style.animationDelay = delays.join(", ");
+    }
+  })();
+  </script>
+
+  <script>
+  (function () {
     var fx = document.getElementById("space-fx");
     if (!fx || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
