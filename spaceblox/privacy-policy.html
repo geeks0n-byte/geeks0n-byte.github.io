@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#020617" />
   <title>Spaceblox — Privacy Policy</title>
   <link rel="icon" href="assets/icon_512.png" type="image/png" />
   <style>
@@ -30,11 +31,14 @@
       margin: 0;
       font-family: system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       color: var(--text);
-      background:
+      background-color: #020617;
+      background-image:
         radial-gradient(1200px 600px at 20% -10%, #1e3a5f55, transparent),
         radial-gradient(900px 500px at 90% 10%, #312e8155, transparent),
         linear-gradient(180deg, var(--bg), #020617 70%);
+      background-attachment: scroll;
       min-height: 100vh;
+      min-height: 100dvh;
       line-height: 1.55;
     }
     .stars {
@@ -53,23 +57,53 @@
     }
     .wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 1.25rem 1.25rem 4rem; }
     header {
-      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.75rem;
+      flex-wrap: wrap;
       padding: 0.75rem 0 1.5rem;
     }
-    .brand { display: flex; align-items: center; gap: 0.85rem; text-decoration: none; color: inherit; }
-    .brand img { width: 52px; height: 52px; border-radius: 14px; box-shadow: 0 0 0 2px #334155, 0 8px 24px #0008; }
-    .brand .brand-title {
-      font-family: "PressStart2P", monospace;
-      font-size: 0.85rem;
-      letter-spacing: 0.04em;
-      color: var(--yellow);
-      text-shadow: 0 0 18px #facc1544;
-      line-height: 1;
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      flex: 0 0 auto;
     }
-
-    nav { display: flex; gap: 0.85rem; flex-wrap: wrap; }
-    nav a { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
-    nav a:hover { color: var(--text); }
+    .brand img {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      box-shadow: 0 0 0 2px #334155, 0 8px 24px #0008;
+    }
+    nav {
+      display: flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    nav a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "PressStart2P", monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.02em;
+      color: #ffffff;
+      text-decoration: none;
+      text-shadow: 1px 1px 0 #000;
+      padding: 0.7rem 0.75rem;
+      line-height: 1.2;
+      image-rendering: pixelated;
+      background-color: #1a1a1a;
+      background-image: url("assets/button_tile_gray_dark.svg");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      border: none;
+      box-shadow: none;
+    }
+    nav a:hover { filter: brightness(1.15); color: #ffffff; }
+    nav a:active { filter: brightness(0.9); transform: translateY(1px); }
 
     .hero {
       display: grid;
@@ -182,6 +216,10 @@
     }
     /* Mobile-first polish */
     img, video, svg { max-width: 100%; height: auto; }
+    html {
+      background: #020617;
+      min-height: 100%;
+    }
     html, body { overflow-x: hidden; }
     .wrap {
       padding: 1rem max(1rem, env(safe-area-inset-right)) 3.5rem max(1rem, env(safe-area-inset-left));
@@ -231,12 +269,11 @@
   <div class="stars" aria-hidden="true"></div>
   <div class="wrap">
     <header>
-      <a class="brand" href="./">
-        <img src="assets/icon_512.png" alt="Spaceblox icon" width="44" height="44" />
-        <span class="brand-title">SPACEBLOX</span>
+      <a class="brand" href="./" aria-label="Spaceblox home">
+        <img src="assets/icon_512.png" alt="Spaceblox" width="44" height="44" />
       </a>
       <nav>
-        <a href="./">Home</a>
+        <a href="./">HOME</a>
       </nav>
     </header>
     <article class="panel">

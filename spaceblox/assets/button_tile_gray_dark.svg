@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="128" height="128" shape-rendering="crispEdges">
+  <!-- Base deepest shadow -->
+  <rect x="1" y="1" width="14" height="14" fill="#000000" />
+  
+  <!-- Main flat face -->
+  <rect x="1" y="1" width="14" height="13" fill="#1a1a1a" />
+  
+  <!-- Top and left outer highlights -->
+  <rect x="1" y="1" width="13" height="1" fill="#3a3a3a" />
+  <rect x="1" y="2" width="1" height="11" fill="#3a3a3a" />
+  
+  <!-- Bottom and right outer shadows -->
+  <rect x="2" y="13" width="13" height="1" fill="#0a0a0a" />
+  <rect x="14" y="2" width="1" height="12" fill="#0a0a0a" />
+</svg>
