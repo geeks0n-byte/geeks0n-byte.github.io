@@ -80,16 +80,17 @@
     .brand .brand-title .bt-word { position: relative; z-index: 0; }
     .brand .brand-title .bt-tile {
       position: absolute;
-      width: 0.2em;
-      height: 0.2em;
+      width: 0.18em;
+      height: 0.18em;
       image-rendering: pixelated;
       pointer-events: none;
       z-index: 1;
+      transform: translate(-50%, -50%);
     }
-    /* Nested inside letter counters — small enough not to spill past the glyph */
-    .brand .brand-title .bt-tile-p { left: 16.6%; top: 28%; }
-    .brand .brand-title .bt-tile-o1 { left: 82.9%; top: 26%; }
-    .brand .brand-title .bt-tile-o2 { left: 82.9%; top: 52%; }
+    /* Centers of P (2nd) and O (8th) for monospace SPACEBLOX + letter-spacing */
+    .brand .brand-title .bt-tile-p { left: 16.5%; top: 38%; }
+    .brand .brand-title .bt-tile-o1 { left: 83.5%; top: 34%; }
+    .brand .brand-title .bt-tile-o2 { left: 83.5%; top: 58%; }
 
     nav { display: flex; gap: 0.85rem; flex-wrap: wrap; }
     nav a { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
@@ -543,70 +544,43 @@
 
     var ASSETS = {
       star: "assets/fx_shooting_star.svg",
-      comets: [
-        "assets/fx_comet_1.svg",
-        "assets/fx_comet_2.svg",
-        "assets/fx_comet_3.svg"
-      ],
       asteroids: [
         "assets/fx_asteroid_1.svg",
         "assets/fx_asteroid_2.svg",
         "assets/fx_asteroid_3.svg"
       ]
     };
-    // Match Godot SpaceBackgroundFx: star base 3π/4, comet base π
+    // Match Godot SpaceBackgroundFx: star base 3π/4
     var STAR_BASE_DEG = 135;
-    var COMET_BASE_DEG = 180;
-    var COMET_FPS = 12;
 
     function rand(a, b) { return a + Math.random() * (b - a); }
     function pick(arr) { return arr[(Math.random() * arr.length) | 0]; }
 
     function spawn(kind) {
-      var el = document.createElement(kind === "comet" ? "div" : "img");
+      var el = document.createElement("img");
       el.className = "sb-fx-item";
+      el.alt = "";
       var w, h, dur, startX, endX, startY, endY, dx, dy, travelDeg, rot0, rot1;
       var hostW = fx.clientWidth || 1;
       var hostH = fx.clientHeight || 1;
 
       if (kind === "star") {
         w = rand(22, 34); h = w; dur = rand(0.85, 1.5);
-        el.alt = "";
         el.src = ASSETS.star;
-        el.style.width = w + "px";
-        el.style.height = h + "px";
-      } else if (kind === "comet") {
-        w = rand(56, 88); h = w * 0.5; dur = rand(2.2, 4.0);
-        el.style.width = w + "px";
-        el.style.height = h + "px";
-        el.style.backgroundImage = "url(" + ASSETS.comets[0] + ")";
-        el.style.backgroundSize = "100% 100%";
-        el.style.backgroundRepeat = "no-repeat";
-        el.style.imageRendering = "pixelated";
-        var frame = 0;
-        var frameTimer = setInterval(function () {
-          frame = (frame + 1) % ASSETS.comets.length;
-          el.style.backgroundImage = "url(" + ASSETS.comets[frame] + ")";
-        }, 1000 / COMET_FPS);
-        el._frameTimer = frameTimer;
       } else {
         w = rand(14, 24); h = w; dur = rand(7, 16);
-        el.alt = "";
         el.src = pick(ASSETS.asteroids);
-        el.style.width = w + "px";
-        el.style.height = h + "px";
       }
+      el.style.width = w + "px";
+      el.style.height = h + "px";
 
-      // Right -> left, stars fall steeper (game: 0.5–1.5 * travel)
+      // Right -> left; stars fall steeper (game: 0.5–1.5 * travel)
       startX = hostW + w + 20;
       endX = -w - 40;
       var travelX = startX - endX;
       if (kind === "star") {
         startY = rand(-40, hostH * 0.4);
         endY = startY + travelX * rand(0.5, 1.2);
-      } else if (kind === "comet") {
-        startY = rand(-30, hostH * 0.55);
-        endY = startY + travelX * rand(0.2, 0.8);
       } else {
         startY = rand(-20, hostH * 0.7);
         endY = startY + travelX * rand(0.1, 0.55);
@@ -618,11 +592,8 @@
       if (kind === "asteroid") {
         rot0 = rand(0, 360);
         rot1 = rot0 + rand(120, 480) * (Math.random() < 0.5 ? 1 : -1);
-      } else if (kind === "star") {
-        rot0 = travelDeg - STAR_BASE_DEG;
-        rot1 = rot0;
       } else {
-        rot0 = travelDeg - COMET_BASE_DEG;
+        rot0 = travelDeg - STAR_BASE_DEG;
         rot1 = rot0;
       }
 
@@ -635,22 +606,13 @@
         { transform: "translate(" + startX + "px," + startY + "px) rotate(" + rot0 + "deg)" },
         { transform: "translate(" + endX + "px," + endY + "px) rotate(" + rot1 + "deg)" }
       ], { duration: dur * 1000, easing: "linear", fill: "forwards" });
-      anim.onfinish = function () {
-        if (el._frameTimer) clearInterval(el._frameTimer);
-        el.remove();
-      };
+      anim.onfinish = function () { el.remove(); };
     }
 
     function schedule() {
-      // Simplified weights vs game: mostly stars, some asteroids, rare comets
-      var roll = Math.random();
-      var kind = roll < 0.62 ? "star" : (roll < 0.92 ? "asteroid" : "comet");
-      if (kind === "asteroid" && Math.random() < 0.28) {
-        var n = 2 + ((Math.random() * 3) | 0);
-        for (var i = 0; i < n; i++) setTimeout(function () { spawn("asteroid"); }, i * rand(80, 220));
-      } else {
-        spawn(kind);
-      }
+      // Stars mostly, occasional single asteroids — no comets / asteroid clouds
+      var kind = Math.random() < 0.72 ? "star" : "asteroid";
+      spawn(kind);
       setTimeout(schedule, rand(1800, 5200));
     }
     setTimeout(schedule, rand(600, 1600));
