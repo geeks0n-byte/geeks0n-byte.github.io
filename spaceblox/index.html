@@ -251,7 +251,9 @@
       width: 100%;
       max-width: min(100%, 700px); /* under tile width — no side-by-side repeat */
       margin-inline: auto;
-      height: clamp(170px, 28vw, 320px);
+      /* Same proportions as mobile (~400×170) */
+      aspect-ratio: 400 / 170;
+      height: auto;
     }
     .space-banner {
       position: absolute;
