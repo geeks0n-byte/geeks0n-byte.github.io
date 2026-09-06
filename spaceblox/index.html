@@ -254,9 +254,9 @@
       position: absolute;
       inset: 0;
       background-repeat: repeat;
-      /* Exact tile size — parallax steps by whole tiles so the loop is seamless */
-      --sb-tw: 1100px;
-      --sb-th: 1956px; /* 360:640 aspect */
+      /* Website-tuned tile scale (portrait SVGs sized for a wide banner; seamless tile steps) */
+      --sb-tw: 720px;
+      --sb-th: 1280px; /* keep 9:16 */
       background-size: var(--sb-tw) var(--sb-th);
       background-position: 0 0;
       image-rendering: pixelated;
@@ -271,37 +271,38 @@
     }
     .space-banner .sb-dust {
       background-image: url("assets/bg_1_far_dust.svg");
-      opacity: 0.85;
-      animation: sb-parallax-a 90s linear infinite;
+      opacity: 0.75;
+      animation: sb-parallax-a 140s linear infinite;
     }
     .space-banner .sb-stars {
       background-image: url("assets/bg_2_medium_stars.svg");
-      animation: sb-parallax-b 55s linear infinite, sb-twinkle 6s ease-in-out infinite;
+      animation: sb-parallax-b 95s linear infinite, sb-twinkle 7.5s ease-in-out infinite;
     }
     .space-banner .sb-accents {
       background-image: url("assets/bg_3_foreground_accents.svg");
-      animation: sb-parallax-c 38s linear infinite, sb-twinkle-alt 6s ease-in-out infinite;
+      animation: sb-parallax-c 70s linear infinite, sb-twinkle-alt 7.5s ease-in-out infinite;
     }
     .space-banner .sb-sparks {
       background-image: url("assets/bg_4_sparkler_crosses.svg");
-      animation: sb-parallax-d 22s linear infinite;
+      opacity: 0.9;
+      animation: sb-parallax-d 48s linear infinite;
     }
-    /* Same tile-step loop, drift direction rotated 90° CW from left+up */
+    /* Left + slight up via whole tiles only (avoids loop pop). Speeds differ per layer. */
     @keyframes sb-parallax-a {
       from { background-position: 0 0; }
-      to { background-position: calc(-1 * var(--sb-th)) calc(2 * var(--sb-tw)); }
+      to { background-position: calc(-2 * var(--sb-tw)) calc(-1 * var(--sb-th)); }
     }
     @keyframes sb-parallax-b {
       from { background-position: 0 0; }
-      to { background-position: calc(-1 * var(--sb-th)) calc(2 * var(--sb-tw)); }
+      to { background-position: calc(-2 * var(--sb-tw)) calc(-1 * var(--sb-th)); }
     }
     @keyframes sb-parallax-c {
       from { background-position: 0 0; }
-      to { background-position: calc(-2 * var(--sb-th)) calc(3 * var(--sb-tw)); }
+      to { background-position: calc(-3 * var(--sb-tw)) calc(-1 * var(--sb-th)); }
     }
     @keyframes sb-parallax-d {
       from { background-position: 0 0; }
-      to { background-position: calc(-2 * var(--sb-th)) calc(3 * var(--sb-tw)); }
+      to { background-position: calc(-3 * var(--sb-tw)) calc(-1 * var(--sb-th)); }
     }
     @keyframes sb-twinkle {
       0%, 100% { opacity: 1; }
@@ -390,9 +391,13 @@
     @media (max-width: 860px) {
       .space-banner .sb-title-stage { width: min(88%, 420px); }
       .space-banner .sb-layer {
-        --sb-tw: 900px;
-        --sb-th: 1600px;
+        --sb-tw: 480px;
+        --sb-th: 853px; /* smaller tiles on mobile */
       }
+      .space-banner .sb-dust { animation-duration: 160s; }
+      .space-banner .sb-stars { animation-duration: 110s, 7.5s; }
+      .space-banner .sb-accents { animation-duration: 80s, 7.5s; }
+      .space-banner .sb-sparks { animation-duration: 55s; }
     }
     @media (prefers-reduced-motion: reduce) {
       .space-banner .sb-layer { animation: none !important; opacity: 1 !important; }
@@ -685,13 +690,13 @@ footer {
       var hostW = fx.clientWidth || 1;
       var hostH = fx.clientHeight || 1;
 
-      // Smaller flybys on narrow banners (mobile)
-      var m = hostW < 640 ? 0.42 : (hostW < 900 ? 0.65 : 1);
+      // Website-only sizes (not game). Scale with banner width.
+      var m = hostW < 640 ? 0.35 : (hostW < 900 ? 0.5 : 0.72);
       if (kind === "star") {
-        w = rand(48, 72) * m; h = w; dur = rand(1.0, 1.8);
+        w = rand(28, 44) * m; h = w; dur = rand(1.4, 2.4);
         el.src = ASSETS.star;
       } else {
-        w = rand(32, 52) * m; h = w; dur = rand(8, 18);
+        w = rand(18, 30) * m; h = w; dur = rand(12, 22);
         el.src = pick(ASSETS.asteroids);
       }
       el.style.width = w + "px";
@@ -733,12 +738,12 @@ footer {
     }
 
     function schedule() {
-      // Stars mostly, occasional single asteroids — rarer than before
-      var kind = Math.random() < 0.78 ? "star" : "asteroid";
+      // Website cadence: mostly stars, sparse asteroids
+      var kind = Math.random() < 0.82 ? "star" : "asteroid";
       spawn(kind);
-      setTimeout(schedule, rand(4500, 11000));
+      setTimeout(schedule, rand(6500, 14000));
     }
-    setTimeout(schedule, rand(2000, 5000));
+    setTimeout(schedule, rand(2500, 6000));
   })();
   </script>
 
