@@ -3,17 +3,278 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Spaceblox</title>
+  <title>Spaceblox — Color logic in space</title>
+  <meta name="description" content="Spaceblox is a calm color-logic puzzle: fill the board with yellow, blue, and green. Never three in a row." />
+  <meta property="og:title" content="Spaceblox" />
+  <meta property="og:description" content="Calm color-logic puzzles in a pixel-space setting." />
+  <meta property="og:image" content="assets/feature.png" />
+  <link rel="icon" href="assets/icon_512.png" type="image/png" />
   <style>
-    body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1.25rem; line-height: 1.5; }
-    a { color: #2b6cb0; }
+    @font-face {
+      font-family: "PressStart2P";
+      src: url("assets/PressStart2P.ttf") format("truetype");
+      font-display: swap;
+    }
+    :root {
+      --bg: #0b1220;
+      --bg2: #111827;
+      --panel: #172033;
+      --line: #334155;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --yellow: #facc15;
+      --blue: #38bdf8;
+      --green: #4ade80;
+      --purple: #c084fc;
+      --accent: #56bdf8;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% -10%, #1e3a5f55, transparent),
+        radial-gradient(900px 500px at 90% 10%, #312e8155, transparent),
+        linear-gradient(180deg, var(--bg), #020617 70%);
+      min-height: 100vh;
+      line-height: 1.55;
+    }
+    .stars {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 12% 18%, #fff8, transparent),
+        radial-gradient(1px 1px at 28% 72%, #fff6, transparent),
+        radial-gradient(1.5px 1.5px at 61% 24%, #fff7, transparent),
+        radial-gradient(1px 1px at 78% 58%, #fff5, transparent),
+        radial-gradient(1px 1px at 88% 12%, #fff6, transparent),
+        radial-gradient(1.5px 1.5px at 42% 40%, #fff5, transparent);
+      opacity: 0.55;
+      z-index: 0;
+    }
+    .wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 1.25rem 1.25rem 4rem; }
+    header {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 0.75rem 0 1.5rem;
+    }
+    .brand { display: flex; align-items: center; gap: 0.85rem; text-decoration: none; color: inherit; }
+    .brand img { width: 52px; height: 52px; border-radius: 14px; box-shadow: 0 0 0 2px #334155, 0 8px 24px #0008; }
+    .brand span {
+      font-family: "PressStart2P", monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      color: var(--yellow);
+      text-shadow: 0 0 18px #facc1544;
+    }
+    nav { display: flex; gap: 0.85rem; flex-wrap: wrap; }
+    nav a { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
+    nav a:hover { color: var(--text); }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2rem;
+      align-items: center;
+      padding: 1rem 0 2.5rem;
+    }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .brand span { font-size: 0.72rem; }
+    }
+    h1 {
+      font-family: "PressStart2P", monospace;
+      font-size: clamp(1.05rem, 2.4vw, 1.45rem);
+      line-height: 1.45;
+      margin: 0 0 1rem;
+      color: #f8fafc;
+    }
+    .lead { font-size: 1.08rem; color: var(--muted); margin: 0 0 1.4rem; max-width: 36rem; }
+    .tiles { display: flex; gap: 0.55rem; margin: 0 0 1.5rem; }
+    .tile {
+      width: 28px; height: 28px; border-radius: 7px;
+      box-shadow: inset 0 -3px 0 #0004, 0 0 0 2px #0f172a;
+    }
+    .tile.y { background: var(--yellow); }
+    .tile.b { background: var(--blue); }
+    .tile.g { background: var(--green); }
+    .tile.p { background: var(--purple); }
+
+    .cta { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.85rem 1.15rem; border-radius: 12px;
+      text-decoration: none; font-weight: 700; font-size: 0.98rem;
+      border: 2px solid transparent;
+    }
+    .btn-primary {
+      background: linear-gradient(180deg, #38bdf8, #0284c7);
+      color: #04111f;
+      box-shadow: 0 10px 28px #0284c766;
+    }
+    .btn-ghost {
+      background: #0f172a99;
+      color: var(--text);
+      border-color: var(--line);
+    }
+    .btn:hover { filter: brightness(1.06); }
+
+    .hero-art {
+      border-radius: 22px;
+      overflow: hidden;
+      border: 2px solid var(--line);
+      background: var(--panel);
+      box-shadow: 0 20px 50px #0007;
+    }
+    .hero-art img { display: block; width: 100%; height: auto; }
+
+    section { margin: 2.5rem 0; }
+    h2 {
+      font-family: "PressStart2P", monospace;
+      font-size: 0.78rem;
+      color: var(--blue);
+      margin: 0 0 1rem;
+      letter-spacing: 0.03em;
+    }
+    .panel {
+      background: color-mix(in srgb, var(--panel) 88%, transparent);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 1.25rem 1.35rem;
+      backdrop-filter: blur(6px);
+    }
+    .rules { display: grid; gap: 0.75rem; padding-left: 1.1rem; margin: 0; color: var(--muted); }
+    .rules li::marker { color: var(--yellow); }
+
+    .shots {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 860px) {
+      .shots { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .shots { grid-template-columns: 1fr; }
+    }
+    figure {
+      margin: 0;
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    figure img { display: block; width: 100%; height: auto; }
+    figcaption {
+      padding: 0.65rem 0.8rem 0.85rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.92rem;
+      display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem;
+      justify-content: space-between;
+    }
+    footer a { color: var(--accent); }
   </style>
 </head>
 <body>
-  <h1>Spaceblox</h1>
-  <p>Android color-logic puzzle on Google Play.</p>
-  <ul>
-    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-  </ul>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="./">
+        <img src="assets/icon_512.png" alt="Spaceblox icon" width="52" height="52" />
+        <span>SPACEBLOX</span>
+      </a>
+      <nav>
+        <a href="#how">How it works</a>
+        <a href="#shots">Screens</a>
+        <a href="privacy-policy.html">Privacy</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h1>Calm color logic<br>in deep space</h1>
+        <p class="lead">
+          Fill every empty cell with yellow, blue, or green.
+          Never place three of the same color in a row or column —
+          keep the board balanced, and clear each puzzle at your own pace.
+        </p>
+        <div class="tiles" aria-hidden="true">
+          <div class="tile y"></div>
+          <div class="tile b"></div>
+          <div class="tile g"></div>
+          <div class="tile p" title="special"></div>
+        </div>
+        <div class="cta">
+          <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Get it on Google Play</a>
+          <a class="btn btn-ghost" href="#how">See the rules</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <img src="assets/feature.png" alt="Spaceblox feature art" width="1024" height="500" />
+      </div>
+    </section>
+
+    <section id="how">
+      <h2>HOW IT WORKS</h2>
+      <div class="panel">
+        <ol class="rules">
+          <li>Fill empty cells with <strong style="color:var(--yellow)">yellow</strong>, <strong style="color:var(--blue)">blue</strong>, or <strong style="color:var(--green)">green</strong>.</li>
+          <li>Never place three of the same color in a row or column.</li>
+          <li>Keep the colors balanced on every line.</li>
+          <li><strong style="color:var(--purple)">Purple</strong> tiles add extra twists as you go.</li>
+          <li>A full, valid board wins. The timer only measures speed — it never fails the puzzle.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="shots">
+      <h2>IN GAME</h2>
+      <div class="shots">
+        <figure>
+          <img src="assets/shot_menu.png" alt="Spaceblox main menu" loading="lazy" />
+          <figcaption>Main menu</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/shot_tutorial.png" alt="Spaceblox tutorial" loading="lazy" />
+          <figcaption>Guided tutorial</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/shot_gameplay.png" alt="Spaceblox gameplay board" loading="lazy" />
+          <figcaption>Color-logic boards</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/shot_levels.png" alt="Spaceblox level select" loading="lazy" />
+          <figcaption>Campaign levels</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/shot_victory.png" alt="Spaceblox victory screen" loading="lazy" />
+          <figcaption>Clear and move on</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/icon_512.png" alt="Spaceblox app icon" loading="lazy" style="padding:18%;background:#0b1220" />
+          <figcaption>On Google Play</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <footer>
+      <div>© Spaceblox · Giga Sichinava</div>
+      <div>
+        <a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a>
+        ·
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
