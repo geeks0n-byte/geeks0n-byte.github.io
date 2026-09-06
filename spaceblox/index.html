@@ -145,7 +145,7 @@
       flex-direction: column;
       gap: 1.75rem;
       align-items: stretch;
-      padding: 0.1rem 0 2.75rem;
+      padding: 0.1rem 0 0;
     }
     .hero-copy { max-width: 40rem; }
     @media (min-width: 900px) {
@@ -441,6 +441,7 @@
       max-width: 36rem;
       margin-left: auto;
       margin-right: auto;
+      margin-top: 4.25rem; /* match #shots gap */
       text-align: center;
     }
     #how h2 { text-align: center; }
@@ -533,7 +534,7 @@
       padding: 1rem max(1rem, env(safe-area-inset-right)) 3.5rem max(1rem, env(safe-area-inset-left));
     }
     @media (max-width: 860px) {
-      .hero { padding: 0.5rem 0 1.75rem; gap: 1.35rem; }
+      .hero { padding: 0.5rem 0 0; gap: 1.35rem; }
       h1 { font-size: clamp(0.92rem, 4.6vw, 1.2rem); }
       .lead { font-size: 1rem; margin-bottom: 1.1rem; }
       .panel { padding: 1rem 1.05rem; border-radius: 14px; }
