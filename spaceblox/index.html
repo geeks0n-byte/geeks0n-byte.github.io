@@ -80,16 +80,16 @@
     .brand .brand-title .bt-word { position: relative; z-index: 0; }
     .brand .brand-title .bt-tile {
       position: absolute;
-      width: 0.34em;
-      height: 0.34em;
+      width: 0.2em;
+      height: 0.2em;
       image-rendering: pixelated;
       pointer-events: none;
       z-index: 1;
     }
-    /* Same relative letter holes as banner / main menu (P then O) */
-    .brand .brand-title .bt-tile-p { left: 14.2%; top: 22%; }
-    .brand .brand-title .bt-tile-o1 { left: 80.6%; top: 18%; }
-    .brand .brand-title .bt-tile-o2 { left: 80.6%; top: 48%; }
+    /* Nested inside letter counters — small enough not to spill past the glyph */
+    .brand .brand-title .bt-tile-p { left: 16.6%; top: 28%; }
+    .brand .brand-title .bt-tile-o1 { left: 82.9%; top: 26%; }
+    .brand .brand-title .bt-tile-o2 { left: 82.9%; top: 52%; }
 
     nav { display: flex; gap: 0.85rem; flex-wrap: wrap; }
     nav a { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
