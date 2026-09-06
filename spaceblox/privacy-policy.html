@@ -116,17 +116,19 @@
       outline: none;
     }
 
-    /* Compact SPACEBLOX title (with tiles) centered in header */
+    /* SPACEBLOX title with tiles: centered in gap between icon and nav */
     .header-title {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, calc(-50% - 5px));
-      display: block;
+      flex: 1 1 auto;
+      min-width: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       text-decoration: none;
       z-index: 0;
       pointer-events: auto;
+      transform: translateY(-5px);
     }
+    nav { margin-left: 0; }
     .header-title .sb-title-stage {
       width: min(62vw, 400px);
       aspect-ratio: 1080 / 180;

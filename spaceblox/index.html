@@ -146,19 +146,22 @@
     }
 
 
-    /* SPACEBLOX title with tiles centered in header (PC) */
+    /* SPACEBLOX title with tiles: centered in gap between icon and nav (PC) */
     .header-title {
       display: none;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, calc(-50% - 5px));
+      flex: 1 1 auto;
+      min-width: 0;
+      justify-content: center;
+      align-items: center;
       text-decoration: none;
       z-index: 0;
       pointer-events: auto;
+      /* slight optical lift */
+      transform: translateY(-5px);
     }
     @media (min-width: 860px) {
-      .header-title { display: block; }
+      .header-title { display: flex; }
+      nav { margin-left: 0; }
     }
     .header-title .sb-title-stage {
       width: min(36vw, 320px);
