@@ -126,10 +126,10 @@
       pointer-events: auto;
     }
     .header-title .sb-title-stage {
-      /* Height matched to brand icon via JS; width follows 1080:180 */
+      /* Sized in JS so glyph height ≈ icon/button; empty design padding clipped */
       height: 52px;
-      width: calc(52px * 1080 / 180);
-      max-width: min(62vw, 340px);
+      width: calc(52px * 1080 / 96);
+      max-width: none;
       position: relative;
       overflow: hidden;
     }
@@ -201,7 +201,7 @@
     @media (max-width: 640px) {
       .header-title .sb-title-stage {
         height: 44px;
-        width: calc(44px * 1080 / 180);
+        width: calc(44px * 1080 / 96);
       }
     }
 
@@ -408,7 +408,7 @@
   <div class="wrap">
     <header>
       <a class="brand" href="./" aria-label="Spaceblox home">
-        <img src="assets/icon_512.png" alt="Spaceblox" width="44" height="44" />
+        <img src="assets/icon_512.png" alt="Spaceblox" width="52" height="52" />
       </a>
       <a class="header-title" href="./" aria-label="SPACEBLOX">
         <div class="sb-title-stage">
@@ -584,18 +584,34 @@
       var stage = document.querySelector(".header-title .sb-title-stage");
       var design = document.querySelector(".header-title .sb-title-design");
       var icon = document.querySelector(".brand img");
+      var btn = document.querySelector("nav a");
+      var header = document.querySelector("header");
+      var brand = document.querySelector(".brand");
+      var nav = document.querySelector("nav");
       if (!stage || !design) return;
-      // Match icon height (falls back to nav button floor)
-      var targetH = (icon && icon.clientHeight) ? icon.clientHeight : 52;
-      var w = targetH * (DESIGN_W / DESIGN_H);
-      var maxW = Math.min(window.innerWidth * 0.62, 340);
-      if (w > maxW) {
-        w = maxW;
-        targetH = w * (DESIGN_H / DESIGN_W);
+      // Glyph box in design coords (.sb-word font-size), not full 180 canvas
+      var GLYPH_H = 96;
+      var GLYPH_TOP = 20;
+      var targetH = 52;
+      if (icon && icon.clientHeight) targetH = Math.max(targetH, icon.clientHeight);
+      if (btn && btn.offsetHeight) targetH = Math.max(targetH, btn.offsetHeight);
+      var scale = targetH / GLYPH_H;
+      var w = DESIGN_W * scale;
+      // Cap width so title fits between icon and BACK (with a small gap)
+      if (header && brand && nav) {
+        var avail = header.clientWidth - brand.offsetWidth - nav.offsetWidth - 16;
+        if (avail > 80 && w > avail) {
+          w = avail;
+          scale = w / DESIGN_W;
+        }
       }
+      var stageH = GLYPH_H * scale; // ≈ icon when uncapped
       stage.style.width = w + "px";
-      stage.style.height = targetH + "px";
-      design.style.transform = "scale(" + (w / DESIGN_W) + ")";
+      stage.style.height = stageH + "px";
+      // Center the glyph vertically; clip empty design padding
+      var glyphCenter = GLYPH_TOP + GLYPH_H / 2;
+      var ty = stageH / 2 - glyphCenter * scale;
+      design.style.transform = "translateY(" + ty + "px) scale(" + scale + ")";
     }
     function fitSoon() {
       fitHeaderTitle();
