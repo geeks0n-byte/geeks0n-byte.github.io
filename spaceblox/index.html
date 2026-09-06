@@ -393,20 +393,20 @@
     .space-banner .sb-dust {
       background-image: url("assets/bg_1_far_dust.svg");
       opacity: 0.75;
-      animation: sb-parallax-a 320s linear infinite;
+      animation: sb-parallax-a 480s linear infinite;
     }
     .space-banner .sb-stars {
       background-image: url("assets/bg_2_medium_stars.svg");
-      animation: sb-parallax-b 240s linear infinite, sb-twinkle 7.5s ease-in-out infinite;
+      animation: sb-parallax-b 360s linear infinite, sb-twinkle 7.5s ease-in-out infinite;
     }
     .space-banner .sb-accents {
       background-image: url("assets/bg_3_foreground_accents.svg");
-      animation: sb-parallax-c 180s linear infinite, sb-twinkle-alt 7.5s ease-in-out infinite;
+      animation: sb-parallax-c 270s linear infinite, sb-twinkle-alt 7.5s ease-in-out infinite;
     }
     .space-banner .sb-sparks {
       background-image: url("assets/bg_4_sparkler_crosses.svg");
       opacity: 0.9;
-      animation: sb-parallax-d 120s linear infinite;
+      animation: sb-parallax-d 180s linear infinite;
     }
     /* Top-right → bottom-left (left + down); short whole-tile steps = slow + seamless */
     @keyframes sb-parallax-a {
@@ -532,10 +532,10 @@
         --sb-tw: 480px;
         --sb-th: 853px; /* smaller tiles on mobile */
       }
-      .space-banner .sb-dust { animation-duration: 360s; }
-      .space-banner .sb-stars { animation-duration: 280s, 7.5s; }
-      .space-banner .sb-accents { animation-duration: 200s, 7.5s; }
-      .space-banner .sb-sparks { animation-duration: 140s; }
+      .space-banner .sb-dust { animation-duration: 540s; }
+      .space-banner .sb-stars { animation-duration: 420s, 7.5s; }
+      .space-banner .sb-accents { animation-duration: 300s, 7.5s; }
+      .space-banner .sb-sparks { animation-duration: 210s; }
     }
     @media (prefers-reduced-motion: reduce) {
       .space-banner .sb-layer { animation: none !important; opacity: 1 !important; }
