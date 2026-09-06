@@ -58,13 +58,35 @@
     }
     .brand { display: flex; align-items: center; gap: 0.85rem; text-decoration: none; color: inherit; }
     .brand img { width: 52px; height: 52px; border-radius: 14px; box-shadow: 0 0 0 2px #334155, 0 8px 24px #0008; }
-    .brand span {
+    .brand .brand-title {
+      position: relative;
+      display: inline-block;
       font-family: "PressStart2P", monospace;
       font-size: 0.85rem;
       letter-spacing: 0.04em;
       color: var(--yellow);
-      text-shadow: 0 0 18px #facc1544;
+      text-shadow:
+        1px 0 0 #04111f,
+        -1px 0 0 #04111f,
+        0 1px 0 #04111f,
+        0 -1px 0 #04111f,
+        0 0 18px #facc1544;
+      line-height: 1;
     }
+    .brand .brand-title .bt-word { position: relative; z-index: 0; }
+    .brand .brand-title .bt-tile {
+      position: absolute;
+      width: 0.34em;
+      height: 0.34em;
+      image-rendering: pixelated;
+      pointer-events: none;
+      z-index: 1;
+    }
+    /* Same relative letter holes as banner / main menu (P then O) */
+    .brand .brand-title .bt-tile-p { left: 14.2%; top: 22%; }
+    .brand .brand-title .bt-tile-o1 { left: 80.6%; top: 18%; }
+    .brand .brand-title .bt-tile-o2 { left: 80.6%; top: 48%; }
+
     nav { display: flex; gap: 0.85rem; flex-wrap: wrap; }
     nav a { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
     nav a:hover { color: var(--text); }
@@ -78,7 +100,7 @@
     }
     @media (max-width: 860px) {
       .hero { grid-template-columns: 1fr; }
-      .brand span { font-size: 0.72rem; }
+      .brand .brand-title { font-size: 0.72rem; }
     }
     h1 {
       font-family: "PressStart2P", monospace;
@@ -214,7 +236,7 @@
       .brand img { width: 44px; height: 44px; border-radius: 12px; }
     }
     @media (max-width: 420px) {
-      .brand span { font-size: 0.62rem; }
+      .brand .brand-title { font-size: 0.62rem; }
       .tiles img { width: 34px; height: 34px; }
       .shots-track figure { width: 118px; flex: 0 0 118px; }
       h2 { font-size: 0.68rem; }
@@ -231,7 +253,12 @@
     <header>
       <a class="brand" href="./">
         <img src="assets/icon_512.png" alt="Spaceblox icon" width="44" height="44" />
-        <span>SPACEBLOX</span>
+        <span class="brand-title" aria-label="SPACEBLOX">
+          <span class="bt-word">SPACEBLOX</span>
+          <img class="bt-tile bt-tile-p" src="assets/tile_green.svg" alt="" width="12" height="12" />
+          <img class="bt-tile bt-tile-o1" src="assets/tile_yellow.svg" alt="" width="12" height="12" />
+          <img class="bt-tile bt-tile-o2" src="assets/tile_blue.svg" alt="" width="12" height="12" />
+        </span>
       </a>
       <nav>
         <a href="./">Home</a>
