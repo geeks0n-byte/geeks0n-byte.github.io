@@ -103,6 +103,22 @@
       filter: drop-shadow(0 4px 0 #0006);
     }
 
+    .play-badge {
+      display: inline-flex;
+      align-items: center;
+      line-height: 0;
+      margin: -0.35rem 0 -0.35rem -0.55rem; /* badge PNG has built-in padding */
+    }
+    .play-badge img {
+      display: block;
+      width: min(215px, 70vw);
+      height: auto;
+    }
+    @media (max-width: 860px) {
+      .play-badge { margin-left: -0.35rem; align-self: flex-start; }
+      .play-badge img { width: min(200px, 75vw); }
+    }
+
     .cta { display: flex; flex-wrap: wrap; gap: 0.75rem; }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
@@ -271,7 +287,9 @@
           <img src="assets/tile_shifter.svg" alt="Special purple tile" width="40" height="40" />
         </div>
         <div class="cta">
-          <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Get it on Google Play</a>
+          <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" aria-label="Get it on Google Play">
+            <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" />
+          </a>
           <a class="btn btn-ghost" href="#how">HOW TO PLAY</a>
         </div>
       </div>
