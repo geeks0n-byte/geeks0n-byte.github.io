@@ -135,8 +135,8 @@
     @media (min-width: 900px) {
       .hero {
         display: grid;
-        grid-template-columns: auto 1fr;
-        grid-template-areas: "art art" "side copy";
+        grid-template-columns: 1fr auto;
+        grid-template-areas: "art art" "copy side";
         gap: 1.75rem 2.5rem;
         align-items: start;
       }
@@ -149,16 +149,16 @@
         grid-area: side;
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: flex-end;
         gap: 1rem;
         padding-top: 0.35rem;
-        justify-self: start;
+        justify-self: end;
       }
       .hero-copy .tiles-row { display: none; }
       .hero-side .tiles-row {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: flex-end;
         margin: 0;
         gap: 0.85rem;
       }
