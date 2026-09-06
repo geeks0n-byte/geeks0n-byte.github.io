@@ -146,96 +146,6 @@
     }
 
 
-    /* SPACEBLOX title with tiles: centered in gap between icon and nav (PC) */
-    .header-title {
-      display: none;
-      flex: 1 1 auto;
-      min-width: 0;
-      justify-content: center;
-      align-items: center;
-      text-decoration: none;
-      z-index: 0;
-      pointer-events: auto;
-      /* slight optical lift */
-      transform: none;
-    }
-    @media (min-width: 860px) {
-      .header-title { display: flex; }
-      nav { margin-left: 0; }
-    }
-    .header-title .sb-title-stage {
-      width: min(36vw, 320px);
-      aspect-ratio: 1080 / 180;
-      height: auto;
-      position: relative;
-      overflow: hidden;
-    }
-    .header-title .sb-title-design {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 1080px;
-      height: 180px;
-      transform-origin: top left;
-      transform: scale(0.25);
-    }
-    .header-title .sb-word {
-      position: absolute;
-      left: 24px;
-      top: 20px;
-      width: 1032px;
-      height: 160px;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "PressStart2P", monospace;
-      font-size: 96px;
-      color: #facc15;
-      letter-spacing: 0;
-      text-shadow:
-        2px 0px 0 #04111f,
-        -2px 0px 0 #04111f,
-        0px 2px 0 #04111f,
-        0px -2px 0 #04111f,
-        2px 2px 0 #04111f,
-        -2px 2px 0 #04111f,
-        2px -2px 0 #04111f,
-        -2px -2px 0 #04111f,
-        3px 0px 0 #04111f,
-        -3px 0px 0 #04111f,
-        0px 3px 0 #04111f,
-        0px -3px 0 #04111f,
-        3px 3px 0 #04111f,
-        -3px 3px 0 #04111f,
-        3px -3px 0 #04111f,
-        -3px -3px 0 #04111f,
-        4px 0px 0 #04111f,
-        -4px 0px 0 #04111f,
-        0px 4px 0 #04111f,
-        0px -4px 0 #04111f,
-        4px 4px 0 #04111f,
-        -4px 4px 0 #04111f,
-        4px -4px 0 #04111f,
-        -4px -4px 0 #04111f,
-        0 0 14px #facc1544;
-      line-height: 1;
-      white-space: nowrap;
-    }
-    .header-title .sb-tile {
-      position: absolute;
-      width: 28px;
-      height: 28px;
-      transform: scale(1.15);
-      transform-origin: 0 0;
-      image-rendering: pixelated;
-      pointer-events: none;
-      z-index: 1;
-    }
-    .header-title .sb-tile-p { left: 230px; top: 66px; }
-    .header-title .sb-tile-o1 { left: 806px; top: 65px; }
-    .header-title .sb-tile-o2 { left: 806px; top: 93px; }
-
     .hero {
       display: flex;
       flex-direction: column;
@@ -710,16 +620,6 @@ footer {
       <a class="brand" href="./" aria-label="Spaceblox home">
         <img src="assets/icon_512.png" alt="Spaceblox" width="52" height="52" />
       </a>
-      <a class="header-title" href="./" aria-label="SPACEBLOX">
-        <div class="sb-title-stage">
-          <div class="sb-title-design">
-            <p class="sb-word">SPACEBLOX</p>
-            <img class="sb-tile sb-tile-p" src="assets/tile_green.svg" alt="" width="28" height="28" />
-            <img class="sb-tile sb-tile-o1" src="assets/tile_yellow.svg" alt="" width="28" height="28" />
-            <img class="sb-tile sb-tile-o2" src="assets/tile_blue.svg" alt="" width="28" height="28" />
-          </div>
-        </div>
-      </a>
       <nav>
         <a href="#how">HOW TO PLAY</a>
         <a href="#shots">SCREENSHOTS</a>
@@ -968,7 +868,6 @@ footer {
 
     function fitSpaceTitle() {
       fitStage(".space-banner .sb-title-stage", ".space-banner .sb-title-design");
-      fitStage(".header-title .sb-title-stage", ".header-title .sb-title-design");
     }
 
     function fitSoon() {
