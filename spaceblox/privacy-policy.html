@@ -126,9 +126,10 @@
       pointer-events: auto;
     }
     .header-title .sb-title-stage {
-      width: min(52vw, 280px);
-      aspect-ratio: 1080 / 180;
-      height: auto;
+      /* Height matched to brand icon via JS; width follows 1080:180 */
+      height: 52px;
+      width: calc(52px * 1080 / 180);
+      max-width: min(62vw, 340px);
       position: relative;
       overflow: hidden;
     }
@@ -198,7 +199,10 @@
     .header-title .sb-tile-o1 { left: 806px; top: 65px; }
     .header-title .sb-tile-o2 { left: 806px; top: 93px; }
     @media (max-width: 640px) {
-      .header-title .sb-title-stage { width: min(46vw, 200px); }
+      .header-title .sb-title-stage {
+        height: 44px;
+        width: calc(44px * 1080 / 180);
+      }
     }
 
     nav a:hover { filter: brightness(1.12); color: #ffffff; }
@@ -579,9 +583,18 @@
     function fitHeaderTitle() {
       var stage = document.querySelector(".header-title .sb-title-stage");
       var design = document.querySelector(".header-title .sb-title-design");
+      var icon = document.querySelector(".brand img");
       if (!stage || !design) return;
-      var w = stage.clientWidth || 1;
-      stage.style.height = (w * (DESIGN_H / DESIGN_W)) + "px";
+      // Match icon height (falls back to nav button floor)
+      var targetH = (icon && icon.clientHeight) ? icon.clientHeight : 52;
+      var w = targetH * (DESIGN_W / DESIGN_H);
+      var maxW = Math.min(window.innerWidth * 0.62, 340);
+      if (w > maxW) {
+        w = maxW;
+        targetH = w * (DESIGN_H / DESIGN_W);
+      }
+      stage.style.width = w + "px";
+      stage.style.height = targetH + "px";
       design.style.transform = "scale(" + (w / DESIGN_W) + ")";
     }
     function fitSoon() {
