@@ -993,64 +993,37 @@ footer {
     var wheel = document.querySelector(".shots-wheel");
     var track = document.querySelector(".shots-track");
     if (!wheel || !track) return;
-
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var loopW = 0;
-    var auto = !reduce;
-    var speed = 0.55; // px per frame (~33px/s at 60fps)
-    var resumeTimer = null;
-    var lastUser = 0;
-
-    function measure() {
-      loopW = track.scrollWidth / 2;
-    }
-
+    var loopW = 0, auto = !reduce, speed = 0.55, resumeTimer = null, lastUser = 0, wrapping = false;
+    function measure() { loopW = track.scrollWidth / 2; }
     function wrap() {
+      if (wrapping) return;
       if (!loopW) measure();
       if (loopW <= 0) return;
+      wrapping = true;
       if (wheel.scrollLeft >= loopW) wheel.scrollLeft -= loopW;
-      else if (wheel.scrollLeft < 0) wheel.scrollLeft += loopW;
+      else if (wheel.scrollLeft <= 1) wheel.scrollLeft += loopW;
+      wrapping = false;
     }
-
     function pauseAuto() {
-      auto = false;
-      lastUser = Date.now();
+      auto = false; lastUser = Date.now();
       if (resumeTimer) clearTimeout(resumeTimer);
-      if (!reduce) {
-        resumeTimer = setTimeout(function () {
-          if (Date.now() - lastUser >= 2000) auto = true;
-        }, 2100);
-      }
+      if (!reduce) resumeTimer = setTimeout(function () { if (Date.now() - lastUser >= 2000) auto = true; }, 2100);
     }
-
     function tick() {
-      if (auto && loopW > 0) {
-        wheel.scrollLeft += speed;
-        wrap();
-      }
+      if (auto && loopW > 0) { wheel.scrollLeft += speed; wrap(); }
       requestAnimationFrame(tick);
     }
-
-    wheel.addEventListener("scroll", function () {
-      wrap();
-    }, { passive: true });
-
-    // Any user swipe / trackpad / mouse-wheel over the strip pauses auto briefly
+    wheel.addEventListener("scroll", function () { if (!wrapping) wrap(); }, { passive: true });
     wheel.addEventListener("wheel", function (e) {
       pauseAuto();
-      // Prefer horizontal; map vertical trackpad swipe to horizontal
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        wheel.scrollLeft += e.deltaY;
-        wrap();
-        e.preventDefault();
-      }
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { wheel.scrollLeft += e.deltaY; wrap(); e.preventDefault(); }
     }, { passive: false });
-
     wheel.addEventListener("pointerdown", pauseAuto, { passive: true });
     wheel.addEventListener("touchstart", pauseAuto, { passive: true });
-
-    window.addEventListener("resize", measure);
+    window.addEventListener("resize", function () { measure(); if (loopW) wrap(); });
     measure();
+    if (loopW > 0) wheel.scrollLeft = Math.floor(loopW * 0.5);
     requestAnimationFrame(tick);
   })();
   </script>
