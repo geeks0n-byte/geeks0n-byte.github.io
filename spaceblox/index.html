@@ -595,27 +595,24 @@
 
     .shots-wheel {
       position: relative;
-      overflow: hidden;
+      overflow-x: auto;
+      overflow-y: hidden;
       border: 1px solid var(--line);
       border-radius: 18px;
       background: color-mix(in srgb, var(--panel) 88%, transparent);
       padding: 0.85rem 0.6rem;
-      touch-action: pan-y;
-      cursor: grab;
-      user-select: none;
-      -webkit-user-select: none;
+      touch-action: pan-x;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
     }
-    .shots-wheel.is-dragging { cursor: grabbing; }
-    .shots-wheel.is-dragging .shots-track,
-    .shots-wheel.is-paused .shots-track {
-      animation-play-state: paused;
-    }
+    .shots-wheel::-webkit-scrollbar { display: none; }
     .shots-track {
       display: flex;
       gap: 0.75rem;
       width: max-content;
-      animation: shots-marquee 28s linear infinite;
-      will-change: transform;
+      /* auto-scroll driven in JS so swipe stays native */
+      animation: none;
     }
     @keyframes shots-marquee {
       from { transform: translateX(0); }
@@ -673,7 +670,7 @@
       .rules { padding-left: 1rem; font-size: 0.98rem; }
       section { margin: 1.75rem 0; }
       .shots-wheel { border-radius: 14px; padding: 0.65rem 0.45rem; }
-      .shots-track { gap: 0.55rem; animation-duration: 22s; }
+      .shots-track { gap: 0.55rem; }
       .shots-track figure { width: 132px; flex: 0 0 132px; border-radius: 10px; }
 footer {
         flex-direction: column;
@@ -988,105 +985,65 @@ footer {
     var wheel = document.querySelector(".shots-wheel");
     var track = document.querySelector(".shots-track");
     if (!wheel || !track) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      // Still allow manual drag when auto-scroll is off
-    }
 
-    var offset = 0;
-    var dragging = false;
-    var startX = 0;
-    var startOffset = 0;
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var loopW = 0;
+    var auto = !reduce;
+    var speed = 0.55; // px per frame (~33px/s at 60fps)
     var resumeTimer = null;
+    var lastUser = 0;
 
     function measure() {
-      // Track is two identical sets; loop width is half
       loopW = track.scrollWidth / 2;
     }
 
-    function apply() {
+    function wrap() {
       if (!loopW) measure();
-      if (loopW > 0) {
-        offset = ((offset % loopW) + loopW) % loopW;
-      }
-      track.style.transform = "translateX(" + (-offset) + "px)";
+      if (loopW <= 0) return;
+      if (wheel.scrollLeft >= loopW) wheel.scrollLeft -= loopW;
+      else if (wheel.scrollLeft < 0) wheel.scrollLeft += loopW;
     }
 
     function pauseAuto() {
-      wheel.classList.add("is-paused");
+      auto = false;
+      lastUser = Date.now();
       if (resumeTimer) clearTimeout(resumeTimer);
-    }
-
-    function scheduleResume() {
-      if (resumeTimer) clearTimeout(resumeTimer);
-      resumeTimer = setTimeout(function () {
-        // Sync CSS animation restart from current offset is hard; keep manual offset
-        // and leave paused until idle long enough, then clear inline transform and unpause
-        track.style.transform = "";
-        offset = 0;
-        wheel.classList.remove("is-paused");
-        // Force reflow so animation restarts cleanly
-        void track.offsetWidth;
-      }, 2200);
-    }
-
-    function onDown(clientX) {
-      measure();
-      dragging = true;
-      startX = clientX;
-      startOffset = offset;
-      pauseAuto();
-      // Capture current visual position from CSS animation if first drag
-      if (!track.style.transform || track.style.transform === "") {
-        var cs = getComputedStyle(track);
-        var tr = cs.transform;
-        if (tr && tr !== "none") {
-          var m = tr.match(/matrix\(([^)]+)\)/);
-          if (m) {
-            var parts = m[1].split(",");
-            var tx = parseFloat(parts[4]);
-            if (!isNaN(tx)) {
-              offset = -tx;
-              startOffset = offset;
-            }
-          }
-        }
-        apply();
+      if (!reduce) {
+        resumeTimer = setTimeout(function () {
+          if (Date.now() - lastUser >= 2000) auto = true;
+        }, 2100);
       }
-      wheel.classList.add("is-dragging");
     }
 
-    function onMove(clientX) {
-      if (!dragging) return;
-      var dx = clientX - startX;
-      offset = startOffset - dx;
-      apply();
+    function tick() {
+      if (auto && loopW > 0) {
+        wheel.scrollLeft += speed;
+        wrap();
+      }
+      requestAnimationFrame(tick);
     }
 
-    function onUp() {
-      if (!dragging) return;
-      dragging = false;
-      wheel.classList.remove("is-dragging");
-      scheduleResume();
-    }
+    wheel.addEventListener("scroll", function () {
+      wrap();
+    }, { passive: true });
 
-    wheel.addEventListener("pointerdown", function (e) {
-      if (e.button != null && e.button !== 0) return;
-      wheel.setPointerCapture(e.pointerId);
-      onDown(e.clientX);
-      e.preventDefault();
-    });
-    wheel.addEventListener("pointermove", function (e) {
-      onMove(e.clientX);
-    });
-    wheel.addEventListener("pointerup", onUp);
-    wheel.addEventListener("pointercancel", onUp);
-    wheel.addEventListener("lostpointercapture", onUp);
+    // Any user swipe / trackpad / mouse-wheel over the strip pauses auto briefly
+    wheel.addEventListener("wheel", function (e) {
+      pauseAuto();
+      // Prefer horizontal; map vertical trackpad swipe to horizontal
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        wheel.scrollLeft += e.deltaY;
+        wrap();
+        e.preventDefault();
+      }
+    }, { passive: false });
 
-    window.addEventListener("resize", function () {
-      measure();
-      apply();
-    });
+    wheel.addEventListener("pointerdown", pauseAuto, { passive: true });
+    wheel.addEventListener("touchstart", pauseAuto, { passive: true });
+
+    window.addEventListener("resize", measure);
+    measure();
+    requestAnimationFrame(tick);
   })();
   </script>
 
