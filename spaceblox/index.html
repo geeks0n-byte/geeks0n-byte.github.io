@@ -388,26 +388,48 @@
       color: #facc15;
       letter-spacing: 0;
       text-shadow:
-        4px 0 0 #04111f,
-        -4px 0 0 #04111f,
-        0 4px 0 #04111f,
-        0 -4px 0 #04111f,
-        4px 4px 0 #04111f,
-        -4px 4px 0 #04111f,
-        4px -4px 0 #04111f,
-        -4px -4px 0 #04111f,
+        7px 0px 0 #04111f,
+        -7px 0px 0 #04111f,
+        0px 7px 0 #04111f,
+        0px -7px 0 #04111f,
+        7px 7px 0 #04111f,
+        -7px 7px 0 #04111f,
+        7px -7px 0 #04111f,
+        -7px -7px 0 #04111f,
+        10px 0px 0 #04111f,
+        -10px 0px 0 #04111f,
+        0px 10px 0 #04111f,
+        0px -10px 0 #04111f,
+        10px 10px 0 #04111f,
+        -10px 10px 0 #04111f,
+        10px -10px 0 #04111f,
+        -10px -10px 0 #04111f,
+        14px 0px 0 #04111f,
+        -14px 0px 0 #04111f,
+        0px 14px 0 #04111f,
+        0px -14px 0 #04111f,
+        14px 14px 0 #04111f,
+        -14px 14px 0 #04111f,
+        14px -14px 0 #04111f,
+        -14px -14px 0 #04111f,
         0 0 18px #facc1544;
       line-height: 1;
       white-space: nowrap;
     }
-    /* Tile holes — JS places these in % of the title stage (works in narrow WebViews) */
+    /* Match main_menu / capture_title: 28×28 @ scale 1.15, origin top-left, crop y-220 */
     .space-banner .sb-tile {
       position: absolute;
-      transform-origin: top left;
+      width: 28px;
+      height: 28px;
+      transform: scale(1.15);
+      transform-origin: 0 0;
       image-rendering: pixelated;
       pointer-events: none;
-      z-index: 3;
+      z-index: 1;
     }
+    .space-banner .sb-tile-p { left: 230px; top: 66px; }
+    .space-banner .sb-tile-o1 { left: 806px; top: 66px; }
+    .space-banner .sb-tile-o2 { left: 806px; top: 93px; }
     @media (max-width: 860px) {
       .space-banner .sb-title-stage { width: min(88%, 420px); }
       .space-banner .sb-layer {
@@ -591,10 +613,10 @@ footer {
             <div class="sb-title-stage">
               <div class="sb-title-design">
                 <p class="sb-word">SPACEBLOX</p>
+                <img class="sb-tile sb-tile-p" src="assets/tile_green.svg" alt="" width="28" height="28" />
+                <img class="sb-tile sb-tile-o1" src="assets/tile_yellow.svg" alt="" width="28" height="28" />
+                <img class="sb-tile sb-tile-o2" src="assets/tile_blue.svg" alt="" width="28" height="28" />
               </div>
-              <img class="sb-tile sb-tile-p" src="assets/tile_green.svg" alt="" width="28" height="28" />
-              <img class="sb-tile sb-tile-o1" src="assets/tile_yellow.svg" alt="" width="28" height="28" />
-              <img class="sb-tile sb-tile-o2" src="assets/tile_blue.svg" alt="" width="28" height="28" />
             </div>
           </div>
         </div>
@@ -803,45 +825,20 @@ footer {
 
   <script>
   (function () {
-    // Design space from game title crop (1080×180). Tiles are stage-% so narrow WebViews stay aligned.
+    // Design crop 1080×180 from capture_title.gd. Tiles live in design px
+    // (230,66)/(806,66)/(806,93), size 28, scale 1.15 — same as main_menu.tscn.
     var DESIGN_W = 1080;
     var DESIGN_H = 180;
-    var TILE = 28 * 1.15; /* in-game tile size after scale */
-    var HOLES = [
-      { sel: ".sb-tile-p", x: 230, y: 66 },
-      { sel: ".sb-tile-o1", x: 806, y: 66 },
-      { sel: ".sb-tile-o2", x: 806, y: 93 }
-    ];
 
     function fitSpaceTitle() {
       var stage = document.querySelector(".sb-title-stage");
       var design = document.querySelector(".sb-title-design");
-      var word = document.querySelector(".sb-word");
       if (!stage || !design) return;
 
       var w = stage.clientWidth || 1;
-      var h = w * (DESIGN_H / DESIGN_W);
       // Force height — some in-app browsers mishandle aspect-ratio
-      stage.style.height = h + "px";
-
-      var s = w / DESIGN_W;
-      design.style.transform = "scale(" + s + ")";
-
-      if (word) {
-        // Keep word metrics in design px; scale comes from parent transform
-        word.style.fontSize = "96px";
-      }
-
-      for (var i = 0; i < HOLES.length; i++) {
-        var hole = HOLES[i];
-        var el = document.querySelector(hole.sel);
-        if (!el) continue;
-        el.style.left = ((hole.x / DESIGN_W) * 100) + "%";
-        el.style.top = ((hole.y / DESIGN_H) * 100) + "%";
-        el.style.width = ((TILE / DESIGN_W) * 100) + "%";
-        el.style.height = "auto";
-        el.style.transform = "none";
-      }
+      stage.style.height = (w * (DESIGN_H / DESIGN_W)) + "px";
+      design.style.transform = "scale(" + (w / DESIGN_W) + ")";
     }
 
     function fitSoon() {
