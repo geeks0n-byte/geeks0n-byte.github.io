@@ -249,6 +249,8 @@
       position: relative;
       isolation: isolate;
       width: 100%;
+      max-width: min(100%, 700px); /* under tile width — no side-by-side repeat */
+      margin-inline: auto;
       height: clamp(170px, 28vw, 320px);
     }
     .space-banner {
