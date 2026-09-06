@@ -149,30 +149,6 @@
     .rules { display: grid; gap: 0.75rem; padding-left: 1.1rem; margin: 0; color: var(--muted); }
     .rules li::marker { color: var(--yellow); }
 
-    .shots {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-    @media (max-width: 860px) {
-      .shots { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 560px) {
-      .shots { grid-template-columns: 1fr; }
-    }
-    figure {
-      margin: 0;
-      background: var(--bg2);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      overflow: hidden;
-    }
-    figure img { display: block; width: 100%; height: auto; }
-    figcaption {
-      padding: 0.65rem 0.8rem 0.85rem;
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
 
     footer {
       margin-top: 3rem;
@@ -196,8 +172,7 @@
       </a>
       <nav>
         <a href="#how">How it works</a>
-        <a href="#shots">Screens</a>
-        <a href="privacy-policy.html">Privacy</a>
+                <a href="privacy-policy.html">Privacy</a>
       </nav>
     </header>
 
@@ -237,35 +212,6 @@
       </div>
     </section>
 
-    <section id="shots">
-      <h2>IN GAME</h2>
-      <div class="shots">
-        <figure>
-          <img src="assets/shot_menu.png" alt="Spaceblox main menu" loading="lazy" />
-          <figcaption>Main menu</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/shot_tutorial.png" alt="Spaceblox tutorial" loading="lazy" />
-          <figcaption>Guided tutorial</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/shot_gameplay.png" alt="Spaceblox gameplay board" loading="lazy" />
-          <figcaption>Color-logic boards</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/shot_levels.png" alt="Spaceblox level select" loading="lazy" />
-          <figcaption>Campaign levels</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/shot_victory.png" alt="Spaceblox victory screen" loading="lazy" />
-          <figcaption>Clear and move on</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/icon_512.png" alt="Spaceblox app icon" loading="lazy" style="padding:18%;background:#0b1220" />
-          <figcaption>On Google Play</figcaption>
-        </figure>
-      </div>
-    </section>
 
     <footer>
       <div>© Spaceblox · Giga Sichinava</div>
