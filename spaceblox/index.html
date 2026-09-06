@@ -143,12 +143,15 @@
     }
     .space-banner .sb-layer {
       position: absolute;
-      inset: -20%;
+      inset: 0;
       background-repeat: repeat;
-      background-size: 45% auto;
+      /* Fixed tile size (360:640) so pan distance can match one period */
+      --sb-tw: 225px;
+      --sb-th: 400px;
+      background-size: var(--sb-tw) var(--sb-th);
       image-rendering: pixelated;
       image-rendering: crisp-edges;
-      will-change: transform, opacity;
+      will-change: background-position, opacity;
       pointer-events: none;
     }
     .space-banner .sb-void {
@@ -159,36 +162,36 @@
     .space-banner .sb-dust {
       background-image: url("assets/bg_1_far_dust.svg");
       opacity: 0.85;
-      animation: sb-parallax-a 90s linear infinite;
+      animation: sb-pan-a 96s linear infinite;
     }
     .space-banner .sb-stars {
       background-image: url("assets/bg_2_medium_stars.svg");
-      animation: sb-parallax-b 55s linear infinite, sb-twinkle 6s ease-in-out infinite;
+      animation: sb-pan-b 64s linear infinite, sb-twinkle 6s ease-in-out infinite;
     }
     .space-banner .sb-accents {
       background-image: url("assets/bg_3_foreground_accents.svg");
-      animation: sb-parallax-c 38s linear infinite, sb-twinkle-alt 6s ease-in-out infinite;
+      animation: sb-pan-c 42s linear infinite, sb-twinkle-alt 6s ease-in-out infinite;
     }
     .space-banner .sb-sparks {
       background-image: url("assets/bg_4_sparkler_crosses.svg");
-      background-size: 38% auto;
-      animation: sb-parallax-d 22s linear infinite;
+      animation: sb-pan-d 28s linear infinite;
     }
-    @keyframes sb-parallax-a {
-      from { transform: translate3d(0, 0, 0); }
-      to { transform: translate3d(-12%, -8%, 0); }
+    /* End offset = exactly 1 tile → seamless with background-repeat */
+    @keyframes sb-pan-a {
+      from { background-position: 0 0; }
+      to { background-position: calc(var(--sb-tw) * -1) calc(var(--sb-th) * -1); }
     }
-    @keyframes sb-parallax-b {
-      from { transform: translate3d(0, 0, 0); }
-      to { transform: translate3d(-18%, -12%, 0); }
+    @keyframes sb-pan-b {
+      from { background-position: 0 0; }
+      to { background-position: calc(var(--sb-tw) * -1) calc(var(--sb-th) * -0.5); }
     }
-    @keyframes sb-parallax-c {
-      from { transform: translate3d(0, 0, 0); }
-      to { transform: translate3d(-26%, -16%, 0); }
+    @keyframes sb-pan-c {
+      from { background-position: 0 0; }
+      to { background-position: calc(var(--sb-tw) * -1) calc(var(--sb-th) * -1); }
     }
-    @keyframes sb-parallax-d {
-      from { transform: translate3d(0, 0, 0); }
-      to { transform: translate3d(-34%, -20%, 0); }
+    @keyframes sb-pan-d {
+      from { background-position: 0 0; }
+      to { background-position: calc(var(--sb-tw) * -1) calc(var(--sb-th) * -1); }
     }
     @keyframes sb-twinkle {
       0%, 100% { opacity: 1; }
@@ -276,7 +279,10 @@
     .space-banner .sb-tile-o2 { left: 806px; top: 93px; }
     @media (max-width: 860px) {
       .space-banner .sb-title-stage { width: min(88%, 420px); }
-      .space-banner .sb-layer { background-size: 70% auto; }
+      .space-banner .sb-layer {
+        --sb-tw: 180px;
+        --sb-th: 320px;
+      }
     }
     @media (prefers-reduced-motion: reduce) {
       .space-banner .sb-layer { animation: none !important; opacity: 1 !important; }
