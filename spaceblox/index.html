@@ -252,15 +252,18 @@
     }
     .space-banner .sb-layer {
       position: absolute;
-      inset: 0;
+      /* Oversized so a 90° rotate still covers the landscape banner */
+      inset: -60%;
       background-repeat: repeat;
-      /* Exact tile size — parallax steps by whole tiles so the loop is seamless */
+      /* Portrait game tiles (360:640); rotated 90° for the wide banner */
       --sb-tw: 1100px;
-      --sb-th: 1956px; /* 360:640 aspect */
+      --sb-th: 1956px;
       background-size: var(--sb-tw) var(--sb-th);
       background-position: 0 0;
       image-rendering: pixelated;
       image-rendering: crisp-edges;
+      transform: rotate(90deg);
+      transform-origin: center center;
       will-change: background-position, opacity;
       pointer-events: none;
     }
