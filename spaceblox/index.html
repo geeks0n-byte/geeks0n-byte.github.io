@@ -107,7 +107,8 @@
       padding: 0.7rem 1.15rem;
       line-height: 1;
       height: auto;
-      max-height: 56px; /* cap: slightly above 52px icon */
+      min-height: 56px; /* floor = prior hug cap */
+      max-height: 56px;
       box-sizing: border-box;
       image-rendering: pixelated;
       border: none;
@@ -131,6 +132,7 @@
         font-size: 0.45rem;
         padding: 0.55rem 0.75rem;
         height: auto;
+        min-height: 48px;
         max-height: 48px;
       }
     }
@@ -154,15 +156,18 @@
       .hero-art { grid-area: art; }
       .hero-copy {
         grid-area: copy;
-        max-width: 36rem;
+        max-width: none;
         width: 100%;
-        margin-inline: auto;
+        justify-self: stretch;
+        margin-inline: 0;
         text-align: center;
       }
       .hero-copy h1,
       .hero-copy .lead {
         text-align: center;
-        margin-inline: auto;
+        max-width: none;
+        width: 100%;
+        margin-inline: 0;
       }
       .hero-side {
         grid-area: side;
