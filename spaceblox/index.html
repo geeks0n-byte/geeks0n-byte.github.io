@@ -157,7 +157,7 @@
       z-index: 0;
       pointer-events: auto;
       /* slight optical lift */
-      transform: translateY(2px);
+      transform: translateY(-2px);
     }
     @media (min-width: 860px) {
       .header-title { display: flex; }
@@ -597,12 +597,22 @@
       border-radius: 18px;
       background: color-mix(in srgb, var(--panel) 88%, transparent);
       padding: 0.85rem 0.6rem;
+      touch-action: pan-y;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .shots-wheel.is-dragging { cursor: grabbing; }
+    .shots-wheel.is-dragging .shots-track,
+    .shots-wheel.is-paused .shots-track {
+      animation-play-state: paused;
     }
     .shots-track {
       display: flex;
       gap: 0.75rem;
       width: max-content;
       animation: shots-marquee 28s linear infinite;
+      will-change: transform;
     }
     @keyframes shots-marquee {
       from { transform: translateX(0); }
@@ -623,6 +633,8 @@
       height: auto;
       aspect-ratio: 9 / 16;
       object-fit: cover;
+      pointer-events: none;
+      -webkit-user-drag: none;
     }
 
     footer {
@@ -964,6 +976,114 @@ footer {
       document.fonts.ready.then(fitSoon);
     }
     window.addEventListener("load", fitSoon);
+  })();
+  </script>
+
+
+  <script>
+  (function () {
+    var wheel = document.querySelector(".shots-wheel");
+    var track = document.querySelector(".shots-track");
+    if (!wheel || !track) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      // Still allow manual drag when auto-scroll is off
+    }
+
+    var offset = 0;
+    var dragging = false;
+    var startX = 0;
+    var startOffset = 0;
+    var loopW = 0;
+    var resumeTimer = null;
+
+    function measure() {
+      // Track is two identical sets; loop width is half
+      loopW = track.scrollWidth / 2;
+    }
+
+    function apply() {
+      if (!loopW) measure();
+      if (loopW > 0) {
+        offset = ((offset % loopW) + loopW) % loopW;
+      }
+      track.style.transform = "translateX(" + (-offset) + "px)";
+    }
+
+    function pauseAuto() {
+      wheel.classList.add("is-paused");
+      if (resumeTimer) clearTimeout(resumeTimer);
+    }
+
+    function scheduleResume() {
+      if (resumeTimer) clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(function () {
+        // Sync CSS animation restart from current offset is hard; keep manual offset
+        // and leave paused until idle long enough, then clear inline transform and unpause
+        track.style.transform = "";
+        offset = 0;
+        wheel.classList.remove("is-paused");
+        // Force reflow so animation restarts cleanly
+        void track.offsetWidth;
+      }, 2200);
+    }
+
+    function onDown(clientX) {
+      measure();
+      dragging = true;
+      startX = clientX;
+      startOffset = offset;
+      pauseAuto();
+      // Capture current visual position from CSS animation if first drag
+      if (!track.style.transform || track.style.transform === "") {
+        var cs = getComputedStyle(track);
+        var tr = cs.transform;
+        if (tr && tr !== "none") {
+          var m = tr.match(/matrix\(([^)]+)\)/);
+          if (m) {
+            var parts = m[1].split(",");
+            var tx = parseFloat(parts[4]);
+            if (!isNaN(tx)) {
+              offset = -tx;
+              startOffset = offset;
+            }
+          }
+        }
+        apply();
+      }
+      wheel.classList.add("is-dragging");
+    }
+
+    function onMove(clientX) {
+      if (!dragging) return;
+      var dx = clientX - startX;
+      offset = startOffset - dx;
+      apply();
+    }
+
+    function onUp() {
+      if (!dragging) return;
+      dragging = false;
+      wheel.classList.remove("is-dragging");
+      scheduleResume();
+    }
+
+    wheel.addEventListener("pointerdown", function (e) {
+      if (e.button != null && e.button !== 0) return;
+      wheel.setPointerCapture(e.pointerId);
+      onDown(e.clientX);
+      e.preventDefault();
+    });
+    wheel.addEventListener("pointermove", function (e) {
+      onMove(e.clientX);
+    });
+    wheel.addEventListener("pointerup", onUp);
+    wheel.addEventListener("pointercancel", onUp);
+    wheel.addEventListener("lostpointercapture", onUp);
+
+    window.addEventListener("resize", function () {
+      measure();
+      apply();
+    });
   })();
   </script>
 
