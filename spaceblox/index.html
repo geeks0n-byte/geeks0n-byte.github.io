@@ -544,10 +544,10 @@
       var hostH = fx.clientHeight || 1;
 
       if (kind === "star") {
-        w = rand(22, 34); h = w; dur = rand(0.85, 1.5);
+        w = rand(48, 72); h = w; dur = rand(1.0, 1.8);
         el.src = ASSETS.star;
       } else {
-        w = rand(14, 24); h = w; dur = rand(7, 16);
+        w = rand(32, 52); h = w; dur = rand(8, 18);
         el.src = pick(ASSETS.asteroids);
       }
       el.style.width = w + "px";
@@ -589,12 +589,12 @@
     }
 
     function schedule() {
-      // Stars mostly, occasional single asteroids — no comets / asteroid clouds
-      var kind = Math.random() < 0.72 ? "star" : "asteroid";
+      // Stars mostly, occasional single asteroids — rarer than before
+      var kind = Math.random() < 0.78 ? "star" : "asteroid";
       spawn(kind);
-      setTimeout(schedule, rand(1800, 5200));
+      setTimeout(schedule, rand(4500, 11000));
     }
-    setTimeout(schedule, rand(600, 1600));
+    setTimeout(schedule, rand(2000, 5000));
   })();
   </script>
 
