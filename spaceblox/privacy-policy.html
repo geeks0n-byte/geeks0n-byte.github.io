@@ -126,8 +126,8 @@
       pointer-events: auto;
     }
     .header-title .sb-title-stage {
-      /* Sized in JS so glyph height ≈ icon/button; empty design padding clipped */
-      height: 52px;
+      /* Fallback; JS sizes glyph≈icon and expands for outline/tiles */
+      height: calc(52px * 122 / 96);
       width: calc(52px * 1080 / 96);
       max-width: none;
       position: relative;
@@ -200,7 +200,7 @@
     .header-title .sb-tile-o2 { left: 806px; top: 93px; }
     @media (max-width: 640px) {
       .header-title .sb-title-stage {
-        height: 44px;
+        height: calc(44px * 122 / 96);
         width: calc(44px * 1080 / 96);
       }
     }
@@ -589,15 +589,19 @@
       var brand = document.querySelector(".brand");
       var nav = document.querySelector("nav");
       if (!stage || !design) return;
-      // Glyph box in design coords (.sb-word font-size), not full 180 canvas
+      // Size letters to icon height; stage taller so outline + O tiles are not clipped
       var GLYPH_H = 96;
       var GLYPH_TOP = 20;
+      var OUTLINE = 8; // text-shadow extent in design px
+      var TILE_BOTTOM = 93 + 28 * 1.15; // blue tile bottom
+      var contentTop = GLYPH_TOP - OUTLINE;
+      var contentBottom = Math.max(GLYPH_TOP + GLYPH_H + OUTLINE, TILE_BOTTOM) + 2;
+      var contentH = contentBottom - contentTop;
       var targetH = 52;
       if (icon && icon.clientHeight) targetH = Math.max(targetH, icon.clientHeight);
       if (btn && btn.offsetHeight) targetH = Math.max(targetH, btn.offsetHeight);
       var scale = targetH / GLYPH_H;
       var w = DESIGN_W * scale;
-      // Cap width so title fits between icon and BACK (with a small gap)
       if (header && brand && nav) {
         var avail = header.clientWidth - brand.offsetWidth - nav.offsetWidth - 16;
         if (avail > 80 && w > avail) {
@@ -605,12 +609,10 @@
           scale = w / DESIGN_W;
         }
       }
-      var stageH = GLYPH_H * scale; // ≈ icon when uncapped
+      var stageH = contentH * scale;
       stage.style.width = w + "px";
       stage.style.height = stageH + "px";
-      // Center the glyph vertically; clip empty design padding
-      var glyphCenter = GLYPH_TOP + GLYPH_H / 2;
-      var ty = stageH / 2 - glyphCenter * scale;
+      var ty = -contentTop * scale;
       design.style.transform = "translateY(" + ty + "px) scale(" + scale + ")";
     }
     function fitSoon() {
