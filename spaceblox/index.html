@@ -120,11 +120,14 @@
     }
 
     .cta { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .cta { align-items: center; }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
-      padding: 0.85rem 1.15rem; border-radius: 12px;
-      text-decoration: none; font-weight: 700; font-size: 0.98rem;
+      padding: 0 1.15rem; border-radius: 10px;
+      text-decoration: none; font-weight: 700; font-size: 0.92rem;
       border: 2px solid transparent;
+      height: 56px; /* match visible Play badge height at ~215px width */
+      box-sizing: border-box;
     }
     .btn-primary {
       background: linear-gradient(180deg, #38bdf8, #0284c7);
@@ -236,7 +239,7 @@
       h1 { font-size: clamp(0.92rem, 4.6vw, 1.2rem); }
       .lead { font-size: 1rem; margin-bottom: 1.1rem; }
       .cta { flex-direction: column; align-items: stretch; }
-      .btn { width: 100%; min-height: 48px; }
+      .btn { width: 100%; height: 52px; }
       .panel { padding: 1rem 1.05rem; border-radius: 14px; }
       .rules { padding-left: 1rem; font-size: 0.98rem; }
       section { margin: 1.75rem 0; }
@@ -351,7 +354,7 @@
     </section>
 
     <footer>
-      <div>© Spaceblox · Giga gix0n Sichinava</div>
+      <div>© Spaceblox · Giga &quot;gix0n&quot; Sichinava</div>
       <div>
         <a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a>
         ·
