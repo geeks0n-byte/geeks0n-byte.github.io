@@ -62,10 +62,8 @@
       justify-content: flex-start;
       gap: 0.75rem;
       flex-wrap: nowrap;
+      width: 100%;
       padding: 0.85rem 0 1.35rem;
-    }
-    header nav {
-      margin-left: 0;
     }
     .brand { display: inline-flex; align-items: center; text-decoration: none; flex: 0 0 auto; }
     .brand img {
@@ -73,25 +71,30 @@
       box-shadow: 0 0 0 2px #334155, 0 8px 24px #0008;
     }
     nav {
+      flex: 1 1 auto;
       display: flex;
-      gap: 0.35rem;
+      gap: clamp(0.3rem, 0.8vw, 0.55rem);
       flex-wrap: nowrap;
-      align-items: center;
+      align-items: stretch;
       min-width: 0;
+      container-type: inline-size;
+      container-name: sitenav;
     }
     nav a {
+      flex: 1 1 0;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-family: "PressStart2P", monospace;
-      font-size: 0.68rem;
+      font-size: clamp(0.34rem, 3.6cqi, 0.8rem);
       letter-spacing: 0.03em;
       color: #ffffff;
       text-decoration: none;
       text-shadow: 1px 1px 0 #000a;
       white-space: nowrap;
-      padding: 0.95rem 1.4rem;
+      padding: clamp(0.55rem, 2.8cqi, 1.15rem) clamp(0.35rem, 2cqi, 0.9rem);
       line-height: 1;
+      min-width: 0;
       image-rendering: pixelated;
       border: none;
       background-color: #1a1a1a;
@@ -265,12 +268,6 @@
       .shots-track { animation: none; }
     }
 
-    @media (min-width: 900px) {
-      nav a {
-        font-size: 0.72rem;
-        padding: 1.05rem 1.55rem;
-      }
-    }
   </style>
 </head>
 <body>
