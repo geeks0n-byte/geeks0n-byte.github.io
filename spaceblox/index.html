@@ -161,7 +161,7 @@
         grid-template-columns: minmax(0, 1fr) auto;
         grid-template-areas: "art art" "copy side";
         gap: 1.5rem 1.25rem;
-        align-items: start;
+        align-items: stretch;
         width: 100%;
         max-width: min(100%, 700px);
         margin-inline: auto;
@@ -194,9 +194,11 @@
         align-items: center;
         justify-content: center;
         gap: 1rem;
-        padding-top: 0.35rem;
+        padding-top: 0;
         width: auto;
+        height: 100%;
         justify-self: end;
+        align-self: stretch;
         transform: translateX(calc(-1.5rem - 6px));
       }
       .hero-copy .tiles-row { display: none; }
