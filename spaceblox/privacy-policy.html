@@ -87,13 +87,15 @@
       align-items: center;
       justify-content: center;
       font-family: "PressStart2P", monospace;
-      font-size: 0.52rem;
+      font-size: clamp(0.36rem, 2.1vw, 0.5rem);
       letter-spacing: 0.02em;
       color: #ffffff;
       text-decoration: none;
       text-shadow: 1px 1px 0 #000;
-      padding: 0.7rem 0.75rem;
-      line-height: 1.2;
+      white-space: nowrap;
+      padding: 0.62rem 1.05rem;
+      min-height: 2.4rem;
+      line-height: 1;
       image-rendering: pixelated;
       background-color: #1a1a1a;
       background-image: url("assets/button_tile_gray_dark.svg");
@@ -104,6 +106,15 @@
     }
     nav a:hover { filter: brightness(1.15); color: #ffffff; }
     nav a:active { filter: brightness(0.9); transform: translateY(1px); }
+    @media (max-width: 420px) {
+      nav { gap: 0.35rem; width: calc(100% - 60px); }
+      nav a {
+        flex: 1 1 auto;
+        padding: 0.55rem 0.55rem;
+        font-size: clamp(0.32rem, 2.8vw, 0.42rem);
+        min-height: 2.15rem;
+      }
+    }
 
     .hero {
       display: grid;
