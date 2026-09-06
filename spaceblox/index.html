@@ -287,22 +287,22 @@
       opacity: 0.9;
       animation: sb-parallax-d 48s linear infinite;
     }
-    /* Left + slight up via whole tiles only (avoids loop pop). Speeds differ per layer. */
+    /* Match game scroll Vector2(-15,-5): left + up ~3:1; whole tiles only */
     @keyframes sb-parallax-a {
       from { background-position: 0 0; }
-      to { background-position: calc(-2 * var(--sb-tw)) calc(-1 * var(--sb-th)); }
+      to { background-position: calc(-16 * var(--sb-tw)) calc(-3 * var(--sb-th)); }
     }
     @keyframes sb-parallax-b {
       from { background-position: 0 0; }
-      to { background-position: calc(-2 * var(--sb-tw)) calc(-1 * var(--sb-th)); }
+      to { background-position: calc(-16 * var(--sb-tw)) calc(-3 * var(--sb-th)); }
     }
     @keyframes sb-parallax-c {
       from { background-position: 0 0; }
-      to { background-position: calc(-3 * var(--sb-tw)) calc(-1 * var(--sb-th)); }
+      to { background-position: calc(-32 * var(--sb-tw)) calc(-6 * var(--sb-th)); }
     }
     @keyframes sb-parallax-d {
       from { background-position: 0 0; }
-      to { background-position: calc(-3 * var(--sb-tw)) calc(-1 * var(--sb-th)); }
+      to { background-position: calc(-32 * var(--sb-tw)) calc(-6 * var(--sb-th)); }
     }
     @keyframes sb-twinkle {
       0%, 100% { opacity: 1; }
