@@ -202,7 +202,8 @@
         height: 100%;
         justify-self: end;
         align-self: stretch;
-        transform: translateX(calc(-1.5rem - 6px));
+        /* optical lift — geometric center sits a bit low vs copy */
+        transform: translateX(calc(-1.5rem - 6px)) translateY(-0.85rem);
       }
       .hero-copy .tiles-row { display: none; }
       .hero-side .tiles-row {
