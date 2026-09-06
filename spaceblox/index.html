@@ -460,13 +460,8 @@
       border-top: 1px solid var(--line);
       color: var(--muted);
       font-size: 0.92rem;
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+      display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem;
+      justify-content: space-between;
     }
     footer a { color: var(--accent); }
 
@@ -490,7 +485,7 @@
       .shots-wheel { border-radius: 14px; padding: 0.65rem 0.45rem; }
       .shots-track { gap: 0.55rem; animation-duration: 22s; }
       .shots-track figure { width: 132px; flex: 0 0 132px; border-radius: 10px; }
-      footer { font-size: 0.88rem; }
+      footer { flex-direction: column; gap: 0.5rem; font-size: 0.88rem; }
       .brand img { width: 44px; height: 44px; border-radius: 12px; }
     }
     @media (max-width: 420px) {
