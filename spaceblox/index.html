@@ -145,9 +145,9 @@
       position: absolute;
       inset: 0;
       background-repeat: repeat;
-      /* Fixed tile size (360:640) so pan distance can match one period */
-      --sb-tw: 225px;
-      --sb-th: 400px;
+      /* Tile wider than the banner so you never see two copies side by side */
+      --sb-tw: 1100px;
+      --sb-th: 1956px; /* 360:640 aspect */
       background-size: var(--sb-tw) var(--sb-th);
       image-rendering: pixelated;
       image-rendering: crisp-edges;
@@ -280,8 +280,8 @@
     @media (max-width: 860px) {
       .space-banner .sb-title-stage { width: min(88%, 420px); }
       .space-banner .sb-layer {
-        --sb-tw: 180px;
-        --sb-th: 320px;
+        --sb-tw: 900px;
+        --sb-th: 1600px;
       }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -321,7 +321,6 @@
       width: max-content;
       animation: shots-marquee 28s linear infinite;
     }
-    .shots-wheel:hover .shots-track { animation-play-state: paused; }
     @keyframes shots-marquee {
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
