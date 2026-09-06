@@ -86,7 +86,7 @@
       display: flex;
       gap: clamp(0.3rem, 0.8vw, 0.55rem);
       flex-wrap: nowrap;
-      align-items: stretch;
+      align-items: center;
       min-width: 0;
       container-type: inline-size;
       container-name: sitenav;
@@ -98,15 +98,18 @@
       align-items: center;
       justify-content: center;
       font-family: "PressStart2P", monospace;
-      font-size: clamp(0.34rem, 3.6cqi, 0.8rem);
+      font-size: clamp(0.34rem, 3.2cqi, 0.72rem);
       letter-spacing: 0.03em;
       color: #ffffff;
       text-decoration: none;
       text-shadow: 1px 1px 0 #000a;
       white-space: nowrap;
-      padding: clamp(0.55rem, 2.8cqi, 1.15rem) clamp(0.35rem, 2cqi, 0.9rem);
+      padding: 0 clamp(0.35rem, 2cqi, 0.9rem);
       line-height: 1;
       min-width: 0;
+      height: 56px; /* slightly taller than 52px icon */
+      max-height: 56px;
+      box-sizing: border-box;
       image-rendering: pixelated;
       border: none;
       background-color: #1a1a1a;
@@ -125,6 +128,10 @@
       .brand img { width: 44px; height: 44px; border-radius: 12px; }
       header { gap: 0.45rem; }
       nav { gap: 0.28rem; }
+      nav a {
+        height: 48px; /* slightly taller than 44px icon */
+        max-height: 48px;
+      }
     }
 
     .hero {
