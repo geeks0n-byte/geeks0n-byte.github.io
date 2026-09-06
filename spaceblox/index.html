@@ -612,7 +612,9 @@
       scrollbar-width: none;
       -ms-overflow-style: none;
       -webkit-overflow-scrolling: touch;
+      cursor: grab;
     }
+    .shots-wheel.is-dragging { cursor: grabbing; user-select: none; }
     .shots-wheel::-webkit-scrollbar { display: none; }
     .shots-track {
       display: flex;
@@ -994,6 +996,7 @@ footer {
     if (!wheel || !track) return;
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var loopW = 0, auto = !reduce, speed = 0.55, resumeTimer = null, lastUser = 0, wrapping = false;
+    var dragging = false, dragId = null, startX = 0, startScroll = 0;
     function measure() { loopW = track.scrollWidth / 2; }
     function wrap() {
       if (wrapping) return;
@@ -1010,15 +1013,41 @@ footer {
       if (!reduce) resumeTimer = setTimeout(function () { if (Date.now() - lastUser >= 2000) auto = true; }, 2100);
     }
     function tick() {
-      if (auto && loopW > 0) { wheel.scrollLeft += speed; wrap(); }
+      if (auto && loopW > 0 && !dragging) { wheel.scrollLeft += speed; wrap(); }
       requestAnimationFrame(tick);
+    }
+    function endDrag(e) {
+      if (!dragging || (e && e.pointerId !== dragId)) return;
+      dragging = false;
+      dragId = null;
+      wheel.classList.remove("is-dragging");
+      try { wheel.releasePointerCapture(e.pointerId); } catch (err) {}
+      pauseAuto();
     }
     wheel.addEventListener("scroll", function () { if (!wrapping) wrap(); }, { passive: true });
     wheel.addEventListener("wheel", function (e) {
       pauseAuto();
       if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { wheel.scrollLeft += e.deltaY; wrap(); e.preventDefault(); }
     }, { passive: false });
-    wheel.addEventListener("pointerdown", pauseAuto, { passive: true });
+    /* Mouse/pen click-drag on PC; touch stays native pan-x (no hold-drag). */
+    wheel.addEventListener("pointerdown", function (e) {
+      pauseAuto();
+      if (e.pointerType === "touch") return;
+      if (e.button !== 0) return;
+      dragging = true;
+      dragId = e.pointerId;
+      startX = e.clientX;
+      startScroll = wheel.scrollLeft;
+      wheel.classList.add("is-dragging");
+      try { wheel.setPointerCapture(e.pointerId); } catch (err) {}
+    });
+    wheel.addEventListener("pointermove", function (e) {
+      if (!dragging || e.pointerId !== dragId) return;
+      wheel.scrollLeft = startScroll - (e.clientX - startX);
+      wrap();
+    });
+    wheel.addEventListener("pointerup", endDrag);
+    wheel.addEventListener("pointercancel", endDrag);
     wheel.addEventListener("touchstart", pauseAuto, { passive: true });
     window.addEventListener("resize", function () { measure(); if (loopW) wrap(); });
     measure();
