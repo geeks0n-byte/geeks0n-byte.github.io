@@ -92,15 +92,16 @@
       color: #f8fafc;
     }
     .lead { font-size: 1.08rem; color: var(--muted); margin: 0 0 1.4rem; max-width: 36rem; }
-    .tiles { display: flex; gap: 0.55rem; margin: 0 0 1.5rem; }
-    .tile {
-      width: 28px; height: 28px; border-radius: 7px;
-      box-shadow: inset 0 -3px 0 #0004, 0 0 0 2px #0f172a;
+    .tiles {
+      display: flex; align-items: center; gap: 0.45rem;
+      margin: 0 0 1.5rem;
+      image-rendering: pixelated;
     }
-    .tile.y { background: var(--yellow); }
-    .tile.b { background: var(--blue); }
-    .tile.g { background: var(--green); }
-    .tile.p { background: var(--purple); }
+    .tiles img {
+      width: 40px; height: 40px;
+      display: block;
+      filter: drop-shadow(0 4px 0 #0006);
+    }
 
     .cta { display: flex; flex-wrap: wrap; gap: 0.75rem; }
     .btn {
@@ -207,11 +208,11 @@
           Fill every empty cell with yellow, blue, or green.
           Never place three of the same color in a row or column.
         </p>
-        <div class="tiles" aria-hidden="true">
-          <div class="tile y"></div>
-          <div class="tile b"></div>
-          <div class="tile g"></div>
-          <div class="tile p" title="special"></div>
+        <div class="tiles" aria-label="In-game tiles">
+          <img src="assets/tile_yellow.svg" alt="Yellow tile" width="40" height="40" />
+          <img src="assets/tile_blue.svg" alt="Blue tile" width="40" height="40" />
+          <img src="assets/tile_green.svg" alt="Green tile" width="40" height="40" />
+          <img src="assets/tile_shifter.svg" alt="Special purple tile" width="40" height="40" />
         </div>
         <div class="cta">
           <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Get it on Google Play</a>
