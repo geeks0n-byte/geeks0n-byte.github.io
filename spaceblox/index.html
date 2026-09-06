@@ -110,15 +110,13 @@
     nav a:active { filter: brightness(0.9); transform: translateY(1px); }
 
     .hero {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 2rem;
-      align-items: center;
-      padding: 1rem 0 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: stretch;
+      padding: 0.5rem 0 2.5rem;
     }
-    @media (max-width: 860px) {
-      .hero { grid-template-columns: 1fr; }
-    }
+    .hero-copy { max-width: 42rem; }
     h1 {
       font-family: "PressStart2P", monospace;
       font-size: clamp(1.05rem, 2.4vw, 1.45rem);
@@ -449,24 +447,6 @@
     </header>
 
     <section class="hero">
-      <div>
-        <h1>Calm color logic<br>in deep space</h1>
-        <p class="lead">
-          Fill every empty cell with yellow, blue, or green tiles.
-          Never place three of the same color in a row or column.
-        </p>
-        <div class="tiles-row">
-          <div class="tiles" aria-label="In-game tiles">
-            <img src="assets/tile_yellow.svg" alt="Yellow tile" width="40" height="40" />
-            <img src="assets/tile_blue.svg" alt="Blue tile" width="40" height="40" />
-            <img src="assets/tile_green.svg" alt="Green tile" width="40" height="40" />
-            <img src="assets/tile_shifter.svg" alt="Special purple tile" width="40" height="40" />
-          </div>
-          <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" aria-label="Get it on Google Play">
-            <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" />
-          </a>
-        </div>
-      </div>
       <div class="hero-art" role="img" aria-label="SPACEBLOX title over animated space background">
         <div class="space-banner" aria-hidden="true">
           <div class="sb-void"></div>
@@ -485,6 +465,24 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="hero-copy">
+        <h1>Calm color logic<br>in deep space</h1>
+        <p class="lead">
+          Fill every empty cell with yellow, blue, or green tiles.
+          Never place three of the same color in a row or column.
+        </p>
+        <div class="tiles-row">
+          <div class="tiles" aria-label="In-game tiles">
+            <img src="assets/tile_yellow.svg" alt="Yellow tile" width="40" height="40" />
+            <img src="assets/tile_blue.svg" alt="Blue tile" width="40" height="40" />
+            <img src="assets/tile_green.svg" alt="Green tile" width="40" height="40" />
+            <img src="assets/tile_shifter.svg" alt="Special purple tile" width="40" height="40" />
+          </div>
+          <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" aria-label="Get it on Google Play">
+            <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" />
+          </a>
         </div>
       </div>
     </section>
