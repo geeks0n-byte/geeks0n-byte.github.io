@@ -70,6 +70,7 @@
     }
     .brand { display: inline-flex; align-items: center; text-decoration: none; flex: 0 0 auto; z-index: 1; }
     .brand img {
+      display: block;
       width: 52px;
       height: 52px;
       border-radius: 14px;
@@ -116,10 +117,6 @@
       outline: none;
     }
 
-    /* Optical Y align with 52px icon (button size unchanged) */
-    @media (min-width: 641px) {
-      nav { transform: translateY(-2px); }
-    }
     nav a:hover { filter: brightness(1.12); color: #ffffff; }
     nav a:active { filter: brightness(0.92); transform: translateY(1px); box-shadow: none; }
 
