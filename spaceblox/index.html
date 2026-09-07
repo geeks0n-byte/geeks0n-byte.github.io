@@ -14,7 +14,7 @@
     @font-face {
       font-family: "PressStart2P";
       src: url("assets/PressStart2P.ttf") format("truetype");
-      font-display: swap;
+      font-display: block;
     }
     :root {
       --bg: #0b1220;
@@ -374,7 +374,10 @@
       aspect-ratio: 1080 / 180;
       position: relative;
       overflow: hidden;
+      opacity: 0; /* shown after font+fit — Messenger paints early otherwise */
+      transition: opacity 0.15s ease;
     }
+    .space-banner .sb-title-stage.is-ready { opacity: 1; }
     .space-banner .sb-title-design {
       position: absolute;
       left: 0;
@@ -426,21 +429,24 @@
         0 0 14px #facc1544;
       line-height: 1;
       white-space: nowrap;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
     }
     /* Match main_menu / capture_title: 28×28 @ scale 1.15, origin top-left, crop y-220 */
     .space-banner .sb-tile {
       position: absolute;
-      width: 28px;
-      height: 28px;
-      transform: scale(1.15);
-      transform-origin: 0 0;
+      /* 28×1.15 design px — avoid nested transform (breaks in some WebViews) */
+      width: 32.2px;
+      height: 32.2px;
+      transform: none;
       image-rendering: pixelated;
       pointer-events: none;
       z-index: 1;
     }
-    .space-banner .sb-tile-p { left: 230px; top: 66px; }
-    .space-banner .sb-tile-o1 { left: 806px; top: 65px; }
-    .space-banner .sb-tile-o2 { left: 806px; top: 93px; }
+    /* % of 1080×180 design box — survives scale quirks better than raw px in some WebViews */
+    .space-banner .sb-tile-p { left: 21.2963%; top: 36.6667%; }   /* 230,66 */
+    .space-banner .sb-tile-o1 { left: 74.6296%; top: 36.1111%; }  /* 806,65 */
+    .space-banner .sb-tile-o2 { left: 74.6296%; top: 51.6667%; }  /* 806,93 */
     @media (max-width: 860px) {
       .space-banner .sb-title-stage { width: min(88%, 420px); }
       .space-banner .sb-layer {
@@ -858,38 +864,65 @@ footer {
 
   <script>
   (function () {
-    // Design crop 1080×180 from capture_title.gd. Tiles live in design px
-    // (230,66)/(806,66)/(806,93), size 28, scale 1.15 — same as main_menu.tscn.
+    // Design crop 1080×180 from capture_title.gd. Tiles at % of design box;
+    // size includes 1.15 scale (no nested transform). Refit aggressively for
+    // in-app browsers (Messenger) that layout late or swap fonts after paint.
     var DESIGN_W = 1080;
     var DESIGN_H = 180;
-
-    function fitStage(stageSel, designSel) {
-      var stage = document.querySelector(stageSel);
-      var design = document.querySelector(designSel);
-      if (!stage || !design) return;
-      var w = stage.clientWidth || 1;
-      stage.style.height = (w * (DESIGN_H / DESIGN_W)) + "px";
-      design.style.transform = "scale(" + (w / DESIGN_W) + ")";
-    }
+    var stage = document.querySelector(".space-banner .sb-title-stage");
+    var design = document.querySelector(".space-banner .sb-title-design");
+    if (!stage || !design) return;
 
     function fitSpaceTitle() {
-      fitStage(".space-banner .sb-title-stage", ".space-banner .sb-title-design");
+      var w = stage.getBoundingClientRect().width || stage.clientWidth || 1;
+      if (w < 2) return false;
+      stage.style.height = (w * (DESIGN_H / DESIGN_W)) + "px";
+      var s = w / DESIGN_W;
+      design.style.transform = "scale(" + s + ")";
+      // Chromium WebView fallback when transform scale is flaky
+      try { design.style.zoom = ""; } catch (e) {}
+      return true;
+    }
+
+    function markReady() {
+      if (fitSpaceTitle()) stage.classList.add("is-ready");
     }
 
     function fitSoon() {
       fitSpaceTitle();
-      requestAnimationFrame(fitSpaceTitle);
+      requestAnimationFrame(function () {
+        fitSpaceTitle();
+        requestAnimationFrame(markReady);
+      });
+    }
+
+    function whenFontsReady(cb) {
+      if (document.fonts && document.fonts.load) {
+        document.fonts.load('96px "PressStart2P"').then(cb).catch(cb);
+        document.fonts.ready.then(cb).catch(function () {});
+      } else {
+        cb();
+      }
     }
 
     fitSoon();
+    whenFontsReady(fitSoon);
     window.addEventListener("resize", fitSoon);
     if (window.visualViewport) {
       window.visualViewport.addEventListener("resize", fitSoon);
-    }
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(fitSoon);
+      window.visualViewport.addEventListener("scroll", fitSoon);
     }
     window.addEventListener("load", fitSoon);
+    // Messenger / WebView often settle layout after load
+    [50, 150, 400, 1000, 2000].forEach(function (ms) {
+      setTimeout(fitSoon, ms);
+    });
+    if (typeof ResizeObserver !== "undefined") {
+      var ro = new ResizeObserver(fitSoon);
+      ro.observe(stage);
+      var banner = stage.closest(".space-banner") || stage.closest(".hero-art");
+      if (banner) ro.observe(banner);
+    }
   })();
   </script>
 
