@@ -902,14 +902,23 @@ footer {
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var loopW = 0, auto = !reduce, speed = 0.55, resumeTimer = null, lastUser = 0, wrapping = false;
     var dragging = false, dragId = null, startX = 0, startScroll = 0;
-    function measure() { loopW = track.scrollWidth / 2; }
+    /* One set's width = offset to first duplicate. scrollWidth/2 is wrong with flex gap
+       (half a gap short) and causes a jump at the seam. */
+    function measure() {
+      var kids = track.children;
+      var half = Math.floor(kids.length / 2);
+      if (half < 1) { loopW = 0; return; }
+      loopW = kids[half].offsetLeft - kids[0].offsetLeft;
+    }
     function wrap() {
       if (wrapping) return;
       if (!loopW) measure();
       if (loopW <= 0) return;
       wrapping = true;
-      if (wheel.scrollLeft >= loopW) wheel.scrollLeft -= loopW;
-      else if (wheel.scrollLeft <= 1) wheel.scrollLeft += loopW;
+      while (wheel.scrollLeft >= loopW) wheel.scrollLeft -= loopW;
+      while (wheel.scrollLeft < 0) wheel.scrollLeft += loopW;
+      /* Keep a small buffer away from 0 so reverse scroll can wrap cleanly */
+      if (wheel.scrollLeft < 1) wheel.scrollLeft += loopW;
       wrapping = false;
     }
     function pauseAuto() {
@@ -928,6 +937,10 @@ footer {
       wheel.classList.remove("is-dragging");
       try { wheel.releasePointerCapture(e.pointerId); } catch (err) {}
       pauseAuto();
+    }
+    function boot() {
+      measure();
+      if (loopW > 0) wheel.scrollLeft = Math.floor(loopW * 0.5);
     }
     wheel.addEventListener("scroll", function () { if (!wrapping) wrap(); }, { passive: true });
     wheel.addEventListener("wheel", function (e) {
@@ -955,8 +968,8 @@ footer {
     wheel.addEventListener("pointercancel", endDrag);
     wheel.addEventListener("touchstart", pauseAuto, { passive: true });
     window.addEventListener("resize", function () { measure(); if (loopW) wrap(); });
-    measure();
-    if (loopW > 0) wheel.scrollLeft = Math.floor(loopW * 0.5);
+    boot();
+    window.addEventListener("load", boot);
     requestAnimationFrame(tick);
   })();
   </script>
