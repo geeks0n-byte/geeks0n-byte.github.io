@@ -219,10 +219,22 @@
       .hero-copy h1 { text-align: center; }
       .hero-copy .lead { text-align: center; }
       .hero-copy .tiles-row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
         justify-content: center;
         width: 100%;
+        gap: 0.75rem 0.85rem;
       }
+      .hero-copy .tiles,
       .hero-copy .play-badge {
+        align-self: center;
+      }
+      /* Row layout: no vertical margin tug — keep equal horizontal PNG trim */
+      .hero-copy .play-badge {
+        margin-top: 0;
+        margin-bottom: 0;
         margin-left: -0.45rem;
         margin-right: -0.45rem;
       }
