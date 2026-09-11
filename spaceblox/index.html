@@ -568,14 +568,12 @@ footer {
     }
 
 
-    /* Language switch — compact pixel UI */
+    /* Language switch — compact pixel UI (footer) */
     .lang-switch {
       display: inline-flex;
       align-items: center;
       gap: 0.2rem;
       flex: 0 0 auto;
-      z-index: 1;
-      margin-left: 0.15rem;
       font-family: "PressStart2P", monospace;
       font-size: 0.55rem;
       letter-spacing: 0.03em;
@@ -603,8 +601,17 @@ footer {
       pointer-events: none;
       padding: 0 0.05rem;
     }
+    footer .footer-end {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.55rem;
+    }
+    @media (max-width: 860px) {
+      footer .footer-end { align-items: center; }
+    }
     @media (max-width: 640px) {
-      .lang-switch { font-size: 0.42rem; margin-left: 0.05rem; }
+      .lang-switch { font-size: 0.42rem; }
       .lang-switch button { padding: 0.3rem 0.18rem; }
     }
   </style>
@@ -621,11 +628,6 @@ footer {
         <a href="#shots" data-i18n="nav.shots">SCREENSHOTS</a>
         <a href="privacy-policy.html" data-i18n="nav.privacy">PRIVACY</a>
       </nav>
-      <div class="lang-switch" role="group" data-i18n-aria="nav.langAria" aria-label="Language">
-        <button type="button" data-set-lang="en" class="lang-btn is-active" aria-pressed="true">EN</button>
-        <span class="lang-sep" aria-hidden="true">|</span>
-        <button type="button" data-set-lang="pl" class="lang-btn" aria-pressed="false">PL</button>
-      </div>
     </header>
 
     <section class="hero">
@@ -729,10 +731,17 @@ footer {
 
     <footer>
       <div>© Spaceblox · Giga &quot;gix0n&quot; Sichinava</div>
-      <div>
-        <a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a>
-        ·
-        <a href="privacy-policy.html" data-i18n="footer.privacy">Privacy Policy</a>
+      <div class="footer-end">
+        <div class="lang-switch" role="group" data-i18n-aria="nav.langAria" aria-label="Language">
+          <button type="button" data-set-lang="en" class="lang-btn is-active" aria-pressed="true">EN</button>
+          <span class="lang-sep" aria-hidden="true">|</span>
+          <button type="button" data-set-lang="pl" class="lang-btn" aria-pressed="false">PL</button>
+        </div>
+        <div>
+          <a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a>
+          ·
+          <a href="privacy-policy.html" data-i18n="footer.privacy">Privacy Policy</a>
+        </div>
       </div>
     </footer>
   </div>
