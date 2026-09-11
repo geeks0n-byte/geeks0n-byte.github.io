@@ -512,6 +512,62 @@
       -webkit-user-drag: none;
     }
 
+
+    /* Trailer: portrait 9:16, capped so it doesn’t dominate desktop */
+    #trailer {
+      width: 100%;
+      max-width: min(100%, 700px);
+      margin-inline: auto;
+      margin-top: 2.75rem;
+    }
+    #trailer h2 { text-align: center; }
+    .trailer-frame {
+      position: relative;
+      width: min(100%, 320px);
+      max-height: min(68vh, 520px);
+      margin-inline: auto;
+      aspect-ratio: 9 / 16;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #000;
+      box-shadow: 0 16px 40px #0006;
+    }
+    .trailer-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+    @media (max-width: 860px) {
+      .trailer-frame {
+        width: min(100%, 280px);
+        max-height: min(72vh, 480px);
+        border-radius: 14px;
+      }
+    }
+
+    /* Scroll-end Play CTA */
+    .cta-end {
+      width: 100%;
+      max-width: min(100%, 700px);
+      margin: 2.75rem auto 0;
+      text-align: center;
+    }
+    .cta-end .play-badge {
+      margin: 0 auto;
+      display: inline-flex;
+    }
+    .cta-end .play-badge img {
+      width: 196px;
+      height: auto;
+    }
+    @media (max-width: 860px) {
+      .cta-end .play-badge img { width: min(196px, 58vw); }
+    }
+
     footer {
       margin-top: 3rem;
       padding-top: 1.25rem;
@@ -682,12 +738,35 @@ footer {
       </div>
     </section>
 
+    <section id="trailer" aria-labelledby="trailer-heading">
+      <h2 id="trailer-heading">TRAILER</h2>
+      <div class="trailer-frame">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/9P90ge2NQsY"
+          title="Spaceblox trailer"
+          aria-label="Spaceblox trailer"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+      </div>
+    </section>
+
+    <div class="cta-end">
+      <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" aria-label="Get it on Google Play">
+        <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" />
+      </a>
+    </div>
+
     <footer>
       <div>© Spaceblox · Giga &quot;gix0n&quot; Sichinava</div>
       <div>
         <a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a>
         ·
         <a href="privacy-policy.html">Privacy Policy</a>
+        ·
+        <a href="motion.html">Motion lab</a>
       </div>
     </footer>
   </div>

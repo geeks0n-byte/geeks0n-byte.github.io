@@ -238,6 +238,35 @@
     }
 
   
+
+    .collect-blurb {
+      margin: 0 0 1.35rem;
+      padding: 0.95rem 1.05rem;
+      border-radius: 12px;
+      border: 1px solid color-mix(in srgb, var(--blue) 35%, var(--line));
+      background: color-mix(in srgb, #0f2744 70%, var(--panel));
+    }
+    .collect-blurb h2 {
+      font-family: "PressStart2P", monospace;
+      font-size: 0.72rem !important;
+      color: var(--blue) !important;
+      margin: 0 0 0.65rem !important;
+      letter-spacing: 0.03em;
+      text-align: left !important;
+    }
+    .collect-blurb p {
+      margin: 0;
+      color: var(--text);
+      font-size: 0.98rem;
+    }
+    .collect-blurb ul {
+      margin: 0.55rem 0 0;
+      padding-left: 1.15rem;
+      color: var(--muted);
+    }
+    .collect-blurb li { margin: 0.25rem 0; }
+    .collect-blurb li::marker { color: var(--yellow); }
+
     article.panel h1 {
       font-family: "PressStart2P", monospace;
       font-size: clamp(0.95rem, 2.4vw, 1.28rem);
@@ -337,6 +366,21 @@
   <p>
     Contact: use the email address listed on the Spaceblox Google Play store listing.
   </p>
+
+  <div class="collect-blurb">
+    <h2>What we collect</h2>
+    <p>
+      In plain language: Spaceblox keeps your progress and settings on your device.
+      Ads may use device and usage data through Google AdMob. Optional Google Play Games
+      can sync progress, settings, and achievements to your Play Games account.
+      We do not run our own player analytics or upload your saves to our own servers.
+    </p>
+    <ul>
+      <li><strong>On your device:</strong> game progress, settings (language, audio, background), optional mid-level sessions, and internal ad-frequency counters.</li>
+      <li><strong>Advertising (AdMob):</strong> device/ad identifiers, IP and device info, ad interaction data — processed by Google under their policies.</li>
+      <li><strong>Optional Play Games:</strong> if you sign in, a cloud snapshot of progress, settings, and achievements (mid-level sessions stay local).</li>
+    </ul>
+  </div>
 
   <h2>1. Summary</h2>
   <p>
