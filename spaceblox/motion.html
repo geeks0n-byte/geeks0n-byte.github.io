@@ -23,7 +23,7 @@
       --blue: #38bdf8;
       --accent: #56bdf8;
       --yellow: #facc15;
-      /* Dynamically sized so one 9:16 tile covers the viewport (see script) */
+      /* Phone-like motif density (landing / in-game), capped — not viewport-scaled */
       --sb-tw: 720px;
       --sb-th: 1280px;
     }
@@ -49,59 +49,50 @@
       overflow: hidden;
       background: #00123a;
     }
-    .space-bg .sb-layer {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      background-repeat: repeat;
-      background-size: var(--sb-tw) var(--sb-th);
-      background-position: 0 0;
-      image-rendering: pixelated;
-      image-rendering: crisp-edges;
-      will-change: background-position, opacity;
-      pointer-events: none;
-    }
     .space-bg .sb-void {
       position: absolute;
       inset: 0;
       background: #00123a;
     }
+    /*
+      GPU translate3d parallax (rAF) — not background-position.
+      Chromium often stalls CSS background-position on position:fixed during scroll.
+      Layer is oversized by one tile so modulo wrap never shows empty edges.
+    */
+    .space-bg .sb-layer {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: calc(100% + var(--sb-tw));
+      height: calc(100% + var(--sb-th));
+      background-repeat: repeat;
+      background-size: var(--sb-tw) var(--sb-th);
+      background-position: 0 0;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+      pointer-events: none;
+    }
     .space-bg .sb-dust {
       background-image: url("assets/bg_1_far_dust.svg");
       opacity: 0.85;
-      animation: sb-parallax-a 720s linear infinite;
     }
     .space-bg .sb-stars {
       background-image: url("assets/bg_2_medium_stars.svg");
-      animation: sb-parallax-b 540s linear infinite, sb-twinkle 9s ease-in-out infinite;
     }
     .space-bg .sb-accents {
       background-image: url("assets/bg_3_foreground_accents.svg");
-      animation: sb-parallax-c 400s linear infinite, sb-twinkle-alt 9s ease-in-out infinite;
     }
     .space-bg .sb-sparks {
       background-image: url("assets/bg_4_sparkler_crosses.svg");
       opacity: 1;
-      animation: sb-parallax-d 280s linear infinite, sb-pulse 7s ease-in-out infinite;
     }
-    /* Integer whole-tile steps only (seamless). Direction: left + slight up. */
-    @keyframes sb-parallax-a {
-      from { background-position: 0 0; }
-      to { background-position: calc(-2 * var(--sb-tw)) calc(-1 * var(--sb-th)); }
-    }
-    @keyframes sb-parallax-b {
-      from { background-position: 0 0; }
-      to { background-position: calc(-3 * var(--sb-tw)) calc(-1 * var(--sb-th)); }
-    }
-    @keyframes sb-parallax-c {
-      from { background-position: 0 0; }
-      to { background-position: calc(-3 * var(--sb-tw)) calc(-1 * var(--sb-th)); }
-    }
-    @keyframes sb-parallax-d {
-      from { background-position: 0 0; }
-      to { background-position: calc(-4 * var(--sb-tw)) calc(-1 * var(--sb-th)); }
-    }
+    /* Twinkle/pulse only (opacity) — safe during scroll; motion is rAF translate3d */
+    .space-bg .sb-stars { animation: sb-twinkle 9s ease-in-out infinite; }
+    .space-bg .sb-accents { animation: sb-twinkle-alt 9s ease-in-out infinite; }
+    .space-bg .sb-sparks { animation: sb-pulse 7s ease-in-out infinite; }
     @keyframes sb-twinkle {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.55; }
@@ -277,10 +268,6 @@
     footer a { color: var(--accent); }
 
     @media (max-width: 860px) {
-      .space-bg .sb-dust { animation-duration: 800s; }
-      .space-bg .sb-stars { animation-duration: 620s, 9s; }
-      .space-bg .sb-accents { animation-duration: 460s, 9s; }
-      .space-bg .sb-sparks { animation-duration: 320s, 7s; }
       .brand img { width: 44px; height: 44px; border-radius: 12px; }
       footer { flex-direction: column; align-items: center; text-align: center; gap: 0.5rem; }
       .play-badge img { width: min(168px, 52vw); }
@@ -295,10 +282,10 @@
 <body>
   <div class="space-bg" aria-hidden="true">
     <div class="sb-void"></div>
-    <div class="sb-layer sb-dust"></div>
-    <div class="sb-layer sb-stars"></div>
-    <div class="sb-layer sb-accents"></div>
-    <div class="sb-layer sb-sparks"></div>
+    <div class="sb-layer sb-dust" data-speed="0.20"></div>
+    <div class="sb-layer sb-stars" data-speed="0.40"></div>
+    <div class="sb-layer sb-accents" data-speed="0.60"></div>
+    <div class="sb-layer sb-sparks" data-speed="0.90"></div>
     <div class="sb-fx" id="space-fx"></div>
   </div>
 
@@ -328,6 +315,26 @@
       </p>
     </div>
 
+    <!-- Extra scroll length so Chromium scroll-freeze regressions are easy to spot -->
+    <div class="panel">
+      <p>
+        Scroll the page: the starfield should keep drifting (GPU translate3d / rAF), not freeze
+        the way CSS <code>background-position</code> often does on fixed layers in Chromium.
+      </p>
+    </div>
+    <div class="panel">
+      <p>
+        Motif density matches the in-game / landing banner feel (~720×1280 tiles, capped) —
+        wide desktops may show gentle repeats rather than oversized stars.
+      </p>
+    </div>
+    <div class="panel">
+      <p>
+        Comets cycle <code>fx_comet_1…3</code> at ~12 FPS on a long R→L cruise, matching
+        <code>space_background_fx.gd</code>. Shooting stars stay steep streaks; asteroids spin.
+      </p>
+    </div>
+
     <div class="actions">
       <a class="back" href="./">← Back to Spaceblox</a>
       <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" aria-label="Get it on Google Play">
@@ -347,25 +354,32 @@
 
   <script>
   (function () {
-    /* Size one 9:16 tile larger than the viewport on both axes (game-like cover pad). */
-    var COVER_PAD = 1.35;
+    /*
+      Cap tile size to phone/landing density so motifs stay game-sized on wide monitors.
+      In-game uses phone 1080×1920 × cover pad; landing banner uses ~720×1280.
+      Prefer ~720×1280 (9:16); shrink on narrow phones; never scale up with desktop width.
+    */
     var ASPECT_W = 9;
     var ASPECT_H = 16;
+    var CAP_W = 720;
+    var CAP_H = 1280;
+    var MOBILE_MAX_W = 480;
     var root = document.documentElement;
 
     function sizeTiles() {
       var vw = Math.max(window.innerWidth || 0, document.documentElement.clientWidth || 0, 1);
-      var vh = Math.max(window.innerHeight || 0, document.documentElement.clientHeight || 0, 1);
-      var needW = vw * COVER_PAD;
-      var needH = vh * COVER_PAD;
-      /* Keep SVG aspect 9:16; ensure tile covers needW and needH so no second copy is visible. */
-      var tw = Math.max(needW, needH * (ASPECT_W / ASPECT_H));
-      var th = tw * (ASPECT_H / ASPECT_W);
-      /* Round up to whole pixels for crisp background-position stepping */
-      tw = Math.ceil(tw);
-      th = Math.ceil(th);
+      var tw, th;
+      if (vw <= 860) {
+        tw = Math.min(MOBILE_MAX_W, Math.max(360, Math.floor(vw * 0.9)));
+        th = Math.ceil(tw * (ASPECT_H / ASPECT_W));
+      } else {
+        tw = CAP_W;
+        th = CAP_H;
+      }
       root.style.setProperty("--sb-tw", tw + "px");
       root.style.setProperty("--sb-th", th + "px");
+      root._sbTw = tw;
+      root._sbTh = th;
     }
 
     sizeTiles();
@@ -380,9 +394,29 @@
   <script>
   (function () {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     var layers = document.querySelectorAll(".space-bg .sb-layer");
+    if (!layers.length) return;
+
+    /* Match game base_scroll_speed ≈ (-15, -5) px/s at motion_scale 1.0; far layers slower via data-speed */
+    var BASE_VX = 15; /* left */
+    var BASE_VY = 5;  /* slight up */
+
+    var state = [];
     for (var i = 0; i < layers.length; i++) {
       var el = layers[i];
+      var speed = parseFloat(el.getAttribute("data-speed") || "0.4");
+      if (!isFinite(speed) || speed <= 0) speed = 0.4;
+      /* Random phase so visits don't sync; slight phase offset reduces obvious seams across layers */
+      var tw0 = document.documentElement._sbTw || 720;
+      var th0 = document.documentElement._sbTh || 1280;
+      state.push({
+        el: el,
+        speed: speed,
+        ox: Math.random() * tw0,
+        oy: Math.random() * th0
+      });
+      /* Randomize twinkle phase too */
       var durs = (getComputedStyle(el).animationDuration || "").split(",");
       var delays = [];
       for (var j = 0; j < durs.length; j++) {
@@ -390,8 +424,32 @@
         if (!isFinite(sec) || sec <= 0) delays.push("0s");
         else delays.push((-Math.random() * sec).toFixed(3) + "s");
       }
-      if (delays.length) el.style.animationDelay = delays.join(", ");
+      if (delays.length && el.style) el.style.animationDelay = delays.join(", ");
     }
+
+    var last = performance.now();
+    function wrap(v, m) {
+      if (m <= 0) return 0;
+      v = v % m;
+      if (v < 0) v += m;
+      return v;
+    }
+
+    function tick(now) {
+      var dt = Math.min(0.064, (now - last) / 1000);
+      last = now;
+      var tw = document.documentElement._sbTw || 720;
+      var th = document.documentElement._sbTh || 1280;
+      for (var i = 0; i < state.length; i++) {
+        var s = state[i];
+        s.ox = wrap(s.ox + BASE_VX * s.speed * dt, tw);
+        s.oy = wrap(s.oy + BASE_VY * s.speed * dt, th);
+        /* Negative translate = content drifts left + up */
+        s.el.style.transform = "translate3d(" + (-s.ox).toFixed(2) + "px," + (-s.oy).toFixed(2) + "px,0)";
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
   })();
   </script>
 
@@ -416,12 +474,14 @@
     // Match in-game AnimatedSprite2D comet frames (~12 FPS)
     var COMET_FPS = 12;
     var COMET_FRAME_MS = 1000 / COMET_FPS;
-    // Shooting star art: head bottom-left, tail up-right → ~135°
-    // Comet art: head on LEFT, tail to RIGHT (horizontal) → ~180° for R→L travel
-    var STAR_BASE_DEG = 135;
-    var COMET_BASE_DEG = 180;
+    // Shooting star art: head bottom-left, tail up-right → 3π/4 (135°)
+    var STAR_BASE_RAD = 3 * Math.PI / 4;
     function rand(a, b) { return a + Math.random() * (b - a); }
     function pick(arr) { return arr[(Math.random() * arr.length) | 0]; }
+    function remap(v, a, b, c, d) {
+      var t = (v - a) / (b - a);
+      return c + t * (d - c);
+    }
 
     // Preload comet frames so mid-flight src swaps do not flicker
     (function preloadCometFrames() {
@@ -435,18 +495,21 @@
       var el = document.createElement("img");
       el.className = "sb-fx-item";
       el.alt = "";
-      var w, h, dur, startX, endX, startY, endY, dx, dy, travelDeg, rot0, rot1, baseDeg;
+      var w, h, dur, startX, endX, startY, endY, dx, dy, rot0, rot1;
       var hostW = fx.clientWidth || window.innerWidth || 1;
       var hostH = fx.clientHeight || window.innerHeight || 1;
       var m = hostW < 640 ? 0.45 : (hostW < 900 ? 0.65 : 0.9);
+      var cometScale = 1;
 
       if (kind === "star") {
         w = rand(28, 46) * m; h = w; dur = rand(1.6, 2.8);
         el.src = ASSETS.star;
       } else if (kind === "comet") {
-        // Comet SVGs are ~2:1 landscape — keep aspect, slightly larger / readable
-        // Cycle fx_comet_1..3 like in-game AnimatedSprite2D (do not pick one static frame)
-        w = rand(56, 92) * m; h = w * 0.5; dur = rand(8, 16);
+        // In-game: Vector2(128, 64), scale rand(0.9, 1.1), duration remap → 10–20s
+        cometScale = rand(0.9, 1.1);
+        w = 128 * cometScale;
+        h = 64 * cometScale;
+        dur = remap(cometScale, 0.9, 1.1, 20.0, 10.0) * rand(0.85, 1.15);
         el.src = ASSETS.comets[0];
       } else {
         w = rand(16, 30) * m; h = w; dur = rand(14, 24);
@@ -455,37 +518,36 @@
       el.style.width = w + "px";
       el.style.height = h + "px";
 
-      if (kind === "comet") {
-        // Cruise across: start partially off right, exit left; long mid-path visibility
-        startX = hostW + rand(w * 0.15, w * 0.85);
-        endX = -w * rand(0.35, 1.05);
-      } else {
-        startX = hostW + w + 20;
-        endX = -w - 40;
-      }
+      var maxDim = Math.max(w, h);
+      // Enter from right, exit left (fx_spawn_start_x style)
+      startX = hostW + maxDim + 50;
+      endX = -maxDim - 100;
       var travelX = startX - endX;
+
       if (kind === "star") {
         // Fast steep shooting-star streak
-        startY = rand(-50, hostH * 0.5);
-        endY = startY + travelX * rand(0.45, 1.1);
+        startY = rand(-100, hostH * 0.4);
+        endY = startY + travelX * rand(0.5, 1.5);
       } else if (kind === "comet") {
-        // Shallow diagonal cruise (small dy vs dx), slight up or down
-        startY = rand(hostH * 0.08, hostH * 0.72);
-        endY = startY + travelX * rand(-0.1, 0.14);
+        // In-game: endY = startY + travelX * rand(0.2, 0.8)
+        startY = rand(-100, hostH * 0.6);
+        endY = startY + travelX * rand(0.2, 0.8);
       } else {
-        startY = rand(-20, hostH * 0.75);
-        endY = startY + travelX * rand(0.1, 0.45);
+        startY = rand(-100, hostH * 0.8);
+        endY = startY + travelX * rand(0.1, 1.2);
       }
       dx = endX - startX;
       dy = endY - startY;
-      travelDeg = Math.atan2(dy, dx) * 180 / Math.PI;
 
       if (kind === "asteroid") {
         rot0 = rand(0, 360);
         rot1 = rot0 + rand(120, 420) * (Math.random() < 0.5 ? 1 : -1);
+      } else if (kind === "comet") {
+        // rotation = atan2(dy, dx) - PI  (art: head left / tail right)
+        rot0 = (Math.atan2(dy, dx) - Math.PI) * 180 / Math.PI;
+        rot1 = rot0;
       } else {
-        baseDeg = kind === "comet" ? COMET_BASE_DEG : STAR_BASE_DEG;
-        rot0 = travelDeg - baseDeg;
+        rot0 = (Math.atan2(dy, dx) - STAR_BASE_RAD) * 180 / Math.PI;
         rot1 = rot0;
       }
 
@@ -525,7 +587,6 @@
         };
       }
 
-      // Wait for decode so the first frame is not a frozen placeholder
       if (typeof el.decode === "function") {
         el.decode().then(startAnim).catch(startAnim);
       } else if (!el.complete) {
@@ -540,7 +601,6 @@
       var r = Math.random();
       var kind = r < 0.58 ? "star" : (r < 0.8 ? "comet" : "asteroid");
       spawn(kind);
-      /* Sparser cadence for a calmer full-page feel */
       setTimeout(schedule, rand(3800, 8200));
     }
     setTimeout(schedule, rand(1200, 2800));
