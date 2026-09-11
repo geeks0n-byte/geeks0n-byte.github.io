@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#020617" />
-  <title data-i18n="meta.title">Spaceblox — Color logic in space</title>
-  <meta name="description" data-i18n-content="meta.description" content="Spaceblox is a calm color-logic puzzle: fill the board with yellow, blue, and green tiles. Never three in a row." />
+  <title>Spaceblox — Color logic in space</title>
+  <meta name="description" content="Spaceblox is a calm color-logic puzzle: fill the board with yellow, blue, and green tiles. Never three in a row." />
   <meta property="og:title" content="Spaceblox" />
-  <meta property="og:description" data-i18n-content="meta.ogDescription" content="Calm color-logic puzzles in a pixel-space setting." />
+  <meta property="og:description" content="Calm color-logic puzzles in a pixel-space setting." />
   <meta property="og:image" content="assets/feature.png" />
   <link rel="icon" href="assets/icon_512.png" type="image/png" />
   <style>
@@ -567,71 +567,24 @@ footer {
       .space-banner .sb-layer { animation: none !important; }
     }
 
-
-    /* Language switch — compact pixel UI (footer) */
-    .lang-switch {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.2rem;
-      flex: 0 0 auto;
-      font-family: "PressStart2P", monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.03em;
-      user-select: none;
-    }
-    .lang-switch button {
-      appearance: none;
-      -webkit-appearance: none;
-      background: transparent;
-      border: none;
-      margin: 0;
-      padding: 0.4rem 0.28rem;
-      font: inherit;
-      color: var(--muted);
-      cursor: pointer;
-      text-shadow: 1px 1px 0 #000a;
-      line-height: 1;
-    }
-    .lang-switch button:hover { color: #e2e8f0; }
-    .lang-switch button.is-active {
-      color: #ffffff;
-    }
-    .lang-switch .lang-sep {
-      color: #64748b;
-      pointer-events: none;
-      padding: 0 0.05rem;
-    }
-    footer .footer-end {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 0.55rem;
-    }
-    @media (max-width: 860px) {
-      footer .footer-end { align-items: center; }
-    }
-    @media (max-width: 640px) {
-      .lang-switch { font-size: 0.42rem; }
-      .lang-switch button { padding: 0.3rem 0.18rem; }
-    }
   </style>
 </head>
 <body>
   <div class="stars" aria-hidden="true"></div>
   <div class="wrap">
     <header>
-      <a class="brand" href="./" data-i18n-aria="nav.homeAria" aria-label="Spaceblox home">
+      <a class="brand" href="./" aria-label="Spaceblox home">
         <img src="assets/icon_512.png" alt="Spaceblox" width="52" height="52" />
       </a>
       <nav>
-        <a href="#how" data-i18n="nav.how">HOW TO PLAY</a>
-        <a href="#shots" data-i18n="nav.shots">SCREENSHOTS</a>
-        <a href="privacy-policy.html" data-i18n="nav.privacy">PRIVACY</a>
+        <a href="#how">HOW TO PLAY</a>
+        <a href="#shots">SCREENSHOTS</a>
+        <a href="privacy-policy.html">PRIVACY</a>
       </nav>
     </header>
 
     <section class="hero">
-      <div class="hero-art" role="img" data-i18n-aria="hero.bannerAria" aria-label="SPACEBLOX title over animated space background">
+      <div class="hero-art" role="img" aria-label="SPACEBLOX title over animated space background">
         <div class="space-banner" aria-hidden="true">
           <div class="sb-void"></div>
           <div class="sb-layer sb-dust"></div>
@@ -645,69 +598,69 @@ footer {
         </div>
       </div>
       <div class="hero-copy">
-        <h1 data-i18n-html="hero.title">Calm color logic<br>in deep space</h1>
-        <p class="lead" data-i18n-html="hero.lead">
+        <h1>Calm color logic<br>in deep space</h1>
+        <p class="lead">
           Fill empty cells with colored tiles.<br class="lead-break" />
           Never place three of the same in a line.
         </p>
         <div class="tiles-row">
-          <div class="tiles" data-i18n-aria="hero.tilesAria" aria-label="In-game tiles">
-            <img src="assets/tile_yellow.svg" data-i18n-alt="hero.altYellow" alt="Yellow tile" width="40" height="40" />
-            <img src="assets/tile_blue.svg" data-i18n-alt="hero.altBlue" alt="Blue tile" width="40" height="40" />
-            <img src="assets/tile_green.svg" data-i18n-alt="hero.altGreen" alt="Green tile" width="40" height="40" />
-            <img src="assets/tile_shifter.svg" data-i18n-alt="hero.altPurple" alt="Special purple tile" width="40" height="40" />
+          <div class="tiles" aria-label="In-game tiles">
+            <img src="assets/tile_yellow.svg" alt="Yellow tile" width="40" height="40" />
+            <img src="assets/tile_blue.svg" alt="Blue tile" width="40" height="40" />
+            <img src="assets/tile_green.svg" alt="Green tile" width="40" height="40" />
+            <img src="assets/tile_shifter.svg" alt="Special purple tile" width="40" height="40" />
           </div>
-          <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" data-i18n-aria="hero.playAria" aria-label="Get it on Google Play">
-            <img src="assets/google-play-badge.png" data-i18n-alt="hero.playAlt" alt="Get it on Google Play" width="215" height="83" />
+          <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" aria-label="Get it on Google Play">
+            <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" />
           </a>
         </div>
       </div>
-      <aside class="hero-side" data-i18n-aria="hero.sideAria" aria-label="Get Spaceblox">
+      <aside class="hero-side" aria-label="Get Spaceblox">
         <div class="tiles-row">
-          <div class="tiles" data-i18n-aria="hero.tilesAria" aria-label="In-game tiles">
+          <div class="tiles" aria-label="In-game tiles">
             <img src="assets/tile_yellow.svg" alt="" width="40" height="40" />
             <img src="assets/tile_blue.svg" alt="" width="40" height="40" />
             <img src="assets/tile_green.svg" alt="" width="40" height="40" />
             <img src="assets/tile_shifter.svg" alt="" width="40" height="40" />
           </div>
-          <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" data-i18n-aria="hero.playAria" aria-label="Get it on Google Play">
-            <img src="assets/google-play-badge.png" data-i18n-alt="hero.playAlt" alt="Get it on Google Play" width="215" height="83" />
+          <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" aria-label="Get it on Google Play">
+            <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" />
           </a>
         </div>
       </aside>
     </section>
 
     <section id="how">
-      <h2 data-i18n="how.title">HOW TO PLAY</h2>
+      <h2>HOW TO PLAY</h2>
       <div class="panel">
         <ol class="rules">
-          <li data-i18n-html="how.r1">Fill empty cells with <img class="rule-tile" src="assets/tile_yellow.svg" alt="" width="18" height="18" /><strong style="color:var(--yellow)">Yellow</strong>, <img class="rule-tile" src="assets/tile_blue.svg" alt="" width="18" height="18" /><strong style="color:var(--blue)">Blue</strong> or <img class="rule-tile" src="assets/tile_green.svg" alt="" width="18" height="18" /><strong style="color:var(--green)">Green</strong> tiles.</li>
-          <li data-i18n="how.r2">Never place three of the same color in a row or column.</li>
-          <li data-i18n="how.r3">Keep the colors balanced on every line.</li>
-          <li data-i18n-html="how.r4"><img class="rule-tile" src="assets/tile_shifter.svg" alt="" width="18" height="18" /><strong style="color:var(--purple)">Purple</strong> tiles add extra twists as you go.</li>
-          <li data-i18n="how.r5">A full, valid board wins the level.</li>
+          <li>Fill empty cells with <img class="rule-tile" src="assets/tile_yellow.svg" alt="" width="18" height="18" /><strong style="color:var(--yellow)">Yellow</strong>, <img class="rule-tile" src="assets/tile_blue.svg" alt="" width="18" height="18" /><strong style="color:var(--blue)">Blue</strong> or <img class="rule-tile" src="assets/tile_green.svg" alt="" width="18" height="18" /><strong style="color:var(--green)">Green</strong> tiles.</li>
+          <li>Never place three of the same color in a row or column.</li>
+          <li>Keep the colors balanced on every line.</li>
+          <li><img class="rule-tile" src="assets/tile_shifter.svg" alt="" width="18" height="18" /><strong style="color:var(--purple)">Purple</strong> tiles add extra twists as you go.</li>
+          <li>A full, valid board wins the level.</li>
         </ol>
       </div>
     </section>
 
     <section id="shots">
-      <h2 data-i18n="shots.title">SCREENSHOTS</h2>
-      <div class="shots-wheel" data-i18n-aria="shots.carouselAria" aria-label="Screenshot carousel">
+      <h2>SCREENSHOTS</h2>
+      <div class="shots-wheel" aria-label="Screenshot carousel">
         <div class="shots-track">
           <figure>
-            <img src="assets/shot_menu.png" data-i18n-alt="shots.menu" alt="Spaceblox main menu" />
+            <img src="assets/shot_menu.png" alt="Spaceblox main menu" />
           </figure>
           <figure>
-            <img src="assets/shot_tutorial.png" data-i18n-alt="shots.tutorial" alt="Spaceblox tutorial" />
+            <img src="assets/shot_tutorial.png" alt="Spaceblox tutorial" />
           </figure>
           <figure>
-            <img src="assets/shot_gameplay.png" data-i18n-alt="shots.gameplay" alt="Spaceblox gameplay board" />
+            <img src="assets/shot_gameplay.png" alt="Spaceblox gameplay board" />
           </figure>
           <figure>
-            <img src="assets/shot_levels.png" data-i18n-alt="shots.levels" alt="Spaceblox level select" />
+            <img src="assets/shot_levels.png" alt="Spaceblox level select" />
           </figure>
           <figure>
-            <img src="assets/shot_victory.png" data-i18n-alt="shots.victory" alt="Spaceblox victory screen" />
+            <img src="assets/shot_victory.png" alt="Spaceblox victory screen" />
           </figure>
           <!-- duplicate set for seamless loop -->
           <figure>
@@ -731,168 +684,14 @@ footer {
 
     <footer>
       <div>© Spaceblox · Giga &quot;gix0n&quot; Sichinava</div>
-      <div class="footer-end">
-        <div class="lang-switch" role="group" data-i18n-aria="nav.langAria" aria-label="Language">
-          <button type="button" data-set-lang="en" class="lang-btn is-active" aria-pressed="true">EN</button>
-          <span class="lang-sep" aria-hidden="true">|</span>
-          <button type="button" data-set-lang="pl" class="lang-btn" aria-pressed="false">PL</button>
-        </div>
-        <div>
-          <a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a>
-          ·
-          <a href="privacy-policy.html" data-i18n="footer.privacy">Privacy Policy</a>
-        </div>
+      <div>
+        <a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a>
+        ·
+        <a href="privacy-policy.html">Privacy Policy</a>
       </div>
     </footer>
   </div>
 
-
-  <script>
-  (function () {
-    var STORAGE_KEY = "spaceblox-lang";
-    var I18N = {
-      en: {
-        "meta.title": "Spaceblox — Color logic in space",
-        "meta.description": "Spaceblox is a calm color-logic puzzle: fill the board with yellow, blue, and green tiles. Never three in a row.",
-        "meta.ogDescription": "Calm color-logic puzzles in a pixel-space setting.",
-        "nav.homeAria": "Spaceblox home",
-        "nav.how": "HOW TO PLAY",
-        "nav.shots": "SCREENSHOTS",
-        "nav.privacy": "PRIVACY",
-        "nav.langAria": "Language",
-        "hero.bannerAria": "SPACEBLOX title over animated space background",
-        "hero.title": "Calm color logic<br>in deep space",
-        "hero.lead": "Fill empty cells with colored tiles.<br class=\"lead-break\" />Never place three of the same in a line.",
-        "hero.tilesAria": "In-game tiles",
-        "hero.altYellow": "Yellow tile",
-        "hero.altBlue": "Blue tile",
-        "hero.altGreen": "Green tile",
-        "hero.altPurple": "Special purple tile",
-        "hero.playAria": "Get it on Google Play",
-        "hero.playAlt": "Get it on Google Play",
-        "hero.sideAria": "Get Spaceblox",
-        "how.title": "HOW TO PLAY",
-        "how.r1": "Fill empty cells with <img class=\"rule-tile\" src=\"assets/tile_yellow.svg\" alt=\"\" width=\"18\" height=\"18\" /><strong style=\"color:var(--yellow)\">Yellow</strong>, <img class=\"rule-tile\" src=\"assets/tile_blue.svg\" alt=\"\" width=\"18\" height=\"18\" /><strong style=\"color:var(--blue)\">Blue</strong> or <img class=\"rule-tile\" src=\"assets/tile_green.svg\" alt=\"\" width=\"18\" height=\"18\" /><strong style=\"color:var(--green)\">Green</strong> tiles.",
-        "how.r2": "Never place three of the same color in a row or column.",
-        "how.r3": "Keep the colors balanced on every line.",
-        "how.r4": "<img class=\"rule-tile\" src=\"assets/tile_shifter.svg\" alt=\"\" width=\"18\" height=\"18\" /><strong style=\"color:var(--purple)\">Purple</strong> tiles add extra twists as you go.",
-        "how.r5": "A full, valid board wins the level.",
-        "shots.title": "SCREENSHOTS",
-        "shots.carouselAria": "Screenshot carousel",
-        "shots.menu": "Spaceblox main menu",
-        "shots.tutorial": "Spaceblox tutorial",
-        "shots.gameplay": "Spaceblox gameplay board",
-        "shots.levels": "Spaceblox level select",
-        "shots.victory": "Spaceblox victory screen",
-        "footer.privacy": "Privacy Policy"
-      },
-      pl: {
-        "meta.title": "Spaceblox — Logika kolorów w kosmosie",
-        "meta.description": "Spaceblox to spokojna zagadka logiczna: wypełniaj planszę żółtymi, niebieskimi i zielonymi kafelkami. Nigdy trzy w rzędzie.",
-        "meta.ogDescription": "Spokojne zagadki logiczne kolorów w pikselowym kosmosie.",
-        "nav.homeAria": "Strona główna Spaceblox",
-        "nav.how": "JAK GRAĆ",
-        "nav.shots": "ZRZUTY",
-        "nav.privacy": "PRYWATNOŚĆ",
-        "nav.langAria": "Język",
-        "hero.bannerAria": "Tytuł SPACEBLOX na animowanym tle kosmosu",
-        "hero.title": "Spokojna logika kolorów<br>w głębokim kosmosie",
-        "hero.lead": "Wypełniaj żółte, niebieskie i zielone kafelki.<br class=\"lead-break\" />Nigdy trzy w rzędzie.",
-        "hero.tilesAria": "Kafelki z gry",
-        "hero.altYellow": "Żółty kafelek",
-        "hero.altBlue": "Niebieski kafelek",
-        "hero.altGreen": "Zielony kafelek",
-        "hero.altPurple": "Specjalny fioletowy kafelek",
-        "hero.playAria": "Pobierz z Google Play",
-        "hero.playAlt": "Pobierz z Google Play",
-        "hero.sideAria": "Pobierz Spaceblox",
-        "how.title": "JAK GRAĆ",
-        "how.r1": "Wypełniaj puste pola kafelkami <img class=\"rule-tile\" src=\"assets/tile_yellow.svg\" alt=\"\" width=\"18\" height=\"18\" /><strong style=\"color:var(--yellow)\">żółtymi</strong>, <img class=\"rule-tile\" src=\"assets/tile_blue.svg\" alt=\"\" width=\"18\" height=\"18\" /><strong style=\"color:var(--blue)\">niebieskimi</strong> lub <img class=\"rule-tile\" src=\"assets/tile_green.svg\" alt=\"\" width=\"18\" height=\"18\" /><strong style=\"color:var(--green)\">zielonymi</strong>.",
-        "how.r2": "Nigdy nie stawiaj trzech tego samego koloru w rzędzie ani kolumnie.",
-        "how.r3": "Utrzymuj równowagę kolorów w każdej linii.",
-        "how.r4": "<img class=\"rule-tile\" src=\"assets/tile_shifter.svg\" alt=\"\" width=\"18\" height=\"18\" /><strong style=\"color:var(--purple)\">Fioletowe</strong> kafelki dodają dodatkowe zwroty w trakcie gry.",
-        "how.r5": "Pełna, poprawna plansza wygrywa poziom.",
-        "shots.title": "ZRZUTY EKRANU",
-        "shots.carouselAria": "Karuzela zrzutów ekranu",
-        "shots.menu": "Menu główne Spaceblox",
-        "shots.tutorial": "Samouczek Spaceblox",
-        "shots.gameplay": "Plansza rozgrywki Spaceblox",
-        "shots.levels": "Wybór poziomów Spaceblox",
-        "shots.victory": "Ekran zwycięstwa Spaceblox",
-        "footer.privacy": "Polityka prywatności"
-      }
-    };
-
-    function detectLang() {
-      try {
-        var saved = localStorage.getItem(STORAGE_KEY);
-        if (saved === "en" || saved === "pl") return saved;
-      } catch (e) {}
-      var langs = [];
-      if (navigator.languages && navigator.languages.length) {
-        for (var i = 0; i < navigator.languages.length; i++) langs.push(navigator.languages[i]);
-      } else if (navigator.language) {
-        langs.push(navigator.language);
-      }
-      for (var j = 0; j < langs.length; j++) {
-        if (String(langs[j]).toLowerCase().indexOf("pl") === 0) return "pl";
-      }
-      return "en";
-    }
-
-    function t(lang, key) {
-      var pack = I18N[lang] || I18N.en;
-      return (pack[key] != null ? pack[key] : (I18N.en[key] != null ? I18N.en[key] : key));
-    }
-
-    function apply(lang) {
-      if (!I18N[lang]) lang = "en";
-      document.documentElement.lang = lang;
-      try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
-
-      var nodes = document.querySelectorAll("[data-i18n]");
-      for (var i = 0; i < nodes.length; i++) {
-        nodes[i].textContent = t(lang, nodes[i].getAttribute("data-i18n"));
-      }
-      var htmlNodes = document.querySelectorAll("[data-i18n-html]");
-      for (var h = 0; h < htmlNodes.length; h++) {
-        htmlNodes[h].innerHTML = t(lang, htmlNodes[h].getAttribute("data-i18n-html"));
-      }
-      var ariaNodes = document.querySelectorAll("[data-i18n-aria]");
-      for (var a = 0; a < ariaNodes.length; a++) {
-        ariaNodes[a].setAttribute("aria-label", t(lang, ariaNodes[a].getAttribute("data-i18n-aria")));
-      }
-      var altNodes = document.querySelectorAll("[data-i18n-alt]");
-      for (var b = 0; b < altNodes.length; b++) {
-        altNodes[b].setAttribute("alt", t(lang, altNodes[b].getAttribute("data-i18n-alt")));
-      }
-      var contentNodes = document.querySelectorAll("[data-i18n-content]");
-      for (var c = 0; c < contentNodes.length; c++) {
-        contentNodes[c].setAttribute("content", t(lang, contentNodes[c].getAttribute("data-i18n-content")));
-      }
-
-      var titleEl = document.querySelector("title[data-i18n]");
-      if (titleEl) document.title = t(lang, titleEl.getAttribute("data-i18n"));
-
-      var btns = document.querySelectorAll("[data-set-lang]");
-      for (var k = 0; k < btns.length; k++) {
-        var on = btns[k].getAttribute("data-set-lang") === lang;
-        btns[k].classList.toggle("is-active", on);
-        btns[k].setAttribute("aria-pressed", on ? "true" : "false");
-      }
-    }
-
-    var initial = detectLang();
-    apply(initial);
-
-    document.addEventListener("click", function (e) {
-      var btn = e.target.closest("[data-set-lang]");
-      if (!btn) return;
-      e.preventDefault();
-      apply(btn.getAttribute("data-set-lang"));
-    });
-  })();
-  </script>
 
   <script>
   (function () {
