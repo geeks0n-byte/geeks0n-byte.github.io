@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#020617" />
-  <title>Spaceblox — Privacy Policy</title>
+  <title data-i18n="meta.title">Spaceblox — Privacy Policy</title>
   <link rel="icon" href="assets/icon_512.png" type="image/png" />
   <style>
     @font-face {
@@ -312,21 +312,67 @@
         max-height: none;
       }
     }
+
+    /* Language switch — compact pixel UI */
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      flex: 0 0 auto;
+      z-index: 1;
+      margin-left: 0.15rem;
+      font-family: "PressStart2P", monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.03em;
+      user-select: none;
+    }
+    .lang-switch button {
+      appearance: none;
+      -webkit-appearance: none;
+      background: transparent;
+      border: none;
+      margin: 0;
+      padding: 0.4rem 0.28rem;
+      font: inherit;
+      color: var(--muted);
+      cursor: pointer;
+      text-shadow: 1px 1px 0 #000a;
+      line-height: 1;
+    }
+    .lang-switch button:hover { color: #e2e8f0; }
+    .lang-switch button.is-active {
+      color: #ffffff;
+    }
+    .lang-switch .lang-sep {
+      color: #64748b;
+      pointer-events: none;
+      padding: 0 0.05rem;
+    }
+    @media (max-width: 640px) {
+      .lang-switch { font-size: 0.42rem; margin-left: 0.05rem; }
+      .lang-switch button { padding: 0.3rem 0.18rem; }
+    }
   </style>
 </head>
 <body>
   <div class="stars" aria-hidden="true"></div>
   <div class="wrap">
     <header>
-      <a class="brand" href="./" aria-label="Spaceblox home">
+      <a class="brand" href="./" data-i18n-aria="nav.homeAria" aria-label="Spaceblox home">
         <img src="assets/icon_512.png" alt="Spaceblox" width="52" height="52" />
       </a>
       <nav>
-        <a href="./">BACK</a>
+        <a href="./" data-i18n="nav.back">BACK</a>
       </nav>
+      <div class="lang-switch" role="group" data-i18n-aria="nav.langAria" aria-label="Language">
+        <button type="button" data-set-lang="en" class="lang-btn is-active" aria-pressed="true">EN</button>
+        <span class="lang-sep" aria-hidden="true">|</span>
+        <button type="button" data-set-lang="pl" class="lang-btn" aria-pressed="false">PL</button>
+      </div>
     </header>
     <div class="privacy-rail">
     <article class="panel">
+<div id="privacy-body" data-i18n-html="privacy.body">
 <h1>Privacy Policy for Spaceblox</h1>
   <p>
     This Privacy Policy describes how <strong>Spaceblox</strong>
@@ -466,16 +512,103 @@
   <p>
     Questions about this Privacy Policy: contact via the Google Play store listing for Spaceblox.
   </p>
+</div>
     </article>
     <footer>
       <div class="footer-links">
-        <a href="./">← Back to Spaceblox</a>
+        <a href="./" data-i18n="footer.back">← Back to Spaceblox</a>
         ·
         <a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a>
       </div>
     </footer>
     </div>
   </div>
+
+
+  <script>
+  (function () {
+    var STORAGE_KEY = "spaceblox-lang";
+    var I18N = {
+      en: {
+        "meta.title": "Spaceblox — Privacy Policy",
+        "nav.homeAria": "Spaceblox home",
+        "nav.back": "BACK",
+        "nav.langAria": "Language",
+        "footer.back": "← Back to Spaceblox",
+        "privacy.body": "<h1>Privacy Policy for Spaceblox</h1>\n  <p>\n    This Privacy Policy describes how <strong>Spaceblox</strong>\n    (“the App”, “we”, “us”) handles information when you use the Android game\n    Spaceblox published on Google Play.\n  </p>\n  <p>\n    Contact: use the email address listed on the Spaceblox Google Play store listing.\n  </p>\n\n  <h2>1. Summary</h2>\n  <p>\n    Spaceblox is a single-player puzzle game. Progress (unlocked levels, stars,\n    settings, and optional in-progress sessions) is stored <strong>locally on your device</strong>.\n    We do not require an account and we do not operate our own player analytics backend.\n  </p>\n  <p>\n    The App shows advertisements through <strong>Google AdMob</strong>. AdMob and related\n    Google advertising services may collect and process device and usage data as described below.\n  </p>\n\n  <h2>2. Information we store on your device</h2>\n  <p>The App may store locally:</p>\n  <ul>\n    <li>Game progress (unlocked levels, star results, achievement unlocks)</li>\n    <li>Settings (language, music/SFX, background mode)</li>\n    <li>Optional saved mid-level session data</li>\n    <li>Internal counters used for ad frequency (for example, wins since the last interstitial)</li>\n  </ul>\n  <p>\n    This data stays on your device unless you clear app storage, uninstall the App,\n    or choose to sync with Google Play Games (see section 6).\n    We do not upload this save data to our own servers.\n  </p>\n  <p>\n  <strong>Local save format (summary):</strong> progress is stored in\n  <code>user://progression.cfg</code> (versioned sections for Meta, Progression,\n  Session, Ads, and Achievements). Cloud sync uses a JSON snapshot with\n  <code>progress</code>, <code>settings</code>, <code>achievements</code>, and a\n  <code>timestamp</code> field. Mid-level sessions are not included in cloud snapshots.\n  </p>\n\n  <h2>3. Advertising (Google AdMob)</h2>\n  <p>\n    Spaceblox uses Google Mobile Ads (AdMob) to show banner, interstitial, and/or rewarded ads.\n    Google and its partners may collect information such as:\n  </p>\n  <ul>\n    <li>Advertising ID / device identifiers</li>\n    <li>IP address and general device information</li>\n    <li>Ad interaction and performance data</li>\n    <li>Approximate location derived from IP (depending on region and settings)</li>\n  </ul>\n  <p>\n    This processing is performed by Google under their own terms and policies.\n    See Google’s documentation:\n  </p>\n  <ul>\n    <li><a href=\"https://policies.google.com/privacy\">Google Privacy Policy</a></li>\n    <li><a href=\"https://support.google.com/admob/answer/6128543\">AdMob &amp; privacy</a></li>\n    <li><a href=\"https://policies.google.com/technologies/ads\">How Google uses information from sites or apps that use our services</a></li>\n  </ul>\n  <p>\n    In the European Economic Area (EEA), UK, and similar regions, a consent form\n    (Google User Messaging Platform / UMP) may be shown before personalized ads are requested.\n    You can change privacy choices where the platform provides a privacy options entry point.\n  </p>\n\n  <h2>4. Children</h2>\n  <p>\n    Spaceblox is a general-audience puzzle game. It is not directed at children under 13\n    (or the equivalent age in your country). If you believe a child has provided personal\n    information through advertising services, contact us and we will help address it as appropriate.\n  </p>\n\n  <h2>5. Data sharing</h2>\n  <p>\n    We do not sell your personal information. Advertising data may be processed by Google\n    and advertising partners as part of serving ads. We do not share your local game saves\n    with third parties.\n  </p>\n\n  <h2>6. Google Play Games cloud save (optional)</h2>\n  <p>\n    On Android, you may sign in to Google Play Games and sync campaign progress.\n    When enabled, a JSON snapshot (progress, settings, achievements, and a timestamp)\n    is stored in your Play Games account by Google—not on servers operated by us.\n    Sync merges progress fields (for example, highest unlocked level and star bits)\n    and may ask you to choose between device and cloud copies when timestamps tie.\n    Mid-level session saves are not uploaded.\n  </p>\n\n  <h2>7. Data retention</h2>\n  <ul>\n    <li><strong>Local game data:</strong> until you clear app data or uninstall.</li>\n    <li><strong>Ad-related data:</strong> retained by Google / partners according to their policies.</li>\n  </ul>\n\n\n  <h2 id=\"data-deletion\">8. Data deletion</h2>\n  <p>\n    Spaceblox does not create its own player accounts. To delete local game data\n    associated with the App on your device:\n  </p>\n  <ul>\n    <li>Open Android Settings → Apps → Spaceblox → Storage → Clear storage / Clear data, or</li>\n    <li>Uninstall Spaceblox (this removes local saves on that device).</li>\n  </ul>\n  <p>\n    If you used optional Google Play Games sign-in, cloud progress is stored in your\n    Google Play Games account. You can manage or delete that data through your Google\n    account / Play Games settings, or contact us via the Spaceblox Google Play listing\n    and we will help with a deletion request to the extent we can.\n  </p>\n\n  <h2>9. Your choices</h2>\n  <ul>\n    <li>Reset progress or clear app storage in Android system settings</li>\n    <li>Limit ad tracking in your device advertising / privacy settings</li>\n    <li>Use in-ad or UMP privacy options where available</li>\n    <li>Uninstall the App at any time</li>\n  </ul>\n\n  <h2>10. International users</h2>\n  <p>\n    If you use the App outside your home country, advertising partners may process data\n    in other countries as described in Google’s policies.\n  </p>\n\n  <h2>11. Changes to this policy</h2>\n  <p>\n    We may update this Privacy Policy from time to time. Continued use of the App after an update\n    means you accept the revised policy.\n  </p>\n\n  <h2>12. Contact</h2>\n  <p>\n    Questions about this Privacy Policy: contact via the Google Play store listing for Spaceblox.\n  </p>"
+      },
+      pl: {
+        "meta.title": "Spaceblox — Polityka prywatności",
+        "nav.homeAria": "Strona główna Spaceblox",
+        "nav.back": "WRÓĆ",
+        "nav.langAria": "Język",
+        "footer.back": "← Powrót do Spaceblox",
+        "privacy.body": "<h1>Polityka prywatności Spaceblox</h1>\n  <p>\n    Niniejsza Polityka prywatności opisuje, w jaki sposób <strong>Spaceblox</strong>\n    („Aplikacja”, „my”) przetwarza informacje, gdy korzystasz z gry na Androida\n    Spaceblox opublikowanej w Google Play.\n  </p>\n  <p>\n    Kontakt: użyj adresu e-mail podanego w karcie Spaceblox w sklepie Google Play.\n  </p>\n\n  <h2>1. Podsumowanie</h2>\n  <p>\n    Spaceblox to jednoosobowa gra logiczna. Postępy (odblokowane poziomy, gwiazdki,\n    ustawienia oraz opcjonalne sesje w trakcie poziomu) są przechowywane\n    <strong>lokalnie na Twoim urządzeniu</strong>.\n    Nie wymagamy konta i nie prowadzimy własnego zaplecza analityki graczy.\n  </p>\n  <p>\n    Aplikacja wyświetla reklamy za pośrednictwem <strong>Google AdMob</strong>. AdMob oraz powiązane\n    usługi reklamowe Google mogą zbierać i przetwarzać dane urządzenia oraz użytkowania, jak opisano poniżej.\n  </p>\n\n  <h2>2. Informacje przechowywane na Twoim urządzeniu</h2>\n  <p>Aplikacja może przechowywać lokalnie:</p>\n  <ul>\n    <li>Postępy w grze (odblokowane poziomy, wyniki gwiazdek, odblokowane osiągnięcia)</li>\n    <li>Ustawienia (język, muzyka/efekty dźwiękowe, tryb tła)</li>\n    <li>Opcjonalne dane zapisanej sesji w trakcie poziomu</li>\n    <li>Wewnętrzne liczniki częstotliwości reklam (np. wygrane od ostatniej reklamy pełnoekranowej)</li>\n  </ul>\n  <p>\n    Te dane pozostają na Twoim urządzeniu, dopóki nie wyczyścisz pamięci aplikacji, nie odinstalujesz Aplikacji\n    lub nie zdecydujesz się na synchronizację z Google Play Gry (zob. sekcja 6).\n    Nie przesyłamy tych zapisów na nasze własne serwery.\n  </p>\n  <p>\n  <strong>Lokalny format zapisu (skrót):</strong> postępy są przechowywane w\n  <code>user://progression.cfg</code> (wersjonowane sekcje Meta, Progression,\n  Session, Ads i Achievements). Synchronizacja w chmurze używa migawki JSON z polami\n  <code>progress</code>, <code>settings</code>, <code>achievements</code> oraz\n  <code>timestamp</code>. Sesje w trakcie poziomu nie są uwzględniane w migawkach chmurowych.\n  </p>\n\n  <h2>3. Reklamy (Google AdMob)</h2>\n  <p>\n    Spaceblox korzysta z Google Mobile Ads (AdMob) do wyświetlania reklam banerowych, pełnoekranowych i/lub nagradzanych.\n    Google i jego partnerzy mogą zbierać informacje takie jak:\n  </p>\n  <ul>\n    <li>Identyfikator reklamowy / identyfikatory urządzenia</li>\n    <li>Adres IP oraz ogólne informacje o urządzeniu</li>\n    <li>Dane o interakcjach z reklamami i ich skuteczności</li>\n    <li>Przybliżona lokalizacja wynikająca z IP (w zależności od regionu i ustawień)</li>\n  </ul>\n  <p>\n    Przetwarzanie to jest wykonywane przez Google na podstawie ich własnych warunków i polityk.\n    Zobacz dokumentację Google:\n  </p>\n  <ul>\n    <li><a href=\"https://policies.google.com/privacy\">Polityka prywatności Google</a></li>\n    <li><a href=\"https://support.google.com/admob/answer/6128543\">AdMob i prywatność</a></li>\n    <li><a href=\"https://policies.google.com/technologies/ads\">Jak Google wykorzystuje informacje z witryn lub aplikacji korzystających z naszych usług</a></li>\n  </ul>\n  <p>\n    Na Europejskim Obszarze Gospodarczym (EOG), w Wielkiej Brytanii i podobnych regionach przed żądaniem\n    spersonalizowanych reklam może zostać wyświetlony formularz zgody\n    (Google User Messaging Platform / UMP).\n    Możesz zmienić wybory dotyczące prywatności tam, gdzie platforma udostępnia punkt wejścia opcji prywatności.\n  </p>\n\n  <h2>4. Dzieci</h2>\n  <p>\n    Spaceblox to gra logiczna skierowana do ogólnej publiczności. Nie jest przeznaczona dla dzieci poniżej 13. roku życia\n    (ani równoważnego wieku w Twoim kraju). Jeśli uważasz, że dziecko przekazało dane osobowe\n    za pośrednictwem usług reklamowych, skontaktuj się z nami — pomożemy rozwiązać sprawę w odpowiedni sposób.\n  </p>\n\n  <h2>5. Udostępnianie danych</h2>\n  <p>\n    Nie sprzedajemy Twoich danych osobowych. Dane reklamowe mogą być przetwarzane przez Google\n    i partnerów reklamowych w ramach wyświetlania reklam. Nie udostępniamy lokalnych zapisów gry\n    podmiotom trzecim.\n  </p>\n\n  <h2>6. Zapis w chmurze Google Play Gry (opcjonalnie)</h2>\n  <p>\n    Na Androidzie możesz zalogować się do Google Play Gry i synchronizować postępy kampanii.\n    Po włączeniu migawka JSON (postępy, ustawienia, osiągnięcia oraz znacznik czasu)\n    jest przechowywana na Twoim koncie Play Gry przez Google — nie na serwerach przez nas prowadzonych.\n    Synchronizacja łączy pola postępów (np. najwyższy odblokowany poziom i bity gwiazdek)\n    i może poprosić o wybór między kopią na urządzeniu a w chmurze, gdy znaczniki czasu się pokrywają.\n    Zapisy sesji w trakcie poziomu nie są przesyłane.\n  </p>\n\n  <h2>7. Retencja danych</h2>\n  <ul>\n    <li><strong>Lokalne dane gry:</strong> do momentu wyczyszczenia danych aplikacji lub odinstalowania.</li>\n    <li><strong>Dane związane z reklamami:</strong> przechowywane przez Google / partnerów zgodnie z ich politykami.</li>\n  </ul>\n\n\n  <h2 id=\"data-deletion\">8. Usuwanie danych</h2>\n  <p>\n    Spaceblox nie tworzy własnych kont graczy. Aby usunąć lokalne dane gry\n    powiązane z Aplikacją na Twoim urządzeniu:\n  </p>\n  <ul>\n    <li>Otwórz Ustawienia Androida → Aplikacje → Spaceblox → Pamięć → Wyczyść pamięć / Wyczyść dane, albo</li>\n    <li>Odinstaluj Spaceblox (usuwa lokalne zapisy na tym urządzeniu).</li>\n  </ul>\n  <p>\n    Jeśli korzystałeś z opcjonalnego logowania do Google Play Gry, postępy w chmurze są przechowywane na Twoim\n    koncie Google Play Gry. Możesz zarządzać tymi danymi lub je usunąć w ustawieniach konta Google /\n    Play Gry albo skontaktować się z nami przez kartę Spaceblox w Google Play —\n    pomożemy w zakresie, w jakim to możliwe, w realizacji żądania usunięcia.\n  </p>\n\n  <h2>9. Twoje wybory</h2>\n  <ul>\n    <li>Zresetuj postępy lub wyczyść pamięć aplikacji w ustawieniach systemowych Androida</li>\n    <li>Ogranicz śledzenie reklam w ustawieniach reklam / prywatności urządzenia</li>\n    <li>Korzystaj z opcji prywatności w reklamach lub UMP, jeśli są dostępne</li>\n    <li>Odinstaluj Aplikację w dowolnym momencie</li>\n  </ul>\n\n  <h2>10. Użytkownicy międzynarodowi</h2>\n  <p>\n    Jeśli korzystasz z Aplikacji poza krajem zamieszkania, partnerzy reklamowi mogą przetwarzać dane\n    w innych krajach, zgodnie z politykami Google.\n  </p>\n\n  <h2>11. Zmiany niniejszej polityki</h2>\n  <p>\n    Możemy od czasu do czasu aktualizować tę Politykę prywatności. Dalsze korzystanie z Aplikacji po aktualizacji\n    oznacza akceptację zmienionej polityki.\n  </p>\n\n  <h2>12. Kontakt</h2>\n  <p>\n    Pytania dotyczące tej Polityki prywatności: kontakt przez kartę Spaceblox w sklepie Google Play.\n  </p>"
+      }
+    };
+
+    function detectLang() {
+      try {
+        var saved = localStorage.getItem(STORAGE_KEY);
+        if (saved === "en" || saved === "pl") return saved;
+      } catch (e) {}
+      var langs = [];
+      if (navigator.languages && navigator.languages.length) {
+        for (var i = 0; i < navigator.languages.length; i++) langs.push(navigator.languages[i]);
+      } else if (navigator.language) {
+        langs.push(navigator.language);
+      }
+      for (var j = 0; j < langs.length; j++) {
+        if (String(langs[j]).toLowerCase().indexOf("pl") === 0) return "pl";
+      }
+      return "en";
+    }
+
+    function t(lang, key) {
+      var pack = I18N[lang] || I18N.en;
+      return (pack[key] != null ? pack[key] : (I18N.en[key] != null ? I18N.en[key] : key));
+    }
+
+    function apply(lang) {
+      if (!I18N[lang]) lang = "en";
+      document.documentElement.lang = lang;
+      try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+
+      var nodes = document.querySelectorAll("[data-i18n]");
+      for (var i = 0; i < nodes.length; i++) {
+        nodes[i].textContent = t(lang, nodes[i].getAttribute("data-i18n"));
+      }
+      var htmlNodes = document.querySelectorAll("[data-i18n-html]");
+      for (var h = 0; h < htmlNodes.length; h++) {
+        htmlNodes[h].innerHTML = t(lang, htmlNodes[h].getAttribute("data-i18n-html"));
+      }
+      var ariaNodes = document.querySelectorAll("[data-i18n-aria]");
+      for (var a = 0; a < ariaNodes.length; a++) {
+        ariaNodes[a].setAttribute("aria-label", t(lang, ariaNodes[a].getAttribute("data-i18n-aria")));
+      }
+
+      var titleEl = document.querySelector("title[data-i18n]");
+      if (titleEl) document.title = t(lang, titleEl.getAttribute("data-i18n"));
+
+      var btns = document.querySelectorAll("[data-set-lang]");
+      for (var k = 0; k < btns.length; k++) {
+        var on = btns[k].getAttribute("data-set-lang") === lang;
+        btns[k].classList.toggle("is-active", on);
+        btns[k].setAttribute("aria-pressed", on ? "true" : "false");
+      }
+    }
+
+    var initial = detectLang();
+    apply(initial);
+
+    document.addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-set-lang]");
+      if (!btn) return;
+      e.preventDefault();
+      apply(btn.getAttribute("data-set-lang"));
+    });
+  })();
+  </script>
 
 </body>
 </html>
