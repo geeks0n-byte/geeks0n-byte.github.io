@@ -413,12 +413,23 @@
         "assets/fx_comet_3.svg"
       ]
     };
+    // Match in-game AnimatedSprite2D comet frames (~12 FPS)
+    var COMET_FPS = 12;
+    var COMET_FRAME_MS = 1000 / COMET_FPS;
     // Shooting star art: head bottom-left, tail up-right → ~135°
     // Comet art: head on LEFT, tail to RIGHT (horizontal) → ~180° for R→L travel
     var STAR_BASE_DEG = 135;
     var COMET_BASE_DEG = 180;
     function rand(a, b) { return a + Math.random() * (b - a); }
     function pick(arr) { return arr[(Math.random() * arr.length) | 0]; }
+
+    // Preload comet frames so mid-flight src swaps do not flicker
+    (function preloadCometFrames() {
+      for (var i = 0; i < ASSETS.comets.length; i++) {
+        var img = new Image();
+        img.src = ASSETS.comets[i];
+      }
+    })();
 
     function spawn(kind) {
       var el = document.createElement("img");
@@ -434,8 +445,9 @@
         el.src = ASSETS.star;
       } else if (kind === "comet") {
         // Comet SVGs are ~2:1 landscape — keep aspect, slightly larger / readable
+        // Cycle fx_comet_1..3 like in-game AnimatedSprite2D (do not pick one static frame)
         w = rand(56, 92) * m; h = w * 0.5; dur = rand(8, 16);
-        el.src = pick(ASSETS.comets);
+        el.src = ASSETS.comets[0];
       } else {
         w = rand(16, 30) * m; h = w; dur = rand(14, 24);
         el.src = pick(ASSETS.asteroids);
@@ -483,13 +495,34 @@
       el.style.opacity = "0";
       fx.appendChild(el);
 
+      var cometFrameTimer = null;
+      var cometFrameIdx = 0;
+      function clearCometFrames() {
+        if (cometFrameTimer != null) {
+          clearInterval(cometFrameTimer);
+          cometFrameTimer = null;
+        }
+      }
+      function startCometFrames() {
+        cometFrameIdx = 0;
+        el.src = ASSETS.comets[0];
+        cometFrameTimer = setInterval(function () {
+          cometFrameIdx = (cometFrameIdx + 1) % ASSETS.comets.length;
+          el.src = ASSETS.comets[cometFrameIdx];
+        }, COMET_FRAME_MS);
+      }
+
       function startAnim() {
         el.style.opacity = "";
+        if (kind === "comet") startCometFrames();
         var anim = el.animate([
           { transform: "translate(" + startX + "px," + startY + "px) rotate(" + rot0 + "deg)", opacity: 1 },
           { transform: "translate(" + endX + "px," + endY + "px) rotate(" + rot1 + "deg)", opacity: 0.85 }
         ], { duration: dur * 1000, easing: "linear", fill: "forwards" });
-        anim.onfinish = function () { el.remove(); };
+        anim.onfinish = function () {
+          clearCometFrames();
+          el.remove();
+        };
       }
 
       // Wait for decode so the first frame is not a frozen placeholder
