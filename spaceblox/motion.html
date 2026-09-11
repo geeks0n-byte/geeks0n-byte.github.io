@@ -489,8 +489,8 @@
         w = rand(28, 46) * m; h = w; dur = rand(1.6, 2.8);
         el.src = ASSETS.star;
       } else if (kind === "comet") {
-        // Comet SVGs are ~2:1 landscape — keep aspect, not a square box
-        w = rand(48, 76) * m; h = w * 0.5; dur = rand(3.2, 5.2);
+        // Comet SVGs are ~2:1 landscape — keep aspect, slightly larger / readable
+        w = rand(56, 92) * m; h = w * 0.5; dur = rand(8, 16);
         el.src = pick(ASSETS.comets);
       } else {
         w = rand(16, 30) * m; h = w; dur = rand(14, 24);
@@ -499,12 +499,23 @@
       el.style.width = w + "px";
       el.style.height = h + "px";
 
-      startX = hostW + w + 20;
-      endX = -w - 40;
+      if (kind === "comet") {
+        // Cruise across: start partially off right, exit left; long mid-path visibility
+        startX = hostW + rand(w * 0.15, w * 0.85);
+        endX = -w * rand(0.35, 1.05);
+      } else {
+        startX = hostW + w + 20;
+        endX = -w - 40;
+      }
       var travelX = startX - endX;
-      if (kind === "star" || kind === "comet") {
+      if (kind === "star") {
+        // Fast steep shooting-star streak
         startY = rand(-50, hostH * 0.5);
         endY = startY + travelX * rand(0.45, 1.1);
+      } else if (kind === "comet") {
+        // Shallow diagonal cruise (small dy vs dx), slight up or down
+        startY = rand(hostH * 0.08, hostH * 0.72);
+        endY = startY + travelX * rand(-0.1, 0.14);
       } else {
         startY = rand(-20, hostH * 0.75);
         endY = startY + travelX * rand(0.1, 0.45);
