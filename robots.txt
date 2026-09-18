@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://geeks0n-byte.github.io/sitemap.xml
