@@ -18,16 +18,8 @@
   <meta name="twitter:image" content="https://geeks0n-byte.github.io/spaceblox/assets/feature.png" />
   <link rel="icon" href="assets/icon_512.png" type="image/png" />
   <link rel="stylesheet" href="shared.css" />
+  <link rel="stylesheet" href="space-bg.css" />
   <style>
-    body {
-      background-color: #020617;
-      background-image:
-        radial-gradient(1200px 600px at 20% -10%, #1e3a5f55, transparent),
-        radial-gradient(900px 500px at 90% 10%, #312e8155, transparent),
-        linear-gradient(180deg, var(--bg), #020617 70%);
-      background-attachment: scroll;
-    }
-
     .privacy-rail {
       width: 100%;
       max-width: min(100%, 700px);
@@ -133,8 +125,15 @@
     }
   </style>
 </head>
-<body>
-  <div class="stars" aria-hidden="true"></div>
+<body class="space-page">
+  <div class="space-bg" aria-hidden="true">
+    <div class="sb-void"></div>
+    <div class="sb-layer sb-dust" data-speed="0.20"></div>
+    <div class="sb-layer sb-stars" data-speed="0.40"></div>
+    <div class="sb-layer sb-accents" data-speed="0.60"></div>
+    <div class="sb-layer sb-sparks" data-speed="0.90"></div>
+    <div class="sb-fx" id="space-fx"></div>
+  </div>
   <div class="wrap">
     <header>
       <a class="brand" href="./" aria-label="Spaceblox home">
@@ -315,6 +314,6 @@
     </div>
   </div>
 
-
+  <script src="space-bg.js" defer></script>
 </body>
 </html>

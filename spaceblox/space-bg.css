@@ -1,0 +1,106 @@
+/* Full-page in-game space parallax (void + bg_1..bg_4) */
+:root {
+  --sb-tw: 720px;
+  --sb-th: 1280px;
+}
+
+html {
+  background: #00123a;
+}
+
+body.space-page {
+  background-color: #00123a;
+  background-image: none;
+}
+
+.space-bg {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: #00123a;
+}
+
+.space-bg .sb-void {
+  position: absolute;
+  inset: 0;
+  background: #00123a;
+}
+
+.space-bg .sb-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(100% + var(--sb-tw));
+  height: calc(100% + var(--sb-th));
+  background-repeat: repeat;
+  background-size: var(--sb-tw) var(--sb-th);
+  background-position: 0 0;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  pointer-events: none;
+}
+
+.space-bg .sb-dust {
+  background-image: url("assets/bg_1_far_dust.svg");
+  opacity: 0.85;
+}
+
+.space-bg .sb-stars {
+  background-image: url("assets/bg_2_medium_stars.svg");
+  animation: sb-twinkle 9s ease-in-out infinite;
+}
+
+.space-bg .sb-accents {
+  background-image: url("assets/bg_3_foreground_accents.svg");
+  animation: sb-twinkle-alt 9s ease-in-out infinite;
+}
+
+.space-bg .sb-sparks {
+  background-image: url("assets/bg_4_sparkler_crosses.svg");
+  opacity: 1;
+  animation: sb-pulse 7s ease-in-out infinite;
+}
+
+@keyframes sb-twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+@keyframes sb-twinkle-alt {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.62; }
+}
+
+@keyframes sb-pulse {
+  0%, 100% { opacity: 0.85; filter: brightness(1); }
+  50% { opacity: 1; filter: brightness(1.1); }
+}
+
+.space-bg .sb-fx {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.space-bg .sb-fx-item {
+  position: absolute;
+  image-rendering: pixelated;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .space-bg .sb-layer {
+    animation: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+  .space-bg .sb-fx { display: none !important; }
+}
