@@ -283,17 +283,49 @@
       max-width: min(100%, 700px);
       margin: 2.75rem auto 0;
       text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
     }
     .cta-end .play-badge {
-      margin: 0 auto;
+      margin: 0;
       display: inline-flex;
     }
     .cta-end .play-badge img {
       width: 196px;
       height: auto;
     }
+    a.web-play {
+      font-family: "PressStart2P", monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.03em;
+      color: #ffffff;
+      text-decoration: none;
+      text-shadow: 1px 1px 0 #000a;
+      white-space: nowrap;
+      padding: 0.95rem 1.15rem;
+      line-height: 1;
+      background-color: #1a1a1a;
+      background-image: url("assets/button_bar_gray_dark.svg?v=ingame3");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      image-rendering: pixelated;
+      outline: none;
+    }
+    a.web-play:hover { filter: brightness(1.12); color: #fff; }
+    a.web-play:active {
+      filter: brightness(0.92);
+      transform: translateY(1px);
+    }
+    a.web-play:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
     @media (max-width: 860px) {
       .cta-end .play-badge img { width: min(196px, 58vw); }
+      a.web-play { font-size: 0.5rem; padding: 0.8rem 1rem; }
     }
 
     footer {
@@ -375,6 +407,7 @@
           <img src="assets/tile_green.svg" alt="Green tile" width="40" height="40" />
           <img src="assets/tile_shifter.svg" alt="Special purple tile" width="40" height="40" />
         </div>
+        <a class="web-play" href="play/">PLAY IN BROWSER</a>
         <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" aria-label="Get it on Google Play">
           <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" />
         </a>
@@ -449,6 +482,7 @@
     </section>
 
     <div class="cta-end">
+      <a class="web-play" href="play/">PLAY IN BROWSER</a>
       <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" aria-label="Get it on Google Play">
         <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" />
       </a>
@@ -457,6 +491,8 @@
     <footer>
       <div>© Spaceblox · Giga &quot;gix0n&quot; Sichinava</div>
       <div>
+        <a href="play/">Play in browser</a>
+        ·
         <a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a>
         ·
         <a href="privacy-policy.html">Privacy Policy</a>
