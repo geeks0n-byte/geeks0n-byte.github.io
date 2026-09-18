@@ -10,8 +10,7 @@ GitHub Pages site for **Spaceblox**:
 | https://geeks0n-byte.github.io/spaceblox/motion.html | Experimental motion lab (`noindex`) |
 
 AdMob crawls `app-ads.txt` at the **root** of the Play Console developer website
-(`https://geeks0n-byte.github.io/app-ads.txt`). Keep that root file authoritative.
-A copy also lives under `spaceblox/` for convenience — if AdMob lines change, update **both**.
+(`https://geeks0n-byte.github.io/app-ads.txt`). Keep only that root file — not under `/spaceblox/`.
 
 ## Publish
 
@@ -34,7 +33,6 @@ If AdMob lists extra `RESELLER` rows, paste those into the **root** `app-ads.txt
   robots.txt
   sitemap.xml
   spaceblox/
-    app-ads.txt        ← same content (kept on purpose)
     index.html         ← landing
     privacy-policy.html
     motion.html
