@@ -5,6 +5,7 @@ GitHub Pages site for **Spaceblox**:
 | URL | Purpose |
 | --- | --- |
 | https://geeks0n-byte.github.io/app-ads.txt | AdMob authorization (must stay at **site root**) |
+| https://geeks0n-byte.github.io/ads.txt | AdSense authorization (must stay at **site root**) |
 | https://geeks0n-byte.github.io/spaceblox/ | Game marketing landing page |
 | https://geeks0n-byte.github.io/spaceblox/play/ | Web (HTML5) build |
 | https://geeks0n-byte.github.io/spaceblox/privacy-policy.html | Privacy policy (Play Store) |
@@ -29,6 +30,7 @@ If AdMob lists extra `RESELLER` rows, paste those into the **root** `app-ads.txt
 ```
 /
   app-ads.txt          ← AdMob (Play Console website root — required)
+  ads.txt              ← AdSense (Sites verification — required)
   index.html           ← redirects to /spaceblox/
   robots.txt
   sitemap.xml
