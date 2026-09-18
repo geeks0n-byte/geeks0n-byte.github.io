@@ -4,7 +4,9 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
 		<title>Spaceblox - Play</title>
-		<style>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">		<style>
 html, body, #canvas {
 	margin: 0;
 	padding: 0;
@@ -13,7 +15,7 @@ html, body, #canvas {
 
 body {
 	color: white;
-	background-color: black;
+	background-color: #00123a;
 	overflow: hidden;
 	touch-action: none;
 }
@@ -26,13 +28,10 @@ body {
 	outline: none;
 }
 
-#status, #status-splash, #status-progress {
+#status, #status-splash {
 	position: absolute;
 	left: 0;
 	right: 0;
-}
-
-#status, #status-splash {
 	top: 0;
 	bottom: 0;
 }
@@ -44,6 +43,14 @@ body {
 	justify-content: center;
 	align-items: center;
 	visibility: hidden;
+}
+
+#status::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.35);
+	pointer-events: none;
 }
 
 #status-splash {
@@ -66,17 +73,29 @@ body {
 	image-rendering: pixelated;
 }
 
-#status-progress, #status-notice {
-	display: none;
+#status-progress {
+	display: none !important;
 }
 
-#status-progress {
-	bottom: 10%;
-	width: 50%;
-	margin: 0 auto;
+#status-loading {
+	position: relative;
+	z-index: 1;
+	display: none;
+	min-width: 14ch;
+	font-family: "Press Start 2P", monospace;
+	font-size: clamp(18px, 3.4vw, 36px);
+	line-height: 1.35;
+	color: #ffffff;
+	text-align: left;
+	letter-spacing: 0.02em;
+	image-rendering: pixelated;
+	user-select: none;
 }
 
 #status-notice {
+	display: none;
+	position: relative;
+	z-index: 1;
 	background-color: #5b3943;
 	border-radius: 0.5rem;
 	border: 1px solid #9b3943;
@@ -87,7 +106,6 @@ body {
 	overflow: hidden;
 	padding: 1rem;
 	text-align: center;
-	z-index: 1;
 }
 		</style>
 		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
@@ -109,6 +127,7 @@ body {
 
 		<div id="status">
 			<img id="status-splash" class="show-image--false fullsize--true use-filter--true" src="index.png" alt="">
+			<div id="status-loading" aria-live="polite">LOADING.</div>
 			<progress id="status-progress"></progress>
 			<div id="status-notice"></div>
 		</div>
@@ -120,24 +139,68 @@ const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
 (function () {
-	const statusOverlay = document.getElementById('status');
+		const statusOverlay = document.getElementById('status');
 	const statusProgress = document.getElementById('status-progress');
+	const statusLoading = document.getElementById('status-loading');
 	const statusNotice = document.getElementById('status-notice');
 
 	let initializing = true;
 	let statusMode = '';
+	let loadingDots = 1;
+	let loadingTimer = null;
+	const LOADING_BASE = 'LOADING';
+	const DOT_INTERVAL_MS = 450;
+
+	function refreshLoadingLabel() {
+		if (!statusLoading) {
+			return;
+		}
+		let dots = '';
+		for (let i = 0; i < loadingDots; i++) {
+			dots += '.';
+		}
+		statusLoading.textContent = LOADING_BASE + dots;
+	}
+
+	function startLoadingDots() {
+		if (loadingTimer !== null) {
+			return;
+		}
+		loadingDots = 1;
+		refreshLoadingLabel();
+		loadingTimer = window.setInterval(function () {
+			loadingDots = (loadingDots + 1) % 4;
+			refreshLoadingLabel();
+		}, DOT_INTERVAL_MS);
+	}
+
+	function stopLoadingDots() {
+		if (loadingTimer !== null) {
+			window.clearInterval(loadingTimer);
+			loadingTimer = null;
+		}
+	}
 
 	function setStatusMode(mode) {
 		if (statusMode === mode || !initializing) {
 			return;
 		}
 		if (mode === 'hidden') {
+			stopLoadingDots();
 			statusOverlay.remove();
 			initializing = false;
 			return;
 		}
 		statusOverlay.style.visibility = 'visible';
-		statusProgress.style.display = mode === 'progress' ? 'block' : 'none';
+		if (statusLoading) {
+			statusLoading.style.display = mode === 'progress' ? 'block' : 'none';
+		}
+		if (mode === 'progress') {
+			startLoadingDots();
+		} else {
+			stopLoadingDots();
+		}
+		statusProgress.style.display = 'none';
 		statusNotice.style.display = mode === 'notice' ? 'block' : 'none';
 		statusMode = mode;
 	}
@@ -178,7 +241,6 @@ const engine = new Engine(GODOT_CONFIG);
 			} catch (err) {
 				serviceWorkerRegistrationPromise = Promise.reject(new Error('Service worker registration failed.'));
 			}
-			// There's a chance that installing the service worker would fix the issue
 			Promise.race([
 				serviceWorkerRegistrationPromise.then((registration) => {
 					if (registration != null) {
@@ -186,32 +248,22 @@ const engine = new Engine(GODOT_CONFIG);
 					}
 					return registration;
 				}).then(() => engine.installServiceWorker()),
-				// For some reason, `getRegistration()` can stall
 				new Promise((resolve) => {
 					setTimeout(() => resolve(), 2000);
 				}),
 			]).then(() => {
-				// Reload if there was no error.
 				window.location.reload();
 			}).catch((err) => {
 				console.error('Error while registering service worker:', err);
 			});
 		} else {
-			// Display the message as usual
 			const missingMsg = 'Error\nThe following features required to run Godot projects on the Web are missing:\n';
 			displayFailureNotice(missingMsg + missing.join('\n'));
 		}
 	} else {
 		setStatusMode('progress');
 		engine.startGame({
-			'onProgress': function (current, total) {
-				if (current > 0 && total > 0) {
-					statusProgress.value = current;
-					statusProgress.max = total;
-				} else {
-					statusProgress.removeAttribute('value');
-					statusProgress.removeAttribute('max');
-				}
+			'onProgress': function (_current, _total) {
 			},
 		}).then(() => {
 			setStatusMode('hidden');
