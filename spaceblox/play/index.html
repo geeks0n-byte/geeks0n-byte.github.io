@@ -77,6 +77,7 @@ body {
 	max-height: 100%;
 	max-width: 100%;
 	margin: auto;
+	pointer-events: none;
 }
 
 #status-splash.show-image--false {
@@ -98,10 +99,15 @@ body {
 }
 
 #status-loading {
-	position: relative;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 	z-index: 1;
 	display: none;
-	min-width: 14ch;
+	/* Reserve full "LOADING..." width so dots don't shift the label */
+	width: 11ch;
+	box-sizing: content-box;
 	font-family: "Press Start 2P", monospace;
 	font-size: clamp(18px, 3.4vw, 36px);
 	line-height: 1.35;
@@ -110,6 +116,8 @@ body {
 	letter-spacing: 0.02em;
 	image-rendering: pixelated;
 	user-select: none;
+	white-space: pre;
+	pointer-events: none;
 }
 
 #status-notice {
@@ -175,11 +183,13 @@ const engine = new Engine(GODOT_CONFIG);
 		if (!statusLoading) {
 			return;
 		}
-		let dots = '';
-		for (let i = 0; i < loadingDots; i++) {
-			dots += '.';
+		// Always occupy 3 dot slots (nbsp when empty) so the label stays centered.
+		const dots = loadingDots;
+		let tail = '';
+		for (let i = 1; i <= 3; i++) {
+			tail += i <= dots ? '.' : '\u00A0';
 		}
-		statusLoading.textContent = LOADING_BASE + dots;
+		statusLoading.textContent = LOADING_BASE + tail;
 	}
 
 	function startLoadingDots() {
@@ -189,7 +199,7 @@ const engine = new Engine(GODOT_CONFIG);
 		loadingDots = 1;
 		refreshLoadingLabel();
 		loadingTimer = window.setInterval(function () {
-			loadingDots = (loadingDots + 1) % 4;
+			loadingDots = loadingDots >= 3 ? 1 : loadingDots + 1;
 			refreshLoadingLabel();
 		}, DOT_INTERVAL_MS);
 	}
