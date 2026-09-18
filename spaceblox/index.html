@@ -20,16 +20,8 @@
   <meta name="twitter:image" content="https://geeks0n-byte.github.io/spaceblox/assets/feature.png" />
   <link rel="icon" href="assets/icon_512.png" type="image/png" />
   <link rel="stylesheet" href="shared.css" />
+  <link rel="stylesheet" href="space-bg.css" />
   <style>
-    body {
-      background-color: #020617;
-      background-image:
-        radial-gradient(1200px 600px at 20% -10%, #1e3a5f55, transparent),
-        radial-gradient(900px 500px at 90% 10%, #312e8155, transparent),
-        linear-gradient(180deg, var(--bg), #020617 70%);
-      background-attachment: scroll;
-    }
-
     .hero {
       display: flex;
       flex-direction: column;
@@ -128,7 +120,7 @@
       border-radius: 22px;
       overflow: hidden;
       border: 2px solid var(--line);
-      background: #00123a;
+      background: color-mix(in srgb, #00123a 55%, transparent);
       box-shadow: 0 20px 50px #0007;
       position: relative;
       isolation: isolate;
@@ -137,94 +129,11 @@
       margin-inline: auto;
       aspect-ratio: 400 / 170;
       height: auto;
-    }
-    .space-banner {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      background: #00123a;
-    }
-    .space-banner .sb-layer {
-      position: absolute;
-      inset: 0;
-      background-repeat: repeat;
-      --sb-tw: 720px;
-      --sb-th: 1280px;
-      background-size: var(--sb-tw) var(--sb-th);
-      background-position: 0 0;
-      image-rendering: pixelated;
-      image-rendering: crisp-edges;
-      will-change: background-position, opacity;
-      pointer-events: none;
-    }
-    .space-banner .sb-void {
-      position: absolute;
-      inset: 0;
-      background: #00123a;
-    }
-    .space-banner .sb-dust {
-      background-image: url("assets/bg_1_far_dust.svg");
-      opacity: 0.75;
-      animation: sb-parallax-a 480s linear infinite;
-    }
-    .space-banner .sb-stars {
-      background-image: url("assets/bg_2_medium_stars.svg");
-      animation: sb-parallax-b 360s linear infinite, sb-twinkle 7.5s ease-in-out infinite;
-    }
-    .space-banner .sb-accents {
-      background-image: url("assets/bg_3_foreground_accents.svg");
-      animation: sb-parallax-c 270s linear infinite, sb-twinkle-alt 7.5s ease-in-out infinite;
-    }
-    .space-banner .sb-sparks {
-      background-image: url("assets/bg_4_sparkler_crosses.svg");
-      opacity: 0.9;
-      animation: sb-parallax-d 180s linear infinite;
-    }
-    @keyframes sb-parallax-a {
-      from { background-position: 0 0; }
-      to { background-position: calc(-2 * var(--sb-tw)) calc(1 * var(--sb-th)); }
-    }
-    @keyframes sb-parallax-b {
-      from { background-position: 0 0; }
-      to { background-position: calc(-2 * var(--sb-tw)) calc(1 * var(--sb-th)); }
-    }
-    @keyframes sb-parallax-c {
-      from { background-position: 0 0; }
-      to { background-position: calc(-3 * var(--sb-tw)) calc(1 * var(--sb-th)); }
-    }
-    @keyframes sb-parallax-d {
-      from { background-position: 0 0; }
-      to { background-position: calc(-3 * var(--sb-tw)) calc(1 * var(--sb-th)); }
-    }
-    @keyframes sb-twinkle {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-    @keyframes sb-twinkle-alt {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.6; }
-    }
-    .space-banner .sb-fx {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      overflow: hidden;
-      pointer-events: none;
-    }
-    .space-banner .sb-fx-item {
-      position: absolute;
-      image-rendering: pixelated;
-      will-change: transform;
-    }
-    .space-banner .sb-title {
-      position: absolute;
-      inset: 0;
       display: grid;
       place-items: center;
-      z-index: 2;
-      pointer-events: none;
+      backdrop-filter: blur(2px);
     }
-    .space-banner .sb-title img {
+    .hero-art img {
       display: block;
       width: min(68%, 520px);
       height: auto;
@@ -233,19 +142,7 @@
       image-rendering: auto;
     }
     @media (max-width: 860px) {
-      .space-banner .sb-title img { width: min(88%, 420px); }
-      .space-banner .sb-layer {
-        --sb-tw: 480px;
-        --sb-th: 853px;
-      }
-      .space-banner .sb-dust { animation-duration: 540s; }
-      .space-banner .sb-stars { animation-duration: 420s, 7.5s; }
-      .space-banner .sb-accents { animation-duration: 300s, 7.5s; }
-      .space-banner .sb-sparks { animation-duration: 210s; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .space-banner .sb-layer { animation: none !important; opacity: 1 !important; }
-      .space-banner .sb-fx { display: none; }
+      .hero-art img { width: min(88%, 420px); }
     }
 
     section { margin: 2.5rem 0; }
@@ -439,13 +336,17 @@
       .shots-track figure { width: 118px; flex: 0 0 118px; }
       h2 { font-size: 0.82rem; }
     }
-    @media (prefers-reduced-motion: reduce) {
-      .space-banner .sb-layer { animation: none !important; }
-    }
   </style>
 </head>
-<body>
-  <div class="stars" aria-hidden="true"></div>
+<body class="space-page">
+  <div class="space-bg" aria-hidden="true">
+    <div class="sb-void"></div>
+    <div class="sb-layer sb-dust" data-speed="0.20"></div>
+    <div class="sb-layer sb-stars" data-speed="0.40"></div>
+    <div class="sb-layer sb-accents" data-speed="0.60"></div>
+    <div class="sb-layer sb-sparks" data-speed="0.90"></div>
+    <div class="sb-fx" id="space-fx"></div>
+  </div>
   <div class="wrap">
     <header>
       <a class="brand" href="./" aria-label="Spaceblox home">
@@ -459,18 +360,8 @@
     </header>
 
     <section class="hero">
-      <div class="hero-art" role="img" aria-label="SPACEBLOX title over animated space background">
-        <div class="space-banner" aria-hidden="true">
-          <div class="sb-void"></div>
-          <div class="sb-layer sb-dust"></div>
-          <div class="sb-layer sb-stars"></div>
-          <div class="sb-layer sb-accents"></div>
-          <div class="sb-layer sb-sparks"></div>
-          <div class="sb-fx" id="space-fx"></div>
-          <div class="sb-title">
-            <img src="assets/title_spaceblox.png" alt="SPACEBLOX" width="1080" height="180" decoding="async" />
-          </div>
-        </div>
+      <div class="hero-art">
+        <img src="assets/title_spaceblox.png" alt="SPACEBLOX" width="1080" height="180" decoding="async" />
       </div>
       <div class="hero-copy">
         <h1>Calm color logic<br>in deep space</h1>
@@ -571,113 +462,11 @@
         <a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a>
         ·
         <a href="privacy-policy.html">Privacy Policy</a>
-        ·
-        <a href="motion.html">Motion lab</a>
       </div>
     </footer>
   </div>
 
-  <script>
-  (function () {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    var layers = document.querySelectorAll(".space-banner .sb-layer");
-    for (var i = 0; i < layers.length; i++) {
-      var el = layers[i];
-      var durs = (getComputedStyle(el).animationDuration || "").split(",");
-      var delays = [];
-      for (var j = 0; j < durs.length; j++) {
-        var sec = parseFloat(durs[j]);
-        if (!isFinite(sec) || sec <= 0) {
-          delays.push("0s");
-        } else {
-          delays.push((-Math.random() * sec).toFixed(3) + "s");
-        }
-      }
-      if (delays.length) el.style.animationDelay = delays.join(", ");
-    }
-  })();
-  </script>
-
-  <script>
-  (function () {
-    var fx = document.getElementById("space-fx");
-    if (!fx || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    var ASSETS = {
-      star: "assets/fx_shooting_star.svg",
-      asteroids: [
-        "assets/fx_asteroid_1.svg",
-        "assets/fx_asteroid_2.svg",
-        "assets/fx_asteroid_3.svg"
-      ]
-    };
-    var STAR_BASE_DEG = 135;
-
-    function rand(a, b) { return a + Math.random() * (b - a); }
-    function pick(arr) { return arr[(Math.random() * arr.length) | 0]; }
-
-    function spawn(kind) {
-      var el = document.createElement("img");
-      el.className = "sb-fx-item";
-      el.alt = "";
-      var w, h, dur, startX, endX, startY, endY, dx, dy, travelDeg, rot0, rot1;
-      var hostW = fx.clientWidth || 1;
-      var hostH = fx.clientHeight || 1;
-
-      var m = hostW < 640 ? 0.35 : (hostW < 900 ? 0.5 : 0.72);
-      if (kind === "star") {
-        w = rand(28, 44) * m; h = w; dur = rand(1.4, 2.4);
-        el.src = ASSETS.star;
-      } else {
-        w = rand(18, 30) * m; h = w; dur = rand(12, 22);
-        el.src = pick(ASSETS.asteroids);
-      }
-      el.style.width = w + "px";
-      el.style.height = h + "px";
-
-      startX = hostW + w + 20;
-      endX = -w - 40;
-      var travelX = startX - endX;
-      if (kind === "star") {
-        startY = rand(-40, hostH * 0.4);
-        endY = startY + travelX * rand(0.5, 1.2);
-      } else {
-        startY = rand(-20, hostH * 0.7);
-        endY = startY + travelX * rand(0.1, 0.55);
-      }
-      dx = endX - startX;
-      dy = endY - startY;
-      travelDeg = Math.atan2(dy, dx) * 180 / Math.PI;
-
-      if (kind === "asteroid") {
-        rot0 = rand(0, 360);
-        rot1 = rot0 + rand(120, 480) * (Math.random() < 0.5 ? 1 : -1);
-      } else {
-        rot0 = travelDeg - STAR_BASE_DEG;
-        rot1 = rot0;
-      }
-
-      el.style.left = "0";
-      el.style.top = "0";
-      el.style.transform = "translate(" + startX + "px," + startY + "px) rotate(" + rot0 + "deg)";
-      fx.appendChild(el);
-
-      var anim = el.animate([
-        { transform: "translate(" + startX + "px," + startY + "px) rotate(" + rot0 + "deg)" },
-        { transform: "translate(" + endX + "px," + endY + "px) rotate(" + rot1 + "deg)" }
-      ], { duration: dur * 1000, easing: "linear", fill: "forwards" });
-      anim.onfinish = function () { el.remove(); };
-    }
-
-    function schedule() {
-      var kind = Math.random() < 0.82 ? "star" : "asteroid";
-      spawn(kind);
-      setTimeout(schedule, rand(6500, 14000));
-    }
-    setTimeout(schedule, rand(2500, 6000));
-  })();
-  </script>
-
+  <script src="space-bg.js" defer></script>
   <script>
   (function () {
     var wheel = document.querySelector(".shots-wheel");

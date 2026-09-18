@@ -7,7 +7,6 @@ GitHub Pages site for **Spaceblox**:
 | https://geeks0n-byte.github.io/app-ads.txt | AdMob authorization (must stay at **site root**) |
 | https://geeks0n-byte.github.io/spaceblox/ | Game marketing landing page |
 | https://geeks0n-byte.github.io/spaceblox/privacy-policy.html | Privacy policy (Play Store) |
-| https://geeks0n-byte.github.io/spaceblox/motion.html | Experimental motion lab (`noindex`) |
 
 AdMob crawls `app-ads.txt` at the **root** of the Play Console developer website
 (`https://geeks0n-byte.github.io/app-ads.txt`). Keep only that root file — not under `/spaceblox/`.
@@ -35,7 +34,9 @@ If AdMob lists extra `RESELLER` rows, paste those into the **root** `app-ads.txt
   spaceblox/
     index.html         ← landing
     privacy-policy.html
-    motion.html
+    motion.html        ← redirects to landing (legacy URL)
     shared.css         ← shared chrome / tokens
+    space-bg.css       ← full-page starfield
+    space-bg.js
     assets/
 ```
