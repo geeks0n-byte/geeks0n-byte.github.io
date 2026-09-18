@@ -9,8 +9,6 @@ GitHub Pages site for **Spaceblox**:
 | https://geeks0n-byte.github.io/spaceblox/play/ | Web (HTML5) build |
 | https://geeks0n-byte.github.io/spaceblox/privacy-policy.html | Privacy policy (Play Store) |
 
-Development uses branch **`test`**. The live site publishes from **`main`** only — merge `test` → `main` when the web build is ready.
-
 AdMob crawls `app-ads.txt` at the **root** of the Play Console developer website
 (`https://geeks0n-byte.github.io/app-ads.txt`). Keep only that root file — not under `/spaceblox/`.
 
