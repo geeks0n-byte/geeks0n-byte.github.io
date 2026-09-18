@@ -1,27 +1,43 @@
 # geeks0n-byte.github.io
 
-Hosts **app-ads.txt** for Spaceblox (AdMob), at:
+GitHub Pages site for **Spaceblox**:
 
-https://geeks0n-byte.github.io/app-ads.txt
+| URL | Purpose |
+| --- | --- |
+| https://geeks0n-byte.github.io/app-ads.txt | AdMob authorization (must stay at **site root**) |
+| https://geeks0n-byte.github.io/spaceblox/ | Game marketing landing page |
+| https://geeks0n-byte.github.io/spaceblox/privacy-policy.html | Privacy policy (Play Store) |
+| https://geeks0n-byte.github.io/spaceblox/motion.html | Experimental motion lab (`noindex`) |
 
-AdMob only accepts this file at the **root** of the Play Console developer website. Do not put it under a game subpath (e.g. `/spaceblox/`).
+AdMob crawls `app-ads.txt` at the **root** of the Play Console developer website
+(`https://geeks0n-byte.github.io/app-ads.txt`). Keep that root file authoritative.
+A copy also lives under `spaceblox/` for convenience — if AdMob lines change, update **both**.
 
 ## Publish
 
-1. On GitHub, create a **public** repository named exactly `geeks0n-byte.github.io`.
-2. From this folder:
-
-```powershell
-git init
-git add app-ads.txt README.md
-git commit -m "Add app-ads.txt for AdMob"
-git branch -M main
-git remote add origin https://github.com/geeks0n-byte/geeks0n-byte.github.io.git
-git push -u origin main
-```
-
-3. Repo **Settings → Pages**: Deploy from branch `main`, folder `/ (root)`.
-4. Open https://geeks0n-byte.github.io/app-ads.txt and confirm you see one line of plain text.
+1. Public repository named exactly `geeks0n-byte.github.io`.
+2. Push to `main` (this repo already includes the Spaceblox site + root `app-ads.txt`).
+3. **Settings → Pages**: Deploy from branch `main`, folder `/ (root)`.
+4. Confirm:
+   - https://geeks0n-byte.github.io/app-ads.txt — one plain-text line
+   - https://geeks0n-byte.github.io/spaceblox/ — landing page
 5. In Play Console, set the developer **website** to `https://geeks0n-byte.github.io`.
 
-If AdMob lists extra `RESELLER` rows, paste those into `app-ads.txt` (one per line) and push again.
+If AdMob lists extra `RESELLER` rows, paste those into the **root** `app-ads.txt` (one per line) and push again.
+
+## Local layout
+
+```
+/
+  app-ads.txt          ← AdMob (Play Console website root — required)
+  index.html           ← redirects to /spaceblox/
+  robots.txt
+  sitemap.xml
+  spaceblox/
+    app-ads.txt        ← same content (kept on purpose)
+    index.html         ← landing
+    privacy-policy.html
+    motion.html
+    shared.css         ← shared chrome / tokens
+    assets/
+```

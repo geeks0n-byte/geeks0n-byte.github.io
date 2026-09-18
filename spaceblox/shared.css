@@ -1,0 +1,199 @@
+/* Shared Spaceblox site chrome — linked from landing, privacy, motion lab */
+@font-face {
+  font-family: "PressStart2P";
+  src: url("assets/PressStart2P.ttf") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  --bg: #0b1220;
+  --bg2: #111827;
+  --panel: #172033;
+  --line: #334155;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --yellow: #facc15;
+  --blue: #38bdf8;
+  --green: #4ade80;
+  --purple: #c084fc;
+  --accent: #56bdf8;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  background: #020617;
+  min-height: 100%;
+}
+
+html, body { overflow-x: hidden; }
+
+body {
+  margin: 0;
+  font-family: system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  min-height: 100dvh;
+  line-height: 1.55;
+}
+
+img, video, svg { max-width: 100%; height: auto; }
+
+.stars {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, #fff8, transparent),
+    radial-gradient(1px 1px at 28% 72%, #fff6, transparent),
+    radial-gradient(1.5px 1.5px at 61% 24%, #fff7, transparent),
+    radial-gradient(1px 1px at 78% 58%, #fff5, transparent),
+    radial-gradient(1px 1px at 88% 12%, #fff6, transparent),
+    radial-gradient(1.5px 1.5px at 42% 40%, #fff5, transparent);
+  opacity: 0.55;
+  z-index: 0;
+}
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1rem max(1rem, env(safe-area-inset-right)) 3.5rem max(1rem, env(safe-area-inset-left));
+}
+
+header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: min(100%, 700px);
+  margin-inline: auto;
+  padding: 0.85rem 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  flex: 0 0 auto;
+  z-index: 1;
+  margin-left: 2px;
+  border-radius: 16px;
+}
+
+.brand img {
+  display: block;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  box-shadow: 0 0 0 2px #334155, 0 8px 24px #0008;
+}
+
+nav {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-left: auto;
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 0;
+  z-index: 1;
+}
+
+nav a,
+a.ui-btn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  font-family: "PressStart2P", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+  text-decoration: none;
+  text-shadow: 1px 1px 0 #000a;
+  white-space: nowrap;
+  padding: 0.85rem;
+  line-height: 1;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  box-sizing: border-box;
+  image-rendering: pixelated;
+  border: none;
+  background-color: #1a1a1a;
+  background-image: url("assets/button_bar_gray_dark.svg?v=ingame3");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  box-shadow: none;
+  outline: none;
+}
+
+nav a:hover,
+a.ui-btn:hover {
+  filter: brightness(1.12);
+  color: #ffffff;
+}
+
+nav a:active,
+a.ui-btn:active {
+  filter: brightness(0.92);
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.brand:focus-visible,
+nav a:focus-visible,
+a.ui-btn:focus-visible,
+.play-badge:focus-visible,
+footer a:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+nav a:focus-visible,
+a.ui-btn:focus-visible {
+  filter: brightness(1.12);
+}
+
+.play-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  border-radius: 8px;
+}
+
+.play-badge img {
+  display: block;
+  width: 168px;
+  height: auto;
+}
+
+footer a { color: var(--accent); }
+
+@media (max-width: 860px) {
+  .brand img { width: 44px; height: 44px; border-radius: 12px; }
+  .play-badge img { width: min(168px, 52vw); }
+}
+
+@media (max-width: 640px) {
+  header { gap: 0.45rem; }
+  nav { gap: 0.35rem; }
+  nav a,
+  a.ui-btn {
+    font-size: 0.45rem;
+    padding: 0.65rem;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+  }
+}

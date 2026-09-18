@@ -5,184 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#020617" />
   <title>Spaceblox — Privacy Policy</title>
+  <meta name="description" content="Privacy Policy for Spaceblox: local progress, Google AdMob advertising, optional Play Games cloud save, and data deletion." />
+  <link rel="canonical" href="https://geeks0n-byte.github.io/spaceblox/privacy-policy.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://geeks0n-byte.github.io/spaceblox/privacy-policy.html" />
+  <meta property="og:title" content="Spaceblox — Privacy Policy" />
+  <meta property="og:description" content="How Spaceblox handles local progress, AdMob ads, and optional Play Games sync." />
+  <meta property="og:image" content="https://geeks0n-byte.github.io/spaceblox/assets/feature.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Spaceblox — Privacy Policy" />
+  <meta name="twitter:description" content="How Spaceblox handles local progress, AdMob ads, and optional Play Games sync." />
+  <meta name="twitter:image" content="https://geeks0n-byte.github.io/spaceblox/assets/feature.png" />
   <link rel="icon" href="assets/icon_512.png" type="image/png" />
+  <link rel="stylesheet" href="shared.css" />
   <style>
-    @font-face {
-      font-family: "PressStart2P";
-      src: url("assets/PressStart2P.ttf") format("truetype");
-      font-display: swap;
-    }
-    :root {
-      --bg: #0b1220;
-      --bg2: #111827;
-      --panel: #172033;
-      --line: #334155;
-      --text: #e2e8f0;
-      --muted: #94a3b8;
-      --yellow: #facc15;
-      --blue: #38bdf8;
-      --green: #4ade80;
-      --purple: #c084fc;
-      --accent: #56bdf8;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
     body {
-      margin: 0;
-      font-family: system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text);
       background-color: #020617;
       background-image:
         radial-gradient(1200px 600px at 20% -10%, #1e3a5f55, transparent),
         radial-gradient(900px 500px at 90% 10%, #312e8155, transparent),
         linear-gradient(180deg, var(--bg), #020617 70%);
       background-attachment: scroll;
-      min-height: 100vh;
-      min-height: 100dvh;
-      line-height: 1.55;
     }
-    .stars {
-      pointer-events: none;
-      position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(1px 1px at 12% 18%, #fff8, transparent),
-        radial-gradient(1px 1px at 28% 72%, #fff6, transparent),
-        radial-gradient(1.5px 1.5px at 61% 24%, #fff7, transparent),
-        radial-gradient(1px 1px at 78% 58%, #fff5, transparent),
-        radial-gradient(1px 1px at 88% 12%, #fff6, transparent),
-        radial-gradient(1.5px 1.5px at 42% 40%, #fff5, transparent);
-      opacity: 0.55;
-      z-index: 0;
-    }
-    .wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 1.25rem 1.25rem 4rem; }
-    header {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      flex-wrap: nowrap;
+
+    .privacy-rail {
       width: 100%;
       max-width: min(100%, 700px);
       margin-inline: auto;
-      padding: 0.85rem 0;
-    }
-    .brand { display: inline-flex; align-items: center; text-decoration: none; flex: 0 0 auto; z-index: 1; margin-left: 2px; }
-    .brand img {
-      display: block;
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      box-shadow: 0 0 0 2px #334155, 0 8px 24px #0008;
-    }
-    nav {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: nowrap;
-      align-items: center;
-      margin-left: auto;
-      flex: 0 0 auto;
-      width: auto;
-      min-width: 0;
-      z-index: 1;
-    }
-    nav a {
-      flex: 0 0 auto;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: auto;
-      font-family: "PressStart2P", monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.03em;
-      color: #ffffff;
-      text-decoration: none;
-      text-shadow: 1px 1px 0 #000a;
-      white-space: nowrap;
-      padding: 0.85rem;
-      line-height: 1;
-      height: auto;
-      min-height: 0;
-      max-height: none;
       box-sizing: border-box;
-      image-rendering: pixelated;
-      border: none;
-      background-color: #1a1a1a;
-      background-image: url("assets/button_bar_gray_dark.svg?v=ingame3");
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-      box-shadow: none;
-      border: none;
-      outline: none;
-    }
-
-    nav a:hover { filter: brightness(1.12); color: #ffffff; }
-    nav a:active { filter: brightness(0.92); transform: translateY(1px); box-shadow: none; }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 2rem;
-      align-items: center;
-      padding: 1rem 0 2.5rem;
-    }
-    @media (max-width: 860px) {
-      .hero { grid-template-columns: 1fr; }
-    }
-    h1 {
-      font-family: "PressStart2P", monospace;
-      font-size: clamp(1.05rem, 2.4vw, 1.45rem);
-      line-height: 1.45;
-      margin: 0 0 1rem;
-      color: #f8fafc;
-    }
-    .lead { font-size: 1.08rem; color: var(--muted); margin: 0 0 1.4rem; max-width: 36rem; }
-    .tiles {
-      display: flex; align-items: center; gap: 0.45rem;
-      margin: 0 0 1.5rem;
-      image-rendering: pixelated;
-    }
-    .tiles img {
-      width: 40px; height: 40px;
-      display: block;
-    }
-
-    .cta { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      padding: 0.85rem 1.15rem; border-radius: 12px;
-      text-decoration: none; font-weight: 700; font-size: 0.98rem;
-      border: 2px solid transparent;
-    }
-    .btn-primary {
-      background: linear-gradient(180deg, #38bdf8, #0284c7);
-      color: #04111f;
-      box-shadow: 0 10px 28px #0284c766;
-    }
-    .btn-ghost {
-      background: #0f172a99;
-      color: var(--text);
-      border-color: var(--line);
-    }
-    .btn:hover { filter: brightness(1.06); }
-
-    .hero-art {
-      border-radius: 22px;
-      overflow: hidden;
-      border: 2px solid var(--line);
-      background: var(--panel);
-      box-shadow: 0 20px 50px #0007;
-    }
-    .hero-art img { display: block; width: 100%; height: auto; }
-
-    section { margin: 2.5rem 0; }
-    h2 {
-      font-family: "PressStart2P", monospace;
-      font-size: 0.78rem;
-      color: var(--blue);
-      margin: 0 0 1rem;
-      letter-spacing: 0.03em;
     }
     .panel {
       background: color-mix(in srgb, var(--panel) 88%, transparent);
@@ -191,26 +41,17 @@
       padding: 1.25rem 1.35rem;
       backdrop-filter: blur(6px);
     }
-    /* Shared rail: panel + footer share the same right edge */
-    .privacy-rail {
-      width: 100%;
-      max-width: min(100%, 700px);
-      margin-inline: auto;
-      box-sizing: border-box;
-    }
     article.panel {
       width: 100%;
       max-width: none;
       margin-inline: 0;
       box-sizing: border-box;
     }
-    .rules { display: grid; gap: 0.75rem; padding-left: 1.1rem; margin: 0; color: var(--muted); }
-    .rules li::marker { color: var(--yellow); }
 
     footer {
       margin-top: 2rem;
       padding-top: 1.25rem;
-      padding-inline: 0; /* flush with panel outer edge */
+      padding-inline: 0;
       border-top: 1px solid var(--line);
       color: var(--muted);
       font-size: 0.92rem;
@@ -219,7 +60,6 @@
       box-sizing: border-box;
       text-align: right;
     }
-    footer a { color: var(--accent); }
     footer .footer-links {
       display: inline-block;
       margin: 0;
@@ -235,9 +75,8 @@
         width: 100%;
         text-align: center;
       }
+      .panel { padding: 1rem 1.05rem; border-radius: 14px; }
     }
-
-  
 
     .collect-blurb {
       margin: 0 0 1.35rem;
@@ -275,12 +114,14 @@
       text-align: center;
     }
     article.panel h2 {
+      font-family: "PressStart2P", monospace;
       font-size: 1.05rem;
       margin: 1.5rem 0 0.6rem;
       color: #f8fafc;
       text-align: left;
+      letter-spacing: 0.03em;
     }
-    article.panel .meta { color: var(--muted); font-size: 0.9rem; margin: 0 0 1rem; }
+    article.panel .meta { color: var(--muted); font-size: 0.9rem; margin: 0 0 1rem; text-align: center; }
     article.panel ul { color: var(--muted); }
     article.panel p { color: var(--muted); }
     article.panel a { color: var(--accent); }
@@ -289,57 +130,6 @@
       background: var(--bg2);
       padding: 0.1em 0.35em;
       border-radius: 4px;
-    }
-    /* Mobile-first polish */
-    img, video, svg { max-width: 100%; height: auto; }
-    html {
-      background: #020617;
-      min-height: 100%;
-    }
-    html, body { overflow-x: hidden; }
-    .wrap {
-      padding: 1rem max(1rem, env(safe-area-inset-right)) 3.5rem max(1rem, env(safe-area-inset-left));
-    }
-    @media (max-width: 860px) {
-      header {
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        gap: 0.55rem;
-      }
-      .hero { padding: 0.5rem 0 1.75rem; gap: 1.35rem; }
-      h1 { font-size: clamp(0.92rem, 4.6vw, 1.2rem); }
-      .lead { font-size: 1rem; margin-bottom: 1.1rem; }
-      .cta { flex-direction: column; align-items: stretch; }
-      .btn { width: 100%; min-height: 48px; }
-      .panel { padding: 1rem 1.05rem; border-radius: 14px; }
-      .rules { padding-left: 1rem; font-size: 0.98rem; }
-      section { margin: 1.75rem 0; }
-      .shots-wheel { border-radius: 14px; padding: 0.65rem 0.45rem; }
-      .shots-track { gap: 0.55rem; animation-duration: 22s; }
-      .shots-track figure { width: 132px; flex: 0 0 132px; border-radius: 10px; }
-      footer { font-size: 0.88rem; }
-      .brand img { width: 44px; height: 44px; border-radius: 12px; }
-    }
-    @media (max-width: 420px) {
-      .tiles img { width: 34px; height: 34px; }
-      .shots-track figure { width: 118px; flex: 0 0 118px; }
-      h2 { font-size: 0.68rem; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .shots-track { animation: none; }
-    }
-
-    @media (max-width: 640px) {
-      .brand img { width: 44px; height: 44px; border-radius: 12px; }
-      header { gap: 0.45rem; }
-      nav { gap: 0.35rem; }
-      nav a {
-        font-size: 0.45rem;
-        padding: 0.65rem;
-        height: auto;
-        min-height: 0;
-        max-height: none;
-      }
     }
   </style>
 </head>
@@ -358,6 +148,7 @@
     <article class="panel">
 <div id="privacy-body">
 <h1>Privacy Policy for Spaceblox</h1>
+  <p class="meta">Last updated: September 18, 2026</p>
   <p>
     This Privacy Policy describes how <strong>Spaceblox</strong>
     (“the App”, “we”, “us”) handles information when you use the Android game
@@ -504,7 +295,8 @@
   <h2>11. Changes to this policy</h2>
   <p>
     We may update this Privacy Policy from time to time. Continued use of the App after an update
-    means you accept the revised policy.
+    means you accept the revised policy. The “Last updated” date at the top of this page
+    reflects the most recent revision.
   </p>
 
   <h2>12. Contact</h2>

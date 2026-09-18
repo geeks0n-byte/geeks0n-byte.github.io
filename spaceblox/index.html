@@ -6,163 +6,62 @@
   <meta name="theme-color" content="#020617" />
   <title>Spaceblox — Color logic in space</title>
   <meta name="description" content="Spaceblox is a calm color-logic puzzle: fill the board with yellow, blue, and green tiles. Never three in a row." />
+  <link rel="canonical" href="https://geeks0n-byte.github.io/spaceblox/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://geeks0n-byte.github.io/spaceblox/" />
   <meta property="og:title" content="Spaceblox" />
   <meta property="og:description" content="Calm color-logic puzzles in a pixel-space setting." />
-  <meta property="og:image" content="assets/feature.png" />
+  <meta property="og:image" content="https://geeks0n-byte.github.io/spaceblox/assets/feature.png" />
+  <meta property="og:image:width" content="1024" />
+  <meta property="og:image:height" content="500" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Spaceblox" />
+  <meta name="twitter:description" content="Calm color-logic puzzles in a pixel-space setting." />
+  <meta name="twitter:image" content="https://geeks0n-byte.github.io/spaceblox/assets/feature.png" />
   <link rel="icon" href="assets/icon_512.png" type="image/png" />
+  <link rel="stylesheet" href="shared.css" />
   <style>
-    @font-face {
-      font-family: "PressStart2P";
-      src: url("assets/PressStart2P.ttf") format("truetype");
-      font-display: swap;
-    }
-    :root {
-      --bg: #0b1220;
-      --bg2: #111827;
-      --panel: #172033;
-      --line: #334155;
-      --text: #e2e8f0;
-      --muted: #94a3b8;
-      --yellow: #facc15;
-      --blue: #38bdf8;
-      --green: #4ade80;
-      --purple: #c084fc;
-      --accent: #56bdf8;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
     body {
-      margin: 0;
-      font-family: system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text);
       background-color: #020617;
       background-image:
         radial-gradient(1200px 600px at 20% -10%, #1e3a5f55, transparent),
         radial-gradient(900px 500px at 90% 10%, #312e8155, transparent),
         linear-gradient(180deg, var(--bg), #020617 70%);
       background-attachment: scroll;
-      min-height: 100vh;
-      min-height: 100dvh;
-      line-height: 1.55;
     }
-    .stars {
-      pointer-events: none;
-      position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(1px 1px at 12% 18%, #fff8, transparent),
-        radial-gradient(1px 1px at 28% 72%, #fff6, transparent),
-        radial-gradient(1.5px 1.5px at 61% 24%, #fff7, transparent),
-        radial-gradient(1px 1px at 78% 58%, #fff5, transparent),
-        radial-gradient(1px 1px at 88% 12%, #fff6, transparent),
-        radial-gradient(1.5px 1.5px at 42% 40%, #fff5, transparent);
-      opacity: 0.55;
-      z-index: 0;
-    }
-    .wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 1.25rem 1.25rem 4rem; }
-    /* Match animated banner width so icon/nav edges line up with it */
-    header {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      flex-wrap: nowrap;
-      width: 100%;
-      max-width: min(100%, 700px);
-      margin-inline: auto;
-      padding: 0.85rem 0;
-    }
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      text-decoration: none;
-      flex: 0 0 auto;
-      z-index: 1;
-      /* 2px ring sits outside the box — nudge so outer edge matches banner/panel */
-      margin-left: 2px;
-    }
-    .brand img {
-      display: block;
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      box-shadow: 0 0 0 2px #334155, 0 8px 24px #0008;
-    }
-    nav {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: nowrap;
-      align-items: center;
-      margin-left: auto;
-      flex: 0 0 auto;
-      width: auto;
-      min-width: 0;
-      z-index: 1;
-    }
-    nav a {
-      flex: 0 0 auto;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: auto;
-      font-family: "PressStart2P", monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.03em;
-      color: #ffffff;
-      text-decoration: none;
-      text-shadow: 1px 1px 0 #000a;
-      white-space: nowrap;
-      padding: 0.85rem;
-      line-height: 1;
-      height: auto;
-      min-height: 0;
-      max-height: none;
-      box-sizing: border-box;
-      image-rendering: pixelated;
-      border: none;
-      background-color: #1a1a1a;
-      background-image: url("assets/button_bar_gray_dark.svg?v=ingame3");
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-      box-shadow: none;
-      border: none;
-      outline: none;
-    }
-    nav a:hover { filter: brightness(1.12); color: #ffffff; }
-    nav a:active {
-      filter: brightness(0.92);
-      transform: translateY(1px);
-      box-shadow: none;
-    }
-    @media (max-width: 640px) {
-      .brand img { width: 44px; height: 44px; border-radius: 12px; }
-      header { gap: 0.45rem; }
-      nav { gap: 0.35rem; }
-      nav a {
-        font-size: 0.45rem;
-        padding: 0.65rem;
-        height: auto;
-        min-height: 0;
-        max-height: none;
-      }
-    }
-
 
     .hero {
       display: flex;
       flex-direction: column;
       gap: 1.75rem;
       align-items: stretch;
-      padding: 0 0 0;
+      padding: 0;
     }
     .hero-copy { max-width: 40rem; }
+    .hero-copy h1,
+    .hero-copy .lead { text-align: center; }
+
+    .tiles-row {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem 0.85rem;
+      margin: 0 0 1.5rem;
+      width: 100%;
+    }
+    .tiles-row .tiles,
+    .tiles-row .play-badge { align-self: center; }
+    .tiles-row .play-badge {
+      margin: 0 -0.45rem;
+    }
+
     @media (min-width: 900px) {
-      /* Same 700px rail as banner/header; columns asymmetric under it */
       .hero {
         display: grid;
         grid-template-columns: minmax(0, 1fr) auto;
-        grid-template-areas: "art art" "copy side";
+        grid-template-areas: "art art" "copy tiles";
         gap: 1.5rem 1.25rem;
         align-items: stretch;
         width: 100%;
@@ -171,7 +70,7 @@
       }
       .hero-art {
         grid-area: art;
-        max-width: none; /* hero already caps width */
+        max-width: none;
       }
       .hero-copy {
         grid-area: copy;
@@ -190,55 +89,24 @@
         width: 100%;
         margin-inline: 0;
       }
-      .hero-side {
-        grid-area: side;
-        display: flex;
+      .tiles-row {
+        grid-area: tiles;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 1rem;
-        padding-top: 0;
+        margin: 0;
+        gap: 0.85rem;
         width: auto;
         height: 100%;
         justify-self: end;
         align-self: stretch;
-        /* optical lift — geometric center sits a bit low vs copy */
         transform: translateX(calc(-1.5rem - 6px)) translateY(-0.85rem);
       }
-      .hero-copy .tiles-row { display: none; }
-      .hero-side .tiles-row {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 0;
-        gap: 0.85rem;
+      .tiles-row .play-badge {
+        margin: -0.55rem -0.45rem;
       }
     }
-    @media (max-width: 899px) {
-      .hero-side { display: none; }
-      .hero-copy h1 { text-align: center; }
-      .hero-copy .lead { text-align: center; }
-      .hero-copy .tiles-row {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        gap: 0.75rem 0.85rem;
-      }
-      .hero-copy .tiles,
-      .hero-copy .play-badge {
-        align-self: center;
-      }
-      /* Row layout: no vertical margin tug — keep equal horizontal PNG trim */
-      .hero-copy .play-badge {
-        margin-top: 0;
-        margin-bottom: 0;
-        margin-left: -0.45rem;
-        margin-right: -0.45rem;
-      }
-    }
+
     h1 {
       font-family: "PressStart2P", monospace;
       font-size: clamp(1.05rem, 2.4vw, 1.45rem);
@@ -247,13 +115,6 @@
       color: #f8fafc;
     }
     .lead { font-size: 1.08rem; color: var(--muted); margin: 0 0 1.4rem; max-width: 36rem; }
-    .tiles-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.75rem 1rem;
-      margin: 0 0 1.5rem;
-    }
     .tiles {
       display: flex; align-items: center; gap: 0.45rem;
       image-rendering: pixelated;
@@ -261,22 +122,6 @@
     .tiles img {
       width: 40px; height: 40px;
       display: block;
-    }
-    .play-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 0;
-      /* trim badge PNG padding equally so it stays centered under tiles */
-      margin: -0.55rem -0.45rem;
-    }
-    .play-badge img {
-      display: block;
-      width: 168px;
-      height: auto;
-    }
-    @media (max-width: 860px) {
-      .play-badge img { width: min(168px, 52vw); }
     }
 
     .hero-art {
@@ -288,9 +133,8 @@
       position: relative;
       isolation: isolate;
       width: 100%;
-      max-width: min(100%, 700px); /* under tile width — no side-by-side repeat */
+      max-width: min(100%, 700px);
       margin-inline: auto;
-      /* Same proportions as mobile (~400×170) */
       aspect-ratio: 400 / 170;
       height: auto;
     }
@@ -304,9 +148,8 @@
       position: absolute;
       inset: 0;
       background-repeat: repeat;
-      /* Website-tuned tile scale (portrait SVGs sized for a wide banner; seamless tile steps) */
       --sb-tw: 720px;
-      --sb-th: 1280px; /* keep 9:16 */
+      --sb-th: 1280px;
       background-size: var(--sb-tw) var(--sb-th);
       background-position: 0 0;
       image-rendering: pixelated;
@@ -337,7 +180,6 @@
       opacity: 0.9;
       animation: sb-parallax-d 180s linear infinite;
     }
-    /* Top-right → bottom-left (left + down); short whole-tile steps = slow + seamless */
     @keyframes sb-parallax-a {
       from { background-position: 0 0; }
       to { background-position: calc(-2 * var(--sb-tw)) calc(1 * var(--sb-th)); }
@@ -374,7 +216,6 @@
       image-rendering: pixelated;
       will-change: transform;
     }
-    /* Baked title (letters+tiles) — Messenger-safe, no font/transform desync */
     .space-banner .sb-title {
       position: absolute;
       inset: 0;
@@ -395,7 +236,7 @@
       .space-banner .sb-title img { width: min(88%, 420px); }
       .space-banner .sb-layer {
         --sb-tw: 480px;
-        --sb-th: 853px; /* smaller tiles on mobile */
+        --sb-th: 853px;
       }
       .space-banner .sb-dust { animation-duration: 540s; }
       .space-banner .sb-stars { animation-duration: 420s, 7.5s; }
@@ -486,12 +327,7 @@
       display: flex;
       gap: 0.75rem;
       width: max-content;
-      /* auto-scroll driven in JS so swipe stays native */
       animation: none;
-    }
-    @keyframes shots-marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
     }
     .shots-track figure {
       margin: 0;
@@ -512,8 +348,6 @@
       -webkit-user-drag: none;
     }
 
-
-    /* Trailer: portrait 9:16, capped so it doesn’t dominate desktop */
     #trailer {
       width: 100%;
       max-width: min(100%, 700px);
@@ -549,7 +383,6 @@
       }
     }
 
-    /* Scroll-end Play CTA */
     .cta-end {
       width: 100%;
       max-width: min(100%, 700px);
@@ -581,18 +414,7 @@
       margin-inline: auto;
       box-sizing: border-box;
     }
-    footer a { color: var(--accent); }
 
-    /* Mobile-first polish */
-    img, video, svg { max-width: 100%; height: auto; }
-    html {
-      background: #020617;
-      min-height: 100%;
-    }
-    html, body { overflow-x: hidden; }
-    .wrap {
-      padding: 1rem max(1rem, env(safe-area-inset-right)) 3.5rem max(1rem, env(safe-area-inset-left));
-    }
     @media (max-width: 860px) {
       .hero { padding: 0.15rem 0 0; gap: 1.35rem; }
       h1 { font-size: clamp(0.92rem, 4.6vw, 1.2rem); }
@@ -603,7 +425,7 @@
       .shots-wheel { border-radius: 14px; padding: 0.65rem 0.45rem; }
       .shots-track { gap: 0.55rem; }
       .shots-track figure { width: 132px; flex: 0 0 132px; border-radius: 10px; }
-footer {
+      footer {
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -611,7 +433,6 @@ footer {
         gap: 0.5rem;
         font-size: 0.88rem;
       }
-      .brand img { width: 44px; height: 44px; border-radius: 12px; }
     }
     @media (max-width: 420px) {
       .tiles img { width: 34px; height: 34px; }
@@ -619,10 +440,8 @@ footer {
       h2 { font-size: 0.82rem; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .shots-track { animation: none; }
       .space-banner .sb-layer { animation: none !important; }
     }
-
   </style>
 </head>
 <body>
@@ -649,7 +468,7 @@ footer {
           <div class="sb-layer sb-sparks"></div>
           <div class="sb-fx" id="space-fx"></div>
           <div class="sb-title">
-            <img src="assets/title_spaceblox.png" alt="SPACEBLOX" width="4320" height="720" decoding="async" />
+            <img src="assets/title_spaceblox.png" alt="SPACEBLOX" width="1080" height="180" decoding="async" />
           </div>
         </div>
       </div>
@@ -659,31 +478,18 @@ footer {
           Fill empty cells with colored tiles.<br class="lead-break" />
           Never place three of the same in a line.
         </p>
-        <div class="tiles-row">
-          <div class="tiles" aria-label="In-game tiles">
-            <img src="assets/tile_yellow.svg" alt="Yellow tile" width="40" height="40" />
-            <img src="assets/tile_blue.svg" alt="Blue tile" width="40" height="40" />
-            <img src="assets/tile_green.svg" alt="Green tile" width="40" height="40" />
-            <img src="assets/tile_shifter.svg" alt="Special purple tile" width="40" height="40" />
-          </div>
-          <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" aria-label="Get it on Google Play">
-            <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" />
-          </a>
-        </div>
       </div>
-      <aside class="hero-side" aria-label="Get Spaceblox">
-        <div class="tiles-row">
-          <div class="tiles" aria-label="In-game tiles">
-            <img src="assets/tile_yellow.svg" alt="" width="40" height="40" />
-            <img src="assets/tile_blue.svg" alt="" width="40" height="40" />
-            <img src="assets/tile_green.svg" alt="" width="40" height="40" />
-            <img src="assets/tile_shifter.svg" alt="" width="40" height="40" />
-          </div>
-          <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" aria-label="Get it on Google Play">
-            <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" />
-          </a>
+      <div class="tiles-row">
+        <div class="tiles" aria-label="In-game tiles">
+          <img src="assets/tile_yellow.svg" alt="Yellow tile" width="40" height="40" />
+          <img src="assets/tile_blue.svg" alt="Blue tile" width="40" height="40" />
+          <img src="assets/tile_green.svg" alt="Green tile" width="40" height="40" />
+          <img src="assets/tile_shifter.svg" alt="Special purple tile" width="40" height="40" />
         </div>
-      </aside>
+        <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" aria-label="Get it on Google Play">
+          <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" />
+        </a>
+      </div>
     </section>
 
     <section id="how">
@@ -771,10 +577,8 @@ footer {
     </footer>
   </div>
 
-
   <script>
   (function () {
-    /* Randomize parallax (and twinkle) phase so each visit starts mid-scroll */
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     var layers = document.querySelectorAll(".space-banner .sb-layer");
     for (var i = 0; i < layers.length; i++) {
@@ -807,7 +611,6 @@ footer {
         "assets/fx_asteroid_3.svg"
       ]
     };
-    // Match Godot SpaceBackgroundFx: star base 3π/4
     var STAR_BASE_DEG = 135;
 
     function rand(a, b) { return a + Math.random() * (b - a); }
@@ -821,7 +624,6 @@ footer {
       var hostW = fx.clientWidth || 1;
       var hostH = fx.clientHeight || 1;
 
-      // Website-only sizes (not game). Scale with banner width.
       var m = hostW < 640 ? 0.35 : (hostW < 900 ? 0.5 : 0.72);
       if (kind === "star") {
         w = rand(28, 44) * m; h = w; dur = rand(1.4, 2.4);
@@ -833,7 +635,6 @@ footer {
       el.style.width = w + "px";
       el.style.height = h + "px";
 
-      // Right -> left; stars fall steeper (game: 0.5–1.5 * travel)
       startX = hostW + w + 20;
       endX = -w - 40;
       var travelX = startX - endX;
@@ -869,7 +670,6 @@ footer {
     }
 
     function schedule() {
-      // Website cadence: mostly stars, sparse asteroids
       var kind = Math.random() < 0.82 ? "star" : "asteroid";
       spawn(kind);
       setTimeout(schedule, rand(6500, 14000));
@@ -877,9 +677,6 @@ footer {
     setTimeout(schedule, rand(2500, 6000));
   })();
   </script>
-
-
-
 
   <script>
   (function () {
@@ -889,8 +686,9 @@ footer {
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var loopW = 0, auto = !reduce, speed = 0.55, resumeTimer = null, lastUser = 0, wrapping = false;
     var dragging = false, dragId = null, startX = 0, startScroll = 0;
-    /* One set's width = offset to first duplicate. scrollWidth/2 is wrong with flex gap
-       (half a gap short) and causes a jump at the seam. */
+    var inView = true, pageVisible = document.visibilityState !== "hidden";
+    var rafId = 0;
+
     function measure() {
       var kids = track.children;
       var half = Math.floor(kids.length / 2);
@@ -904,18 +702,34 @@ footer {
       wrapping = true;
       while (wheel.scrollLeft >= loopW) wheel.scrollLeft -= loopW;
       while (wheel.scrollLeft < 0) wheel.scrollLeft += loopW;
-      /* Keep a small buffer away from 0 so reverse scroll can wrap cleanly */
       if (wheel.scrollLeft < 1) wheel.scrollLeft += loopW;
       wrapping = false;
+    }
+    function shouldRun() {
+      return auto && !dragging && inView && pageVisible && loopW > 0;
+    }
+    function tick() {
+      rafId = 0;
+      if (shouldRun()) {
+        wheel.scrollLeft += speed;
+        wrap();
+        rafId = requestAnimationFrame(tick);
+      }
+    }
+    function ensureTick() {
+      if (!rafId && shouldRun()) rafId = requestAnimationFrame(tick);
     }
     function pauseAuto() {
       auto = false; lastUser = Date.now();
       if (resumeTimer) clearTimeout(resumeTimer);
-      if (!reduce) resumeTimer = setTimeout(function () { if (Date.now() - lastUser >= 2000) auto = true; }, 2100);
-    }
-    function tick() {
-      if (auto && loopW > 0 && !dragging) { wheel.scrollLeft += speed; wrap(); }
-      requestAnimationFrame(tick);
+      if (!reduce) {
+        resumeTimer = setTimeout(function () {
+          if (Date.now() - lastUser >= 2000) {
+            auto = true;
+            ensureTick();
+          }
+        }, 2100);
+      }
     }
     function endDrag(e) {
       if (!dragging || (e && e.pointerId !== dragId)) return;
@@ -928,13 +742,26 @@ footer {
     function boot() {
       measure();
       if (loopW > 0) wheel.scrollLeft = Math.floor(loopW * 0.5);
+      ensureTick();
     }
+
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        inView = !!(entries[0] && entries[0].isIntersecting);
+        if (inView) ensureTick();
+      }, { threshold: 0 });
+      io.observe(wheel);
+    }
+    document.addEventListener("visibilitychange", function () {
+      pageVisible = document.visibilityState !== "hidden";
+      if (pageVisible) ensureTick();
+    });
+
     wheel.addEventListener("scroll", function () { if (!wrapping) wrap(); }, { passive: true });
     wheel.addEventListener("wheel", function (e) {
       pauseAuto();
       if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { wheel.scrollLeft += e.deltaY; wrap(); e.preventDefault(); }
     }, { passive: false });
-    /* Mouse/pen click-drag on PC; touch stays native pan-x (no hold-drag). */
     wheel.addEventListener("pointerdown", function (e) {
       pauseAuto();
       if (e.pointerType === "touch") return;
@@ -957,7 +784,6 @@ footer {
     window.addEventListener("resize", function () { measure(); if (loopW) wrap(); });
     boot();
     window.addEventListener("load", boot);
-    requestAnimationFrame(tick);
   })();
   </script>
 
