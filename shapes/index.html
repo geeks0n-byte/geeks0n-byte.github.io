@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N1W5TP9WDN"></script>
+  <script src="/spaceblox/ga.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1624206851803206"
+     crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a1622" />
+  <meta name="robots" content="index,follow" />
+  <title>Shapes — Coming soon</title>
+  <meta name="description" content="Shapes is a new puzzle game from geeks0n-byte. Work in progress — site and releases coming soon." />
+  <link rel="canonical" href="https://geeks0n-byte.github.io/shapes/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://geeks0n-byte.github.io/shapes/" />
+  <meta property="og:title" content="Shapes" />
+  <meta property="og:description" content="A new puzzle game — coming soon." />
+  <meta property="og:image" content="https://geeks0n-byte.github.io/shapes/og.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Shapes" />
+  <meta name="twitter:description" content="A new puzzle game — coming soon." />
+  <meta name="twitter:image" content="https://geeks0n-byte.github.io/shapes/og.svg" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <link rel="stylesheet" href="shapes-bg.css" />
+  <style>
+    .hero {
+      position: relative;
+      min-height: calc(100dvh - 5.5rem);
+      max-width: min(100%, 720px);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.25rem;
+      padding: 2.5rem 0 3rem;
+    }
+
+    .hero-brand {
+      margin: 0;
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: clamp(3.4rem, 14vw, 6.5rem);
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--ink);
+      opacity: 0;
+      transform: translateY(18px);
+      animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+    }
+
+    .hero-brand span {
+      display: block;
+      background: linear-gradient(105deg, var(--ink) 0%, var(--mint) 45%, var(--coral) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 28rem;
+      font-size: clamp(1.05rem, 2.6vw, 1.25rem);
+      font-weight: 500;
+      color: var(--muted);
+      opacity: 0;
+      transform: translateY(14px);
+      animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.28s forwards;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-top: 0.35rem;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.42s forwards;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Syne", sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #071018;
+      background: var(--mint);
+      padding: 0.9rem 1.25rem;
+      border-radius: 999px;
+      border: none;
+      cursor: default;
+    }
+
+    .cta[aria-disabled="true"] {
+      opacity: 0.85;
+    }
+
+    .cta-note {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-brand,
+      .lead,
+      .cta-row {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shapes-field" aria-hidden="true">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" role="presentation">
+      <circle class="shape" cx="160" cy="140" r="70" fill="#ff6b4a" fill-opacity="0.22" />
+      <rect class="shape" x="980" y="80" width="110" height="110" rx="8" fill="#3ecf8e" fill-opacity="0.2" transform="rotate(18 1035 135)" />
+      <polygon class="shape" points="620,60 690,190 550,190" fill="#f0c14a" fill-opacity="0.18" />
+      <circle class="shape" cx="1040" cy="560" r="120" fill="#ff6b4a" fill-opacity="0.12" />
+      <rect class="shape" x="80" y="520" width="150" height="150" rx="12" fill="#3ecf8e" fill-opacity="0.14" transform="rotate(-12 155 595)" />
+      <polygon class="shape" points="520,620 610,780 430,780" fill="#f0c14a" fill-opacity="0.14" />
+    </svg>
+  </div>
+
+  <div class="wrap">
+    <header>
+      <a class="brand" href="./" aria-label="Shapes home">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="16" fill="#12263a" />
+          <circle cx="22" cy="24" r="10" fill="#ff6b4a" />
+          <rect x="34" y="14" width="18" height="18" rx="3" fill="#3ecf8e" />
+          <polygon points="32,38 48,58 16,58" fill="#f0c14a" />
+        </svg>
+        <span class="brand-name">Shapes</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="../spaceblox/">Spaceblox</a>
+        <a href="privacy-policy.html">Privacy</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <h1 class="hero-brand"><span>Shapes</span></h1>
+      <p class="lead">A new puzzle game from geeks0n-byte. Work in progress — Play Store and web play will land here the same way as Spaceblox.</p>
+      <div class="cta-row">
+        <span class="cta" aria-disabled="true">Coming soon</span>
+        <span class="cta-note">Placeholder site · more soon</span>
+      </div>
+    </main>
+
+    <footer>
+      <p>
+        <a href="../spaceblox/">Spaceblox</a>
+        ·
+        <a href="privacy-policy.html">Privacy</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
