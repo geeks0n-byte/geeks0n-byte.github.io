@@ -2,17 +2,150 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Spaceblox</title>
-  <meta http-equiv="refresh" content="0; url=/spaceblox/" />
-  <link rel="canonical" href="https://geeks0n-byte.github.io/spaceblox/" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-N1W5TP9WDN"></script>
-  <script src="/spaceblox/ga.js"></script>
+  <script src="/ga.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1624206851803206"
      crossorigin="anonymous"></script>
-  <script>location.replace("/spaceblox/");</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#14181f" />
+  <title>geeks0n-byte — Games</title>
+  <meta name="description" content="Indie puzzles from geeks0n-byte: Spaceblox (out now) and Shapes (coming soon)." />
+  <link rel="canonical" href="https://geeks0n-byte.github.io/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://geeks0n-byte.github.io/" />
+  <meta property="og:title" content="geeks0n-byte" />
+  <meta property="og:description" content="Indie puzzles: Spaceblox and Shapes." />
+  <meta property="og:image" content="https://geeks0n-byte.github.io/spaceblox/assets/feature.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="geeks0n-byte" />
+  <meta name="twitter:description" content="Indie puzzles: Spaceblox and Shapes." />
+  <link rel="icon" href="/spaceblox/assets/icon_512.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #14181f;
+      --ink: #edebe0;
+      --muted: #9ea3a8;
+      --line: #3a414c;
+      --yellow: #f7cc1a;
+      --space: #38bdf8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); }
+    body {
+      font-family: "Figtree", "Segoe UI", system-ui, sans-serif;
+      line-height: 1.5;
+      padding: 1.5rem max(1rem, env(safe-area-inset-right)) 3rem max(1rem, env(safe-area-inset-left));
+    }
+    .wrap { max-width: 880px; margin: 0 auto; }
+    header { margin-bottom: 2rem; }
+    .studio {
+      margin: 0;
+      font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.6rem, 4vw, 2.1rem);
+      letter-spacing: 0.02em;
+    }
+    .tag {
+      margin: 0.45rem 0 0;
+      color: var(--muted);
+      max-width: 36rem;
+    }
+    .games {
+      display: grid;
+      gap: 1rem;
+    }
+    @media (min-width: 720px) {
+      .games { grid-template-columns: 1fr 1fr; gap: 1.15rem; }
+    }
+    .game {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem;
+      background: #1c222c;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+    .game:hover { border-color: var(--yellow); transform: translateY(-1px); }
+    .game:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; }
+    .game img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      display: block;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      background: #0f1319;
+    }
+    .game h2 {
+      margin: 0;
+      font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .game p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+    .badge {
+      display: inline-block;
+      font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #141414;
+      background: var(--yellow);
+      padding: 0.35rem 0.55rem;
+      border-radius: 4px;
+      width: fit-content;
+    }
+    .badge.live { background: var(--space); }
+    footer {
+      margin-top: 2.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    footer a { color: var(--yellow); }
+  </style>
 </head>
 <body>
-  <p><a href="/spaceblox/">Continue to Spaceblox</a></p>
+  <div class="wrap">
+    <header>
+      <h1 class="studio">geeks0n-byte</h1>
+      <p class="tag">Small indie puzzles. Play free on the web, or on Google Play when available.</p>
+    </header>
+
+    <div class="games">
+      <a class="game" href="/spaceblox/">
+        <img src="/spaceblox/assets/feature.png" width="1024" height="500" alt="Spaceblox" />
+        <span class="badge live">Out now</span>
+        <h2>Spaceblox</h2>
+        <p>Calm color logic in deep space. Play in browser or on Google Play.</p>
+      </a>
+      <a class="game" href="/shapes/">
+        <img src="/shapes/assets/og_share.png" width="1200" height="630" alt="Shapes" />
+        <span class="badge">Coming soon</span>
+        <h2>Shapes</h2>
+        <p>Match a shape. Peel a layer. Build combos.</p>
+      </a>
+    </div>
+
+    <footer>
+      <a href="/spaceblox/privacy-policy.html">Privacy</a>
+      ·
+      <a href="/spaceblox/">Spaceblox</a>
+      ·
+      <a href="/shapes/">Shapes</a>
+    </footer>
+  </div>
+  <script src="/consent.js" defer></script>
 </body>
 </html>
