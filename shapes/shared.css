@@ -1,4 +1,4 @@
-/* Shapes site — kit-aligned chrome (see web_kit/BRIEF.md) */
+/* Shapes site chrome — Spaceblox-simple layout, kit colors */
 :root {
   --bg-deep: #242930;
   --bg: #2e333d;
@@ -12,7 +12,7 @@
   --green: #1f7a47;
   --white: #fafaf7;
   --black: #141414;
-  --line: rgba(237, 235, 224, 0.14);
+  --line: #4a515c;
   --focus: var(--yellow);
 }
 
@@ -38,70 +38,64 @@ body {
 
 img { max-width: 100%; height: auto; display: block; }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1rem max(1rem, env(safe-area-inset-right)) 3.5rem max(1rem, env(safe-area-inset-left));
 }
 
-.site-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 3;
+header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: 0.85rem max(1rem, env(safe-area-inset-right)) 0.85rem max(1rem, env(safe-area-inset-left));
-  max-width: 1120px;
+  width: 100%;
+  max-width: min(100%, 700px);
   margin-inline: auto;
+  padding: 0.85rem 0;
 }
 
 .brand {
   display: inline-flex;
-  align-items: center;
   text-decoration: none;
   border-radius: 12px;
 }
 
 .brand img {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   box-shadow: 0 0 0 1px var(--line);
 }
 
 nav {
   display: flex;
-  gap: 0.4rem;
+  gap: 0.35rem;
   align-items: center;
   margin-left: auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 nav a {
-  font-family: "Figtree", "Segoe UI", system-ui, sans-serif;
-  font-weight: 600;
-  font-size: 0.85rem;
+  font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--ink);
   text-decoration: none;
-  padding: 0.5rem 0.85rem;
+  padding: 0.55rem 0.7rem;
   border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(36, 41, 48, 0.55);
-  backdrop-filter: blur(8px);
+  border-radius: 4px;
+  background: var(--face);
 }
 
 nav a:hover {
-  border-color: rgba(237, 235, 224, 0.32);
-  background: rgba(36, 41, 48, 0.75);
+  border-color: var(--yellow);
+  color: var(--yellow);
 }
 
 .brand:focus-visible,
@@ -112,63 +106,27 @@ footer a:focus-visible {
   outline-offset: 3px;
 }
 
-.wrap {
-  position: relative;
-  z-index: 1;
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 max(1rem, env(safe-area-inset-right)) 3.5rem max(1rem, env(safe-area-inset-left));
-}
-
-.section {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 2.75rem 0 0;
-  text-align: center;
-}
-
-.section h2 {
-  margin: 0 0 0.55rem;
-  font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
-  font-weight: 700;
-  font-size: clamp(1.35rem, 3.2vw, 1.7rem);
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: var(--ink);
-}
-
-.section p {
-  margin: 0 auto 1.1rem;
-  color: var(--ink-muted);
-  font-size: 1.02rem;
-  max-width: 34rem;
-}
-
-.section-media {
-  width: auto;
-  max-width: min(100%, 180px);
-  margin-inline: auto;
-  border-radius: 4px;
-}
-
-.pigment-rule {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 2.5rem 0 0;
-}
-
 footer {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 1.25rem 0 0;
+  max-width: min(100%, 700px);
+  margin: 2.5rem auto 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
   color: var(--ink-muted);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  justify-content: space-between;
 }
 
 footer a { color: var(--yellow); }
 
 @media (max-width: 640px) {
-  .brand img { width: 36px; height: 36px; border-radius: 9px; }
-  nav a { font-size: 0.78rem; padding: 0.45rem 0.7rem; }
+  .brand img { width: 40px; height: 40px; border-radius: 10px; }
+  nav a { font-size: 0.62rem; padding: 0.45rem 0.55rem; }
+  footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 }
