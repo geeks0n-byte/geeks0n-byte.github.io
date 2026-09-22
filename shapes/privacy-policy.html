@@ -23,32 +23,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="shared.css" />
   <style>
-    .panel {
+    .panel-article {
       max-width: min(100%, 700px);
-      margin: 5.5rem auto 0;
-      padding: 0 0 2rem;
+      margin: 1.25rem auto 0;
     }
-    .panel h1 {
+    .panel-article h1 {
       font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
       font-weight: 700;
-      font-size: clamp(1.8rem, 5vw, 2.4rem);
+      font-size: clamp(1.6rem, 4vw, 2rem);
       letter-spacing: 0.02em;
       text-transform: uppercase;
-      margin: 0 0 0.75rem;
+      margin: 0 0 0.65rem;
     }
-    .meta { color: var(--ink-muted); font-size: 0.95rem; margin: 0 0 1.5rem; }
-    .panel p { margin: 0 0 1rem; color: var(--ink); }
-    .panel a { color: var(--yellow); }
-    body { background: var(--bg-deep); }
-    .site-header { position: relative; max-width: 700px; padding-inline: 0; }
-    .wrap { padding-top: 0; }
+    .meta { color: var(--ink-muted); font-size: 0.95rem; margin: 0 0 1.25rem; }
+    .panel-article p { margin: 0 0 1rem; color: var(--ink); }
+    .panel-article a { color: var(--yellow); }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <header class="site-header">
+    <header>
       <a class="brand" href="./" aria-label="Shapes home">
-        <img src="assets/logo_mark.png" width="512" height="512" alt="" />
+        <img src="assets/logo_mark.png" width="44" height="44" alt="Shapes" />
       </a>
       <nav aria-label="Primary">
         <a href="./">Home</a>
@@ -56,30 +52,28 @@
       </nav>
     </header>
 
-    <article class="panel">
+    <article class="panel-article">
       <h1>Privacy Policy</h1>
       <p class="meta">Last updated: September 22, 2026 · Placeholder</p>
       <p>
         <strong>Shapes</strong> is in early development and is not yet publicly released.
-        This page is a placeholder so the store listing and site structure can match Spaceblox.
+        This page is a placeholder so the site structure can match Spaceblox.
       </p>
       <p>
-        When the game ships, this policy will describe local progress storage, any advertising
-        (for example Google AdMob / AdSense), optional cloud save, and website analytics
-        (Google Analytics on this site).
+        When the game ships, this policy will describe local progress, advertising,
+        optional cloud save, and website analytics.
       </p>
       <p>
-        Until then, visiting this marketing site may still load Google Analytics and AdSense
-        as configured on geeks0n-byte.github.io. See the
+        Until then, this marketing site may load Google Analytics and AdSense as configured
+        on geeks0n-byte.github.io. See the
         <a href="../spaceblox/privacy-policy.html">Spaceblox Privacy Policy</a> for how those
-        Google services are described today.
+        services are described today.
       </p>
     </article>
 
-    <img class="pigment-rule" src="assets/palette_strip.png" width="1200" height="240" alt="" loading="lazy" />
-
     <footer>
-      <p><a href="./">Shapes</a> · <a href="../spaceblox/">Spaceblox</a></p>
+      <div>© Shapes · geeks0n-byte</div>
+      <div><a href="./">Home</a> · <a href="../spaceblox/">Spaceblox</a></div>
     </footer>
   </div>
 </body>

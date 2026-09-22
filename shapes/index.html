@@ -11,7 +11,7 @@
   <meta name="theme-color" content="#242930" />
   <meta name="robots" content="index,follow" />
   <title>Shapes — Match. Peel. Combo.</title>
-  <meta name="description" content="Shapes — Match a shape. Peel a layer. Build combos. A tactile puzzle game from geeks0n-byte. Coming soon." />
+  <meta name="description" content="Shapes — Match a shape. Peel a layer. Build combos. A tactile puzzle from geeks0n-byte. Coming soon." />
   <link rel="canonical" href="https://geeks0n-byte.github.io/shapes/" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://geeks0n-byte.github.io/shapes/" />
@@ -32,42 +32,43 @@
   <link rel="stylesheet" href="shared.css" />
   <style>
     .hero {
-      position: relative;
-      min-height: 100vh;
-      min-height: 100dvh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      gap: 1.25rem;
       align-items: center;
       text-align: center;
-      padding: 5.5rem max(1rem, env(safe-area-inset-right)) 2.5rem max(1rem, env(safe-area-inset-left));
-      background: var(--bg-deep);
-      overflow: hidden;
+      max-width: min(100%, 700px);
+      margin: 0.35rem auto 0;
+      padding: 0.5rem 0 0;
     }
 
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-      width: min(100%, 520px);
+    .hero-art {
+      width: 100%;
       display: grid;
-      gap: 1.15rem;
-      justify-items: center;
+      place-items: center;
+      padding: 0.25rem 0;
     }
 
-    .hero-wordmark {
-      width: min(100%, 440px);
+    .hero-art img {
+      width: min(92%, 420px);
       height: auto;
       border-radius: 8px;
     }
 
-    .lead {
+    .hero h1 {
       margin: 0;
       font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
-      font-weight: 600;
-      font-size: clamp(1.15rem, 3vw, 1.4rem);
+      font-weight: 700;
+      font-size: clamp(1.35rem, 4vw, 1.75rem);
       letter-spacing: 0.01em;
       color: var(--ink);
-      max-width: 22rem;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 28rem;
+      color: var(--ink-muted);
+      font-size: 1.05rem;
     }
 
     .cta-row {
@@ -76,6 +77,7 @@
       gap: 0.75rem 1rem;
       align-items: center;
       justify-content: center;
+      margin-top: 0.25rem;
     }
 
     .cta {
@@ -84,156 +86,345 @@
       justify-content: center;
       font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
       font-weight: 700;
-      font-size: 0.92rem;
-      letter-spacing: 0.06em;
+      font-size: 0.88rem;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       text-decoration: none;
       color: var(--black);
       background: var(--yellow);
-      padding: 0.85rem 1.25rem;
+      padding: 0.85rem 1.2rem;
       border-radius: 4px;
       border: none;
       cursor: default;
-      animation: cta-pulse 2.8s ease-in-out infinite;
     }
 
     .cta[aria-disabled="true"] { opacity: 0.95; }
 
     .cta-note {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--ink-muted);
     }
 
-    .section-media {
-      width: auto;
-      max-width: min(100%, 180px);
-      margin-inline: auto;
+    section { margin: 2.5rem 0; }
+
+    h2 {
+      font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin: 0 0 1rem;
+      text-align: center;
     }
 
-    .section-media.is-feature {
-      max-width: min(100%, 300px);
+    #how {
+      max-width: 36rem;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
     }
 
-    .section-media.is-wide {
-      max-width: min(100%, 480px);
-    }
-
-    .section-media.is-strip {
+    .panel {
+      background: color-mix(in srgb, var(--face) 92%, transparent);
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 1.1rem 1.2rem;
+      display: inline-block;
+      text-align: left;
       max-width: 100%;
     }
 
-    .feature-block {
+    .rules {
       display: grid;
-      gap: 0.55rem;
-      justify-items: center;
-      text-align: center;
-      margin-top: 1.75rem;
-    }
-
-    .feature-block:first-of-type { margin-top: 1rem; }
-
-    .feature-block p {
+      gap: 0.7rem;
+      padding-left: 1.2rem;
       margin: 0;
       color: var(--ink-muted);
-      font-size: 0.98rem;
-      max-width: 26rem;
     }
 
-    .hero-preview {
-      width: min(100%, 560px);
-      margin: 0 auto 0.5rem;
-      border-radius: 6px;
+    .rules li::marker { color: var(--yellow); }
+
+    #shots {
+      width: 100%;
+      max-width: min(100%, 700px);
+      margin-inline: auto;
     }
 
-    @keyframes cta-pulse {
-      0%, 100% { filter: brightness(1); }
-      50% { filter: brightness(1.08); }
+    .shots-wheel {
+      position: relative;
+      overflow-x: auto;
+      overflow-y: hidden;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      background: color-mix(in srgb, var(--face) 92%, transparent);
+      padding: 0.75rem 0.55rem;
+      touch-action: pan-x;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      cursor: grab;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .cta { animation: none; }
+    .shots-wheel.is-dragging { cursor: grabbing; user-select: none; }
+    .shots-wheel::-webkit-scrollbar { display: none; }
+
+    .shots-track {
+      display: flex;
+      gap: 0.65rem;
+      width: max-content;
+    }
+
+    .shots-track figure {
+      margin: 0;
+      width: 148px;
+      flex: 0 0 148px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .shots-track img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      pointer-events: none;
+      -webkit-user-drag: none;
+    }
+
+    #trailer {
+      width: 100%;
+      max-width: min(100%, 700px);
+      margin-inline: auto;
+    }
+
+    .trailer-frame {
+      position: relative;
+      width: min(100%, 280px);
+      margin-inline: auto;
+      aspect-ratio: 9 / 16;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid var(--line);
+      background: var(--black);
+      box-shadow: 0 12px 32px #0006;
+    }
+
+    .trailer-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.55;
+    }
+
+    .trailer-label {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      margin: 0;
+      padding: 1rem;
+      font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-align: center;
+      background: linear-gradient(180deg, transparent 30%, rgba(36, 41, 48, 0.72) 100%);
+    }
+
+    .cta-end {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin: 2rem 0 0;
+    }
+
+    @media (max-width: 860px) {
+      .hero { gap: 1rem; }
+      .hero-art img { width: min(100%, 360px); }
+      .shots-track figure { width: 128px; flex: 0 0 128px; }
     }
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="./" aria-label="Shapes home">
-      <img src="assets/logo_mark.png" width="40" height="40" alt="" />
-    </a>
-    <nav aria-label="Primary">
-      <a href="../spaceblox/">Spaceblox</a>
-      <a href="privacy-policy.html">Privacy</a>
-    </nav>
-  </header>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="./" aria-label="Shapes home">
+        <img src="assets/logo_mark.png" width="44" height="44" alt="Shapes" />
+      </a>
+      <nav aria-label="Primary">
+        <a href="#how">How to play</a>
+        <a href="#shots">Screenshots</a>
+        <a href="privacy-policy.html">Privacy</a>
+      </nav>
+    </header>
 
-  <main>
-    <section class="hero" aria-label="Shapes">
-      <div class="hero-inner">
-        <h1 class="visually-hidden">Shapes</h1>
-        <img class="hero-wordmark" src="assets/logo_wordmark.png" width="1600" height="900" alt="Shapes" fetchpriority="high" />
-        <p class="lead">Match a shape. Peel a layer. Build combos.</p>
-        <div class="cta-row">
-          <span class="cta" aria-disabled="true">Coming soon</span>
-          <span class="cta-note">Play Store &amp; web · WIP</span>
+    <section class="hero">
+      <div class="hero-art">
+        <img src="assets/logo_wordmark.png" width="1600" height="900" alt="Shapes" fetchpriority="high" />
+      </div>
+      <h1>Match a shape. Peel a layer.<br />Build combos.</h1>
+      <p class="lead">A tactile puzzle from geeks0n-byte. Coming soon to Play Store and the web.</p>
+      <div class="cta-row">
+        <span class="cta" aria-disabled="true">Coming soon</span>
+        <span class="cta-note">WIP</span>
+      </div>
+    </section>
+
+    <section id="how">
+      <h2>How to play</h2>
+      <div class="panel">
+        <ol class="rules">
+          <li><strong style="color:var(--ink)">Match</strong> — clear tiles that share a shape.</li>
+          <li><strong style="color:var(--ink)">Peel</strong> — strip a layer to dig deeper.</li>
+          <li><strong style="color:var(--ink)">Combo</strong> — chain clears for longer runs.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="shots">
+      <h2>Screenshots</h2>
+      <div class="shots-wheel" aria-label="Screenshot carousel">
+        <div class="shots-track">
+          <figure><img src="assets/board_snippet.png" alt="Shapes board placeholder" /></figure>
+          <figure><img src="assets/tile_sample.png" alt="Shapes tile placeholder" /></figure>
+          <figure><img src="assets/feature_match.png" alt="Match placeholder" /></figure>
+          <figure><img src="assets/feature_peel.png" alt="Peel placeholder" /></figure>
+          <figure><img src="assets/feature_combo.png" alt="Combo placeholder" /></figure>
+          <figure><img src="assets/hero_portrait.png" alt="Shapes key art placeholder" /></figure>
+          <!-- duplicate set for seamless loop -->
+          <figure><img src="assets/board_snippet.png" alt="" aria-hidden="true" /></figure>
+          <figure><img src="assets/tile_sample.png" alt="" aria-hidden="true" /></figure>
+          <figure><img src="assets/feature_match.png" alt="" aria-hidden="true" /></figure>
+          <figure><img src="assets/feature_peel.png" alt="" aria-hidden="true" /></figure>
+          <figure><img src="assets/feature_combo.png" alt="" aria-hidden="true" /></figure>
+          <figure><img src="assets/hero_portrait.png" alt="" aria-hidden="true" /></figure>
         </div>
       </div>
     </section>
 
-    <div class="wrap">
-      <section class="section" aria-labelledby="tile-heading">
-        <h2 id="tile-heading">What’s on a tile</h2>
-        <p>Colored mats. Cutout shapes. Nest L / M / S — read the stack, then clear it.</p>
-        <img class="section-media" src="assets/tile_sample.png" width="800" height="800" alt="Sample Shapes tile with nested cutouts on a pigment mat" loading="lazy" />
-      </section>
+    <section id="trailer" aria-labelledby="trailer-heading">
+      <h2 id="trailer-heading">Trailer</h2>
+      <div class="trailer-frame">
+        <img src="assets/hero_portrait.png" alt="" />
+        <p class="trailer-label">Trailer<br />coming soon</p>
+      </div>
+    </section>
 
-      <section class="section" aria-labelledby="play-heading">
-        <h2 id="play-heading">How it plays</h2>
-        <p>Short loops. Shared shapes. Peel a layer when you’re ready to dig deeper.</p>
-
-        <div class="feature-block">
-          <p>Share a shape across tiles to clear them.</p>
-          <img class="section-media is-feature" src="assets/feature_match.png" width="1200" height="900" alt="Match: shared shapes across two tiles" loading="lazy" />
-        </div>
-
-        <div class="feature-block">
-          <p>Strip a layer to reveal what’s under.</p>
-          <img class="section-media is-feature" src="assets/feature_peel.png" width="1200" height="900" alt="Peel: strip a layer from a nested tile" loading="lazy" />
-        </div>
-
-        <div class="feature-block">
-          <p>Chain clears for longer runs.</p>
-          <img class="section-media is-feature" src="assets/feature_combo.png" width="1200" height="900" alt="Combo: chain clears on the board" loading="lazy" />
-        </div>
-      </section>
-
-      <section class="section wide board-section" aria-labelledby="board-heading">
-        <h2 id="board-heading">On the board</h2>
-        <p>Portrait energy. Dense nests. Pigment you can feel.</p>
-        <picture>
-          <source media="(min-width: 800px)" srcset="assets/hero_landscape.png" width="1920" height="1080" />
-          <img class="section-media is-wide hero-preview" src="assets/hero_portrait.png" width="1080" height="1920" alt="Shapes key art with nested pigment tiles" loading="lazy" />
-        </picture>
-        <img class="section-media is-wide" src="assets/board_snippet.png" width="1600" height="1000" alt="Gameplay board snippet from Shapes" loading="lazy" style="margin-top: 1rem;" />
-      </section>
-
-      <section class="section wide" aria-labelledby="shapes-heading">
-        <h2 id="shapes-heading">The catalog</h2>
-        <p>Circles, diamonds, stars, and friends — sizes nested, pigments stacked.</p>
-        <img class="section-media is-strip" src="assets/shape_row.png" width="1800" height="320" alt="Row of Shapes catalog silhouettes" loading="lazy" />
-      </section>
-
-      <img class="pigment-rule" src="assets/palette_strip.png" width="1200" height="240" alt="" loading="lazy" />
-
-      <footer>
-        <p>
-          <a href="./">Shapes</a>
-          ·
-          <a href="../spaceblox/">Spaceblox</a>
-          ·
-          <a href="privacy-policy.html">Privacy</a>
-        </p>
-      </footer>
+    <div class="cta-end">
+      <span class="cta" aria-disabled="true">Coming soon</span>
     </div>
-  </main>
+
+    <footer>
+      <div>© Shapes · geeks0n-byte</div>
+      <div>
+        <a href="../spaceblox/">Spaceblox</a>
+        ·
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+  (function () {
+    var wheel = document.querySelector(".shots-wheel");
+    var track = document.querySelector(".shots-track");
+    if (!wheel || !track) return;
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var loopW = 0, auto = !reduce, speed = 0.55, wrapping = false;
+    var dragging = false, dragId = null, startX = 0, startScroll = 0;
+    var inView = true, pageVisible = document.visibilityState !== "hidden";
+    var rafId = 0;
+
+    function measure() {
+      var kids = track.children;
+      var half = Math.floor(kids.length / 2);
+      if (half < 1) { loopW = 0; return; }
+      loopW = kids[half].offsetLeft - kids[0].offsetLeft;
+    }
+    function wrap() {
+      if (wrapping) return;
+      if (!loopW) measure();
+      if (loopW <= 0) return;
+      wrapping = true;
+      while (wheel.scrollLeft >= loopW) wheel.scrollLeft -= loopW;
+      while (wheel.scrollLeft < 0) wheel.scrollLeft += loopW;
+      if (wheel.scrollLeft < 1) wheel.scrollLeft += loopW;
+      wrapping = false;
+    }
+    function shouldRun() {
+      return auto && !dragging && inView && pageVisible && loopW > 0;
+    }
+    function tick() {
+      rafId = 0;
+      if (shouldRun()) {
+        wheel.scrollLeft += speed;
+        wrap();
+        rafId = requestAnimationFrame(tick);
+      }
+    }
+    function ensureTick() {
+      if (!rafId && shouldRun()) rafId = requestAnimationFrame(tick);
+    }
+    function pauseAuto() {
+      auto = false;
+      if (rafId) { cancelAnimationFrame(rafId); rafId = 0; }
+    }
+    function resumeAutoSoon() {
+      if (reduce) return;
+      window.clearTimeout(resumeAutoSoon._t);
+      resumeAutoSoon._t = window.setTimeout(function () {
+        auto = true;
+        ensureTick();
+      }, 1800);
+    }
+
+    measure();
+    wrap();
+    ensureTick();
+    window.addEventListener("resize", function () { measure(); wrap(); ensureTick(); });
+    document.addEventListener("visibilitychange", function () {
+      pageVisible = document.visibilityState !== "hidden";
+      ensureTick();
+    });
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        inView = entries[0] && entries[0].isIntersecting;
+        ensureTick();
+      }, { threshold: 0.12 }).observe(wheel);
+    }
+
+    wheel.addEventListener("pointerdown", function (e) {
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      dragging = true;
+      dragId = e.pointerId;
+      startX = e.clientX;
+      startScroll = wheel.scrollLeft;
+      wheel.classList.add("is-dragging");
+      pauseAuto();
+      try { wheel.setPointerCapture(dragId); } catch (_) {}
+    });
+    wheel.addEventListener("pointermove", function (e) {
+      if (!dragging || e.pointerId !== dragId) return;
+      wheel.scrollLeft = startScroll - (e.clientX - startX);
+      wrap();
+    });
+    function endDrag(e) {
+      if (!dragging || (e && e.pointerId !== dragId)) return;
+      dragging = false;
+      dragId = null;
+      wheel.classList.remove("is-dragging");
+      resumeAutoSoon();
+    }
+    wheel.addEventListener("pointerup", endDrag);
+    wheel.addEventListener("pointercancel", endDrag);
+    wheel.addEventListener("wheel", function () { pauseAuto(); resumeAutoSoon(); }, { passive: true });
+  })();
+  </script>
 </body>
 </html>
