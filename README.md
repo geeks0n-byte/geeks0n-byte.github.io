@@ -4,13 +4,14 @@ GitHub Pages site for geeks0n-byte games:
 
 | URL | Purpose |
 | --- | --- |
-| https://geeks0n-byte.github.io/app-ads.txt | AdMob authorization (must stay at **site root**) |
-| https://geeks0n-byte.github.io/ads.txt | AdSense authorization (must stay at **site root**) |
+| https://geeks0n-byte.github.io/ | Studio hub (Spaceblox + Shapes) |
+| https://geeks0n-byte.github.io/app-ads.txt | AdMob authorization (**site root**) |
+| https://geeks0n-byte.github.io/ads.txt | AdSense authorization (**site root**) |
 | https://geeks0n-byte.github.io/spaceblox/ | Spaceblox marketing landing |
 | https://geeks0n-byte.github.io/spaceblox/play/ | Spaceblox web (HTML5) build |
-| https://geeks0n-byte.github.io/spaceblox/privacy-policy.html | Spaceblox privacy policy |
-| https://geeks0n-byte.github.io/shapes/ | Shapes marketing landing (WIP placeholder) |
-| https://geeks0n-byte.github.io/shapes/privacy-policy.html | Shapes privacy placeholder |
+| https://geeks0n-byte.github.io/spaceblox/privacy-policy.html | Spaceblox + site privacy |
+| https://geeks0n-byte.github.io/shapes/ | Shapes marketing (WIP) |
+| https://geeks0n-byte.github.io/shapes/privacy-policy.html | Shapes site privacy |
 
 AdMob crawls `app-ads.txt` at the **root** of the Play Console developer website
 (`https://geeks0n-byte.github.io/app-ads.txt`). Keep only that root file — not under game folders.
@@ -20,35 +21,27 @@ AdMob crawls `app-ads.txt` at the **root** of the Play Console developer website
 1. Public repository named exactly `geeks0n-byte.github.io`.
 2. Push to `main`.
 3. **Settings → Pages**: Deploy from branch `main`, folder `/ (root)`.
-4. Confirm:
-   - https://geeks0n-byte.github.io/app-ads.txt — one plain-text line
-   - https://geeks0n-byte.github.io/spaceblox/ — Spaceblox landing
-   - https://geeks0n-byte.github.io/shapes/ — Shapes placeholder
+4. Confirm root `app-ads.txt`, studio hub, `/spaceblox/`, `/shapes/`.
 5. In Play Console, set the developer **website** to `https://geeks0n-byte.github.io`.
-
-If AdMob lists extra `RESELLER` rows, paste those into the **root** `app-ads.txt` (one per line) and push again.
 
 ## Local layout
 
 ```
 /
-  app-ads.txt          ← AdMob (Play Console website root — required)
-  ads.txt              ← AdSense (Sites verification — required)
-  index.html           ← redirects to /spaceblox/
-  robots.txt
-  sitemap.xml
-  google03499aee60edbd13.html  ← Search Console verification
+  index.html           ← studio hub
+  ga.js                ← GA4 + Consent Mode defaults
+  consent.js           ← Accept / Reject banner
+  app-ads.txt / ads.txt
+  robots.txt / sitemap.xml
+  google03499aee60edbd13.html
   spaceblox/
-    index.html         ← landing
-    privacy-policy.html
-    play/              ← Godot HTML5 export
-    ga.js              ← shared GA4 config (also used by /shapes/)
-    shared.css
-    space-bg.css / space-bg.js
-    assets/
+    index.html, privacy-policy.html, play/, assets/, …
+    ga.js              ← same logic as /ga.js (legacy path)
   shapes/
-    index.html         ← kit-based marketing landing (WIP)
-    privacy-policy.html
-    shared.css
-    assets/            ← graphics from shapes web_kit (heroes, icons, features, OG)
+    index.html, privacy-policy.html, shared.css, assets/
 ```
+
+## Notes
+
+- Play PWA service worker keeps **COEP injection off** so AdSense/gtag can load on static hosts.
+- After changing play SW cache version, hard-refresh or clear the Spaceblox SW once.

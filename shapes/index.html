@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-N1W5TP9WDN"></script>
-  <script src="/spaceblox/ga.js"></script>
+  <script src="/ga.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1624206851803206"
      crossorigin="anonymous"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -34,7 +34,7 @@
     .hero {
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
+      gap: 1.1rem;
       align-items: center;
       text-align: center;
       max-width: min(100%, 700px);
@@ -42,24 +42,44 @@
       padding: 0.5rem 0 0;
     }
 
-    .hero-art {
-      width: 100%;
-      display: grid;
-      place-items: center;
-      padding: 0.25rem 0;
+    .hero-mark {
+      width: 88px;
+      height: 88px;
+      border-radius: 20px;
+      box-shadow: 0 0 0 1px var(--line);
     }
 
-    .hero-art img {
-      width: min(92%, 420px);
-      height: auto;
-      border-radius: 8px;
-    }
-
-    .hero h1 {
+    .hero-title {
       margin: 0;
       font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
       font-weight: 700;
-      font-size: clamp(1.35rem, 4vw, 1.75rem);
+      font-size: clamp(2.4rem, 10vw, 3.6rem);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1;
+      color: var(--ink);
+    }
+
+    .pigment-bar {
+      display: flex;
+      width: min(100%, 220px);
+      height: 8px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .pigment-bar span { flex: 1; }
+    .pigment-bar .r { background: var(--red); }
+    .pigment-bar .y { background: var(--yellow); }
+    .pigment-bar .b { background: var(--blue); }
+    .pigment-bar .g { background: var(--green); }
+    .pigment-bar .w { background: var(--white); }
+
+    .pitch {
+      margin: 0.35rem 0 0;
+      font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.2rem, 3.6vw, 1.55rem);
       letter-spacing: 0.01em;
       color: var(--ink);
     }
@@ -77,7 +97,7 @@
       gap: 0.75rem 1rem;
       align-items: center;
       justify-content: center;
-      margin-top: 0.25rem;
+      margin-top: 0.15rem;
     }
 
     .cta {
@@ -101,8 +121,15 @@
     .cta[aria-disabled="true"] { opacity: 0.95; }
 
     .cta-note {
-      font-size: 0.88rem;
-      color: var(--ink-muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--ink);
+      background: var(--face);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 0.35rem 0.55rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
     section { margin: 2.5rem 0; }
@@ -114,8 +141,16 @@
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--yellow);
-      margin: 0 0 1rem;
+      margin: 0 0 0.65rem;
       text-align: center;
+    }
+
+    .section-note {
+      margin: 0 auto 1rem;
+      text-align: center;
+      color: var(--ink-muted);
+      font-size: 0.92rem;
+      max-width: 28rem;
     }
 
     #how {
@@ -176,23 +211,29 @@
 
     .shots-track figure {
       margin: 0;
-      width: 148px;
-      flex: 0 0 148px;
+      width: 220px;
+      flex: 0 0 220px;
       background: var(--bg);
       border: 1px solid var(--line);
       border-radius: 10px;
       overflow: hidden;
     }
 
+    .shots-track figure.is-portrait { width: 140px; flex: 0 0 140px; }
+
     .shots-track img {
       display: block;
       width: 100%;
       height: auto;
-      aspect-ratio: 9 / 16;
-      object-fit: cover;
+      aspect-ratio: 16 / 10;
+      object-fit: contain;
+      background: var(--bg-deep);
       pointer-events: none;
       -webkit-user-drag: none;
     }
+
+    .shots-track figure.is-portrait img { aspect-ratio: 9 / 16; object-fit: cover; }
+    .shots-track figure.is-square img { aspect-ratio: 1 / 1; object-fit: contain; }
 
     #trailer {
       width: 100%;
@@ -202,9 +243,9 @@
 
     .trailer-frame {
       position: relative;
-      width: min(100%, 280px);
+      width: min(100%, 420px);
       margin-inline: auto;
-      aspect-ratio: 9 / 16;
+      aspect-ratio: 16 / 9;
       border-radius: 12px;
       overflow: hidden;
       border: 2px solid var(--line);
@@ -216,7 +257,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.55;
+      opacity: 0.45;
     }
 
     .trailer-label {
@@ -233,7 +274,7 @@
       text-transform: uppercase;
       color: var(--ink);
       text-align: center;
-      background: linear-gradient(180deg, transparent 30%, rgba(36, 41, 48, 0.72) 100%);
+      background: linear-gradient(180deg, transparent 20%, rgba(36, 41, 48, 0.75) 100%);
     }
 
     .cta-end {
@@ -245,9 +286,10 @@
     }
 
     @media (max-width: 860px) {
-      .hero { gap: 1rem; }
-      .hero-art img { width: min(100%, 360px); }
-      .shots-track figure { width: 128px; flex: 0 0 128px; }
+      .hero { gap: 0.9rem; }
+      .hero-mark { width: 72px; height: 72px; border-radius: 16px; }
+      .shots-track figure { width: 180px; flex: 0 0 180px; }
+      .shots-track figure.is-portrait { width: 120px; flex: 0 0 120px; }
     }
   </style>
 </head>
@@ -259,16 +301,19 @@
       </a>
       <nav aria-label="Primary">
         <a href="#how">How to play</a>
-        <a href="#shots">Screenshots</a>
+        <a href="#shots">Preview</a>
+        <a href="/spaceblox/">Spaceblox</a>
         <a href="privacy-policy.html">Privacy</a>
       </nav>
     </header>
 
     <section class="hero">
-      <div class="hero-art">
-        <img src="assets/logo_wordmark.png" width="1600" height="900" alt="Shapes" fetchpriority="high" />
+      <img class="hero-mark" src="assets/logo_mark.png" width="88" height="88" alt="" fetchpriority="high" />
+      <h1 class="hero-title">Shapes</h1>
+      <div class="pigment-bar" aria-hidden="true">
+        <span class="r"></span><span class="y"></span><span class="b"></span><span class="g"></span><span class="w"></span>
       </div>
-      <h1>Match a shape. Peel a layer.<br />Build combos.</h1>
+      <p class="pitch">Match a shape. Peel a layer.<br />Build combos.</p>
       <p class="lead">A tactile puzzle from geeks0n-byte. Coming soon to Play Store and the web.</p>
       <div class="cta-row">
         <span class="cta" aria-disabled="true">Coming soon</span>
@@ -288,31 +333,32 @@
     </section>
 
     <section id="shots">
-      <h2>Screenshots</h2>
-      <div class="shots-wheel" aria-label="Screenshot carousel">
+      <h2>Preview</h2>
+      <p class="section-note">Early kit art — not final device screenshots.</p>
+      <div class="shots-wheel" aria-label="Preview art carousel">
         <div class="shots-track">
-          <figure><img src="assets/board_snippet.png" alt="Shapes board placeholder" /></figure>
-          <figure><img src="assets/tile_sample.png" alt="Shapes tile placeholder" /></figure>
-          <figure><img src="assets/feature_match.png" alt="Match placeholder" /></figure>
-          <figure><img src="assets/feature_peel.png" alt="Peel placeholder" /></figure>
-          <figure><img src="assets/feature_combo.png" alt="Combo placeholder" /></figure>
-          <figure><img src="assets/hero_portrait.png" alt="Shapes key art placeholder" /></figure>
-          <!-- duplicate set for seamless loop -->
+          <figure><img src="assets/board_snippet.png" alt="Board preview" /></figure>
+          <figure class="is-square"><img src="assets/tile_sample.png" alt="Tile preview" /></figure>
+          <figure><img src="assets/feature_match.png" alt="Match preview" /></figure>
+          <figure><img src="assets/feature_peel.png" alt="Peel preview" /></figure>
+          <figure><img src="assets/feature_combo.png" alt="Combo preview" /></figure>
+          <figure class="is-portrait"><img src="assets/hero_portrait.png" alt="Key art preview" /></figure>
           <figure><img src="assets/board_snippet.png" alt="" aria-hidden="true" /></figure>
-          <figure><img src="assets/tile_sample.png" alt="" aria-hidden="true" /></figure>
+          <figure class="is-square"><img src="assets/tile_sample.png" alt="" aria-hidden="true" /></figure>
           <figure><img src="assets/feature_match.png" alt="" aria-hidden="true" /></figure>
           <figure><img src="assets/feature_peel.png" alt="" aria-hidden="true" /></figure>
           <figure><img src="assets/feature_combo.png" alt="" aria-hidden="true" /></figure>
-          <figure><img src="assets/hero_portrait.png" alt="" aria-hidden="true" /></figure>
+          <figure class="is-portrait"><img src="assets/hero_portrait.png" alt="" aria-hidden="true" /></figure>
         </div>
       </div>
     </section>
 
     <section id="trailer" aria-labelledby="trailer-heading">
       <h2 id="trailer-heading">Trailer</h2>
+      <p class="section-note">Placeholder until the real trailer is ready.</p>
       <div class="trailer-frame">
-        <img src="assets/hero_portrait.png" alt="" />
-        <p class="trailer-label">Trailer<br />coming soon</p>
+        <img src="assets/hero_landscape.png" alt="" />
+        <p class="trailer-label">Trailer coming soon</p>
       </div>
     </section>
 
@@ -323,13 +369,16 @@
     <footer>
       <div>© Shapes · geeks0n-byte</div>
       <div>
-        <a href="../spaceblox/">Spaceblox</a>
+        <a href="/">Studio</a>
+        ·
+        <a href="/spaceblox/">Spaceblox</a>
         ·
         <a href="privacy-policy.html">Privacy Policy</a>
       </div>
     </footer>
   </div>
 
+  <script src="/consent.js" defer></script>
   <script>
   (function () {
     var wheel = document.querySelector(".shots-wheel");
