@@ -8,108 +8,152 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1624206851803206"
      crossorigin="anonymous"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0a1622" />
+  <meta name="theme-color" content="#242930" />
   <meta name="robots" content="index,follow" />
-  <title>Shapes — Coming soon</title>
-  <meta name="description" content="Shapes is a new puzzle game from geeks0n-byte. Work in progress — site and releases coming soon." />
+  <title>Shapes — Match. Peel. Combo.</title>
+  <meta name="description" content="Shapes — Match a shape. Peel a layer. Build combos. A tactile puzzle game from geeks0n-byte. Coming soon." />
   <link rel="canonical" href="https://geeks0n-byte.github.io/shapes/" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://geeks0n-byte.github.io/shapes/" />
   <meta property="og:title" content="Shapes" />
-  <meta property="og:description" content="A new puzzle game — coming soon." />
-  <meta property="og:image" content="https://geeks0n-byte.github.io/shapes/og.svg" />
+  <meta property="og:description" content="Match a shape. Peel a layer. Build combos." />
+  <meta property="og:image" content="https://geeks0n-byte.github.io/shapes/assets/og_share.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Shapes" />
-  <meta name="twitter:description" content="A new puzzle game — coming soon." />
-  <meta name="twitter:image" content="https://geeks0n-byte.github.io/shapes/og.svg" />
-  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <meta name="twitter:description" content="Match a shape. Peel a layer. Build combos." />
+  <meta name="twitter:image" content="https://geeks0n-byte.github.io/shapes/assets/og_share.png" />
+  <link rel="icon" href="assets/favicon_32.png" type="image/png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="assets/icon_192.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="shared.css" />
-  <link rel="stylesheet" href="shapes-bg.css" />
   <style>
     .hero {
       position: relative;
-      min-height: calc(100dvh - 5.5rem);
-      max-width: min(100%, 720px);
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      background: var(--bg-deep);
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1.04);
+      animation: hero-settle 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .hero-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(180deg, rgba(36, 41, 48, 0.35) 0%, transparent 28%),
+        linear-gradient(180deg, transparent 48%, rgba(36, 41, 48, 0.88) 100%);
+      pointer-events: none;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+      width: min(100%, 720px);
       margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 1.25rem;
-      padding: 2.5rem 0 3rem;
-    }
-
-    .hero-brand {
-      margin: 0;
-      font-family: "Syne", sans-serif;
-      font-weight: 800;
-      font-size: clamp(3.4rem, 14vw, 6.5rem);
-      line-height: 0.92;
-      letter-spacing: -0.03em;
-      text-transform: uppercase;
-      color: var(--ink);
+      padding: 0 max(1rem, env(safe-area-inset-right)) calc(2.25rem + env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
       opacity: 0;
-      transform: translateY(18px);
-      animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
-    }
-
-    .hero-brand span {
-      display: block;
-      background: linear-gradient(105deg, var(--ink) 0%, var(--mint) 45%, var(--coral) 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      transform: translateY(16px);
+      animation: rise 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
     }
 
     .lead {
-      margin: 0;
-      max-width: 28rem;
-      font-size: clamp(1.05rem, 2.6vw, 1.25rem);
-      font-weight: 500;
-      color: var(--muted);
-      opacity: 0;
-      transform: translateY(14px);
-      animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.28s forwards;
+      margin: 0 0 1rem;
+      font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.15rem, 3.2vw, 1.45rem);
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      max-width: 22rem;
     }
 
     .cta-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 0.75rem 1rem;
       align-items: center;
-      margin-top: 0.35rem;
-      opacity: 0;
-      transform: translateY(14px);
-      animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.42s forwards;
     }
 
     .cta {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-family: "Syne", sans-serif;
+      font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
       font-weight: 700;
       font-size: 0.95rem;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       text-decoration: none;
-      color: #071018;
-      background: var(--mint);
-      padding: 0.9rem 1.25rem;
-      border-radius: 999px;
+      color: var(--black);
+      background: var(--yellow);
+      padding: 0.9rem 1.35rem;
+      border-radius: 4px;
       border: none;
       cursor: default;
     }
 
-    .cta[aria-disabled="true"] {
-      opacity: 0.85;
-    }
+    .cta[aria-disabled="true"] { opacity: 0.95; }
 
     .cta-note {
       font-size: 0.9rem;
-      color: var(--muted);
+      color: var(--ink-muted);
+    }
+
+    .feature-block {
+      display: grid;
+      gap: 0.85rem;
+      margin-top: 1.75rem;
+    }
+
+    .feature-block:first-of-type { margin-top: 0; }
+
+    .feature-block h3 {
+      margin: 0;
+      font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .feature-block p {
+      margin: 0;
+      color: var(--ink-muted);
+      font-size: 1rem;
+    }
+
+    .board-section .section-media {
+      width: 100%;
+      max-width: none;
+    }
+
+    .wide {
+      max-width: 900px;
+    }
+
+    @keyframes hero-settle {
+      to { transform: scale(1); }
     }
 
     @keyframes rise {
@@ -117,61 +161,97 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .hero-brand,
-      .lead,
-      .cta-row {
+      .hero-media img,
+      .hero-copy {
+        animation: none;
         opacity: 1;
         transform: none;
-        animation: none;
       }
     }
   </style>
 </head>
 <body>
-  <div class="shapes-field" aria-hidden="true">
-    <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" role="presentation">
-      <circle class="shape" cx="160" cy="140" r="70" fill="#ff6b4a" fill-opacity="0.22" />
-      <rect class="shape" x="980" y="80" width="110" height="110" rx="8" fill="#3ecf8e" fill-opacity="0.2" transform="rotate(18 1035 135)" />
-      <polygon class="shape" points="620,60 690,190 550,190" fill="#f0c14a" fill-opacity="0.18" />
-      <circle class="shape" cx="1040" cy="560" r="120" fill="#ff6b4a" fill-opacity="0.12" />
-      <rect class="shape" x="80" y="520" width="150" height="150" rx="12" fill="#3ecf8e" fill-opacity="0.14" transform="rotate(-12 155 595)" />
-      <polygon class="shape" points="520,620 610,780 430,780" fill="#f0c14a" fill-opacity="0.14" />
-    </svg>
-  </div>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Shapes home">
+      <img src="assets/logo_mark.png" width="512" height="512" alt="" />
+    </a>
+    <nav aria-label="Primary">
+      <a href="../spaceblox/">Spaceblox</a>
+      <a href="privacy-policy.html">Privacy</a>
+    </nav>
+  </header>
 
-  <div class="wrap">
-    <header>
-      <a class="brand" href="./" aria-label="Shapes home">
-        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
-          <rect width="64" height="64" rx="16" fill="#12263a" />
-          <circle cx="22" cy="24" r="10" fill="#ff6b4a" />
-          <rect x="34" y="14" width="18" height="18" rx="3" fill="#3ecf8e" />
-          <polygon points="32,38 48,58 16,58" fill="#f0c14a" />
-        </svg>
-        <span class="brand-name">Shapes</span>
-      </a>
-      <nav aria-label="Primary">
-        <a href="../spaceblox/">Spaceblox</a>
-        <a href="privacy-policy.html">Privacy</a>
-      </nav>
-    </header>
-
-    <main class="hero">
-      <h1 class="hero-brand"><span>Shapes</span></h1>
-      <p class="lead">A new puzzle game from geeks0n-byte. Work in progress — Play Store and web play will land here the same way as Spaceblox.</p>
-      <div class="cta-row">
-        <span class="cta" aria-disabled="true">Coming soon</span>
-        <span class="cta-note">Placeholder site · more soon</span>
+  <main>
+    <section class="hero" aria-label="Shapes">
+      <h1 class="visually-hidden">Shapes</h1>
+      <picture class="hero-media">
+        <source media="(min-width: 800px)" srcset="assets/hero_landscape.png" width="1920" height="1080" />
+        <img src="assets/hero_portrait.png" width="1080" height="1920" alt="Shapes logo nest and pigment tiles on a slate grid" fetchpriority="high" />
+      </picture>
+      <div class="hero-scrim" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="lead">Match a shape. Peel a layer. Build combos.</p>
+        <div class="cta-row">
+          <span class="cta" aria-disabled="true">Coming soon</span>
+          <span class="cta-note">Play Store &amp; web · WIP</span>
+        </div>
       </div>
-    </main>
+    </section>
 
-    <footer>
-      <p>
-        <a href="../spaceblox/">Spaceblox</a>
-        ·
-        <a href="privacy-policy.html">Privacy</a>
-      </p>
-    </footer>
-  </div>
+    <div class="wrap">
+      <section class="section" aria-labelledby="tile-heading">
+        <h2 id="tile-heading">What’s on a tile</h2>
+        <p>Colored mats. Cutout shapes. Nest L / M / S — read the stack, then clear it.</p>
+        <img class="section-media" src="assets/tile_sample.png" width="800" height="800" alt="Sample Shapes tile with nested cutouts on a pigment mat" loading="lazy" />
+      </section>
+
+      <section class="section" aria-labelledby="play-heading">
+        <h2 id="play-heading">How it plays</h2>
+        <p>Short loops. Shared shapes. Peel a layer when you’re ready to dig deeper.</p>
+
+        <div class="feature-block">
+          <h3>Match</h3>
+          <p>Share a shape across tiles to clear them.</p>
+          <img class="section-media" src="assets/feature_match.png" width="1200" height="900" alt="Matching shared shapes across tiles" loading="lazy" />
+        </div>
+
+        <div class="feature-block">
+          <h3>Peel</h3>
+          <p>Strip a layer to reveal what’s under.</p>
+          <img class="section-media" src="assets/feature_peel.png" width="1200" height="900" alt="Peeling a layer from a nested tile" loading="lazy" />
+        </div>
+
+        <div class="feature-block">
+          <h3>Combo</h3>
+          <p>Chain clears for longer runs.</p>
+          <img class="section-media" src="assets/feature_combo.png" width="1200" height="900" alt="Chaining combo clears on the board" loading="lazy" />
+        </div>
+      </section>
+
+      <section class="section wide board-section" aria-labelledby="board-heading">
+        <h2 id="board-heading">On the board</h2>
+        <p>Portrait energy. Dense nests. Pigment you can feel.</p>
+        <img class="section-media" src="assets/board_snippet.png" width="1600" height="1000" alt="Gameplay board snippet from Shapes" loading="lazy" />
+      </section>
+
+      <section class="section wide" aria-labelledby="shapes-heading">
+        <h2 id="shapes-heading">The catalog</h2>
+        <p>Circles, diamonds, stars, and friends — sizes nested, pigments stacked.</p>
+        <img class="section-media" src="assets/shape_row.png" width="1800" height="320" alt="Row of Shapes catalog silhouettes" loading="lazy" />
+      </section>
+
+      <img class="pigment-rule" src="assets/palette_strip.png" width="1200" height="240" alt="" loading="lazy" />
+
+      <footer>
+        <p>
+          <a href="./">Shapes</a>
+          ·
+          <a href="../spaceblox/">Spaceblox</a>
+          ·
+          <a href="privacy-policy.html">Privacy</a>
+        </p>
+      </footer>
+    </div>
+  </main>
 </body>
 </html>

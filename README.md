@@ -47,10 +47,8 @@ If AdMob lists extra `RESELLER` rows, paste those into the **root** `app-ads.txt
     space-bg.css / space-bg.js
     assets/
   shapes/
-    index.html         ← WIP placeholder landing
+    index.html         ← kit-based marketing landing (WIP)
     privacy-policy.html
     shared.css
-    shapes-bg.css
-    icon.svg
-    og.svg
+    assets/            ← graphics from shapes web_kit (heroes, icons, features, OG)
 ```
