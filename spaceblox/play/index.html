@@ -3,10 +3,10 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-		<!-- Google tag (gtag.js) -->
+		<!-- Google tag (gtag.js). Banner stays off this canvas; choice is saved site-wide. -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-N1W5TP9WDN"></script>
 		<script src="/ga.js"></script>
-		<title>Spaceblox - Play</title>
+		<title>Spaceblox</title>
 		<meta name="description" content="Spaceblox — calm color-logic puzzles in deep space. Play free in your browser." />
 		<link rel="canonical" href="https://geeks0n-byte.github.io/spaceblox/play/" />
 		<meta property="og:type" content="website" />
@@ -21,8 +21,7 @@
 		<meta name="twitter:title" content="Spaceblox" />
 		<meta name="twitter:description" content="Calm color-logic puzzles in deep space. Play free in your browser." />
 		<meta name="twitter:image" content="https://geeks0n-byte.github.io/spaceblox/play/og-share.png" />
-<style>
-
+		<style>
 @font-face {
 	font-family: "Press Start 2P";
 	src: url("PressStart2P.ttf") format("truetype");
@@ -30,6 +29,7 @@
 	font-style: normal;
 	font-display: block;
 }
+
 html, body, #canvas {
 	margin: 0;
 	padding: 0;
@@ -68,6 +68,7 @@ body {
 	visibility: hidden;
 }
 
+/* Match in-game LoadingOverlay dim on the boot void. */
 #status::before {
 	content: "";
 	position: absolute;
@@ -165,12 +166,12 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":7634852,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":7686312,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
 (function () {
-		const statusOverlay = document.getElementById('status');
+	const statusOverlay = document.getElementById('status');
 	const statusProgress = document.getElementById('status-progress');
 	const statusLoading = document.getElementById('status-loading');
 	const statusNotice = document.getElementById('status-notice');
@@ -274,6 +275,7 @@ const engine = new Engine(GODOT_CONFIG);
 			} catch (err) {
 				serviceWorkerRegistrationPromise = Promise.reject(new Error('Service worker registration failed.'));
 			}
+			// There's a chance that installing the service worker would fix the issue
 			Promise.race([
 				serviceWorkerRegistrationPromise.then((registration) => {
 					if (registration != null) {
@@ -281,15 +283,18 @@ const engine = new Engine(GODOT_CONFIG);
 					}
 					return registration;
 				}).then(() => engine.installServiceWorker()),
+				// For some reason, `getRegistration()` can stall
 				new Promise((resolve) => {
 					setTimeout(() => resolve(), 2000);
 				}),
 			]).then(() => {
+				// Reload if there was no error.
 				window.location.reload();
 			}).catch((err) => {
 				console.error('Error while registering service worker:', err);
 			});
 		} else {
+			// Display the message as usual
 			const missingMsg = 'Error\nThe following features required to run Godot projects on the Web are missing:\n';
 			displayFailureNotice(missingMsg + missing.join('\n'));
 		}
@@ -297,6 +302,7 @@ const engine = new Engine(GODOT_CONFIG);
 		setStatusMode('progress');
 		engine.startGame({
 			'onProgress': function (_current, _total) {
+				// Keep the animated LOADING label; no native progress bar.
 			},
 		}).then(() => {
 			setStatusMode('hidden');
