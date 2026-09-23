@@ -49,6 +49,9 @@
     }
     .tiles-row .tiles,
     .tiles-row .play-badge { align-self: center; }
+    .tiles-row .web-play {
+      width: calc(4 * 40px + 3 * 0.45rem);
+    }
     .tiles-row .play-badge {
       margin: 0 -0.45rem;
     }
@@ -302,6 +305,10 @@
       height: auto;
     }
     a.web-play {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
       font-family: "PressStart2P", monospace;
       font-size: 0.5rem;
       letter-spacing: 0.03em;
@@ -366,6 +373,7 @@
     }
     @media (max-width: 420px) {
       .tiles img { width: 34px; height: 34px; }
+      .tiles-row .web-play { width: calc(4 * 34px + 3 * 0.45rem); }
       .shots-track figure { width: 118px; flex: 0 0 118px; }
       h2 { font-size: 0.82rem; }
     }
