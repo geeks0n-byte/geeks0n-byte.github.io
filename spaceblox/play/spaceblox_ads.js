@@ -169,9 +169,7 @@
       spec.adDismissed = function () {
         finish(false);
       };
-      // Prefer reward callbacks over generic afterAd.
       spec.afterAd = function () {};
-      spec.adBreakDone = function () {};
     }
 
     try {
@@ -221,6 +219,9 @@
           finish(true);
         },
         adDismissed: function () {
+          finish(false);
+        },
+        adBreakDone: function () {
           finish(false);
         },
       });
