@@ -57,8 +57,10 @@
       max-width: 100%;
     }
     .tiles-stack .web-play {
-      width: 100%;
+      /* Tile art has 1px of empty margin in a 16px frame. */
+      width: calc(100% - 5px);
       min-width: 0;
+      justify-self: center;
     }
     .tiles-row .play-badge {
       margin: 0 -0.45rem;
@@ -328,7 +330,7 @@
       line-height: 1;
       background-color: #1a1a1a;
       background-image: none;
-      box-shadow: inset 1px 1px 0 #3a3a3a, inset -1px -1px 0 #0a0a0a;
+      box-shadow: inset 2px 2px 0 #3a3a3a, inset -2px -2px 0 #0a0a0a;
       image-rendering: pixelated;
       outline: none;
     }
@@ -380,6 +382,7 @@
     }
     @media (max-width: 420px) {
       .tiles img { width: 34px; height: 34px; }
+      .tiles-stack .web-play { width: calc(100% - 4.25px); }
       .shots-track figure { width: 118px; flex: 0 0 118px; }
       h2 { font-size: 0.82rem; }
     }
