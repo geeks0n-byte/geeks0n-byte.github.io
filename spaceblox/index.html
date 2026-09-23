@@ -51,19 +51,27 @@
     .tiles-row .play-badge { align-self: center; }
     .tiles-stack {
       display: inline-grid;
+      grid-template-columns: max-content;
       justify-items: stretch;
       gap: 0.85rem;
       width: max-content;
       max-width: 100%;
     }
-    .tiles-stack .web-play {
+    .tiles-stack .tiles { width: max-content; }
+    .tiles-stack .web-play,
+    .tiles-stack .play-badge {
       /* Tile art has 1px of empty margin in a 16px frame. */
-      width: calc(100% - 5px);
-      min-width: 0;
+      width: 0;
+      min-width: calc(100% - 5px);
       justify-self: center;
     }
-    .tiles-row .play-badge {
-      margin: 0 -0.45rem;
+    .tiles-stack .play-badge {
+      margin: 0;
+    }
+    .tiles-stack .play-badge img,
+    .cta-stack .play-badge img {
+      width: 100%;
+      height: auto;
     }
 
     @media (min-width: 900px) {
@@ -112,7 +120,7 @@
         transform: translateX(calc(-1.5rem - 6px)) translateY(-0.85rem);
       }
       .tiles-row .play-badge {
-        margin: -0.55rem -0.45rem;
+        margin: 0;
       }
     }
 
@@ -299,20 +307,19 @@
       width: 100%;
       max-width: min(100%, 700px);
       margin: 2.75rem auto 0;
-      text-align: center;
       display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      align-items: center;
       justify-content: center;
     }
-    .cta-end .play-badge {
-      margin: 0;
-      display: inline-flex;
+    .cta-stack {
+      display: inline-grid;
+      grid-template-columns: max-content;
+      justify-items: stretch;
+      gap: 0.85rem;
     }
-    .cta-end .play-badge img {
-      width: 196px;
-      height: auto;
+    .cta-stack .play-badge {
+      width: 0;
+      min-width: 100%;
+      margin: 0;
     }
     a.web-play {
       display: inline-flex;
@@ -352,9 +359,6 @@
         padding: 0.85rem 0.45rem;
       }
     }
-    @media (max-width: 860px) {
-      .cta-end .play-badge img { width: min(196px, 58vw); }
-    }
 
     footer {
       margin-top: 3rem;
@@ -391,7 +395,8 @@
     }
     @media (max-width: 420px) {
       .tiles img { width: 34px; height: 34px; }
-      .tiles-stack .web-play { width: calc(100% - 4.25px); }
+      .tiles-stack .web-play,
+      .tiles-stack .play-badge { min-width: calc(100% - 4.25px); }
       .shots-track figure { width: 118px; flex: 0 0 118px; }
       h2 { font-size: 0.82rem; }
     }
@@ -438,10 +443,10 @@
             <img src="assets/tile_shifter.svg" alt="Special purple tile" width="40" height="40" />
           </div>
           <a class="web-play" href="play/">PLAY IN BROWSER</a>
+          <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" aria-label="Get it on Google Play">
+            <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" />
+          </a>
         </div>
-        <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" aria-label="Get it on Google Play">
-          <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" />
-        </a>
       </div>
     </section>
 
@@ -513,10 +518,12 @@
     </section>
 
     <div class="cta-end">
-      <a class="web-play" href="play/">PLAY IN BROWSER</a>
-      <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" aria-label="Get it on Google Play">
-        <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" />
-      </a>
+      <div class="cta-stack">
+        <a class="web-play" href="play/">PLAY IN BROWSER</a>
+        <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" aria-label="Get it on Google Play">
+          <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" />
+        </a>
+      </div>
     </div>
 
     <footer>
