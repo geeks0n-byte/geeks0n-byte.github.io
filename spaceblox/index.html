@@ -49,8 +49,16 @@
     }
     .tiles-row .tiles,
     .tiles-row .play-badge { align-self: center; }
-    .tiles-row .web-play {
-      width: calc(4 * 40px + 3 * 0.45rem);
+    .tiles-stack {
+      display: inline-grid;
+      justify-items: stretch;
+      gap: 0.85rem;
+      width: max-content;
+      max-width: 100%;
+    }
+    .tiles-stack .web-play {
+      width: 100%;
+      min-width: 0;
     }
     .tiles-row .play-badge {
       margin: 0 -0.45rem;
@@ -310,18 +318,17 @@
       justify-content: center;
       box-sizing: border-box;
       font-family: "PressStart2P", monospace;
-      font-size: 0.5rem;
+      font-size: 0.58rem;
       letter-spacing: 0.03em;
       color: #ffffff;
       text-decoration: none;
       text-shadow: 1px 1px 0 #000a;
       white-space: nowrap;
-      padding: 0.8rem 1rem;
+      padding: 0.72rem 0.4rem;
       line-height: 1;
       background-color: #1a1a1a;
-      background-image: url("assets/button_bar_gray_dark.svg?v=ingame3");
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
+      background-image: none;
+      box-shadow: inset 1px 1px 0 #3a3a3a, inset -1px -1px 0 #0a0a0a;
       image-rendering: pixelated;
       outline: none;
     }
@@ -373,7 +380,6 @@
     }
     @media (max-width: 420px) {
       .tiles img { width: 34px; height: 34px; }
-      .tiles-row .web-play { width: calc(4 * 34px + 3 * 0.45rem); }
       .shots-track figure { width: 118px; flex: 0 0 118px; }
       h2 { font-size: 0.82rem; }
     }
@@ -412,13 +418,15 @@
         </p>
       </div>
       <div class="tiles-row">
-        <div class="tiles" aria-label="In-game tiles">
-          <img src="assets/tile_yellow.svg" alt="Yellow tile" width="40" height="40" />
-          <img src="assets/tile_blue.svg" alt="Blue tile" width="40" height="40" />
-          <img src="assets/tile_green.svg" alt="Green tile" width="40" height="40" />
-          <img src="assets/tile_shifter.svg" alt="Special purple tile" width="40" height="40" />
+        <div class="tiles-stack">
+          <div class="tiles" aria-label="In-game tiles">
+            <img src="assets/tile_yellow.svg" alt="Yellow tile" width="40" height="40" />
+            <img src="assets/tile_blue.svg" alt="Blue tile" width="40" height="40" />
+            <img src="assets/tile_green.svg" alt="Green tile" width="40" height="40" />
+            <img src="assets/tile_shifter.svg" alt="Special purple tile" width="40" height="40" />
+          </div>
+          <a class="web-play" href="play/">PLAY IN BROWSER</a>
         </div>
-        <a class="web-play" href="play/">PLAY IN BROWSER</a>
         <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" aria-label="Get it on Google Play">
           <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" />
         </a>
