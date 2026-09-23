@@ -126,15 +126,41 @@
   function showAdBreak(type, name, onDone, onReward) {
     ensureAdsbyGoogle();
     var finished = false;
+    var settledStatus = "";
+    var adVisible = false;
+    var watchdog = 0;
+    function clearWatchdog() {
+      if (watchdog) {
+        global.clearTimeout(watchdog);
+        watchdog = 0;
+      }
+    }
+    function armWatchdog(ms) {
+      clearWatchdog();
+      watchdog = global.setTimeout(function () {
+        watchdog = 0;
+        finish(false, "timeout");
+      }, ms);
+    }
     function finish(rewarded, status) {
+      var next = status || (rewarded ? "viewed" : "notShown");
+      // A break queued before adsbygoogle.js is ready never calls adBreakDone.
+      // The timeout continues the game; a later real completion still reports so
+      // the pause can be released without starting a second puzzle.
       if (finished) {
+        if (settledStatus === "timeout") {
+          settledStatus = next;
+          callGodot(onDone, next);
+        }
         return;
       }
       finished = true;
+      settledStatus = next;
+      clearWatchdog();
       if (rewarded && onReward) {
         callGodot(onReward, 1);
       }
-      callGodot(onDone, status || (rewarded ? "viewed" : "notShown"));
+      callGodot(onDone, next);
     }
 
     if (typeof global.adBreak !== "function") {
@@ -146,7 +172,11 @@
     var spec = {
       type: type || "browse",
       name: name || "spaceblox",
-      beforeAd: function () {},
+      beforeAd: function () {
+        adVisible = true;
+        armWatchdog(45000);
+        callGodot(onDone, "before");
+      },
       afterAd: function () {},
       adBreakDone: function (info) {
         var status = info && info.breakStatus ? String(info.breakStatus) : "other";
@@ -174,6 +204,9 @@
 
     try {
       global.adBreak(spec);
+      if (!finished && !adVisible) {
+        armWatchdog(2500);
+      }
       return true;
     } catch (err) {
       console.warn("SpacebloxAds adBreak error", err);
