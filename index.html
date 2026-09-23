@@ -16,11 +16,10 @@
   <meta property="og:url" content="https://geeks0n-byte.github.io/" />
   <meta property="og:title" content="geeks0n-byte" />
   <meta property="og:description" content="Indie puzzles: Spaceblox and Shapes." />
-  <meta property="og:image" content="https://geeks0n-byte.github.io/spaceblox/assets/feature.png" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="geeks0n-byte" />
   <meta name="twitter:description" content="Indie puzzles: Spaceblox and Shapes." />
-  <link rel="icon" href="/spaceblox/assets/icon_512.png" type="image/png" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet" />
@@ -75,14 +74,11 @@
     }
     .game:hover { border-color: var(--yellow); transform: translateY(-1px); }
     .game:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; }
-    .game img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-      display: block;
-      aspect-ratio: 16 / 10;
+    .game-mark {
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
       object-fit: cover;
-      background: #0f1319;
     }
     .game h2 {
       margin: 0;
@@ -125,13 +121,13 @@
 
     <div class="games">
       <a class="game" href="/spaceblox/">
-        <img src="/spaceblox/assets/feature.png" width="1024" height="500" alt="Spaceblox" />
+        <img class="game-mark" src="/spaceblox/assets/icon_512.png" width="72" height="72" alt="" />
         <span class="badge live">Out now</span>
         <h2>Spaceblox</h2>
         <p>Calm color logic in deep space. Play in browser or on Google Play.</p>
       </a>
       <a class="game" href="/shapes/">
-        <img src="/shapes/assets/og_share.png" width="1200" height="630" alt="Shapes" />
+        <img class="game-mark" src="/shapes/assets/logo_mark.png" width="72" height="72" alt="" />
         <span class="badge">Coming soon</span>
         <h2>Shapes</h2>
         <p>Match a shape. Peel a layer. Build combos.</p>
@@ -141,9 +137,7 @@
     <footer>
       <a href="/spaceblox/privacy-policy.html">Privacy</a>
       ·
-      <a href="/spaceblox/">Spaceblox</a>
-      ·
-      <a href="/shapes/">Shapes</a>
+      <a href="#cookies" data-consent-open>Cookies</a>
     </footer>
   </div>
   <script src="/consent.js" defer></script>

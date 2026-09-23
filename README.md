@@ -36,12 +36,11 @@ AdMob crawls `app-ads.txt` at the **root** of the Play Console developer website
   google03499aee60edbd13.html
   spaceblox/
     index.html, privacy-policy.html, play/, assets/, …
-    ga.js              ← same logic as /ga.js (legacy path)
   shapes/
     index.html, privacy-policy.html, shared.css, assets/
 ```
 
 ## Notes
 
-- Play PWA service worker keeps **COEP injection off** so AdSense/gtag can load on static hosts.
-- After changing play SW cache version, hard-refresh or clear the Spaceblox SW once.
+- Play export keeps **cross-origin isolation off** (`ensure_cross_origin_isolation_headers=false` in the Web preset) so AdSense and Analytics can load. The custom shell loads `/ga.js` and does not show the consent bar over the canvas.
+- Analytics config lives in root `/ga.js` only.

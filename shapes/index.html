@@ -42,13 +42,6 @@
       padding: 0.5rem 0 0;
     }
 
-    .hero-mark {
-      width: 88px;
-      height: 88px;
-      border-radius: 20px;
-      box-shadow: 0 0 0 1px var(--line);
-    }
-
     .hero-title {
       margin: 0;
       font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
@@ -235,48 +228,6 @@
     .shots-track figure.is-portrait img { aspect-ratio: 9 / 16; object-fit: cover; }
     .shots-track figure.is-square img { aspect-ratio: 1 / 1; object-fit: contain; }
 
-    #trailer {
-      width: 100%;
-      max-width: min(100%, 700px);
-      margin-inline: auto;
-    }
-
-    .trailer-frame {
-      position: relative;
-      width: min(100%, 420px);
-      margin-inline: auto;
-      aspect-ratio: 16 / 9;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 2px solid var(--line);
-      background: var(--black);
-      box-shadow: 0 12px 32px #0006;
-    }
-
-    .trailer-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.45;
-    }
-
-    .trailer-label {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      margin: 0;
-      padding: 1rem;
-      font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
-      font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-align: center;
-      background: linear-gradient(180deg, transparent 20%, rgba(36, 41, 48, 0.75) 100%);
-    }
-
     .cta-end {
       display: flex;
       flex-wrap: wrap;
@@ -287,7 +238,6 @@
 
     @media (max-width: 860px) {
       .hero { gap: 0.9rem; }
-      .hero-mark { width: 72px; height: 72px; border-radius: 16px; }
       .shots-track figure { width: 180px; flex: 0 0 180px; }
       .shots-track figure.is-portrait { width: 120px; flex: 0 0 120px; }
     }
@@ -307,7 +257,6 @@
     </header>
 
     <section class="hero">
-      <img class="hero-mark" src="assets/logo_mark.png" width="88" height="88" alt="" fetchpriority="high" />
       <h1 class="hero-title">Shapes</h1>
       <div class="pigment-bar" aria-hidden="true">
         <span class="r"></span><span class="y"></span><span class="b"></span><span class="g"></span><span class="w"></span>
@@ -352,15 +301,6 @@
       </div>
     </section>
 
-    <section id="trailer" aria-labelledby="trailer-heading">
-      <h2 id="trailer-heading">Trailer</h2>
-      <p class="section-note">Placeholder until the real trailer is ready.</p>
-      <div class="trailer-frame">
-        <img src="assets/hero_landscape.png" alt="" />
-        <p class="trailer-label">Trailer coming soon</p>
-      </div>
-    </section>
-
     <div class="cta-end">
       <span class="cta" aria-disabled="true">Coming soon</span>
     </div>
@@ -371,6 +311,8 @@
         <a href="/">Studio</a>
         ·
         <a href="privacy-policy.html">Privacy Policy</a>
+        ·
+        <a href="#cookies" data-consent-open>Cookies</a>
       </div>
     </footer>
   </div>
