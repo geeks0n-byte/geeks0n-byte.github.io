@@ -109,11 +109,9 @@ body {
 	transform: translate(-50%, -50%);
 	z-index: 1;
 	display: none;
-	/* Reserve full "LOADING..." width so dots don't shift the label */
-	width: 11ch;
-	box-sizing: content-box;
 	font-family: "Press Start 2P", monospace;
-	font-size: clamp(18px, 3.4vw, 36px);
+	/* 36px on the 1080×1920 game view, same scale the in-game label uses. */
+	font-size: clamp(12px, min(3.333vw, 1.875vh), 36px);
 	line-height: 1.35;
 	color: #ffffff;
 	text-align: left;
@@ -122,6 +120,35 @@ body {
 	user-select: none;
 	white-space: pre;
 	pointer-events: none;
+}
+
+#status-loading .loading-dot {
+	display: inline-block;
+	opacity: 0;
+	will-change: opacity;
+	animation-duration: 1.8s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+
+#status-loading .loading-dot:nth-of-type(1) { animation-name: loading-dot-1; }
+#status-loading .loading-dot:nth-of-type(2) { animation-name: loading-dot-2; }
+#status-loading .loading-dot:nth-of-type(3) { animation-name: loading-dot-3; }
+
+/* Four 0.45s steps: one dot, two, three, then blank. Opacity keeps moving while wasm compiles. */
+@keyframes loading-dot-1 {
+	0%, 74.99% { opacity: 1; }
+	75%, 100% { opacity: 0; }
+}
+@keyframes loading-dot-2 {
+	0%, 24.99% { opacity: 0; }
+	25%, 74.99% { opacity: 1; }
+	75%, 100% { opacity: 0; }
+}
+@keyframes loading-dot-3 {
+	0%, 49.99% { opacity: 0; }
+	50%, 74.99% { opacity: 1; }
+	75%, 100% { opacity: 0; }
 }
 
 #status-notice {
@@ -159,7 +186,7 @@ body {
 
 		<div id="status">
 			<img id="status-splash" class="show-image--false fullsize--true use-filter--true" src="index.png" alt="">
-			<div id="status-loading" aria-live="polite">LOADING.</div>
+			<div id="status-loading" aria-label="Loading">LOADING<span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span></div>
 			<progress id="status-progress"></progress>
 			<div id="status-notice"></div>
 		</div>
@@ -178,49 +205,12 @@ const engine = new Engine(GODOT_CONFIG);
 
 	let initializing = true;
 	let statusMode = '';
-	let loadingDots = 1;
-	let loadingTimer = null;
-	const LOADING_BASE = 'LOADING';
-	const DOT_INTERVAL_MS = 450;
-
-	function refreshLoadingLabel() {
-		if (!statusLoading) {
-			return;
-		}
-		// Always occupy 3 dot slots (nbsp when empty) so the label stays centered.
-		const dots = loadingDots;
-		let tail = '';
-		for (let i = 1; i <= 3; i++) {
-			tail += i <= dots ? '.' : '\u00A0';
-		}
-		statusLoading.textContent = LOADING_BASE + tail;
-	}
-
-	function startLoadingDots() {
-		if (loadingTimer !== null) {
-			return;
-		}
-		loadingDots = 1;
-		refreshLoadingLabel();
-		loadingTimer = window.setInterval(function () {
-			loadingDots = loadingDots >= 3 ? 1 : loadingDots + 1;
-			refreshLoadingLabel();
-		}, DOT_INTERVAL_MS);
-	}
-
-	function stopLoadingDots() {
-		if (loadingTimer !== null) {
-			window.clearInterval(loadingTimer);
-			loadingTimer = null;
-		}
-	}
 
 	function setStatusMode(mode) {
 		if (statusMode === mode || !initializing) {
 			return;
 		}
 		if (mode === 'hidden') {
-			stopLoadingDots();
 			statusOverlay.remove();
 			initializing = false;
 			return;
@@ -228,11 +218,6 @@ const engine = new Engine(GODOT_CONFIG);
 		statusOverlay.style.visibility = 'visible';
 		if (statusLoading) {
 			statusLoading.style.display = mode === 'progress' ? 'block' : 'none';
-		}
-		if (mode === 'progress') {
-			startLoadingDots();
-		} else {
-			stopLoadingDots();
 		}
 		statusProgress.style.display = 'none';
 		statusNotice.style.display = mode === 'notice' ? 'block' : 'none';
@@ -300,13 +285,17 @@ const engine = new Engine(GODOT_CONFIG);
 		}
 	} else {
 		setStatusMode('progress');
-		engine.startGame({
-			'onProgress': function (_current, _total) {
-				// Keep the animated LOADING label; no native progress bar.
-			},
-		}).then(() => {
-			setStatusMode('hidden');
-		}, displayFailureNotice);
+		// Paint the CSS dots before wasm compilation blocks the main thread.
+		const start = () => {
+			engine.startGame({
+				'onProgress': function (_current, _total) {
+					// Keep the animated LOADING label; no native progress bar.
+				},
+			}).then(() => {
+				setStatusMode('hidden');
+			}, displayFailureNotice);
+		};
+		requestAnimationFrame(() => requestAnimationFrame(start));
 	}
 }());
 		</script>
