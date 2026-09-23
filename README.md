@@ -43,4 +43,5 @@ AdMob crawls `app-ads.txt` at the **root** of the Play Console developer website
 ## Notes
 
 - Play export keeps **cross-origin isolation off** (`ensure_cross_origin_isolation_headers=false` in the Web preset) so AdSense and Analytics can load. The custom shell loads `/ga.js` and does not show the consent bar over the canvas.
+- Exclude `google-services.json` and `google-services-spaceblox.json` from the Web export. Those Android Firebase files contain an API key and must not ship in `/spaceblox/play/`.
 - Analytics config lives in root `/ga.js` only.
