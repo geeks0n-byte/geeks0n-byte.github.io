@@ -215,6 +215,9 @@
             finish(false);
           }
         },
+        beforeAd: function () {
+          callGodot(onResult, 2);
+        },
         adViewed: function () {
           finish(true);
         },
