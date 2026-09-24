@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1790291887|17389499';
+const CACHE_VERSION = '1790293205|19298990';
 /** @type {string} */
 const CACHE_PREFIX = 'Spaceblox-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
