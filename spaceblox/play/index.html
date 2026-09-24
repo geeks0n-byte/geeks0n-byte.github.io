@@ -36,7 +36,7 @@ html, body, #canvas {
 	border: 0;
 }
 
-body {
+html, body {
 	color: white;
 	background-color: #00123a;
 	overflow: hidden;
@@ -193,11 +193,49 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":7703940,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":0,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":7703940,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
 (function () {
+	const canvas = document.getElementById('canvas');
+	const baseAspect = 1080 / 1920;
+
+	// canvas_resize_policy 0: Godot uses the canvas buffer as the window.
+	function fitPlayCanvas() {
+		const vw = window.innerWidth;
+		const vh = window.innerHeight;
+		if (vw < 1 || vh < 1) {
+			return;
+		}
+		let cssW = vw;
+		let cssH = vh;
+		if (vw / vh > baseAspect) {
+			cssH = vh;
+			cssW = Math.min(vw, Math.round(vh * baseAspect));
+		}
+		const scale = window.devicePixelRatio || 1;
+		const bufW = Math.max(1, Math.floor(cssW * scale));
+		const bufH = Math.max(1, Math.floor(cssH * scale));
+		if (canvas.width !== bufW) {
+			canvas.width = bufW;
+		}
+		if (canvas.height !== bufH) {
+			canvas.height = bufH;
+		}
+		canvas.style.position = 'absolute';
+		canvas.style.width = cssW + 'px';
+		canvas.style.height = cssH + 'px';
+		canvas.style.left = Math.floor((vw - cssW) / 2) + 'px';
+		canvas.style.top = Math.floor((vh - cssH) / 2) + 'px';
+	}
+
+	window.addEventListener('resize', fitPlayCanvas);
+	if (window.visualViewport) {
+		window.visualViewport.addEventListener('resize', fitPlayCanvas);
+	}
+	fitPlayCanvas();
+
 	const statusOverlay = document.getElementById('status');
 	const statusProgress = document.getElementById('status-progress');
 	const statusLoading = document.getElementById('status-loading');
