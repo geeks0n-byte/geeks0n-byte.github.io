@@ -287,14 +287,12 @@
       background: #000;
       box-shadow: 0 16px 40px #0006;
     }
-    .trailer-frame video {
+    .trailer-frame iframe {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
-      max-width: none;
-      object-fit: contain;
-      background: #000;
+      border: 0;
       display: block;
     }
     @media (max-width: 860px) {
@@ -525,16 +523,15 @@
     <section id="trailer" aria-labelledby="trailer-heading">
       <h2 id="trailer-heading">TRAILER</h2>
       <div class="trailer-frame">
-        <video
-          controls
-          playsinline
-          preload="metadata"
-          width="1080"
-          height="1920"
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/SgMDnckUF-I"
+          title="Spaceblox trailer"
           aria-label="Spaceblox trailer"
-        >
-          <source src="assets/trailer_1080x1920_60fps.mp4" type="video/mp4" />
-        </video>
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
       </div>
     </section>
 
