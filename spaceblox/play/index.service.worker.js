@@ -36,12 +36,6 @@ self.addEventListener('activate', (event) => {
 		return ('navigationPreload' in self.registration) ? self.registration.navigationPreload.enable() : Promise.resolve();
 	}).then(function () {
 		return self.clients.claim();
-	}).then(function () {
-		return self.clients.matchAll({ type: 'window' });
-	}).then(function (windowClients) {
-		return Promise.all(windowClients.map(function (client) {
-			return client.navigate(client.url);
-		}));
 	}));
 });
 
