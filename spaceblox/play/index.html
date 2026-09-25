@@ -201,7 +201,17 @@ const engine = new Engine(GODOT_CONFIG);
 	// Adopt service-worker updates during this load. The export plugin makes
 	// index.pck network-first and claims clients, so a stale pack cannot stick
 	// after a publish. Registration is idempotent when a worker already exists.
+	// Reload once when a worker takes control. client.navigate() from the worker
+	// throws on a client it does not control yet; this page hook is the reload.
 	if ('serviceWorker' in navigator && GODOT_CONFIG['serviceWorker']) {
+		var reloadedForWorker = false;
+		navigator.serviceWorker.addEventListener('controllerchange', function () {
+			if (reloadedForWorker) {
+				return;
+			}
+			reloadedForWorker = true;
+			window.location.reload();
+		});
 		navigator.serviceWorker.register(GODOT_CONFIG['serviceWorker']).catch(function (err) {
 			console.error('Error while registering service worker:', err);
 		});
