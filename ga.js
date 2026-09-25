@@ -42,7 +42,13 @@ function gtag() {
     var el = document.createElement("script");
     el.async = true;
     el.src = src;
-    if (src.indexOf("adsbygoogle.js") !== -1) el.crossOrigin = "anonymous";
+    if (src.indexOf("adsbygoogle.js") !== -1) {
+      el.crossOrigin = "anonymous";
+      // H5 games ad cadence for the play export. Marketing pages ignore the hint.
+      if (location.pathname.indexOf("/spaceblox/play") === 0) {
+        el.setAttribute("data-ad-frequency-hint", "30s");
+      }
+    }
     document.head.appendChild(el);
   }
 
