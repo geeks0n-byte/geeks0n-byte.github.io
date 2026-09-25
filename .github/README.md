@@ -1,5 +1,7 @@
 # geeks0n-byte.github.io
 
+This file lives in `.github/` so the repository page still shows it. Pages publishes `main` as-is because `.nojekyll` is present. The readme is not at the repo root, so the site does not serve `/README.md`.
+
 GitHub Pages site for geeks0n-byte games:
 
 | URL | Purpose |
@@ -29,7 +31,7 @@ AdMob crawls `app-ads.txt` at the **root** of the Play Console developer website
 ```
 /
   index.html           ← studio hub
-  ga.js                ← GA4 + Consent Mode defaults
+  ga.js                ← GA4 + AdSense, injected only after Accept
   consent.js           ← Accept / Reject banner
   app-ads.txt / ads.txt
   robots.txt / sitemap.xml
