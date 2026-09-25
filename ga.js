@@ -85,7 +85,6 @@ function gtag() {
 
   whenReady(function () {
     if (read() === "granted") loadGoogle();
-    else if (hasScript("googletagmanager.com/gtag/js")) configGa();
   });
 
   window.Geeks0nConsent = {
