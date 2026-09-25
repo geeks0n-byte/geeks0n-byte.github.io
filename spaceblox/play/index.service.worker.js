@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1790293205|19298990';
+const CACHE_VERSION = '1790294661|19219502';
 /** @type {string} */
 const CACHE_PREFIX = 'Spaceblox-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
@@ -21,6 +21,7 @@ const CACHEABLE_FILES = ["index.wasm","index.pck"];
 const FULL_CACHE = CACHED_FILES.concat(CACHEABLE_FILES);
 
 self.addEventListener('install', (event) => {
+	self.skipWaiting();
 	event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(CACHED_FILES)));
 });
 
@@ -33,6 +34,14 @@ self.addEventListener('activate', (event) => {
 	).then(function () {
 		// Enable navigation preload if available.
 		return ('navigationPreload' in self.registration) ? self.registration.navigationPreload.enable() : Promise.resolve();
+	}).then(function () {
+		return self.clients.claim();
+	}).then(function () {
+		return self.clients.matchAll({ type: 'window' });
+	}).then(function (windowClients) {
+		return Promise.all(windowClients.map(function (client) {
+			return client.navigate(client.url);
+		}));
 	}));
 });
 
@@ -119,6 +128,21 @@ self.addEventListener(
 							console.error('Network error: ', e); // eslint-disable-line no-console
 							return caches.match(OFFLINE_URL);
 						}
+					}
+				}
+				const preferNetwork = local === 'index.pck' || local === 'index.wasm';
+				if (preferNetwork) {
+					try {
+						let networked = await event.preloadResponse;
+						if (networked == null) {
+							networked = await self.fetch(event.request);
+						}
+						if (networked && networked.ok) {
+							cache.put(event.request, networked.clone());
+							return networked;
+						}
+					} catch (e) {
+						console.error('Network error: ', e); // eslint-disable-line no-console
 					}
 				}
 				let cached = await cache.match(event.request);

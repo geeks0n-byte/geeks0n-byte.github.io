@@ -193,11 +193,20 @@ html, body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":0,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":7700932,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":0,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":7702916,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
 (function () {
+	// Adopt service-worker updates during this load. The export plugin makes
+	// index.pck network-first and claims clients, so a stale pack cannot stick
+	// after a publish. Registration is idempotent when a worker already exists.
+	if ('serviceWorker' in navigator && GODOT_CONFIG['serviceWorker']) {
+		navigator.serviceWorker.register(GODOT_CONFIG['serviceWorker']).catch(function (err) {
+			console.error('Error while registering service worker:', err);
+		});
+	}
+
 	const canvas = document.getElementById('canvas');
 	const baseAspect = 1080 / 1920;
 
