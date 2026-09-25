@@ -21,6 +21,29 @@
 
   var bannerHost = null;
   var bannerIns = null;
+  var lastInitOpts = null;
+
+  // /ga.js injects adsbygoogle.js only after Accept. Until then every break
+  // finishes immediately so a level clear or hint tap cannot wait forever.
+  function consentGranted() {
+    try {
+      return !!(
+        global.Geeks0nConsent &&
+        typeof global.Geeks0nConsent.get === "function" &&
+        global.Geeks0nConsent.get() === "granted"
+      );
+    } catch (err) {
+      return false;
+    }
+  }
+
+  function adsLibraryLoaded() {
+    return !!(global.adsbygoogle && global.adsbygoogle.loaded);
+  }
+
+  function adsHostReady() {
+    return consentGranted() && adsLibraryLoaded();
+  }
 
   function ensureAdsbyGoogle() {
     global.adsbygoogle = global.adsbygoogle || [];
@@ -58,6 +81,15 @@
     if (opts.test != null) {
       CFG.test = !!opts.test;
     }
+    lastInitOpts = {
+      client: CFG.client,
+      bannerSlot: CFG.bannerSlot,
+      test: CFG.test,
+    };
+    if (!consentGranted()) {
+      CFG.ready = false;
+      return true;
+    }
     ensureAdsbyGoogle();
     try {
       if (typeof global.adConfig === "function") {
@@ -84,7 +116,7 @@
   }
 
   function showBanner() {
-    if (!CFG.bannerSlot) {
+    if (!CFG.bannerSlot || !adsHostReady()) {
       return false;
     }
     ensureAdsbyGoogle();
@@ -163,7 +195,7 @@
       callGodot(onDone, next);
     }
 
-    if (typeof global.adBreak !== "function") {
+    if (!adsHostReady() || typeof global.adBreak !== "function") {
       console.warn("SpacebloxAds: adBreak unavailable");
       finish(false, "unavailable");
       return false;
@@ -220,19 +252,22 @@
   }
 
   function showRewarded(onResult) {
-    ensureAdsbyGoogle();
     var finished = false;
+    var idle = 0;
     function finish(rewarded) {
       if (finished) {
         return;
       }
       finished = true;
+      if (idle) {
+        global.clearTimeout(idle);
+        idle = 0;
+      }
       callGodot(onResult, rewarded ? 1 : 0);
     }
 
-    if (typeof global.adBreak !== "function") {
+    if (!adsHostReady() || typeof global.adBreak !== "function") {
       console.warn("SpacebloxAds: adBreak unavailable");
-      finish(false);
       return false;
     }
 
@@ -249,6 +284,10 @@
           }
         },
         beforeAd: function () {
+          if (idle) {
+            global.clearTimeout(idle);
+            idle = 0;
+          }
           callGodot(onResult, 2);
         },
         adViewed: function () {
@@ -261,12 +300,29 @@
           finish(false);
         },
       });
+      if (!finished) {
+        idle = global.setTimeout(function () {
+          idle = 0;
+          finish(false);
+        }, 2500);
+      }
       return true;
     } catch (err) {
       console.warn("SpacebloxAds rewarded error", err);
       finish(false);
       return false;
     }
+  }
+
+  if (global.document && global.document.documentElement) {
+    global.document.documentElement.addEventListener("geeks0n-consent", function (ev) {
+      var value = ev && ev.detail ? ev.detail.value : "";
+      if (value === "granted" && lastInitOpts) {
+        init(lastInitOpts);
+      } else if (value && value !== "granted") {
+        CFG.ready = false;
+      }
+    });
   }
 
   global.SpacebloxAds = {

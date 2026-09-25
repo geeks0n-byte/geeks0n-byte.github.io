@@ -1,7 +1,6 @@
 (function () {
   if (!window.Geeks0nConsent) return;
 
-  var onPlay = location.pathname.indexOf("/spaceblox/play") === 0;
   var privacyHref = location.pathname.indexOf("/shapes") === 0
     ? "/shapes/privacy-policy.html"
     : "/spaceblox/privacy-policy.html";
@@ -92,5 +91,5 @@
     show();
   });
 
-  if (!onPlay && !window.Geeks0nConsent.get()) show();
+  if (!window.Geeks0nConsent.get()) show();
 })();
