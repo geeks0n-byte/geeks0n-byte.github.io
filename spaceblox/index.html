@@ -58,7 +58,6 @@
       max-width: 100%;
     }
     .tiles-stack .tiles { width: max-content; }
-    .tiles-stack .web-play,
     .tiles-stack .play-badge {
       /* Tile art has 1px of empty margin in a 16px frame. */
       width: 0;
@@ -343,6 +342,10 @@
       box-shadow: none;
       image-rendering: pixelated;
       outline: none;
+      /* Same width as the tile row, minus the empty margin in each 16px frame. */
+      width: calc(4 * 40px + 3 * 0.45rem - 5px);
+      max-width: 100%;
+      justify-self: center;
     }
     a.web-play:hover { filter: brightness(1.12); color: #fff; }
     a.web-play:active {
@@ -395,8 +398,8 @@
     }
     @media (max-width: 420px) {
       .tiles img { width: 34px; height: 34px; }
-      .tiles-stack .web-play,
       .tiles-stack .play-badge { min-width: calc(100% - 4.25px); }
+      a.web-play { width: calc(4 * 34px + 3 * 0.45rem - 4.25px); }
       .shots-track figure { width: 118px; flex: 0 0 118px; }
       h2 { font-size: 0.82rem; }
     }
