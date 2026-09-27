@@ -192,7 +192,7 @@ html, body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":0,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":7704360,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":0,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":7704840,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
@@ -214,6 +214,35 @@ const engine = new Engine(GODOT_CONFIG);
 		navigator.serviceWorker.register(GODOT_CONFIG['serviceWorker']).catch(function (err) {
 			console.error('Error while registering service worker:', err);
 		});
+	}
+
+	// Godot resumes AudioContext only for canvas input. A press on the cookie
+	// banner never reaches it, so resume any context this page created.
+	var engineAudioContexts = [];
+	var NativeAudioContext = window.AudioContext || window.webkitAudioContext;
+	if (NativeAudioContext) {
+		var WrappedAudioContext = function (options) {
+			var ctx = arguments.length ? new NativeAudioContext(options) : new NativeAudioContext();
+			engineAudioContexts.push(ctx);
+			if (ctx.state === 'running') {
+				window.__sbxAudioRunning = true;
+			}
+			return ctx;
+		};
+		WrappedAudioContext.prototype = NativeAudioContext.prototype;
+		Object.setPrototypeOf(WrappedAudioContext, NativeAudioContext);
+		window.AudioContext = WrappedAudioContext;
+		window.webkitAudioContext = WrappedAudioContext;
+		var resumeEngineAudio = function () {
+			for (var i = 0; i < engineAudioContexts.length; i++) {
+				var audioCtx = engineAudioContexts[i];
+				if (audioCtx && audioCtx.state === 'suspended') {
+					audioCtx.resume();
+				}
+			}
+		};
+		document.addEventListener('pointerdown', resumeEngineAudio, true);
+		document.addEventListener('keydown', resumeEngineAudio, true);
 	}
 
 	const canvas = document.getElementById('canvas');
