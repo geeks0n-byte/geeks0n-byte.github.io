@@ -192,7 +192,7 @@ html, body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":0,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":7704840,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":0,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":7704584,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
@@ -221,12 +221,26 @@ const engine = new Engine(GODOT_CONFIG);
 	var engineAudioContexts = [];
 	var NativeAudioContext = window.AudioContext || window.webkitAudioContext;
 	if (NativeAudioContext) {
+		function noteAudioRunning(ctx) {
+			if (ctx && ctx.state === 'running') {
+				window.__sbxAudioRunning = true;
+			}
+		}
+		function resumeContext(audioCtx) {
+			if (!audioCtx || audioCtx.state !== 'suspended') {
+				return;
+			}
+			audioCtx.resume().then(function () {
+				noteAudioRunning(audioCtx);
+			}, function () {});
+		}
 		var WrappedAudioContext = function (options) {
 			var ctx = arguments.length ? new NativeAudioContext(options) : new NativeAudioContext();
 			engineAudioContexts.push(ctx);
-			if (ctx.state === 'running') {
-				window.__sbxAudioRunning = true;
-			}
+			ctx.addEventListener('statechange', function () {
+				noteAudioRunning(ctx);
+			});
+			noteAudioRunning(ctx);
 			return ctx;
 		};
 		WrappedAudioContext.prototype = NativeAudioContext.prototype;
@@ -235,10 +249,7 @@ const engine = new Engine(GODOT_CONFIG);
 		window.webkitAudioContext = WrappedAudioContext;
 		var resumeEngineAudio = function () {
 			for (var i = 0; i < engineAudioContexts.length; i++) {
-				var audioCtx = engineAudioContexts[i];
-				if (audioCtx && audioCtx.state === 'suspended') {
-					audioCtx.resume();
-				}
+				resumeContext(engineAudioContexts[i]);
 			}
 		};
 		document.addEventListener('pointerdown', resumeEngineAudio, true);
