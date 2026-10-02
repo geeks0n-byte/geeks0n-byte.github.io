@@ -6,7 +6,7 @@ GitHub Pages site for geeks0n-byte games:
 
 | URL | Purpose |
 | --- | --- |
-| https://geeks0n-byte.github.io/ | Home (Spaceblox + Shapes) |
+| https://geeks0n-byte.github.io/ | Home |
 | https://geeks0n-byte.github.io/about/ , /contact/ , /privacy-policy/ | About, contact, site privacy policy |
 | https://geeks0n-byte.github.io/devlog/ | Devlog index and posts |
 | https://geeks0n-byte.github.io/app-ads.txt | AdMob authorization (**site root**) |
@@ -14,7 +14,6 @@ GitHub Pages site for geeks0n-byte games:
 | https://geeks0n-byte.github.io/spaceblox/ | Spaceblox guide and landing |
 | https://geeks0n-byte.github.io/spaceblox/play/ | Spaceblox web (HTML5) build |
 | https://geeks0n-byte.github.io/spaceblox/privacy-policy.html | Copy of /privacy-policy/ (the app links here) |
-| https://geeks0n-byte.github.io/shapes/ | Shapes (in development) |
 
 AdMob crawls `app-ads.txt` at the **root** of the Play Console developer website
 (`https://geeks0n-byte.github.io/app-ads.txt`). Keep only that root file — not under game folders.
@@ -24,7 +23,7 @@ AdMob crawls `app-ads.txt` at the **root** of the Play Console developer website
 1. Public repository named exactly `geeks0n-byte.github.io`.
 2. Push to `main`.
 3. **Settings → Pages**: Deploy from branch `main`, folder `/ (root)`.
-4. Confirm root `app-ads.txt`, studio hub, `/spaceblox/`, `/shapes/`.
+4. Confirm root `app-ads.txt`, home page and `/spaceblox/`.
 5. In Play Console, set the developer **website** to `https://geeks0n-byte.github.io`.
 
 ## Local layout
@@ -40,8 +39,6 @@ AdMob crawls `app-ads.txt` at the **root** of the Play Console developer website
   google03499aee60edbd13.html
   spaceblox/
     index.html, privacy-policy.html, play/, assets/, …
-  shapes/
-    index.html, privacy-policy.html (points to /privacy-policy/), assets/
 ```
 
 ## Notes
