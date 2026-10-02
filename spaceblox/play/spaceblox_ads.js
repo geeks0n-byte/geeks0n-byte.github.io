@@ -21,28 +21,16 @@
 
   var bannerHost = null;
   var bannerIns = null;
-  var lastInitOpts = null;
 
-  // /ga.js injects adsbygoogle.js only after Accept. Until then every break
-  // finishes immediately so a level clear or hint tap cannot wait forever.
-  function consentGranted() {
-    try {
-      return !!(
-        global.Geeks0nConsent &&
-        typeof global.Geeks0nConsent.get === "function" &&
-        global.Geeks0nConsent.get() === "granted"
-      );
-    } catch (err) {
-      return false;
-    }
-  }
-
+  // /ga.js loads adsbygoogle.js; Google's consent message (CMP) handles consent
+  // and ad breaks respect it. Until the library loads every break finishes
+  // immediately so a level clear or hint tap cannot wait forever.
   function adsLibraryLoaded() {
     return !!(global.adsbygoogle && global.adsbygoogle.loaded);
   }
 
   function adsHostReady() {
-    return consentGranted() && adsLibraryLoaded();
+    return adsLibraryLoaded();
   }
 
   function ensureAdsbyGoogle() {
@@ -80,15 +68,6 @@
     }
     if (opts.test != null) {
       CFG.test = !!opts.test;
-    }
-    lastInitOpts = {
-      client: CFG.client,
-      bannerSlot: CFG.bannerSlot,
-      test: CFG.test,
-    };
-    if (!consentGranted()) {
-      CFG.ready = false;
-      return true;
     }
     ensureAdsbyGoogle();
     try {
@@ -312,17 +291,6 @@
       finish(false);
       return false;
     }
-  }
-
-  if (global.document && global.document.documentElement) {
-    global.document.documentElement.addEventListener("geeks0n-consent", function (ev) {
-      var value = ev && ev.detail ? ev.detail.value : "";
-      if (value === "granted" && lastInitOpts) {
-        init(lastInitOpts);
-      } else if (value && value !== "granted") {
-        CFG.ready = false;
-      }
-    });
   }
 
   global.SpacebloxAds = {

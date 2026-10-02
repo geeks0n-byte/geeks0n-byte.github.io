@@ -27,5 +27,5 @@ Small readable changes. Subtract before adding. Prove it works before claiming d
 - `spaceblox/play/index.service.worker.js` is network-first for `index.pck` and `index.wasm`.
 - Analytics config lives in root `/ga.js` only. Keep `app-ads.txt` at the site root, not under a game folder.
 - Every page needs the same head (title, description, canonical, `google-adsense-account` meta, `/ga.js`, then `adsbygoogle.js`), the site header nav and the footer with the "Privacy settings" link. Copy an existing page when adding one, and add it to `sitemap.xml`.
-- The play export shell (spaceblox repo `web/shell.html`) must not load `/consent.js` (removed). The game's in-game Accept screen still uses `window.Geeks0nConsent` from `/ga.js`.
+- The play export shell (spaceblox repo `web/shell.html`) must not load `/consent.js` (removed). The game has no in-game consent screen on web; Google's consent message handles it, and `/ga.js` only adds the AdSense tag with the 30 s ad cadence on the play page.
 - The play export keeps cross-origin isolation off so AdSense and Analytics can load.

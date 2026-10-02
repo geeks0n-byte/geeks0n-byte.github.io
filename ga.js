@@ -48,29 +48,9 @@ gtag("config", "G-N1W5TP9WDN");
   });
 
   // Spaceblox web game. Its page shell has no AdSense tag, so add it here with the
-  // H5 Games ad cadence. The Godot build (scripts/web_site_consent.gd in the
-  // spaceblox repo) still shows its own start screen and reads window.Geeks0nConsent;
-  // spaceblox_ads.js only runs ad breaks after that in-game Accept. Keep this
-  // small bridge until a new web export drops it. It does not gate Google tags.
+  // H5 Games ad cadence the game needs. Consent is handled by Google's consent
+  // message like every other page; the game no longer has its own start screen.
   if (location.pathname.indexOf("/spaceblox/play") === 0) {
     addScript(ADS_SRC, { crossorigin: "anonymous", "data-ad-frequency-hint": "30s" });
-    var KEY = "geeks0n_consent_v1";
-    window.Geeks0nConsent = {
-      get: function () {
-        try {
-          return localStorage.getItem(KEY);
-        } catch (_) {
-          return null;
-        }
-      },
-      set: function (value) {
-        try {
-          localStorage.setItem(KEY, value);
-        } catch (_) {}
-        document.documentElement.dispatchEvent(
-          new CustomEvent("geeks0n-consent", { detail: { value: value } })
-        );
-      },
-    };
   }
 })();
