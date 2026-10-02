@@ -8,7 +8,6 @@ Giga's GitHub Pages site for his games. Static HTML, CSS, and JS. No build step:
 - `ga.js` — GA4 with Consent Mode v2 (defaults denied), the footer "Privacy settings" link, and the Spaceblox web game bridge. Every page loads it before the AdSense tag. Consent is handled by Google's CMP (AdSense > Privacy & messaging); there is no home-made banner.
 - `app-ads.txt` and `ads.txt` — AdMob and AdSense authorization. Site root only.
 - `spaceblox/` — game guide and landing; `spaceblox/privacy-policy.html` mirrors `/privacy-policy/` (canonical) because the app links to it. `spaceblox/play/` — exported Godot web build.
-- `shapes/` — Shapes page (in development).
 - `404.html`, `robots.txt`, `sitemap.xml`, `.nojekyll`.
 
 ## Run
