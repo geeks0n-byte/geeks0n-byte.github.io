@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How Spaceblox&#x27;s Color Rules Work – Devlog</title>
+  <meta name="description" content="A plain-language tour of Spaceblox&#x27;s puzzle rules: Rule of Two, Equal Balance, green tiles that count twice, purple shifters and = / × links." />
+  <link rel="canonical" href="https://geeks0n-byte.github.io/devlog/how-spaceblox-color-rules-work/" />
+  <meta name="google-adsense-account" content="ca-pub-1624206851803206" />
+  <script src="/ga.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1624206851803206" crossorigin="anonymous"></script>
+  <meta name="theme-color" content="#14181f" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://geeks0n-byte.github.io/devlog/how-spaceblox-color-rules-work/" />
+  <meta property="og:title" content="How Spaceblox&#x27;s Color Rules Work – Devlog" />
+  <meta property="og:description" content="A plain-language tour of Spaceblox&#x27;s puzzle rules: Rule of Two, Equal Balance, green tiles that count twice, purple shifters and = / × links." />
+  <meta property="og:image" content="https://geeks0n-byte.github.io/spaceblox/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/site.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-header">
+      <a class="site-brand" href="/">geeks0n-byte</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="/">Home</a>
+        <a href="/spaceblox/">Spaceblox</a>
+        <a href="/shapes/">Shapes</a>
+        <a href="/devlog/" aria-current="page">Devlog</a>
+        <a href="/about/">About</a>
+      </nav>
+    </header>
+    <main class="prose">
+    <a class="back-link" href="/devlog/">← Devlog</a>
+    <article>
+    <h1>How Spaceblox&#x27;s color rules work</h1>
+    <p class="post-meta">By Giga Sichinava · <time datetime="2026-10-02">2 October 2026</time></p>
+    <p>Spaceblox looks like a coloring exercise: an empty grid, a few tiles already placed, and three colors to choose from. What makes it a puzzle is that each color behaves a little differently. This post walks through the rules in the order the game teaches them, and why each one exists.</p>
+    <h2>Two colors, two rules</h2>
+    <p>The heart of Spaceblox uses only <strong>yellow</strong> and <strong>blue</strong>, and two rules.</p>
+    <p><strong>Rule of Two.</strong> You may never have three of the same color next to each other in a row or column. Two yellows side by side are fine. A third is not.</p>
+    <p><strong>Equal Balance.</strong> When a row or column is full, it must contain the same number of yellow and blue tiles.</p>
+    <p>On their own, each rule is easy. Together they produce a surprising amount of deduction. If two blues sit side by side, both neighbours must be yellow. If a six-cell row already has three yellows, everything left in it must be blue. Most early levels can be solved using only these two observations, and the game marks any broken rule in red as soon as it happens, so you learn the patterns by doing.</p>
+    <h2>Green: one tile, two colors</h2>
+    <p>Two-color grids have a limit: Equal Balance only works on lines with an even number of cells. <strong>Green</strong> solves that, and adds a twist.</p>
+    <ul>
+    <li>For the <strong>Rule of Two</strong>, green counts as <em>both</em> yellow and blue. A green beside two yellows makes three yellows. Yellow–green–yellow is also three in a row.</li>
+    <li>For <strong>Equal Balance</strong>, green counts as <em>neither</em>. It fills the cell without changing the count.</li>
+    <li><strong>Rule of One:</strong> a row or column can hold at most one green.</li>
+    </ul>
+    <p>That combination is what makes odd-length lines solvable. Yellow and blue must be equal, so together they always fill an even number of cells; on a five-cell line, one cell must be something else. With only one green allowed per line, the question "where does the green go?" often becomes the key to the whole board.</p>
+    <h2>Purple: tiles that move</h2>
+    <p><strong>Purple</strong> tiles, called shifters in the code, sit between two linked cells with an arrow. Tapping one slides it to the other cell, leaving its old cell empty. Like green, purple fills a cell without counting toward Equal Balance. Two shifters can compete for the same cell — if one is already there, the other is blocked until you move the first. Some levels add a star goal for using only a limited number of hops, so planning the moves matters.</p>
+    <h2>Locks and links</h2>
+    <p>Finally, the board can carry extra information:</p>
+    <ul>
+    <li>a <strong>lock icon</strong> marks a fixed tile you cannot change;</li>
+    <li>an <strong>=</strong> between two cells means they must be the same color;</li>
+    <li>an <strong>×</strong> means they must be different.</li>
+    </ul>
+    <p>Links are also what hints use. When you ask for a hint, the game reveals a helpful = or × clue instead of simply filling a cell, so you still get to make the deduction yourself.</p>
+    <h2>Why teach the rules this way?</h2>
+    <p>Each rule appears in the tutorial on its own small board, with a highlighted cell to practise on, before the next one is introduced. The full rule guide, with valid and invalid examples, is one tap away during any level. The goal is that you never lose a level because you forgot a rule — only because a puzzle made you think.</p>
+    <p><a href="/spaceblox/play/">Play Spaceblox in your browser</a> or read the <a href="/spaceblox/">full guide and tips</a>.</p>
+    </article>
+    </main>
+    <footer class="site-footer">
+      <nav aria-label="Footer">
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/privacy-policy/" data-privacy-settings>Privacy settings</a>
+      </nav>
+      <div>© 2026 Giga Sichinava</div>
+    </footer>
+  </div>
+</body>
+</html>

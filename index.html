@@ -2,144 +2,93 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <script src="/ga.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#14181f" />
-  <title>geeks0n-byte — Games</title>
-  <meta name="description" content="Indie puzzles from geeks0n-byte: Spaceblox (out now) and Shapes (coming soon)." />
+  <title>geeks0n-byte – Calm Indie Puzzle Games by Giga Sichinava</title>
+  <meta name="description" content="Calm, logic-first puzzle games made solo in Godot by Giga Sichinava in Poland. Play Spaceblox in your browser or on Google Play." />
   <link rel="canonical" href="https://geeks0n-byte.github.io/" />
+  <meta name="google-adsense-account" content="ca-pub-1624206851803206" />
+  <script src="/ga.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1624206851803206" crossorigin="anonymous"></script>
+  <meta name="theme-color" content="#14181f" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://geeks0n-byte.github.io/" />
-  <meta property="og:title" content="geeks0n-byte" />
-  <meta property="og:description" content="Indie puzzles: Spaceblox and Shapes." />
+  <meta property="og:title" content="geeks0n-byte – Calm Indie Puzzle Games by Giga Sichinava" />
+  <meta property="og:description" content="Calm, logic-first puzzle games made solo in Godot by Giga Sichinava in Poland. Play Spaceblox in your browser or on Google Play." />
   <meta property="og:image" content="https://geeks0n-byte.github.io/shapes/assets/og_share.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="geeks0n-byte" />
-  <meta name="twitter:description" content="Indie puzzles: Spaceblox and Shapes." />
-  <meta name="twitter:image" content="https://geeks0n-byte.github.io/shapes/assets/og_share.png" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #14181f;
-      --ink: #edebe0;
-      --muted: #9ea3a8;
-      --line: #3a414c;
-      --yellow: #f7cc1a;
-      --space: #38bdf8;
-    }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); }
-    body {
-      font-family: "Figtree", "Segoe UI", system-ui, sans-serif;
-      line-height: 1.5;
-      padding: 1.5rem max(1rem, env(safe-area-inset-right)) 3rem max(1rem, env(safe-area-inset-left));
-    }
-    .wrap { max-width: 880px; margin: 0 auto; }
-    header { margin-bottom: 2rem; }
-    .studio {
-      margin: 0;
-      font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
-      font-weight: 700;
-      font-size: clamp(1.6rem, 4vw, 2.1rem);
-      letter-spacing: 0.02em;
-    }
-    .tag {
-      margin: 0.45rem 0 0;
-      color: var(--muted);
-      max-width: 36rem;
-    }
-    .games {
-      display: grid;
-      gap: 1rem;
-    }
-    @media (min-width: 720px) {
-      .games { grid-template-columns: 1fr 1fr; gap: 1.15rem; }
-    }
-    .game {
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-      text-decoration: none;
-      color: inherit;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 1rem;
-      background: #1c222c;
-      transition: border-color 0.15s ease, transform 0.15s ease;
-    }
-    .game:hover { border-color: var(--yellow); transform: translateY(-1px); }
-    .game:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; }
-    .game-mark {
-      width: 72px;
-      height: 72px;
-      border-radius: 16px;
-      object-fit: cover;
-    }
-    .game h2 {
-      margin: 0;
-      font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
-      font-size: 1.15rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-    .game p { margin: 0; color: var(--muted); font-size: 0.95rem; }
-    .badge {
-      display: inline-block;
-      font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
-      font-weight: 700;
-      font-size: 0.72rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #141414;
-      background: var(--yellow);
-      padding: 0.35rem 0.55rem;
-      border-radius: 4px;
-      width: fit-content;
-    }
-    .badge.live { background: var(--space); }
-    footer {
-      margin-top: 2.5rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-    footer a { color: var(--yellow); }
-  </style>
+  <link rel="stylesheet" href="/site.css" />
 </head>
 <body>
   <div class="wrap">
-    <header>
-      <h1 class="studio">geeks0n-byte</h1>
-      <p class="tag">Small indie puzzles. Play free on the web, or on Google Play when available.</p>
+    <header class="site-header">
+      <a class="site-brand" href="/">geeks0n-byte</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="/" aria-current="page">Home</a>
+        <a href="/spaceblox/">Spaceblox</a>
+        <a href="/shapes/">Shapes</a>
+        <a href="/devlog/">Devlog</a>
+        <a href="/about/">About</a>
+      </nav>
     </header>
-
+    <main class="prose home">
+    <h1>Calm puzzle games, made by one developer</h1>
+    <p>geeks0n-byte is the home of small, thoughtful puzzle games made by <strong>Giga Sichinava</strong> (published on Google Play as <strong>gix0n</strong>), an independent developer based in Warsaw, Poland. Every game here is designed, programmed, tested and released by one person using the open-source <strong>Godot</strong> engine.</p>
+    <p>The idea behind every project is the same: puzzles you can pick up for five minutes or settle into for an evening, with clear rules, no pressure and no tricks. You should always be able to work out <em>why</em> a move is right — that "aha" moment is the whole point.</p>
+    <h2>Featured games</h2>
     <div class="games">
       <a class="game" href="/spaceblox/">
         <img class="game-mark" src="/spaceblox/assets/icon_512.png" width="72" height="72" alt="" />
         <span class="badge live">Out now</span>
-        <h2>Spaceblox</h2>
+        <h3>Spaceblox</h3>
         <p>Calm color logic in deep space. Play in browser or on Google Play.</p>
       </a>
       <a class="game" href="/shapes/">
         <img class="game-mark" src="/shapes/assets/logo_mark.png" width="72" height="72" alt="" />
-        <span class="badge">Coming soon</span>
-        <h2>Shapes</h2>
+        <span class="badge">In development</span>
+        <h3>Shapes</h3>
         <p>Match a shape. Peel a layer. Build combos.</p>
       </a>
     </div>
-
-    <footer>
-      <a href="/spaceblox/privacy-policy.html">Privacy</a>
-      ·
-      <button type="button" class="cookie-choice" data-consent-open>Cookies</button>
+    <h3>Spaceblox — color logic in deep space</h3>
+    <p><strong>Out now · Android and web browser</strong></p>
+    <p>Spaceblox is a calm color-logic puzzle set in soft pixel space. You fill an empty grid with yellow, blue and green tiles, and every color has its own rules: never three of the same color in a row, keep yellow and blue balanced on every line, and use green — which counts as <em>both</em> yellow and blue — at most once per line. Purple tiles that hop between linked cells, plus "=" and "×" links between cells, add fresh twists as the campaign moves from easy to medium to hard.</p>
+    <p>There is a guided tutorial, a full rule guide, hints when you are stuck, unlimited undo and redo, three optional star goals on every level, and achievements to chase (in the browser now, and on Android from the upcoming 1.1.0 update). The game is translated into seven languages: English, Spanish, German, French, Polish, Georgian and Ukrainian.</p>
+    <ul>
+    <li><a href="/spaceblox/">Read the full Spaceblox guide: rules, tips and FAQ</a></li>
+    <li><a href="/spaceblox/play/">Play Spaceblox in your browser</a></li>
+    <li><a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Get Spaceblox on Google Play</a></li>
+    </ul>
+    <h3>Shapes — match, peel, combo</h3>
+    <p><strong>In development</strong></p>
+    <p>Shapes is the next puzzle in the workshop. Each tile on the board is a small stack of layered shapes. Tap two tiles that share a shape and that layer peels away, revealing what sits underneath. Keep finding matches in a chain to build a combo, and clear the whole board to win. Shapes is still being built, so details will change before release.</p>
+    <ul>
+    <li><a href="/shapes/">See how Shapes works so far</a></li>
+    </ul>
+    <h2>Why these games feel the way they do</h2>
+    <p><strong>Rules first, luck never.</strong> Spaceblox puzzles are built so they can be solved by reasoning alone. The game highlights broken rules in red as you play, so you learn from mistakes immediately instead of discovering them at the end.</p>
+    <p><strong>Calm by design.</strong> There is no game-over countdown and no energy system. A level never fails when time runs out; time only decides whether you earn the optional time star.</p>
+    <p><strong>Respectful of players.</strong> Game progress is stored on your own device by default. Where consent is required, Google's certified consent tool asks before Google Analytics or AdSense use cookies on this website, and you can change your choices at any time from the "Privacy settings" link in the footer. Details are in the <a href="/privacy-policy/">Privacy Policy</a>.</p>
+    <p><strong>Accessible where possible.</strong> The browser version of Spaceblox, and the upcoming 1.1.0 update for Android, include optional colorblind tile patterns and screen-reader labels for menus and the game screen, so the color rules do not rely on color alone.</p>
+    <h2>Latest updates</h2>
+    <ul>
+    <li><strong>Coming soon: Spaceblox 1.1.0 for Android.</strong> The next update adds achievements with bronze, silver and gold tiers, optional Google Play Games cloud save and achievement sync, colorblind tile patterns and screen-reader support.</li>
+    <li><strong>Devlog: How Spaceblox's color rules work.</strong> A plain-language walkthrough of the Rule of Two, Equal Balance, green tiles and purple shifters. <a href="/devlog/how-spaceblox-color-rules-work/">Read the post</a></li>
+    <li><strong>Devlog: Designing a calm puzzle game.</strong> Why Spaceblox has no game-over timer, how hints work, and what the three stars are for. <a href="/devlog/designing-a-calm-puzzle-game/">Read the post</a></li>
+    <li><strong>1 September 2026: Spaceblox released on Google Play.</strong> The first release includes the campaign across easy, medium and hard levels, a guided tutorial, hints and undo, and the yellow, blue, green and purple tile rules.</li>
+    </ul>
+    <h2>Get in touch</h2>
+    <p>Found a bug, have an idea for a puzzle rule, or want to write about one of the games? Visit the <a href="/contact/">Contact page</a>. You can also read more <a href="/about/">about the developer</a>.</p>
+    </main>
+    <footer class="site-footer">
+      <nav aria-label="Footer">
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/privacy-policy/" data-privacy-settings>Privacy settings</a>
+      </nav>
+      <div>© 2026 Giga Sichinava</div>
     </footer>
   </div>
-  <script src="/consent.js" defer></script>
 </body>
 </html>
