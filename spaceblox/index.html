@@ -2,26 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <script src="/ga.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#020617" />
-  <title>Spaceblox — Color logic in space</title>
-  <meta name="description" content="Spaceblox is a calm color-logic puzzle: fill the board with yellow, blue, and green tiles. Never three in a row." />
+  <title>Spaceblox – Calm Color-Logic Puzzle: Rules, Tips &amp; FAQ</title>
+  <meta name="description" content="How to play Spaceblox: fill the grid with yellow, blue and green tiles, follow the Rule of Two and Equal Balance. Rules, beginner tips and FAQ." />
   <link rel="canonical" href="https://geeks0n-byte.github.io/spaceblox/" />
+  <meta name="google-adsense-account" content="ca-pub-1624206851803206" />
+  <script src="/ga.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1624206851803206" crossorigin="anonymous"></script>
+  <meta name="theme-color" content="#020617" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://geeks0n-byte.github.io/spaceblox/" />
-  <meta property="og:title" content="Spaceblox" />
-  <meta property="og:description" content="Calm color-logic puzzles in a pixel-space setting." />
+  <meta property="og:title" content="Spaceblox – Calm Color-Logic Puzzle: Rules, Tips &amp; FAQ" />
+  <meta property="og:description" content="How to play Spaceblox: fill the grid with yellow, blue and green tiles, follow the Rule of Two and Equal Balance. Rules, beginner tips and FAQ." />
   <meta property="og:image" content="https://geeks0n-byte.github.io/spaceblox/og-image.png" />
-  <meta property="og:image:width" content="1024" />
-  <meta property="og:image:height" content="500" />
-  <meta property="og:image:type" content="image/png" />
-  <meta property="og:image:alt" content="SPACEBLOX title over a pixel space background" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Spaceblox" />
-  <meta name="twitter:description" content="Calm color-logic puzzles in a pixel-space setting." />
-  <meta name="twitter:image" content="https://geeks0n-byte.github.io/spaceblox/og-image.png" />
-  <meta name="twitter:image:alt" content="SPACEBLOX title over a pixel space background" />
   <link rel="icon" href="assets/icon_512.png" type="image/png" />
   <link rel="stylesheet" href="shared.css" />
   <link rel="stylesheet" href="space-bg.css" />
@@ -66,8 +60,7 @@
     .tiles-stack .play-badge {
       margin: 0;
     }
-    .tiles-stack .play-badge img,
-    .cta-stack .play-badge img {
+    .tiles-stack .play-badge img {
       width: 100%;
       height: auto;
     }
@@ -173,41 +166,6 @@
       margin: 0 0 1rem;
       letter-spacing: 0.03em;
     }
-    #how {
-      max-width: 36rem;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 2.25rem;
-      text-align: center;
-    }
-    #how h2 { text-align: center; }
-    #how .panel {
-      text-align: left;
-      display: inline-block;
-      width: fit-content;
-      max-width: 100%;
-      box-sizing: border-box;
-      padding: 1.1rem 1.15rem;
-      margin-inline: auto;
-      border-width: 3px;
-    }
-    #how .rules {
-      display: grid;
-      gap: 0.75rem;
-      padding-left: 1.25rem;
-      margin: 0 auto;
-      width: fit-content;
-      max-width: 100%;
-      text-align: left;
-    }
-    #how .rule-tile {
-      display: inline-block;
-      width: 1.05em;
-      height: 1.05em;
-      vertical-align: -0.15em;
-      margin-right: 0.28em;
-      image-rendering: pixelated;
-    }
     #shots h2 { text-align: center; }
     #shots {
       width: 100%;
@@ -222,8 +180,6 @@
       padding: 1.25rem 1.35rem;
       backdrop-filter: blur(6px);
     }
-    .rules { display: grid; gap: 0.75rem; padding-left: 1.1rem; margin: 0; color: var(--muted); }
-    .rules li::marker { color: var(--yellow); }
 
     .shots-wheel {
       position: relative;
@@ -301,24 +257,6 @@
       }
     }
 
-    .cta-end {
-      width: 100%;
-      max-width: min(100%, 700px);
-      margin: 2.75rem auto 0;
-      display: flex;
-      justify-content: center;
-    }
-    .cta-stack {
-      display: inline-grid;
-      grid-template-columns: max-content;
-      justify-items: stretch;
-      gap: 0.85rem;
-    }
-    .cta-stack .play-badge {
-      width: 0;
-      min-width: 100%;
-      margin: 0;
-    }
     a.web-play {
       display: inline-flex;
       align-items: center;
@@ -362,38 +300,15 @@
       }
     }
 
-    footer {
-      margin-top: 3rem;
-      padding-top: 1.25rem;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 0.92rem;
-      display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem;
-      justify-content: space-between;
-      width: 100%;
-      max-width: min(100%, 700px);
-      margin-inline: auto;
-      box-sizing: border-box;
-    }
-
     @media (max-width: 860px) {
       .hero { padding: 0.15rem 0 0; gap: 1.35rem; }
       h1 { font-size: clamp(0.92rem, 4.6vw, 1.2rem); }
       .lead { font-size: 1rem; margin-bottom: 1.1rem; }
       .panel { padding: 1rem 1.05rem; border-radius: 14px; }
-      .rules { padding-left: 1rem; font-size: 0.98rem; }
       section { margin: 1.75rem 0; }
       .shots-wheel { border-radius: 14px; padding: 0.65rem 0.45rem; }
       .shots-track { gap: 0.55rem; }
       .shots-track figure { width: 132px; flex: 0 0 132px; border-radius: 10px; }
-      footer {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        gap: 0.5rem;
-        font-size: 0.88rem;
-      }
     }
     @media (max-width: 420px) {
       .tiles img { width: 34px; height: 34px; }
@@ -402,6 +317,52 @@
       .shots-track figure { width: 118px; flex: 0 0 118px; }
       h2 { font-size: 0.82rem; }
     }
+
+    /* Guide text */
+    .guide {
+      width: 100%;
+      max-width: min(100%, 700px);
+      margin-inline: auto;
+      color: var(--text);
+    }
+    .guide h2 { margin: 2rem 0 0.85rem; line-height: 1.5; }
+    .guide h2:first-child { margin-top: 0; }
+    .guide h3 { font-size: 1.05rem; color: var(--yellow); margin: 1.4rem 0 0.4rem; }
+    .guide p, .guide li { color: #cbd5e1; }
+    .guide li { margin: 0.35rem 0; }
+    .guide strong { color: #f8fafc; }
+    .guide ol li::marker, .guide ul li::marker { color: var(--yellow); }
+
+    /* Trailer loads only on click */
+    .trailer-poster {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      border: 0;
+      cursor: pointer;
+      background: #000;
+    }
+    .trailer-poster img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.8; }
+    .trailer-poster span {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-family: "PressStart2P", monospace;
+      font-size: 0.6rem;
+      color: #fff;
+      text-shadow: 1px 1px 0 #000a;
+      padding: 0.85rem;
+      white-space: nowrap;
+      background-color: #1a1a1a;
+      background-image: url("assets/button_bar_gray_dark.svg?v=ingame3");
+      background-size: 100% 100%;
+    }
+    .trailer-poster:hover span, .trailer-poster:focus-visible span { filter: brightness(1.25); }
+    .trailer-note { text-align: center; color: var(--muted); font-size: 0.85rem; margin: 0.6rem 0 0; }
+    .guide a { color: var(--accent); }
   </style>
 </head>
 <body class="space-page">
@@ -414,26 +375,25 @@
     <div class="sb-fx" id="space-fx"></div>
   </div>
   <div class="wrap">
-    <header>
-      <a class="brand" href="./" aria-label="Spaceblox home">
-        <img src="assets/icon_512.png" alt="Spaceblox" width="52" height="52" />
-      </a>
-      <nav>
-        <a href="#how">HOW TO PLAY</a>
-        <a href="#shots">SCREENSHOTS</a>
-        <a href="privacy-policy.html">PRIVACY</a>
+    <header class="site-header">
+      <a class="site-brand" href="/">geeks0n-byte</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="/">Home</a>
+        <a href="/spaceblox/" aria-current="page">Spaceblox</a>
+        <a href="/shapes/">Shapes</a>
+        <a href="/devlog/">Devlog</a>
+        <a href="/about/">About</a>
       </nav>
     </header>
-
+    <main>
     <section class="hero">
-      <div class="hero-art">
-        <img src="assets/title_spaceblox.png" alt="SPACEBLOX" width="1080" height="180" decoding="async" />
-      </div>
+      <h1 class="hero-art">
+        <img src="assets/title_spaceblox.png" alt="Spaceblox" width="1080" height="180" decoding="async" />
+      </h1>
       <div class="hero-copy">
-        <h1>Calm color logic<br>in deep space</h1>
         <p class="lead">
-          Fill empty cells with colored tiles.<br class="lead-break" />
-          Never place three of the same in a line.
+          <strong>A calm color-logic puzzle set in soft pixel space.</strong><br />
+          Play free in your browser or on Android.
         </p>
       </div>
       <div class="tiles-row">
@@ -452,17 +412,55 @@
       </div>
     </section>
 
-    <section id="how">
-      <h2>HOW TO PLAY</h2>
-      <div class="panel">
-        <ol class="rules">
-          <li>Fill empty cells with <img class="rule-tile" src="assets/tile_yellow.svg" alt="" width="18" height="18" /><strong style="color:var(--yellow)">Yellow</strong>, <img class="rule-tile" src="assets/tile_blue.svg" alt="" width="18" height="18" /><strong style="color:var(--blue)">Blue</strong> or <img class="rule-tile" src="assets/tile_green.svg" alt="" width="18" height="18" /><strong style="color:var(--green)">Green</strong> tiles.</li>
-          <li>Never place three of the same color in a row or column.</li>
-          <li>Keep the colors balanced on every line.</li>
-          <li><img class="rule-tile" src="assets/tile_shifter.svg" alt="" width="18" height="18" /><strong style="color:var(--purple)">Purple</strong> tiles add extra twists as you go.</li>
-          <li>A full, valid board wins the level.</li>
-        </ol>
-      </div>
+    <section class="guide panel" id="guide">
+    <p>Spaceblox gives you a grid with a few colored tiles already in place and asks you to fill every empty cell. That sounds simple, but each color follows its own rules. Yellow and blue must stay balanced on every line, no color may appear three times in a row, green counts as two colors at once, and purple tiles hop between linked cells. A full board that breaks no rules clears the level.</p>
+    <p>There is no luck involved: every puzzle can be solved by careful reasoning. The game marks broken rules with a red highlight as you play, so you always know where a problem is, and you can undo, redo or ask for a hint whenever you need one.</p>
+    <h2>How to play, step by step</h2>
+    <ol>
+    <li><strong>Start with the tutorial.</strong> The first time you press Play, Spaceblox offers a guided tutorial. It introduces one rule at a time on small boards and lets you practise each one before moving on. You can replay it any time from the main menu.</li>
+    <li><strong>Look at the board.</strong> Some cells already hold tiles. Tiles with a <strong>lock icon</strong> are fixed and cannot be changed — they are your starting clues.</li>
+    <li><strong>Place tiles.</strong> Tap (or click) an empty cell to cycle through the colors: Yellow, then Blue, then Green. Stop on the color you want.</li>
+    <li><strong>Fix mistakes.</strong> Press and hold a filled cell to clear it, or use <strong>Undo</strong> and <strong>Redo</strong> in the top bar. <strong>Restart</strong> puts the board back to its starting layout.</li>
+    <li><strong>Watch for red.</strong> If a placement breaks a rule, the affected cells are highlighted in red. Change one of them to resolve the conflict.</li>
+    <li><strong>Slide purple tiles.</strong> On boards with purple tiles, tap a purple tile to hop it along its arrow to the linked cell.</li>
+    <li><strong>Fill the last cell.</strong> When every cell is filled and no rule is broken, the level is solved and you see how many stars you earned.</li>
+    <li><strong>Need the rules again?</strong> The <strong>How to Play</strong> button opens the full rule guide with valid and invalid examples at any time, even mid-level.</li>
+    </ol>
+    <h2>The rules</h2>
+    <h3>Core rules (yellow and blue)</h3>
+    <ul>
+    <li><strong>Rule of Two:</strong> never place three tiles of the same color next to each other in a row or column. Two yellows side by side are fine; a third is not.</li>
+    <li><strong>Equal Balance:</strong> every completed row and column must contain the same number of yellow and blue tiles.</li>
+    </ul>
+    <h3>Green tiles</h3>
+    <ul>
+    <li>Green <strong>counts as both yellow and blue</strong> for the Rule of Two. So a green next to two yellows makes "three yellows", and yellow–green–yellow is also a run of three.</li>
+    <li><strong>Rule of One:</strong> a row or column may contain at most one green tile.</li>
+    <li>Equal Balance <strong>ignores green</strong>. Green fills a cell without adding to the yellow or blue count, which is exactly what makes odd-length lines (3, 5 or 7 cells) possible to balance.</li>
+    </ul>
+    <h3>Purple tiles (shifters)</h3>
+    <ul>
+    <li>A purple tile sits between two linked cells. Tap it to slide it along the arrow to the other cell.</li>
+    <li>Another purple tile on the destination cell blocks the move — clear that path first.</li>
+    <li>Like green, purple fills a cell without counting toward Equal Balance.</li>
+    </ul>
+    <h3>Locks and links</h3>
+    <ul>
+    <li><strong>Lock icon:</strong> the tile is fixed.</li>
+    <li><strong>= between two cells:</strong> both cells must be the <em>same</em> color.</li>
+    <li><strong>× between two cells:</strong> the two cells must be <em>different</em> colors.</li>
+    </ul>
+    <h2>Stars, hints and progression</h2>
+    <p>Each campaign level has up to <strong>three star goals</strong>:</p>
+    <ol>
+    <li><strong>Solved</strong> — finish a valid board.</li>
+    <li><strong>No hints used</strong> — finish without using a hint.</li>
+    <li><strong>Time</strong> — finish within the level's time limit. Running out of time never ends the level; it only means this star stays empty. On boards with purple tiles, a star can instead ask you to use no more than a set number of purple hops.</li>
+    </ol>
+    <p>Stars are optional. You can clear a level with one star and come back later to collect the rest.</p>
+    <p><strong>Hints</strong> reveal a helpful "=" or "×" clue on the board. Each level gives you a small number of hints (more on harder levels). If you run out, you can choose to watch an optional ad to receive three more hints.</p>
+    <p>The campaign runs across <strong>easy, medium and hard</strong> levels, unlocking as you go, so the rules build up gradually from small boards to larger ones with green, purple and linked cells. Achievements reward milestones, star goals and a few secret feats, with bronze, silver and gold tiers to track on the Achievements screen (in the browser version now, and on Android from the upcoming 1.1.0 update).</p>
+
     </section>
 
     <section id="shots">
@@ -522,44 +520,93 @@
       </div>
     </section>
 
+    <section class="guide panel" id="features">
+    <h2>Features</h2>
+    <ul>
+    <li>Guided, step-by-step tutorial</li>
+    <li>Campaign with easy, medium and hard levels</li>
+    <li>Full in-game rule guide with examples</li>
+    <li>Hints, unlimited undo and redo, restart and hold-to-clear</li>
+    <li>Three optional star goals per level</li>
+    <li>Achievements with bronze, silver and gold tiers, plus hidden ones*</li>
+    <li>Optional colorblind tile patterns and screen-reader labels*</li>
+    <li>Dynamic or static space background, music and sound-effect settings</li>
+    <li>Mid-level progress is saved, so you can continue where you left off</li>
+    <li>On Android: optional Google Play Games sign-in for cloud save and achievements*</li>
+    </ul>
+    <p>* Available in the browser version now (cloud save excepted) and coming to Android with version 1.1.0.</p>
+    <h2>Controls</h2>
+    <ul>
+    <li><strong>Phone or tablet:</strong> tap an empty cell to cycle Yellow → Blue → Green; press and hold a filled cell to clear it; tap a purple tile to slide it.</li>
+    <li><strong>Browser:</strong> the same actions with the mouse — click a cell to cycle colors, click and hold a filled cell for about a second to clear it, and click a purple tile to slide it. On a touchscreen, tap and hold work just like on a phone.</li>
+    <li><strong>Top bar:</strong> Pause, Restart, How to Play (rules), Hint, Undo and Redo.</li>
+    </ul>
+    <h2>Platforms and languages</h2>
+    <ul>
+    <li><strong>Android:</strong> <a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a> — free, contains ads. Released on 1 September 2026.</li>
+    <li><strong>Web browser:</strong> <a href="/spaceblox/play/">play here</a> — free, runs in a modern browser on desktop or mobile; the game is laid out in portrait. Cloud save is not available in the web version.</li>
+    <li><strong>Languages:</strong> English, Spanish, German, French, Polish, Georgian and Ukrainian.</li>
+    <li>Built with the Godot engine.</li>
+    </ul>
+    <h2>Tips and strategy for beginners</h2>
+    <p><strong>1. Hunt for pairs first.</strong> Whenever two cells of the same color sit next to each other in a line, the cells on either side of that pair must be the other color. This is the single most useful deduction in the game and often unlocks a whole row.</p>
+    <p><strong>2. Fill the gap in a sandwich.</strong> If you see yellow, empty, yellow, the gap must be blue (and vice versa). Three in a row is broken whether the middle tile arrives first or last.</p>
+    <p><strong>3. Count to the halfway point.</strong> In a six-cell line without green, Equal Balance means exactly three yellows and three blues. Once one color reaches three, every remaining empty cell in that line must be the other color.</p>
+    <p><strong>4. Odd lines need a special tile.</strong> Yellow and blue must be equal, so their total is always even. A line with an odd number of cells therefore needs a green or purple tile somewhere in it. Because there can be only one green per line, finding where that green goes is often the key to an odd-sized board.</p>
+    <p><strong>5. Treat green as a wildcard that can block itself.</strong> Green counts as both colors for the Rule of Two, so it can never sit directly beside a same-color pair (yellow-yellow-green or blue-blue-green) or between two matching tiles (yellow-green-yellow). Green is easiest to place next to mixed neighbours.</p>
+    <p><strong>6. Use links as shortcuts.</strong> An "×" link on a yellow/blue board means the two cells are opposites, so knowing one tells you the other. Chains of "=" and "×" links let you carry information across the grid.</p>
+    <p><strong>7. Move purple tiles early.</strong> Sliding a purple tile changes which cell is empty. Decide where each shifter should rest before filling its neighbours, and remember a shifter can be blocked by another one.</p>
+    <p><strong>8. Let red highlights teach you.</strong> A red line shows exactly which rule broke. Rather than guessing, undo and ask which rule the red cells are breaking.</p>
+    <p><strong>9. Save hints for real dead ends.</strong> Solving without hints earns a star. If you are stuck, scan every row and column for pairs and halfway counts once more before tapping Hint.</p>
+    <h2>FAQ</h2>
+    <p><strong>Is Spaceblox free?</strong><br>
+    Yes. Spaceblox is free to play on Android and in the browser. It is supported by ads, and you can optionally watch an ad to get extra hints.</p>
+    <p><strong>Do I need an account?</strong><br>
+    No. Progress is saved on your device. On Android, version 1.1.0 adds optional Google Play Games sign-in to sync progress and achievements.</p>
+    <p><strong>Is there a timer?</strong><br>
+    Each level has a time limit only for the optional time star. A level never fails when time runs out: you can take as long as you like and still solve it — you just won't earn that star.</p>
+    <p><strong>Is every puzzle solvable without guessing?</strong><br>
+    The puzzles are designed to be solved by logic. If you feel you must guess, look again for pairs, sandwiches and halfway counts — or use a hint.</p>
+    <p><strong>Will my browser progress carry over to the Android app?</strong><br>
+    No. The web version saves in your browser's own storage on that device, and cloud sync is only available in the Android app.</p>
+    <p><strong>Is Spaceblox playable with color blindness?</strong><br>
+    Spaceblox has an optional colorblind mode that adds patterns to the tiles, so colors can be told apart by shape as well as color.</p>
+
+    </section>
+
     <section id="trailer" aria-labelledby="trailer-heading">
       <h2 id="trailer-heading">TRAILER</h2>
       <div class="trailer-frame">
-        <iframe
-          src="https://www.youtube-nocookie.com/embed/SgMDnckUF-I"
-          title="Spaceblox trailer"
-          aria-label="Spaceblox trailer"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"
-        ></iframe>
+        <button type="button" class="trailer-poster" data-video="SgMDnckUF-I" aria-label="Play the Spaceblox trailer">
+          <img src="assets/shot_gameplay.png" alt="" width="1080" height="1920" loading="lazy" />
+          <span>▶ PLAY TRAILER</span>
+        </button>
       </div>
+      <p class="trailer-note">Loads from YouTube (privacy-enhanced mode) when you press play.</p>
     </section>
 
-    <div class="cta-end">
-      <div class="cta-stack">
-        <a class="web-play" href="play/">PLAY IN BROWSER</a>
-        <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" aria-label="Get it on Google Play">
-          <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" />
-        </a>
-      </div>
-    </div>
-
-    <footer>
-      <div>© Spaceblox · Giga &quot;gix0n&quot; Sichinava</div>
-      <div>
-        <a href="/">Studio</a>
-        ·
-        <a href="privacy-policy.html">Privacy Policy</a>
-        ·
-        <button type="button" class="cookie-choice" data-consent-open>Cookies</button>
-      </div>
+    <section class="guide panel" id="links">
+    <h2>Links</h2>
+    <ul>
+    <li><a href="/spaceblox/play/">Play Spaceblox in your browser</a></li>
+    <li><a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Spaceblox on Google Play</a></li>
+    <li><a href="https://www.youtube.com/watch?v=SgMDnckUF-I">Trailer on YouTube</a></li>
+    <li><a href="/privacy-policy/">Privacy Policy</a></li>
+    <li><a href="/contact/">Contact the developer</a></li>
+    </ul>
+    </section>
+    </main>
+    <footer class="site-footer">
+      <nav aria-label="Footer">
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/privacy-policy/" data-privacy-settings>Privacy settings</a>
+      </nav>
+      <div>© 2026 Giga Sichinava</div>
     </footer>
   </div>
-
   <script src="space-bg.js" defer></script>
-  <script src="/consent.js" defer></script>
   <script>
   (function () {
     var wheel = document.querySelector(".shots-wheel");
@@ -667,7 +714,19 @@
     boot();
     window.addEventListener("load", boot);
   })();
+  (function () {
+    var btn = document.querySelector(".trailer-poster");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var f = document.createElement("iframe");
+      f.src = "https://www.youtube-nocookie.com/embed/" + btn.getAttribute("data-video") + "?autoplay=1";
+      f.title = "Spaceblox trailer";
+      f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      f.allowFullscreen = true;
+      f.referrerPolicy = "strict-origin-when-cross-origin";
+      btn.replaceWith(f);
+    });
+  })();
   </script>
-
 </body>
 </html>

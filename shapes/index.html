@@ -2,31 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <script src="/ga.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#242930" />
-  <meta name="robots" content="index,follow" />
-  <title>Shapes — Match. Peel. Combo.</title>
-  <meta name="description" content="Shapes — Match a shape. Peel a layer. Build combos. A tactile puzzle from geeks0n-byte. Coming soon." />
+  <title>Shapes – Match, Peel, Combo | Puzzle in Development</title>
+  <meta name="description" content="Shapes is a tactile matching puzzle in development: tap two tiles that share a shape to peel a layer, chain matches into combos, clear the board." />
   <link rel="canonical" href="https://geeks0n-byte.github.io/shapes/" />
+  <meta name="google-adsense-account" content="ca-pub-1624206851803206" />
+  <script src="/ga.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1624206851803206" crossorigin="anonymous"></script>
+  <meta name="theme-color" content="#14181f" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://geeks0n-byte.github.io/shapes/" />
-  <meta property="og:title" content="Shapes" />
-  <meta property="og:description" content="Match a shape. Peel a layer. Build combos." />
+  <meta property="og:title" content="Shapes – Match, Peel, Combo | Puzzle in Development" />
+  <meta property="og:description" content="Shapes is a tactile matching puzzle in development: tap two tiles that share a shape to peel a layer, chain matches into combos, clear the board." />
   <meta property="og:image" content="https://geeks0n-byte.github.io/shapes/assets/og_share.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Shapes" />
-  <meta name="twitter:description" content="Match a shape. Peel a layer. Build combos." />
-  <meta name="twitter:image" content="https://geeks0n-byte.github.io/shapes/assets/og_share.png" />
   <link rel="icon" href="assets/favicon_32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="assets/icon_192.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="shared.css" />
+  <link rel="stylesheet" href="/site.css" />
   <style>
+    :root {
+      --ink-muted: var(--muted);
+      --face: #383d45;
+      --bg-deep: #242930;
+      --red: #d11a1a;
+      --blue: #1452b3;
+      --green: #1f7a47;
+      --white: #fafaf7;
+      --black: #141414;
+    }
     .hero {
       display: flex;
       flex-direction: column;
@@ -40,7 +43,7 @@
 
     .hero-title {
       margin: 0;
-      font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
+      font-family: var(--head);
       font-weight: 700;
       font-size: clamp(2.4rem, 10vw, 3.6rem);
       letter-spacing: 0.06em;
@@ -66,7 +69,7 @@
 
     .pitch {
       margin: 0.35rem 0 0;
-      font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
+      font-family: var(--head);
       font-weight: 700;
       font-size: clamp(1.2rem, 3.6vw, 1.55rem);
       letter-spacing: 0.01em;
@@ -93,7 +96,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
+      font-family: var(--head);
       font-weight: 700;
       font-size: 0.88rem;
       letter-spacing: 0.05em;
@@ -121,17 +124,15 @@
       text-transform: uppercase;
     }
 
-    section { margin: 2.5rem 0; }
 
-    h2 {
-      font-family: "Outfit", "Bahnschrift", "Segoe UI", sans-serif;
-      font-weight: 700;
+    #shots h2 {
+      font-family: var(--head);
       font-size: 1rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--yellow);
-      margin: 0 0 0.65rem;
       text-align: center;
+      margin: 2.5rem 0 0.65rem;
     }
 
     .section-note {
@@ -142,32 +143,6 @@
       max-width: 28rem;
     }
 
-    #how {
-      max-width: 36rem;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-    }
-
-    .panel {
-      background: color-mix(in srgb, var(--face) 92%, transparent);
-      border: 2px solid var(--line);
-      border-radius: 12px;
-      padding: 1.1rem 1.2rem;
-      display: inline-block;
-      text-align: left;
-      max-width: 100%;
-    }
-
-    .rules {
-      display: grid;
-      gap: 0.7rem;
-      padding-left: 1.2rem;
-      margin: 0;
-      color: var(--ink-muted);
-    }
-
-    .rules li::marker { color: var(--yellow); }
 
     #shots {
       width: 100%;
@@ -224,69 +199,66 @@
     .shots-track figure.is-portrait img { aspect-ratio: 9 / 16; object-fit: cover; }
     .shots-track figure.is-square img { aspect-ratio: 1 / 1; object-fit: contain; }
 
-    .cta-end {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      justify-content: center;
-      margin: 2rem 0 0;
-    }
 
     @media (max-width: 860px) {
       .hero { gap: 0.9rem; }
       .shots-track figure { width: 180px; flex: 0 0 180px; }
       .shots-track figure.is-portrait { width: 120px; flex: 0 0 120px; }
     }
+
+    .prose { max-width: min(100%, 700px); margin-inline: auto; }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <header>
-      <a class="brand" href="./" aria-label="Shapes home">
-        <img src="assets/logo_mark.png" width="44" height="44" alt="Shapes" />
-      </a>
-      <nav aria-label="Primary">
-        <a href="#how">How to play</a>
-        <a href="#shots">Preview</a>
-        <a href="privacy-policy.html">Privacy</a>
+    <header class="site-header">
+      <a class="site-brand" href="/">geeks0n-byte</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="/">Home</a>
+        <a href="/spaceblox/">Spaceblox</a>
+        <a href="/shapes/" aria-current="page">Shapes</a>
+        <a href="/devlog/">Devlog</a>
+        <a href="/about/">About</a>
       </nav>
     </header>
-
+    <main>
     <section class="hero">
       <h1 class="hero-title">Shapes</h1>
       <div class="pigment-bar" aria-hidden="true">
         <span class="r"></span><span class="y"></span><span class="b"></span><span class="g"></span><span class="w"></span>
       </div>
       <p class="pitch">Match a shape. Peel a layer.<br />Build combos.</p>
-      <p class="lead">A tactile puzzle from geeks0n-byte. Coming soon to Play Store and the web.</p>
-      <div class="cta-row">
-        <span class="cta" aria-disabled="true">Coming soon</span>
-        <span class="cta-note">WIP</span>
-      </div>
+      <p class="lead"><em>In development — not yet released.</em></p>
     </section>
+    <div class="prose">
+    <p>Shapes is the second puzzle game from geeks0n-byte, being built in the Godot engine by the same solo developer who made <a href="/spaceblox/">Spaceblox</a>. Where Spaceblox is about slow, careful deduction, Shapes is more tactile: a board of layered tiles that you peel apart one match at a time.</p>
+    <p>This page describes how the current prototype plays. Shapes is still in development, so rules, art and features can change before it is released, and there is no download yet. This page will be updated as the game takes shape.</p>
+    <h2>What is Shapes?</h2>
+    <p>Every tile on the Shapes board is a small stack: a colored base with several shape layers on top of it, from back to front. Two tiles "match" when they share a shape. When you match them, the shared layer peels off both tiles and reveals whatever is underneath. A tile is cleared when all of its layers are gone, and a round is won when the whole board is clear.</p>
+    <p>The idea is a puzzle that feels good in the hand: quick taps, satisfying peels, and a board that slowly opens up as you dig through it.</p>
+    <h2>How the prototype plays</h2>
+    <ol>
+    <li><strong>Tap a tile</strong> to select it.</li>
+    <li><strong>Tap a second tile</strong> that shares a shape with the first. The shared shape peels off both tiles.</li>
+    <li><strong>Keep going.</strong> After a successful match, the second tile stays selected, so you can immediately look for its next partner. Every match in a row adds to your <strong>combo</strong>.</li>
+    <li><strong>Avoid misses.</strong> Tapping a tile that shares nothing with your selection counts as a move and resets the combo to zero.</li>
+    <li><strong>Change your mind.</strong> Tap the selected tile again to deselect it, or use <strong>Undo</strong> to step back.</li>
+    <li><strong>Clear the board.</strong> When every tile has been peeled away, the round ends.</li>
+    </ol>
+    <p>In the prototype, longer combo chains are rewarded and clearing the board at a good pace helps your score. A hint can point out a possible match when you are stuck, and the game calls out "Streak" and "Hot" as your combo grows.</p>
 
-    <section id="how">
-      <h2>How to play</h2>
-      <div class="panel">
-        <ol class="rules">
-          <li><strong style="color:var(--ink)">Match</strong> — clear tiles that share a shape.</li>
-          <li><strong style="color:var(--ink)">Peel</strong> — strip a layer to dig deeper.</li>
-          <li><strong style="color:var(--ink)">Combo</strong> — chain clears for longer runs.</li>
-        </ol>
-      </div>
-    </section>
-
+    </div>
     <section id="shots">
       <h2>Preview</h2>
-      <p class="section-note">Early kit art — not final device screenshots.</p>
+      <p class="section-note">Early prototype art, not final screenshots.</p>
       <div class="shots-wheel" aria-label="Preview art carousel">
         <div class="shots-track">
-          <figure><img src="assets/board_snippet.png" alt="Board preview" /></figure>
-          <figure class="is-square"><img src="assets/tile_sample.png" alt="Tile preview" /></figure>
-          <figure><img src="assets/feature_match.png" alt="Match preview" /></figure>
-          <figure><img src="assets/feature_peel.png" alt="Peel preview" /></figure>
-          <figure><img src="assets/feature_combo.png" alt="Combo preview" /></figure>
-          <figure class="is-portrait"><img src="assets/hero_portrait.png" alt="Key art preview" /></figure>
+          <figure><img src="assets/board_snippet.png" alt="Shapes board preview" /></figure>
+          <figure class="is-square"><img src="assets/tile_sample.png" alt="A layered Shapes tile" /></figure>
+          <figure><img src="assets/feature_match.png" alt="Matching two tiles that share a shape" /></figure>
+          <figure><img src="assets/feature_peel.png" alt="A layer peeling off a tile" /></figure>
+          <figure><img src="assets/feature_combo.png" alt="A combo chain" /></figure>
+          <figure class="is-portrait"><img src="assets/hero_portrait.png" alt="Shapes key art" /></figure>
           <figure><img src="assets/board_snippet.png" alt="" aria-hidden="true" /></figure>
           <figure class="is-square"><img src="assets/tile_sample.png" alt="" aria-hidden="true" /></figure>
           <figure><img src="assets/feature_match.png" alt="" aria-hidden="true" /></figure>
@@ -296,24 +268,41 @@
         </div>
       </div>
     </section>
-
-    <div class="cta-end">
-      <span class="cta" aria-disabled="true">Coming soon</span>
+    <div class="prose">
+    <h2>Tips for the prototype</h2>
+    <ul>
+    <li><strong>Think in chains, not pairs.</strong> Because the second tile stays selected after a match, prefer a match whose second tile has another obvious partner.</li>
+    <li><strong>Read the front layer.</strong> The shape on top is what you can match next. Peeling it may reveal a shape that links to a different part of the board.</li>
+    <li><strong>Don't panic-tap.</strong> A miss breaks your combo, so pause and scan the board before you tap.</li>
+    </ul>
+    <h2>How Shapes relates to Spaceblox</h2>
+    <p>Both are calm, single-player puzzles made by one developer, but they play very differently. Spaceblox is a logic grid where you work out every color from a few clear rules. Shapes is a matching game about spotting shared shapes and planning chains of matches. If you enjoy one, the other offers a different kind of puzzle.</p>
+    <h2>FAQ</h2>
+    <p><strong>Can I play Shapes now?</strong><br>
+    Not yet. Shapes is in development and has not been released. In the meantime, you can <a href="/spaceblox/play/">play Spaceblox in your browser</a>.</p>
+    <p><strong>Will the rules change?</strong><br>
+    Possibly. Everything on this page describes the current prototype, and details may change during development.</p>
+    <p><strong>How do I hear about updates?</strong><br>
+    Check the <a href="/devlog/">devlog</a> and this page, which will be updated as development continues.</p>
+    <h2>Links</h2>
+    <ul>
+    <li><a href="/spaceblox/">Spaceblox — play now</a></li>
+    <li><a href="/devlog/">Devlog</a></li>
+    <li><a href="/privacy-policy/">Privacy Policy</a></li>
+    <li><a href="/contact/">Contact</a></li>
+    </ul>
     </div>
-
-    <footer>
-      <div>© Shapes · geeks0n-byte</div>
-      <div>
-        <a href="/">Studio</a>
-        ·
-        <a href="privacy-policy.html">Privacy Policy</a>
-        ·
-        <button type="button" class="cookie-choice" data-consent-open>Cookies</button>
-      </div>
+    </main>
+    <footer class="site-footer">
+      <nav aria-label="Footer">
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/privacy-policy/" data-privacy-settings>Privacy settings</a>
+      </nav>
+      <div>© 2026 Giga Sichinava</div>
     </footer>
   </div>
-
-  <script src="/consent.js" defer></script>
   <script>
   (function () {
     var wheel = document.querySelector(".shots-wheel");
