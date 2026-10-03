@@ -7,6 +7,8 @@
 		<!-- /ga.js: GA4 with Consent Mode and AdSense with the H5 games ad cadence. Google's consent message (CMP) handles consent. -->
 		<script src="/ga.js"></script>
 		<title>Play Spaceblox in Your Browser – geeks0n-byte</title>
+		<!-- The engine sets document.title to the project name at startup; the game puts this page title back on web. -->
+		<script>window.spacebloxPageTitle = document.title;</script>
 		<meta name="description" content="Spaceblox — calm color-logic puzzles in deep space. Play free in your browser." />
 		<link rel="canonical" href="https://geeks0n-byte.github.io/spaceblox/play/" />
 		<meta property="og:type" content="website" />
@@ -230,7 +232,7 @@ html, body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":0,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":7705352,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":0,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":7703832,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
