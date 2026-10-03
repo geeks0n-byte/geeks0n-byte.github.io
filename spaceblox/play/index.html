@@ -2,27 +2,28 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="google-adsense-account" content="ca-pub-1624206851803206">
 		<!-- /ga.js: GA4 with Consent Mode and AdSense with the H5 games ad cadence. Google's consent message (CMP) handles consent. -->
 		<script src="/ga.js"></script>
-		<title>Spaceblox</title>
+		<title>Play Spaceblox in Your Browser – geeks0n-byte</title>
 		<meta name="description" content="Spaceblox — calm color-logic puzzles in deep space. Play free in your browser." />
 		<link rel="canonical" href="https://geeks0n-byte.github.io/spaceblox/play/" />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://geeks0n-byte.github.io/spaceblox/play/" />
-		<meta property="og:title" content="Spaceblox" />
+		<meta property="og:site_name" content="geeks0n-byte" />
+		<meta property="og:title" content="Play Spaceblox in Your Browser – geeks0n-byte" />
 		<meta property="og:description" content="Calm color-logic puzzles in deep space. Play free in your browser." />
 		<meta property="og:image" content="https://geeks0n-byte.github.io/spaceblox/og-image.png" />
-		<meta property="og:image:width" content="1024" />
-		<meta property="og:image:height" content="500" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
 		<meta property="og:image:type" content="image/png" />
-		<meta property="og:image:alt" content="SPACEBLOX title over a pixel space background" />
+		<meta property="og:image:alt" content="The SPACEBLOX title over a pixel space background, with the main menu and a puzzle in progress" />
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content="Spaceblox" />
+		<meta name="twitter:title" content="Play Spaceblox in Your Browser – geeks0n-byte" />
 		<meta name="twitter:description" content="Calm color-logic puzzles in deep space. Play free in your browser." />
 		<meta name="twitter:image" content="https://geeks0n-byte.github.io/spaceblox/og-image.png" />
-		<meta name="twitter:image:alt" content="SPACEBLOX title over a pixel space background" />
+		<meta name="twitter:image:alt" content="The SPACEBLOX title over a pixel space background, with the main menu and a puzzle in progress" />
 		<style>
 @font-face {
 	font-family: "Press Start 2P";
@@ -153,6 +154,40 @@ html, body {
 	75%, 100% { opacity: 0; }
 }
 
+/* Way back to the site. Shown only on wide landscape screens, where the
+   letterboxed 9:16 game leaves at least ~190px free on each side. */
+#back-link {
+	display: none;
+	position: fixed;
+	top: 16px;
+	left: 16px;
+	z-index: 2;
+	align-items: center;
+	min-height: 44px;
+	padding: 0 14px;
+	font-family: "Press Start 2P", monospace;
+	font-size: 12px;
+	color: #ffffff;
+	text-decoration: none;
+	background: rgba(0, 0, 0, 0.35);
+	border: 1px solid #334155;
+	border-radius: 8px;
+}
+#back-link:hover { color: #facc15; }
+#back-link:focus-visible { outline: 2px solid #f7cc1a; outline-offset: 3px; }
+@media (min-width: 900px) and (min-aspect-ratio: 1/1) {
+	#back-link { display: inline-flex; }
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+}
+
 #status-notice {
 	display: none;
 	position: relative;
@@ -176,7 +211,9 @@ html, body {
 
 	</head>
 	<body>
-		<canvas id="canvas">
+		<h1 class="visually-hidden">Spaceblox</h1>
+		<a id="back-link" href="/spaceblox/">← Spaceblox</a>
+		<canvas id="canvas" aria-label="Spaceblox game">
 			Your browser does not support the canvas tag.
 		</canvas>
 

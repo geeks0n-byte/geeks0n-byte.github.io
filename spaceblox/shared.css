@@ -1,4 +1,5 @@
-/* Spaceblox landing (/spaceblox/): space theme for the site-wide header, nav and footer */
+/* Spaceblox landing (/spaceblox/): game theme on top of /site.css.
+   The header, nav, footer and focus style come from /site.css, as on every page. */
 @font-face {
   font-family: "PressStart2P";
   src: url("assets/PressStart2P.ttf") format("truetype");
@@ -19,8 +20,6 @@
   --accent: #56bdf8;
 }
 
-* { box-sizing: border-box; }
-
 html {
   scroll-behavior: smooth;
   background: #020617;
@@ -29,93 +28,31 @@ html {
 
 html, body { overflow-x: hidden; }
 
-body {
-  margin: 0;
-  font-family: system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+body.space-page {
+  padding: 0;
   color: var(--text);
-  min-height: 100vh;
-  min-height: 100dvh;
   line-height: 1.55;
 }
 
 img, video, svg { max-width: 100%; height: auto; }
 
-.wrap {
+.space-page .wrap {
   position: relative;
   z-index: 1;
   max-width: 1080px;
-  margin: 0 auto;
-  padding: 1rem max(1rem, env(safe-area-inset-right)) 3.5rem max(1rem, env(safe-area-inset-left));
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 1rem max(1rem, env(safe-area-inset-right)) 1.5rem max(1rem, env(safe-area-inset-left));
 }
 
-.site-header {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  width: 100%;
-  max-width: min(100%, 700px);
+/* Shared chrome, same width as the studio pages, readable on the starfield. */
+.space-page .site-header,
+.space-page .site-footer {
+  max-width: 880px;
   margin-inline: auto;
-  padding: 0.85rem 0;
 }
-
-.site-brand {
-  font-family: "PressStart2P", monospace;
-  font-size: 0.7rem;
-  color: #ffffff;
-  text-decoration: none;
-  text-shadow: 1px 1px 0 #000a;
-}
-
-.site-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  align-items: center;
-}
-
-.site-nav a,
-a.ui-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "PressStart2P", monospace;
-  font-size: 0.55rem;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: #ffffff;
-  text-decoration: none;
-  text-shadow: 1px 1px 0 #000a;
-  white-space: nowrap;
-  padding: 0.75rem;
-  line-height: 1;
-  image-rendering: pixelated;
-  border: none;
-  background-color: #1a1a1a;
-  background-image: url("assets/button_bar_gray_dark.svg?v=ingame3");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
-
-.site-nav a:hover,
-.site-nav a[aria-current="page"],
-a.ui-btn:hover {
-  filter: brightness(1.25);
-  color: var(--yellow);
-}
-
-.site-nav a:active,
-a.ui-btn:active {
-  filter: brightness(0.92);
-  transform: translateY(1px);
-}
-
-a:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-}
+.space-page .site-nav a { background: #0b1220d9; }
+.space-page .site-footer { margin-top: 3rem; }
 
 .play-badge {
   display: inline-flex;
@@ -131,31 +68,6 @@ a:focus-visible {
   height: auto;
 }
 
-.site-footer {
-  margin: 3rem auto 0;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 0.92rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.25rem;
-  justify-content: space-between;
-  width: 100%;
-  max-width: min(100%, 700px);
-}
-.site-footer nav { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; }
-.site-footer a { color: var(--accent); }
-
-
 @media (max-width: 860px) {
   .play-badge img { width: min(168px, 52vw); }
-}
-
-@media (max-width: 640px) {
-  .site-header { flex-direction: column; }
-  .site-nav { justify-content: center; gap: 0.3rem; }
-  .site-nav a { font-size: 0.45rem; padding: 0.65rem 0.55rem; }
-  .site-footer { flex-direction: column; align-items: center; text-align: center; }
-  .site-footer nav { justify-content: center; }
 }
