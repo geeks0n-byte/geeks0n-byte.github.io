@@ -1,6 +1,6 @@
 # geeks0n-byte.github.io
 
-This file lives in `.github/` so the repository page still shows it. Pages publishes `main` as-is because `.nojekyll` is present. The readme is not at the repo root, so the site does not serve `/README.md`.
+This file lives in `.github/` so the repository page still shows it. Pages publishes `main` as-is because `.nojekyll` is present. The readme is not at the repo root, so the site does not serve `/README.md`. Agent and maintainer notes are in `.github/AGENTS.md` for the same reason.
 
 GitHub Pages site for geeks0n-byte games:
 
