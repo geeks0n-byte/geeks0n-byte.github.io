@@ -12,47 +12,64 @@
   <meta name="theme-color" content="#14181f" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://geeks0n-byte.github.io/" />
-  <meta property="og:title" content="geeks0n-byte – Calm Indie Puzzle Games by Giga Sichinava" />
   <meta property="og:description" content="Calm, logic-first puzzle games made solo in Godot by Giga Sichinava in Poland. Play Spaceblox in your browser or on Google Play." />
-  <meta property="og:image" content="https://geeks0n-byte.github.io/spaceblox/og-image.png" />
+  <meta property="og:site_name" content="geeks0n-byte" />
+  <meta property="og:title" content="geeks0n-byte – Calm Indie Puzzle Games by Giga Sichinava" />
+  <meta property="og:image" content="https://geeks0n-byte.github.io/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:alt" content="geeks0n-byte: calm puzzle games made by one developer, with Spaceblox tiles and a gameplay screenshot" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="geeks0n-byte – Calm Indie Puzzle Games by Giga Sichinava" />
+  <meta name="twitter:description" content="Calm, logic-first puzzle games made solo in Godot by Giga Sichinava in Poland. Play Spaceblox in your browser or on Google Play." />
+  <meta name="twitter:image" content="https://geeks0n-byte.github.io/assets/og-image.png" />
+  <meta name="twitter:image:alt" content="geeks0n-byte: calm puzzle games made by one developer, with Spaceblox tiles and a gameplay screenshot" />
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
   <link rel="stylesheet" href="/site.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <div class="wrap">
     <header class="site-header">
-      <a class="site-brand" href="/">geeks0n-byte</a>
+      <a class="site-brand" href="/"><img src="/favicon.svg" width="28" height="28" alt="" />geeks0n-byte</a>
       <nav class="site-nav" aria-label="Main">
         <a href="/" aria-current="page">Home</a>
         <a href="/spaceblox/">Spaceblox</a>
         <a href="/devlog/">Devlog</a>
         <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
       </nav>
     </header>
-    <main class="prose home">
+    <main id="main" class="home">
+    <section class="prose home-intro">
     <h1>Calm puzzle games, made by one developer</h1>
     <p>geeks0n-byte is the home of small, thoughtful puzzle games made by <strong>Giga Sichinava</strong> (published on Google Play as <strong>gix0n</strong>), an independent developer based in Warsaw, Poland. Every game here is designed, programmed, tested and released by one person using the open-source <strong>Godot</strong> engine.</p>
-    <p>The idea behind every project is the same: puzzles you can pick up for five minutes or settle into for an evening, with clear rules, no pressure and no tricks. You should always be able to work out <em>why</em> a move is right — that "aha" moment is the whole point.</p>
-    <h2>Featured games</h2>
-    <div class="games">
-      <a class="game" href="/spaceblox/">
-        <img class="game-mark" src="/spaceblox/assets/icon_512.png" width="72" height="72" alt="" />
-        <span class="badge live">Out now</span>
-        <h3>Spaceblox</h3>
-        <p>Calm color logic in deep space. Play in browser or on Google Play.</p>
-      </a>
-    </div>
-    <h3>Spaceblox — color logic in deep space</h3>
-    <p><strong>Out now · Android and web browser</strong></p>
+    </section>
+    <section class="hero-card" aria-labelledby="hero-spaceblox">
+      <div class="hero-card-copy">
+        <span class="badge live">Out now · Android and web browser</span>
+        <h2 id="hero-spaceblox"><img src="/spaceblox/assets/title_spaceblox.png" alt="Spaceblox" width="1080" height="180" /></h2>
+        <p class="hero-card-tagline">Calm color logic in deep space.</p>
+        <div class="cta-row">
+          <a class="pixel-btn" href="/spaceblox/play/">Play in browser</a>
+          <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game"><img src="/spaceblox/assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" /></a>
+        </div>
+        <a class="hero-card-more" href="/spaceblox/">Read the full Spaceblox guide: rules, tips and FAQ</a>
+      </div>
+      <figure class="hero-card-shot">
+        <img src="/spaceblox/assets/shot_gameplay.png" alt="A Spaceblox puzzle in progress: a grid with yellow, blue and purple tiles" width="1080" height="1920" />
+      </figure>
+    </section>
+    <div class="prose">
+    <h2>Spaceblox — color logic in deep space</h2>
     <p>Spaceblox is a calm color-logic puzzle set in soft pixel space. You fill an empty grid with yellow, blue and green tiles, and every color has its own rules: never three of the same color in a row, keep yellow and blue balanced on every line, and use green — which counts as <em>both</em> yellow and blue — at most once per line. Purple tiles that hop between linked cells, plus "=" and "×" links between cells, add fresh twists as the campaign moves from easy to medium to hard.</p>
     <p>There is a guided tutorial, a full rule guide, hints when you are stuck, unlimited undo and redo, three optional star goals on every level, and achievements to chase (in the browser now, and on Android from the upcoming 1.1.0 update). The game is translated into seven languages: English, Spanish, German, French, Polish, Georgian and Ukrainian.</p>
-    <ul>
-    <li><a href="/spaceblox/">Read the full Spaceblox guide: rules, tips and FAQ</a></li>
-    <li><a href="/spaceblox/play/">Play Spaceblox in your browser</a></li>
-    <li><a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Get Spaceblox on Google Play</a></li>
-    </ul>
     <h2>Why these games feel the way they do</h2>
+    <p>The idea behind every project is the same: puzzles you can pick up for five minutes or settle into for an evening, with clear rules, no pressure and no tricks. You should always be able to work out <em>why</em> a move is right — that "aha" moment is the whole point.</p>
     <p><strong>Rules first, luck never.</strong> Spaceblox puzzles are built so they can be solved by reasoning alone. The game highlights broken rules in red as you play, so you learn from mistakes immediately instead of discovering them at the end.</p>
     <p><strong>Calm by design.</strong> There is no game-over countdown and no energy system. A level never fails when time runs out; time only decides whether you earn the optional time star.</p>
     <p><strong>Respectful of players.</strong> Game progress is stored on your own device by default. Where consent is required, Google's certified consent tool asks before Google Analytics or AdSense use cookies on this website, and you can change your choices at any time from the "Privacy settings" link in the footer. Details are in the <a href="/privacy-policy/">Privacy Policy</a>.</p>
@@ -66,6 +83,7 @@
     </ul>
     <h2>Get in touch</h2>
     <p>Found a bug, have an idea for a puzzle rule, or want to write about one of the games? Visit the <a href="/contact/">Contact page</a>. You can also read more <a href="/about/">about the developer</a>.</p>
+    </div>
     </main>
     <footer class="site-footer">
       <nav aria-label="Footer">
