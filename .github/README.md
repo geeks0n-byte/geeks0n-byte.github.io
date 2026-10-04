@@ -2,11 +2,11 @@
 
 This file lives in `.github/` so the repository page still shows it. Pages publishes `main` as-is because `.nojekyll` is present. The readme is not at the repo root, so the site does not serve `/README.md`. Agent and maintainer notes are in `.github/AGENTS.md` for the same reason.
 
-GitHub Pages site for geeks0n-byte games:
+GitHub Pages site for Spaceblox, a calm color-logic puzzle made by Giga Sichinava:
 
 | URL | Purpose |
 | --- | --- |
-| https://geeks0n-byte.github.io/ | Home |
+| https://geeks0n-byte.github.io/ | Home (Spaceblox landing page) |
 | https://geeks0n-byte.github.io/about/ , /contact/ , /privacy-policy/ | About, contact, site privacy policy |
 | https://geeks0n-byte.github.io/devlog/ | Devlog index and posts |
 | https://geeks0n-byte.github.io/app-ads.txt | AdMob authorization (**site root**) |
