@@ -9,7 +9,7 @@
   <meta name="google-adsense-account" content="ca-pub-1624206851803206" />
   <script src="/ga.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1624206851803206" crossorigin="anonymous"></script>
-  <meta name="theme-color" content="#020617" />
+  <meta name="theme-color" content="#00123a" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://geeks0n-byte.github.io/spaceblox/" />
   <meta property="og:description" content="How to play Spaceblox: fill the grid with yellow, blue and green tiles, follow the Rule of Two and Equal Balance. Rules, beginner tips and FAQ." />
@@ -29,620 +29,136 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
+  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/site.css" />
-  <link rel="stylesheet" href="shared.css" />
-  <link rel="stylesheet" href="space-bg.css" />
-  <style>
-    .hero {
-      display: flex;
-      flex-direction: column;
-      gap: 1.75rem;
-      align-items: stretch;
-      padding: 0;
-    }
-    .hero-copy { max-width: 40rem; margin-inline: auto; }
-    .hero-copy h1,
-    .hero-copy .lead { text-align: center; }
-
-    .tiles-row {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.85rem;
-      margin: 0 0 1.5rem;
-      width: 100%;
-    }
-    .tiles-row .tiles,
-    .tiles-row .play-badge { align-self: center; }
-    .tiles-stack {
-      display: inline-grid;
-      grid-template-columns: max-content;
-      justify-items: stretch;
-      gap: 0.85rem;
-      width: max-content;
-      max-width: 100%;
-    }
-    .tiles-stack .tiles { width: max-content; }
-    .tiles-stack .play-badge {
-      /* Tile art has 1px of empty margin in a 16px frame. */
-      width: 0;
-      min-width: calc(100% - 5px);
-      justify-self: center;
-    }
-    .tiles-stack .play-badge {
-      margin: 0;
-    }
-    .tiles-stack .play-badge img {
-      width: 100%;
-      height: auto;
-    }
-
-    @media (min-width: 900px) {
-      .hero {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        grid-template-areas: "art art" "copy tiles";
-        gap: 1.5rem 1.25rem;
-        align-items: stretch;
-        width: 100%;
-        max-width: min(100%, 700px);
-        margin-inline: auto;
-      }
-      .hero-art {
-        grid-area: art;
-        max-width: none;
-      }
-      .hero-copy {
-        grid-area: copy;
-        max-width: none;
-        width: 100%;
-        justify-self: stretch;
-        margin-inline: 0;
-        text-align: center;
-        min-width: 0;
-        transform: translateX(calc(-1.5rem - 6px));
-      }
-      .hero-copy h1,
-      .hero-copy .lead {
-        text-align: center;
-        max-width: none;
-        width: 100%;
-        margin-inline: 0;
-      }
-      .tiles-row {
-        grid-area: tiles;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin: 0;
-        gap: 0.85rem;
-        width: auto;
-        height: 100%;
-        justify-self: end;
-        align-self: stretch;
-        transform: translateX(calc(-1.5rem - 6px)) translateY(-0.85rem);
-      }
-      .tiles-row .play-badge {
-        margin: 0;
-      }
-    }
-
-    h1 {
-      font-family: "PressStart2P", monospace;
-      font-size: clamp(1.05rem, 2.4vw, 1.45rem);
-      line-height: 1.45;
-      margin: 0 0 1rem;
-      color: #f8fafc;
-    }
-    .lead { font-size: 1.08rem; color: var(--muted); margin: 0 auto 1.4rem; max-width: 36rem; }
-    .lead br { display: none; }
-    .lead strong { display: block; color: #fff; font-size: 1.22rem; line-height: 1.4; margin-bottom: 0.35rem; }
-    .tiles {
-      display: flex; align-items: center; gap: 0.45rem;
-      image-rendering: pixelated;
-    }
-    .tiles img {
-      width: 40px; height: 40px;
-      display: block;
-    }
-
-    .hero-art {
-      width: 100%;
-      max-width: min(100%, 700px);
-      margin-inline: auto;
-      display: grid;
-      place-items: center;
-      border: none;
-      background: none;
-      box-shadow: none;
-      backdrop-filter: none;
-      aspect-ratio: auto;
-      height: auto;
-      padding: 0.35rem 0 0.15rem;
-    }
-    .hero-art img {
-      display: block;
-      width: min(96%, 680px);
-      height: auto;
-      aspect-ratio: 1080 / 180;
-      image-rendering: -webkit-optimize-contrast;
-      image-rendering: auto;
-    }
-    @media (max-width: 860px) {
-      .hero-art img { width: min(100%, 560px); }
-    }
-
-    section { margin: 2.5rem 0; }
-    h2 {
-      font-family: "PressStart2P", monospace;
-      font-size: 0.98rem;
-      color: var(--blue);
-      margin: 0 0 1rem;
-      letter-spacing: 0.03em;
-    }
-    #shots h2 { text-align: center; }
-    #shots {
-      width: 100%;
-      max-width: min(100%, 700px);
-      margin-inline: auto;
-      margin-top: 4.25rem;
-    }
-    .panel {
-      background: color-mix(in srgb, var(--panel) 88%, transparent);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 1.25rem 1.35rem;
-      backdrop-filter: blur(6px);
-    }
-
-    .shots-wheel {
-      position: relative;
-      overflow-x: auto;
-      overflow-y: hidden;
-      border: 3px solid var(--line);
-      border-radius: 18px;
-      background: color-mix(in srgb, var(--panel) 88%, transparent);
-      padding: 0.85rem 0.6rem;
-      touch-action: pan-x;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      -webkit-overflow-scrolling: touch;
-      cursor: grab;
-    }
-    .shots-wheel.is-dragging { cursor: grabbing; user-select: none; }
-    .shots-wheel::-webkit-scrollbar { display: none; }
-    .shots-track {
-      display: flex;
-      gap: 0.75rem;
-      width: max-content;
-      animation: none;
-    }
-    .shots-track figure {
-      margin: 0;
-      width: 220px;
-      flex: 0 0 220px;
-      background: var(--bg2);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    .shots-track img {
-      display: block;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 9 / 16;
-      object-fit: cover;
-      pointer-events: none;
-      -webkit-user-drag: none;
-    }
-    .shots-track figcaption {
-      padding: 0.45rem 0.5rem 0.55rem;
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--text);
-    }
-    .shots-wheel {
-      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 2.5rem, #000 calc(100% - 2.5rem), transparent 100%);
-      mask-image: linear-gradient(90deg, transparent 0, #000 2.5rem, #000 calc(100% - 2.5rem), transparent 100%);
-    }
-    .shots-controls { display: flex; justify-content: center; gap: 0.5rem; margin-top: 0.85rem; }
-    .shots-controls button {
-      min-width: 48px;
-      min-height: 44px;
-      padding: 0 0.9rem;
-      border: 0;
-      cursor: pointer;
-      font-family: "PressStart2P", monospace;
-      font-size: 0.6rem;
-      color: #fff;
-      text-shadow: 1px 1px 0 #000a;
-      image-rendering: pixelated;
-      background: #1a1a1a url("assets/button_bar_gray_dark.svg?v=ingame3") 0 0 / 100% 100% no-repeat;
-    }
-    .shots-controls button:hover { filter: brightness(1.25); color: var(--yellow); }
-
-    /* 8: in-page jump links */
-    .jump {
-      width: 100%;
-      max-width: min(100%, 700px);
-      margin: 2rem auto 0;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .jump span { color: var(--muted); font-size: 0.9rem; margin-right: 0.2rem; }
-    .jump a {
-      display: inline-flex;
-      align-items: center;
-      min-height: 40px;
-      padding: 0 0.8rem;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: #0b1220d9;
-      color: var(--text);
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-    .jump a:hover { border-color: var(--yellow); color: var(--yellow); }
-    section[id], .guide h2[id] { scroll-margin-top: 1rem; }
-    .guide details { border-top: 1px solid var(--line); }
-    .guide details:last-of-type { border-bottom: 1px solid var(--line); }
-    .guide summary {
-      cursor: pointer;
-      min-height: 44px;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.55rem 0;
-      font-weight: 700;
-      color: #f8fafc;
-      list-style: none;
-    }
-    .guide summary::-webkit-details-marker { display: none; }
-    .guide summary::before { content: "+"; font-family: "PressStart2P", monospace; font-size: 0.7rem; color: var(--yellow); width: 1rem; flex: none; }
-    .guide details[open] summary::before { content: "−"; }
-    .guide details p { margin: 0 0 0.9rem 1.6rem; }
-    .to-top { text-align: right; margin: 1rem 0 0; }
-    .to-top a { display: inline-flex; align-items: center; min-height: 44px; }
-
-    /* 20: closing call to action */
-    .cta-band { text-align: center; }
-    .cta-band .cta-row { justify-content: center; margin: 0.4rem 0 0.6rem; }
-    .cta-band a.web-play { width: auto; padding: 0.95rem 1.1rem; color: #fff; }
-    .cta-band .play-badge img { width: 150px; }
-    .cta-band p { margin: 0.4rem 0 0; }
-
-    #trailer {
-      width: 100%;
-      max-width: min(100%, 700px);
-      margin-inline: auto;
-      margin-top: 2.75rem;
-    }
-    #trailer h2 { text-align: center; }
-    .trailer-frame {
-      position: relative;
-      width: min(100%, 300px);
-      margin-inline: auto;
-      aspect-ratio: 9 / 16;
-      border-radius: 18px;
-      overflow: hidden;
-      border: 3px solid var(--line);
-      background: #000;
-      box-shadow: 0 16px 40px #0006;
-    }
-    .trailer-frame iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-      display: block;
-    }
-    @media (max-width: 860px) {
-      .trailer-frame {
-        width: min(100%, 260px);
-        border-radius: 14px;
-      }
-    }
-
-    a.web-play {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
-      font-family: "PressStart2P", monospace;
-      font-size: 0.52rem;
-      letter-spacing: 0.03em;
-      color: #ffffff;
-      text-decoration: none;
-      text-shadow: 1px 1px 0 #000a;
-      white-space: nowrap;
-      padding: 0.65rem 0.35rem;
-      line-height: 1;
-      border: none;
-      background-color: #1a1a1a;
-      background-image: url("assets/button_bar_gray_dark.svg?v=ingame3");
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-      box-shadow: none;
-      image-rendering: pixelated;
-      /* Same width as the tile row, minus the empty margin in each 16px frame. */
-      width: calc(4 * 40px + 3 * 0.45rem - 5px);
-      max-width: 100%;
-      justify-self: center;
-    }
-    a.web-play:hover { filter: brightness(1.12); color: #fff; }
-    a.web-play:active {
-      filter: brightness(0.92);
-      transform: translateY(1px);
-    }
-
-    @media (min-width: 900px) {
-      a.web-play {
-        font-size: 0.64rem;
-        padding: 0.85rem 0.45rem;
-      }
-    }
-
-    @media (max-width: 860px) {
-      .hero { padding: 0.15rem 0 0; gap: 1.35rem; }
-      h1 { font-size: clamp(0.92rem, 4.6vw, 1.2rem); }
-      .lead { font-size: 1rem; margin-bottom: 1.1rem; }
-      .panel { padding: 1rem 1.05rem; border-radius: 14px; }
-      section { margin: 1.75rem 0; }
-      .shots-wheel { border-radius: 14px; padding: 0.65rem 0.45rem; }
-      .shots-track { gap: 0.55rem; }
-      .shots-track figure { width: 150px; flex: 0 0 150px; border-radius: 10px; }
-      .shots-track figcaption { font-size: 0.78rem; }
-    }
-    @media (max-width: 420px) {
-      .tiles img { width: 34px; height: 34px; }
-      .tiles-stack .play-badge { min-width: calc(100% - 4.25px); }
-      a.web-play { width: calc(4 * 34px + 3 * 0.45rem - 4.25px); }
-      .shots-track figure { width: 136px; flex: 0 0 136px; }
-      h2 { font-size: 0.82rem; }
-    }
-
-    /* Guide text */
-    .guide {
-      width: 100%;
-      max-width: min(100%, 700px);
-      margin-inline: auto;
-      color: var(--text);
-    }
-    .guide h2 { margin: 2rem 0 0.85rem; line-height: 1.5; }
-    .guide h2:first-child { margin-top: 0; }
-    .guide h3 { font-size: 1.05rem; color: var(--yellow); margin: 1.4rem 0 0.4rem; }
-    .guide p, .guide li { color: #cbd5e1; }
-    .guide li { margin: 0.35rem 0; }
-    .guide strong { color: #f8fafc; }
-    .guide ol li::marker, .guide ul li::marker { color: var(--yellow); }
-
-    /* Trailer loads only on click */
-    .trailer-poster {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      padding: 0;
-      border: 0;
-      cursor: pointer;
-      background: #000;
-    }
-    .trailer-poster img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.7; }
-    .trailer-poster span {
-      position: absolute;
-      left: 50%;
-      top: 74%;
-      transform: translate(-50%, -50%);
-      font-family: "PressStart2P", monospace;
-      font-size: 0.6rem;
-      color: #fff;
-      text-shadow: 1px 1px 0 #000a;
-      padding: 0.85rem;
-      white-space: nowrap;
-      background-color: #1a1a1a;
-      background-image: url("assets/button_bar_gray_dark.svg?v=ingame3");
-      background-size: 100% 100%;
-    }
-    .trailer-poster:hover span, .trailer-poster:focus-visible span { filter: brightness(1.25); }
-    .trailer-note { text-align: center; color: var(--muted); font-size: 0.85rem; margin: 0.6rem 0 0; }
-    .guide a { color: var(--accent); }
-  </style>
+  <link rel="stylesheet" href="/spaceblox/shared.css" />
 </head>
-<body class="space-page" id="top">
-  <a class="skip-link" href="#main">Skip to content</a>
-  <div class="space-bg" aria-hidden="true">
-    <div class="sb-void"></div>
-    <div class="sb-layer sb-dust" data-speed="0.20"></div>
-    <div class="sb-layer sb-stars" data-speed="0.40"></div>
-    <div class="sb-layer sb-accents" data-speed="0.60"></div>
-    <div class="sb-layer sb-sparks" data-speed="0.90"></div>
-    <div class="sb-fx" id="space-fx"></div>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/"><img src="/favicon.svg" alt="" width="32" height="32" />geeks0n-byte</a>
+    <nav class="nav site-nav" id="site-nav" aria-label="Main"><a href="/">Home</a><a href="/spaceblox/" aria-current="page">Spaceblox</a><a href="/devlog/">Devlog</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><i aria-hidden="true"></i>Menu</button>
   </div>
-  <div class="wrap">
-    <header class="site-header">
-      <a class="site-brand" href="/"><img src="/favicon.svg" width="28" height="28" alt="" />geeks0n-byte</a>
-      <nav class="site-nav" aria-label="Main">
-        <a href="/">Home</a>
-        <a href="/spaceblox/" aria-current="page">Spaceblox</a>
-        <a href="/devlog/">Devlog</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-      </nav>
-    </header>
-    <main id="main">
-    <section class="hero">
-      <h1 class="hero-art">
-        <img src="assets/title_spaceblox.png" alt="Spaceblox" width="1080" height="180" decoding="async" />
-      </h1>
-      <div class="hero-copy">
-        <p class="lead">
-          <strong>A calm color-logic puzzle set in soft pixel space.</strong><br />
-          Play free in your browser or on Android.
-        </p>
-      </div>
-      <div class="tiles-row">
-        <div class="tiles-stack">
-          <div class="tiles" aria-label="In-game tiles">
-            <img src="assets/tile_yellow.svg" alt="Yellow tile" width="40" height="40" />
-            <img src="assets/tile_blue.svg" alt="Blue tile" width="40" height="40" />
-            <img src="assets/tile_green.svg" alt="Green tile" width="40" height="40" />
-            <img src="assets/tile_shifter.svg" alt="Special purple tile" width="40" height="40" />
-          </div>
-          <a class="web-play" href="play/">PLAY IN BROWSER</a>
-          <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game" aria-label="Get it on Google Play">
-            <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" />
-          </a>
-        </div>
-      </div>
-    </section>
+</header>
+<main id="main">
+<section class="hero sky-deep sb-hero">
+  <img class="deco d-a1" src="/spaceblox/assets/fx_asteroid_1.svg" width="64" height="64" alt="" />
+  <img class="deco d-a2" src="/spaceblox/assets/fx_asteroid_3.svg" width="48" height="48" alt="" />
+  <img class="deco d-a3" src="/spaceblox/assets/fx_asteroid_2.svg" width="32" height="32" alt="" />
+  <img class="deco comet d-c1" src="/spaceblox/assets/fx_comet_1.svg" width="128" height="64" alt="" />
+  <div class="container sb-hero-grid">
+    <div class="hero-copy">
+      <nav class="crumbs small" aria-label="Breadcrumb"><a href="/">Home</a> <span aria-hidden="true">/</span> <span aria-current="page">Spaceblox</span></nav>
+      <h1 class="wordmark"><img src="/spaceblox/assets/title_spaceblox.png" alt="Spaceblox" width="540" height="90" /></h1>
+      <p class="lead"><strong>A calm color-logic puzzle set in soft pixel space.</strong> Play free in your browser or on Android.</p>
+      <div class="tiles-row" aria-hidden="true"><img src="/spaceblox/assets/tile_yellow.svg" alt="" width="48" height="48" /><img src="/spaceblox/assets/tile_blue.svg" alt="" width="48" height="48" /><img src="/spaceblox/assets/tile_green.svg" alt="" width="48" height="48" /><img src="/spaceblox/assets/tile_shifter.svg" alt="" width="48" height="48" /></div>
+      <div class="cta-row"><a class="btn btn-primary" href="/spaceblox/play/"><img class="ico" src="/assets/icon_play_dark.svg" alt="" width="16" height="16" />Play in browser</a><a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game"><img src="/spaceblox/assets/google-play-badge.png" alt="Get it on Google Play" width="646" height="250" /></a></div>
+      <ul class="facts">
+        <li><span>Price</span>Free · contains ads</li><li><span>Platforms</span>Android · Web</li><li><span>Languages</span>7</li><li><span>Released</span>1 Sep 2026</li>
+      </ul>
+    </div>
+    <figure class="frame hero-phone"><img src="/spaceblox/assets/shot_gameplay.webp" alt="A Spaceblox puzzle in progress: a grid with yellow, blue and purple tiles" width="600" height="1067" /></figure>
+  </div>
+</section>
 
-    <nav class="jump" aria-label="On this page">
-      <span>Jump to:</span>
-      <a href="#how-to-play">How to play</a>
-      <a href="#rules">Rules</a>
-      <a href="#shots">Screenshots</a>
-      <a href="#tips">Tips</a>
-      <a href="#faq">FAQ</a>
-      <a href="#trailer">Trailer</a>
-    </nav>
+<nav class="jump" aria-label="On this page"><div class="container"><span class="small">On this page</span>
+<a href="#how-to-play">How to play</a><a href="#rules">Rules</a><a href="#shots">Screenshots</a><a href="#tips">Tips</a><a href="#faq">FAQ</a><a href="#trailer">Trailer</a></div></nav>
 
-    <section class="guide panel" id="guide">
-    <p>Spaceblox gives you a grid with a few colored tiles already in place and asks you to fill every empty cell. That sounds simple, but each color follows its own rules. Yellow and blue must stay balanced on every line, no color may appear three times in a row, green counts as two colors at once, and purple tiles hop between linked cells. A full board that breaks no rules clears the level.</p>
+<section class="section-tight" id="guide" aria-labelledby="guide-h"><div class="container intro">
+  <div class="prose">
+    <h2 class="visually-hidden" id="guide-h">About the game</h2>
+    <p class="lead">Spaceblox gives you a grid with a few colored tiles already in place and asks you to fill every empty cell. That sounds simple, but each color follows its own rules.</p>
+    <p>Yellow and blue must stay balanced on every line, no color may appear three times in a row, green counts as two colors at once, and purple tiles hop between linked cells. A full board that breaks no rules clears the level.</p>
     <p>There is no luck involved: every puzzle can be solved by careful reasoning. The game marks broken rules with a red highlight as you play, so you always know where a problem is, and you can undo, redo or ask for a hint whenever you need one.</p>
-    <h2 id="how-to-play">How to play</h2>
-    <ol>
-    <li><strong>Start with the tutorial.</strong> The first time you press Play, Spaceblox offers a guided tutorial. It introduces one rule at a time on small boards and lets you practise each one before moving on. You can replay it any time from the main menu.</li>
-    <li><strong>Look at the board.</strong> Some cells already hold tiles. Tiles with a <strong>lock icon</strong> are fixed and cannot be changed — they are your starting clues.</li>
-    <li><strong>Place tiles.</strong> Tap (or click) an empty cell to cycle through the colors: Yellow, then Blue, then Green. Stop on the color you want.</li>
-    <li><strong>Fix mistakes.</strong> Press and hold a filled cell to clear it, or use <strong>Undo</strong> and <strong>Redo</strong> in the top bar. <strong>Restart</strong> puts the board back to its starting layout.</li>
-    <li><strong>Watch for red.</strong> If a placement breaks a rule, the affected cells are highlighted in red. Change one of them to resolve the conflict.</li>
-    <li><strong>Slide purple tiles.</strong> On boards with purple tiles, tap a purple tile to hop it along its arrow to the linked cell.</li>
-    <li><strong>Fill the last cell.</strong> When every cell is filled and no rule is broken, the level is solved and you see how many stars you earned.</li>
-    <li><strong>Need the rules again?</strong> The <strong>How to Play</strong> button opens the full rule guide with valid and invalid examples at any time, even mid-level.</li>
-    </ol>
-    <h2 id="rules">The rules</h2>
-    <h3>Core rules (yellow and blue)</h3>
-    <ul>
-    <li><strong>Rule of Two:</strong> never place three tiles of the same color next to each other in a row or column. Two yellows side by side are fine; a third is not.</li>
-    <li><strong>Equal Balance:</strong> every completed row and column must contain the same number of yellow and blue tiles.</li>
-    </ul>
-    <h3>Green tiles</h3>
-    <ul>
-    <li>Green <strong>counts as both yellow and blue</strong> for the Rule of Two. So a green next to two yellows makes "three yellows", and yellow–green–yellow is also a run of three.</li>
-    <li><strong>Rule of One:</strong> a row or column may contain at most one green tile.</li>
-    <li>Equal Balance <strong>ignores green</strong>. Green fills a cell without adding to the yellow or blue count, which is exactly what makes odd-length lines (3, 5 or 7 cells) possible to balance.</li>
-    </ul>
-    <h3>Purple tiles (shifters)</h3>
-    <ul>
-    <li>A purple tile sits between two linked cells. Tap it to slide it along the arrow to the other cell.</li>
-    <li>Another purple tile on the destination cell blocks the move — clear that path first.</li>
-    <li>Like green, purple fills a cell without counting toward Equal Balance.</li>
-    </ul>
-    <h3>Locks and links</h3>
-    <ul>
-    <li><strong>Lock icon:</strong> the tile is fixed.</li>
-    <li><strong>= between two cells:</strong> both cells must be the <em>same</em> color.</li>
-    <li><strong>× between two cells:</strong> the two cells must be <em>different</em> colors.</li>
-    </ul>
-    <h2>Stars, hints and progression</h2>
-    <p>Each campaign level has up to <strong>three star goals</strong>:</p>
-    <ol>
-    <li><strong>Solved</strong> — finish a valid board.</li>
-    <li><strong>No hints used</strong> — finish without using a hint.</li>
-    <li><strong>Time</strong> — finish within the level's time limit. Running out of time never ends the level; it only means this star stays empty. On boards with purple tiles, a star can instead ask you to use no more than a set number of purple hops.</li>
-    </ol>
+  </div>
+  <aside class="card card-pad quick" aria-labelledby="glance-h">
+    <h3 id="glance-h">At a glance</h3>
+    <dl>
+      <dt>Android</dt><dd><a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a> · free, contains ads</dd>
+      <dt>Web</dt><dd><a href="/spaceblox/play/">Play here</a> · desktop or mobile, portrait layout</dd>
+      <dt>Languages</dt><dd>English, Spanish, German, French, Polish, Georgian, Ukrainian</dd>
+      <dt>Engine</dt><dd>Godot</dd>
+      <dt>Privacy</dt><dd><a href="/spaceblox/privacy-policy.html">Spaceblox privacy policy</a></dd>
+    </dl>
+  </aside>
+</div></section>
+
+<section class="section-tight" id="how-to-play" aria-labelledby="htp-h"><div class="container">
+  <div class="section-head"><div><p class="eyebrow">Guide</p><h2 id="htp-h">How to play</h2></div></div>
+  <ol class="steps">
+    <li class="card step"><span class="num" aria-hidden="true">01</span><div><strong>Start with the tutorial.</strong> The first time you press Play, Spaceblox offers a guided tutorial. It introduces one rule at a time on small boards and lets you practise each one before moving on. You can replay it any time from the main menu.</div></li>
+    <li class="card step"><span class="num" aria-hidden="true">02</span><div><strong>Look at the board.</strong> Some cells already hold tiles. Tiles with a <strong>lock icon</strong> are fixed and cannot be changed — they are your starting clues.</div></li>
+    <li class="card step"><span class="num" aria-hidden="true">03</span><div><strong>Place tiles.</strong> Tap (or click) an empty cell to cycle through the colors: Yellow, then Blue, then Green. Stop on the color you want.</div></li>
+    <li class="card step"><span class="num" aria-hidden="true">04</span><div><strong>Fix mistakes.</strong> Press and hold a filled cell to clear it, or use <strong>Undo</strong> and <strong>Redo</strong> in the top bar. <strong>Restart</strong> puts the board back to its starting layout.</div></li>
+    <li class="card step"><span class="num" aria-hidden="true">05</span><div><strong>Watch for red.</strong> If a placement breaks a rule, the affected cells are highlighted in red. Change one of them to resolve the conflict.</div></li>
+    <li class="card step"><span class="num" aria-hidden="true">06</span><div><strong>Slide purple tiles.</strong> On boards with purple tiles, tap a purple tile to hop it along its arrow to the linked cell.</div></li>
+    <li class="card step"><span class="num" aria-hidden="true">07</span><div><strong>Fill the last cell.</strong> When every cell is filled and no rule is broken, the level is solved and you see how many stars you earned.</div></li>
+    <li class="card step"><span class="num" aria-hidden="true">08</span><div><strong>Need the rules again?</strong> The <strong>How to Play</strong> button opens the full rule guide with valid and invalid examples at any time, even mid-level.</div></li>
+  </ol>
+</div></section>
+
+<section class="section-tight" id="rules" aria-labelledby="rules-h"><div class="container">
+  <div class="section-head"><div><p class="eyebrow">Guide</p><h2 id="rules-h">The rules</h2></div></div>
+  <div class="rules">
+    <div class="card card-pad rule"><div class="rule-tiles"><img src="/spaceblox/assets/tile_yellow.svg" alt="" width="48" height="48" /><img src="/spaceblox/assets/tile_blue.svg" alt="" width="48" height="48" /></div><h3>Core rules (yellow and blue)</h3><ul>
+      <li><strong>Rule of Two:</strong> never place three tiles of the same color next to each other in a row or column. Two yellows side by side are fine; a third is not.</li>
+      <li><strong>Equal Balance:</strong> every completed row and column must contain the same number of yellow and blue tiles.</li></ul></div>
+    <div class="card card-pad rule"><div class="rule-tiles"><img src="/spaceblox/assets/tile_green.svg" alt="" width="48" height="48" /></div><h3>Green tiles</h3><ul>
+      <li>Green <strong>counts as both yellow and blue</strong> for the Rule of Two. So a green next to two yellows makes "three yellows", and yellow–green–yellow is also a run of three.</li>
+      <li><strong>Rule of One:</strong> a row or column may contain at most one green tile.</li>
+      <li>Equal Balance <strong>ignores green</strong>. Green fills a cell without adding to the yellow or blue count, which is exactly what makes odd-length lines (3, 5 or 7 cells) possible to balance.</li></ul></div>
+    <div class="card card-pad rule"><div class="rule-tiles"><img src="/spaceblox/assets/tile_shifter.svg" alt="" width="48" height="48" /></div><h3>Purple tiles (shifters)</h3><ul>
+      <li>A purple tile sits between two linked cells. Tap it to slide it along the arrow to the other cell.</li>
+      <li>Another purple tile on the destination cell blocks the move — clear that path first.</li>
+      <li>Like green, purple fills a cell without counting toward Equal Balance.</li></ul></div>
+    <div class="card card-pad rule"><div class="rule-tiles"><span class="locked"><img src="/spaceblox/assets/tile_yellow.svg" alt="" width="48" height="48" /><img class="ov" src="/spaceblox/assets/tile_lock.svg" alt="" width="48" height="48" /></span></div><h3>Locks and links</h3><ul>
+      <li><strong>Lock icon:</strong> the tile is fixed.</li>
+      <li><strong>= between two cells:</strong> both cells must be the <em>same</em> color.</li>
+      <li><strong>× between two cells:</strong> the two cells must be <em>different</em> colors.</li></ul></div>
+  </div>
+</div></section>
+
+<aside class="ad-band ad-rect" aria-label="Advertisement" data-ad-placement="spaceblox-after-rules" hidden>
+  <div class="ad-slot">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1624206851803206" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div>
+</aside>
+
+<section class="section-tight sky shots-sec" id="shots" aria-labelledby="shots-h" data-carousel><div class="container">
+  <div class="section-head"><div><p class="eyebrow">Gallery</p><h2 id="shots-h">Screenshots</h2></div>
+  <div class="shots-ctl"><button class="icon-btn" type="button" data-dir="-1" aria-label="Previous screenshots">◀</button><button class="icon-btn" type="button" data-dir="1" aria-label="Next screenshots">▶</button></div></div>
+  <div class="shots" tabindex="0" role="region" aria-label="Screenshots, scroll sideways or use the arrow keys">
+    <figure class="frame"><img src="/spaceblox/assets/shot_main_menu.webp" alt="Spaceblox main menu" width="600" height="1067" loading="lazy" /><figcaption>Main menu</figcaption></figure>
+    <figure class="frame"><img src="/spaceblox/assets/shot_gameplay.webp" alt="Spaceblox gameplay" width="600" height="1067" loading="lazy" /><figcaption>Gameplay</figcaption></figure>
+    <figure class="frame"><img src="/spaceblox/assets/shot_tutorial.webp" alt="Spaceblox tutorial" width="600" height="1067" loading="lazy" /><figcaption>Tutorial</figcaption></figure>
+    <figure class="frame"><img src="/spaceblox/assets/shot_levels.webp" alt="Spaceblox level select" width="600" height="1067" loading="lazy" /><figcaption>Level select</figcaption></figure>
+    <figure class="frame"><img src="/spaceblox/assets/shot_how_to_play.webp" alt="Spaceblox how to play" width="600" height="1067" loading="lazy" /><figcaption>How to play</figcaption></figure>
+    <figure class="frame"><img src="/spaceblox/assets/shot_achievements.webp" alt="Spaceblox achievements" width="600" height="1067" loading="lazy" /><figcaption>Achievements</figcaption></figure>
+    <figure class="frame"><img src="/spaceblox/assets/shot_pause.webp" alt="Spaceblox pause menu" width="600" height="1067" loading="lazy" /><figcaption>Pause menu</figcaption></figure>
+    <figure class="frame"><img src="/spaceblox/assets/shot_victory.webp" alt="Spaceblox victory screen" width="600" height="1067" loading="lazy" /><figcaption>Victory screen</figcaption></figure>
+  </div>
+</div></section>
+
+<section class="section-tight" aria-labelledby="stars-h"><div class="container">
+  <div class="section-head"><div><p class="eyebrow">Progression</p><h2 id="stars-h">Stars, hints and progression</h2></div></div>
+  <p class="section-intro">Each campaign level has up to <strong>three star goals</strong>:</p>
+  <ol class="stars3">
+    <li class="card card-pad"><img src="/spaceblox/assets/icon_star_on.svg" width="48" height="48" alt="" /><h3>Solved</h3><p>Finish a valid board.</p></li>
+    <li class="card card-pad"><img src="/spaceblox/assets/icon_star_on.svg" width="48" height="48" alt="" /><h3>No hints used</h3><p>Finish without using a hint.</p></li>
+    <li class="card card-pad"><img src="/spaceblox/assets/icon_star_on.svg" width="48" height="48" alt="" /><h3>Time</h3><p>Finish within the level's time limit. Running out of time never ends the level; it only means this star stays empty. On boards with purple tiles, a star can instead ask you to use no more than a set number of purple hops.</p></li>
+  </ol>
+  <div class="prose stars-more">
     <p>Stars are optional. You can clear a level with one star and come back later to collect the rest.</p>
     <p><strong>Hints</strong> reveal a helpful "=" or "×" clue on the board. Each level gives you a small number of hints (more on harder levels). If you run out, you can choose to watch an optional ad to receive three more hints.</p>
     <p>The campaign runs across <strong>easy, medium and hard</strong> levels, unlocking as you go, so the rules build up gradually from small boards to larger ones with green, purple and linked cells. Achievements reward milestones, star goals and a few secret feats, with bronze, silver and gold tiers to track on the Achievements screen (in the browser version now, and on Android from the upcoming 1.1.0 update).</p>
+  </div>
+</div></section>
 
-    </section>
-
-    <section id="shots">
-      <h2>Screenshots</h2>
-      <div class="shots-wheel" role="region" aria-label="Screenshot carousel" tabindex="0">
-        <div class="shots-track">
-          <figure>
-            <img src="assets/shot_main_menu.png" alt="Spaceblox main menu" width="1080" height="1920" />
-            <figcaption>Main menu</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/shot_gameplay.png" alt="Spaceblox gameplay" width="1080" height="1920" />
-            <figcaption>Gameplay</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/shot_tutorial.png" alt="Spaceblox tutorial" width="1080" height="1920" />
-            <figcaption>Tutorial</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/shot_levels.png" alt="Spaceblox level select" width="1080" height="1920" />
-            <figcaption>Level select</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/shot_how_to_play.png" alt="Spaceblox how to play" width="1080" height="1920" />
-            <figcaption>How to play</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/shot_achievements.png" alt="Spaceblox achievements" width="1080" height="1920" />
-            <figcaption>Achievements</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/shot_pause.png" alt="Spaceblox pause menu" width="1080" height="1920" />
-            <figcaption>Pause menu</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/shot_victory.png" alt="Spaceblox victory screen" width="1080" height="1920" />
-            <figcaption>Victory screen</figcaption>
-          </figure>
-          <!-- duplicate set for seamless loop -->
-          <figure aria-hidden="true">
-            <img src="assets/shot_main_menu.png" alt="" width="1080" height="1920" />
-            <figcaption>Main menu</figcaption>
-          </figure>
-          <figure aria-hidden="true">
-            <img src="assets/shot_gameplay.png" alt="" width="1080" height="1920" />
-            <figcaption>Gameplay</figcaption>
-          </figure>
-          <figure aria-hidden="true">
-            <img src="assets/shot_tutorial.png" alt="" width="1080" height="1920" />
-            <figcaption>Tutorial</figcaption>
-          </figure>
-          <figure aria-hidden="true">
-            <img src="assets/shot_levels.png" alt="" width="1080" height="1920" />
-            <figcaption>Level select</figcaption>
-          </figure>
-          <figure aria-hidden="true">
-            <img src="assets/shot_how_to_play.png" alt="" width="1080" height="1920" />
-            <figcaption>How to play</figcaption>
-          </figure>
-          <figure aria-hidden="true">
-            <img src="assets/shot_achievements.png" alt="" width="1080" height="1920" />
-            <figcaption>Achievements</figcaption>
-          </figure>
-          <figure aria-hidden="true">
-            <img src="assets/shot_pause.png" alt="" width="1080" height="1920" />
-            <figcaption>Pause menu</figcaption>
-          </figure>
-          <figure aria-hidden="true">
-            <img src="assets/shot_victory.png" alt="" width="1080" height="1920" />
-            <figcaption>Victory screen</figcaption>
-          </figure>
-        </div>
-      </div>
-      <div class="shots-controls">
-        <button type="button" class="shots-prev" aria-label="Previous screenshot">◀</button>
-        <button type="button" class="shots-toggle" aria-pressed="false">Pause</button>
-        <button type="button" class="shots-next" aria-label="Next screenshot">▶</button>
-      </div>
-    </section>
-
-    <section class="guide panel" id="features">
-    <h2>Features</h2>
-    <ul>
+<section class="section-tight" id="features"><div class="container cols3">
+  <div><h2>Features</h2><ul class="ticks">
     <li>Guided, step-by-step tutorial</li>
     <li>Campaign with easy, medium and hard levels</li>
     <li>Full in-game rule guide with examples</li>
@@ -653,251 +169,94 @@
     <li>Dynamic or static space background, music and sound-effect settings</li>
     <li>Mid-level progress is saved, so you can continue where you left off</li>
     <li>On Android: optional Google Play Games sign-in for cloud save and achievements*</li>
-    </ul>
-    <p>* Available in the browser version now (cloud save excepted) and coming to Android with version 1.1.0.</p>
-    <h2>Controls</h2>
-    <ul>
+  </ul><p class="small">* Available in the browser version now (cloud save excepted) and coming to Android with version 1.1.0.</p></div>
+  <div><h2>Controls</h2><ul class="ticks">
     <li><strong>Phone or tablet:</strong> tap an empty cell to cycle Yellow → Blue → Green; press and hold a filled cell to clear it; tap a purple tile to slide it.</li>
     <li><strong>Browser:</strong> the same actions with the mouse — click a cell to cycle colors, click and hold a filled cell for about a second to clear it, and click a purple tile to slide it. On a touchscreen, tap and hold work just like on a phone.</li>
     <li><strong>Top bar:</strong> Pause, Restart, How to Play (rules), Hint, Undo and Redo.</li>
-    </ul>
-    <h2>Platforms and languages</h2>
-    <ul>
+  </ul></div>
+  <div><h2>Platforms and languages</h2><ul class="ticks">
     <li><strong>Android:</strong> <a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a> — free, contains ads. Released on 1 September 2026.</li>
     <li><strong>Web browser:</strong> <a href="/spaceblox/play/">play here</a> — free, runs in a modern browser on desktop or mobile; the game is laid out in portrait. Cloud save is not available in the web version.</li>
     <li><strong>Languages:</strong> English, Spanish, German, French, Polish, Georgian and Ukrainian.</li>
     <li>Built with the Godot engine.</li>
-    </ul>
-    <h2 id="tips">Beginner tips</h2>
-    <p><strong>1. Hunt for pairs first.</strong> Whenever two cells of the same color sit next to each other in a line, the cells on either side of that pair must be the other color. This is the single most useful deduction in the game and often unlocks a whole row.</p>
-    <p><strong>2. Fill the gap in a sandwich.</strong> If you see yellow, empty, yellow, the gap must be blue (and vice versa). Three in a row is broken whether the middle tile arrives first or last.</p>
-    <p><strong>3. Count to the halfway point.</strong> In a six-cell line without green, Equal Balance means exactly three yellows and three blues. Once one color reaches three, every remaining empty cell in that line must be the other color.</p>
-    <p><strong>4. Odd lines need a special tile.</strong> Yellow and blue must be equal, so their total is always even. A line with an odd number of cells therefore needs a green or purple tile somewhere in it. Because there can be only one green per line, finding where that green goes is often the key to an odd-sized board.</p>
-    <p><strong>5. Treat green as a wildcard that can block itself.</strong> Green counts as both colors for the Rule of Two, so it can never sit directly beside a same-color pair (yellow-yellow-green or blue-blue-green) or between two matching tiles (yellow-green-yellow). Green is easiest to place next to mixed neighbours.</p>
-    <p><strong>6. Use links as shortcuts.</strong> An "×" link on a yellow/blue board means the two cells are opposites, so knowing one tells you the other. Chains of "=" and "×" links let you carry information across the grid.</p>
-    <p><strong>7. Move purple tiles early.</strong> Sliding a purple tile changes which cell is empty. Decide where each shifter should rest before filling its neighbours, and remember a shifter can be blocked by another one.</p>
-    <p><strong>8. Let red highlights teach you.</strong> A red line shows exactly which rule broke. Rather than guessing, undo and ask which rule the red cells are breaking.</p>
-    <p><strong>9. Save hints for real dead ends.</strong> Solving without hints earns a star. If you are stuck, scan every row and column for pairs and halfway counts once more before tapping Hint.</p>
-    <h2 id="faq">FAQ</h2>
-    <details>
-      <summary>Is Spaceblox free?</summary>
-      <p>Yes. Spaceblox is free to play on Android and in the browser. It is supported by ads, and you can optionally watch an ad to get extra hints.</p>
-    </details>
-    <details>
-      <summary>Do I need an account?</summary>
-      <p>No. Progress is saved on your device. On Android, version 1.1.0 adds optional Google Play Games sign-in to sync progress and achievements.</p>
-    </details>
-    <details>
-      <summary>Is there a timer?</summary>
-      <p>Each level has a time limit only for the optional time star. A level never fails when time runs out: you can take as long as you like and still solve it — you just won't earn that star.</p>
-    </details>
-    <details>
-      <summary>Is every puzzle solvable without guessing?</summary>
-      <p>The puzzles are designed to be solved by logic. If you feel you must guess, look again for pairs, sandwiches and halfway counts — or use a hint.</p>
-    </details>
-    <details>
-      <summary>Will my browser progress carry over to the Android app?</summary>
-      <p>No. The web version saves in your browser's own storage on that device, and cloud sync is only available in the Android app.</p>
-    </details>
-    <details>
-      <summary>Is Spaceblox playable with color blindness?</summary>
-      <p>Spaceblox has an optional colorblind mode that adds patterns to the tiles, so colors can be told apart by shape as well as color.</p>
-    </details>
-    <p class="to-top"><a href="#top">↑ Back to top</a></p>
-    </section>
+  </ul></div>
+</div></section>
 
-    <section id="trailer" aria-labelledby="trailer-heading">
-      <h2 id="trailer-heading">Trailer</h2>
-      <div class="trailer-frame">
-        <button type="button" class="trailer-poster" data-video="SgMDnckUF-I" aria-label="Play the Spaceblox trailer">
-          <img src="assets/shot_gameplay.png" alt="" width="1080" height="1920" loading="lazy" />
-          <span>▶ PLAY TRAILER</span>
-        </button>
-      </div>
-      <p class="trailer-note">Loads from YouTube (privacy-enhanced mode) when you press play.</p>
-    </section>
+<section class="section-tight" id="tips" aria-labelledby="tips-h"><div class="container">
+  <div class="section-head"><div><p class="eyebrow">Get better</p><h2 id="tips-h">Beginner tips</h2></div></div>
+  <ol class="tips">
+    <li><span class="num" aria-hidden="true">1</span><div><strong>Hunt for pairs first.</strong> Whenever two cells of the same color sit next to each other in a line, the cells on either side of that pair must be the other color. This is the single most useful deduction in the game and often unlocks a whole row.</div></li>
+    <li><span class="num" aria-hidden="true">2</span><div><strong>Fill the gap in a sandwich.</strong> If you see yellow, empty, yellow, the gap must be blue (and vice versa). Three in a row is broken whether the middle tile arrives first or last.</div></li>
+    <li><span class="num" aria-hidden="true">3</span><div><strong>Count to the halfway point.</strong> In a six-cell line without green, Equal Balance means exactly three yellows and three blues. Once one color reaches three, every remaining empty cell in that line must be the other color.</div></li>
+    <li><span class="num" aria-hidden="true">4</span><div><strong>Odd lines need a special tile.</strong> Yellow and blue must be equal, so their total is always even. A line with an odd number of cells therefore needs a green or purple tile somewhere in it. Because there can be only one green per line, finding where that green goes is often the key to an odd-sized board.</div></li>
+    <li><span class="num" aria-hidden="true">5</span><div><strong>Treat green as a wildcard that can block itself.</strong> Green counts as both colors for the Rule of Two, so it can never sit directly beside a same-color pair (yellow-yellow-green or blue-blue-green) or between two matching tiles (yellow-green-yellow). Green is easiest to place next to mixed neighbours.</div></li>
+    <li><span class="num" aria-hidden="true">6</span><div><strong>Use links as shortcuts.</strong> An "×" link on a yellow/blue board means the two cells are opposites, so knowing one tells you the other. Chains of "=" and "×" links let you carry information across the grid.</div></li>
+    <li><span class="num" aria-hidden="true">7</span><div><strong>Move purple tiles early.</strong> Sliding a purple tile changes which cell is empty. Decide where each shifter should rest before filling its neighbours, and remember a shifter can be blocked by another one.</div></li>
+    <li><span class="num" aria-hidden="true">8</span><div><strong>Let red highlights teach you.</strong> A red line shows exactly which rule broke. Rather than guessing, undo and ask which rule the red cells are breaking.</div></li>
+    <li><span class="num" aria-hidden="true">9</span><div><strong>Save hints for real dead ends.</strong> Solving without hints earns a star. If you are stuck, scan every row and column for pairs and halfway counts once more before tapping Hint.</div></li>
+  </ol>
+</div></section>
 
-    <section class="guide panel cta-band" id="links" aria-labelledby="play-heading">
-    <h2 id="play-heading">Play Spaceblox</h2>
-    <div class="cta-row">
-      <a class="web-play" href="play/">PLAY IN BROWSER</a>
-      <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game"><img src="assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" /></a>
-    </div>
-    <p>Prefer to watch first? <a href="https://www.youtube.com/watch?v=SgMDnckUF-I">Trailer on YouTube</a></p>
-    </section>
-    </main>
-    <footer class="site-footer">
-      <nav aria-label="Footer">
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-        <a href="/privacy-policy/">Privacy Policy</a>
-        <a href="/privacy-policy/" data-privacy-settings>Privacy settings</a>
-      </nav>
-      <div>© 2026 Giga Sichinava</div>
-    </footer>
+<aside class="ad-band" aria-label="Advertisement" data-ad-placement="spaceblox-before-faq" hidden>
+  <div class="ad-slot">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1624206851803206" data-ad-format="auto" data-full-width-responsive="true"></ins>
   </div>
-  <script src="space-bg.js" defer></script>
-  <script>
-  (function () {
-    var wheel = document.querySelector(".shots-wheel");
-    var track = document.querySelector(".shots-track");
-    if (!wheel || !track) return;
-    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var loopW = 0, auto = !reduce, speed = 0.55, resumeTimer = null, lastUser = 0, wrapping = false;
-    var dragging = false, dragId = null, startX = 0, startScroll = 0;
-    var inView = true, pageVisible = document.visibilityState !== "hidden";
-    var rafId = 0;
+</aside>
 
-    function measure() {
-      var kids = track.children;
-      var half = Math.floor(kids.length / 2);
-      if (half < 1) { loopW = 0; return; }
-      loopW = kids[half].offsetLeft - kids[0].offsetLeft;
-    }
-    function wrap() {
-      if (wrapping) return;
-      if (!loopW) measure();
-      if (loopW <= 0) return;
-      wrapping = true;
-      while (wheel.scrollLeft >= loopW) wheel.scrollLeft -= loopW;
-      while (wheel.scrollLeft < 0) wheel.scrollLeft += loopW;
-      if (wheel.scrollLeft < 1) wheel.scrollLeft += loopW;
-      wrapping = false;
-    }
-    var userPaused = reduce, hovering = false;
-    function shouldRun() {
-      return auto && !userPaused && !hovering && !dragging && inView && pageVisible && loopW > 0;
-    }
-    function tick() {
-      rafId = 0;
-      if (shouldRun()) {
-        wheel.scrollLeft += speed;
-        wrap();
-        rafId = requestAnimationFrame(tick);
-      }
-    }
-    function ensureTick() {
-      if (!rafId && shouldRun()) rafId = requestAnimationFrame(tick);
-    }
-    function pauseAuto() {
-      auto = false; lastUser = Date.now();
-      if (resumeTimer) clearTimeout(resumeTimer);
-      if (!reduce) {
-        resumeTimer = setTimeout(function () {
-          if (Date.now() - lastUser >= 2000) {
-            auto = true;
-            ensureTick();
-          }
-        }, 2100);
-      }
-    }
-    function endDrag(e) {
-      if (!dragging || (e && e.pointerId !== dragId)) return;
-      dragging = false;
-      dragId = null;
-      wheel.classList.remove("is-dragging");
-      try { wheel.releasePointerCapture(e.pointerId); } catch (err) {}
-      pauseAuto();
-    }
-    function boot() {
-      measure();
-      if (loopW > 0) wheel.scrollLeft = Math.floor(loopW * 0.5);
-      ensureTick();
-    }
+<section class="section-tight" aria-label="FAQ and trailer"><div class="container faq-trailer">
+  <div id="faq"><div class="section-head"><div><p class="eyebrow">Help</p><h2>FAQ</h2></div></div>
+    <div class="faq">
+      <details class="card" open><summary>Is Spaceblox free?</summary><p>Yes. Spaceblox is free to play on Android and in the browser. It is supported by ads, and you can optionally watch an ad to get extra hints.</p></details>
+      <details class="card"><summary>Do I need an account?</summary><p>No. Progress is saved on your device. On Android, version 1.1.0 adds optional Google Play Games sign-in to sync progress and achievements.</p></details>
+      <details class="card"><summary>Is there a timer?</summary><p>Each level has a time limit only for the optional time star. A level never fails when time runs out: you can take as long as you like and still solve it — you just won't earn that star.</p></details>
+      <details class="card"><summary>Is every puzzle solvable without guessing?</summary><p>The puzzles are designed to be solved by logic. If you feel you must guess, look again for pairs, sandwiches and halfway counts — or use a hint.</p></details>
+      <details class="card"><summary>Will my browser progress carry over to the Android app?</summary><p>No. The web version saves in your browser's own storage on that device, and cloud sync is only available in the Android app.</p></details>
+      <details class="card"><summary>Is Spaceblox playable with color blindness?</summary><p>Spaceblox has an optional colorblind mode that adds patterns to the tiles, so colors can be told apart by shape as well as color.</p></details>
+    </div>
+  </div>
+  <div id="trailer"><div class="section-head"><div><p class="eyebrow">Watch</p><h2>Trailer</h2></div></div>
+    <button class="trailer sky" type="button" data-video="SgMDnckUF-I" aria-label="Play the Spaceblox trailer (loads YouTube)"><span class="frame"><img src="/spaceblox/assets/shot_gameplay.webp" alt="" width="600" height="1067" loading="lazy" /></span><span class="btn btn-primary">▶ Play trailer</span></button>
+    <p class="small trailer-note">Loads from YouTube (privacy-enhanced mode) when you press play. Prefer YouTube? <a href="https://www.youtube.com/watch?v=SgMDnckUF-I">Watch the trailer there</a>.</p>
+  </div>
+</div></section>
 
-    if ("IntersectionObserver" in window) {
-      var io = new IntersectionObserver(function (entries) {
-        inView = !!(entries[0] && entries[0].isIntersecting);
-        if (inView) ensureTick();
-      }, { threshold: 0 });
-      io.observe(wheel);
-    }
-    document.addEventListener("visibilitychange", function () {
-      pageVisible = document.visibilityState !== "hidden";
-      if (pageVisible) ensureTick();
-    });
-
-    wheel.addEventListener("scroll", function () { if (!wrapping) wrap(); }, { passive: true });
-    wheel.addEventListener("wheel", function (e) {
-      pauseAuto();
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { wheel.scrollLeft += e.deltaY; wrap(); e.preventDefault(); }
-    }, { passive: false });
-    wheel.addEventListener("pointerdown", function (e) {
-      pauseAuto();
-      if (e.pointerType === "touch") return;
-      if (e.button !== 0) return;
-      dragging = true;
-      dragId = e.pointerId;
-      startX = e.clientX;
-      startScroll = wheel.scrollLeft;
-      wheel.classList.add("is-dragging");
-      try { wheel.setPointerCapture(e.pointerId); } catch (err) {}
-    });
-    wheel.addEventListener("pointermove", function (e) {
-      if (!dragging || e.pointerId !== dragId) return;
-      wheel.scrollLeft = startScroll - (e.clientX - startX);
-      wrap();
-    });
-    wheel.addEventListener("pointerup", endDrag);
-    wheel.addEventListener("pointercancel", endDrag);
-    wheel.addEventListener("touchstart", pauseAuto, { passive: true });
-    window.addEventListener("resize", function () { measure(); if (loopW) wrap(); });
-
-    // Controls: previous / next one screenshot, and pause or play the auto-scroll.
-    var toggle = document.querySelector(".shots-toggle");
-    function step(dir) {
-      var fig = track.children[0];
-      var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
-      var dist = (fig ? fig.offsetWidth : 200) + gap;
-      var from = wheel.scrollLeft, t0 = 0, dur = reduce ? 0 : 280;
-      pauseAuto();
-      function frame(ts) {
-        if (!t0) t0 = ts;
-        var k = dur ? Math.min(1, (ts - t0) / dur) : 1;
-        wheel.scrollLeft = from + dir * dist * (1 - Math.pow(1 - k, 3));
-        wrap();
-        if (k < 1) requestAnimationFrame(frame);
-      }
-      requestAnimationFrame(frame);
-    }
-    function setPaused(p) {
-      userPaused = p;
-      if (toggle) {
-        toggle.textContent = p ? "Play" : "Pause";
-        toggle.setAttribute("aria-pressed", p ? "true" : "false");
-        toggle.setAttribute("aria-label", p ? "Play the screenshot carousel" : "Pause the screenshot carousel");
-      }
-      if (!p) { auto = true; ensureTick(); }
-    }
-    var prev = document.querySelector(".shots-prev"), next = document.querySelector(".shots-next");
-    if (prev) prev.addEventListener("click", function () { step(-1); });
-    if (next) next.addEventListener("click", function () { step(1); });
-    if (toggle) toggle.addEventListener("click", function () { setPaused(!userPaused); });
-    setPaused(userPaused);
-    wheel.addEventListener("mouseenter", function () { hovering = true; });
-    wheel.addEventListener("mouseleave", function () { hovering = false; ensureTick(); });
-    wheel.addEventListener("focusin", function () { hovering = true; });
-    wheel.addEventListener("focusout", function () { hovering = false; ensureTick(); });
-    wheel.addEventListener("keydown", function (e) {
-      if (e.key === "ArrowLeft") { step(-1); e.preventDefault(); }
-      if (e.key === "ArrowRight") { step(1); e.preventDefault(); }
-    });
-    boot();
-    window.addEventListener("load", boot);
-  })();
-  (function () {
-    var btn = document.querySelector(".trailer-poster");
-    if (!btn) return;
-    btn.addEventListener("click", function () {
-      var f = document.createElement("iframe");
-      f.src = "https://www.youtube-nocookie.com/embed/" + btn.getAttribute("data-video") + "?autoplay=1";
-      f.title = "Spaceblox trailer";
-      f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-      f.allowFullscreen = true;
-      f.referrerPolicy = "strict-origin-when-cross-origin";
-      btn.replaceWith(f);
-    });
-  })();
-  </script>
+<section class="final-cta sky-deep" id="links" aria-labelledby="play-h"><div class="container final-inner">
+  <img class="wm" src="/spaceblox/assets/title_spaceblox.png" alt="" width="270" height="45" />
+  <h2 id="play-h" class="lead">Ready for a calm puzzle?</h2>
+  <div class="cta-row"><a class="btn btn-primary" href="/spaceblox/play/"><img class="ico" src="/assets/icon_play_dark.svg" alt="" width="16" height="16" />Play in browser</a><a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game"><img src="/spaceblox/assets/google-play-badge.png" alt="Get it on Google Play" width="646" height="250" /></a></div>
+  <p class="small"><a href="/spaceblox/privacy-policy.html">Spaceblox privacy policy</a> · <a href="/devlog/">Devlog</a></p>
+</div></section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="f-brand">
+        <a class="brand" href="/"><img src="/favicon.svg" alt="" width="32" height="32" />geeks0n-byte</a>
+        <p class="small">Calm, logic-first puzzle games made solo in Godot by Giga Sichinava in Poland.</p>
+      </div>
+      <nav aria-labelledby="f-sb"><h2 id="f-sb">Spaceblox</h2><ul>
+        <li><a href="/spaceblox/">Game page &amp; guide</a></li>
+        <li><a href="/spaceblox/play/">Play in browser</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a></li>
+      </ul></nav>
+      <nav aria-labelledby="f-studio"><h2 id="f-studio">Studio</h2><ul>
+        <li><a href="/devlog/">Devlog</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul></nav>
+      <nav aria-labelledby="f-legal"><h2 id="f-legal">Legal</h2><ul>
+        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+        <li><a href="/spaceblox/privacy-policy.html">Spaceblox privacy policy</a></li>
+        <li><a href="/privacy-policy/" data-privacy-settings>Privacy settings</a></li>
+        <li><a class="mono" href="/ads.txt">ads.txt</a></li>
+        <li><a class="mono" href="/app-ads.txt">app-ads.txt</a></li>
+      </ul></nav>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Giga Sichinava</span><span>Google Play and the Google Play logo are trademarks of Google LLC.</span></div>
+  </div>
+</footer>
+<script src="/site.js" defer></script>
 </body>
 </html>
