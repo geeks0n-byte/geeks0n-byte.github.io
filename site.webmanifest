@@ -1,7 +1,7 @@
 {
-  "name": "geeks0n-byte",
-  "short_name": "geeks0n-byte",
-  "description": "Calm, logic-first puzzle games made solo in Godot by Giga Sichinava.",
+  "name": "Spaceblox",
+  "short_name": "Spaceblox",
+  "description": "A calm color-logic puzzle set in soft pixel space. Made by Giga Sichinava.",
   "start_url": "/",
   "scope": "/",
   "display": "browser",

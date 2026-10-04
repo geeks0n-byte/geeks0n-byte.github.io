@@ -1,4 +1,4 @@
-/* geeks0n-byte site styles: "soft pixel space" (STYLE-SPEC.md, Mira, Oct 2026).
+/* Spaceblox site styles: "soft pixel space" (STYLE-SPEC.md, Mira, Oct 2026).
    Tokens and components for every page. /spaceblox/ adds spaceblox/shared.css. */
 @font-face { font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("/assets/fonts/inter-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 @font-face { font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("/assets/fonts/inter-latin-ext.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
@@ -130,6 +130,9 @@ a.card:hover h3 { color: var(--gold); }
 .hero-grid { display: grid; grid-template-columns: 1fr 432px; gap: var(--s8); align-items: center; position: relative; }
 .hero-copy h1 { margin-bottom: var(--s5); }
 .hero-copy .lead { margin-bottom: var(--s6); max-width: 580px; }
+.hero-wm { margin: 0 0 var(--s4); line-height: 0; }
+.hero-wm img { width: 432px; height: 72px; max-width: none; margin-left: -42px; } /* the PNG has transparent side padding */
+.hero-by { margin-top: var(--s5); color: var(--muted); }
 .hero-art figcaption { text-align: center; margin-top: 20px; }
 .board { display: grid; grid-template-columns: repeat(6, 64px); padding: 16px; background: rgba(0, 10, 36, .75); border: 2px solid var(--line); border-radius: 6px; box-shadow: 0 12px 0 rgba(0, 4, 20, .5); width: max-content; position: relative; }
 .board .cell, .board .wall { position: relative; width: 64px; height: 64px; }
@@ -251,6 +254,8 @@ a.card:hover h3 { color: var(--gold); }
   .footer-grid .f-brand { grid-column: 1 / -1; }
 
   .home-hero { padding: var(--s7) 0; }
+  .hero-wm img { width: 270px; height: 45px; margin-left: -26px; }
+  .hero-by { text-align: center; }
   .hero-grid { grid-template-columns: 1fr; gap: var(--s7); }
   .board { grid-template-columns: repeat(6, 48px); padding: 12px; margin: 0 auto; }
   .board .cell, .board .wall, .board .cell img { width: 48px; height: 48px; }
