@@ -1,5 +1,5 @@
 // Animated space background: the Spaceblox bg_1..bg_4 parallax layers drifting
-// diagonally, twinkling stars, and an occasional comet, shooting star or asteroid.
+// diagonally, twinkling stars, and random comets, shooting stars and asteroids.
 // Motion runs on the compositor (CSS transform/opacity animations and WAAPI);
 // this script only builds the DOM, sizes tiles on resize and spawns an effect
 // every few seconds. Off: prefers-reduced-motion (static layers), Save-Data.
@@ -78,60 +78,96 @@
   document.addEventListener("visibilitychange", onVis);
   onVis();
 
-  // Occasional effects (none with reduced motion or Save-Data).
+  // Random events, as on the pre-redesign site: comets, shooting stars and
+  // asteroids appear at random times, cross the screen along a random line
+  // (random position and angle), then are removed. None with reduced motion
+  // or Save-Data; fewer on phones and reading pages.
   var A = "/spaceblox/assets/";
   var COMETS = [A + "fx_comet_1.svg", A + "fx_comet_2.svg", A + "fx_comet_3.svg"];
   var ROCKS = [A + "fx_asteroid_1.svg", A + "fx_asteroid_2.svg", A + "fx_asteroid_3.svg"];
+  var MAX_LIVE = small ? 2 : 3;
+  var live = 0;
   function rand(a, b) { return a + Math.random() * (b - a); }
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+
+  // Distance from (px,py) along unit vector (ux,uy) to the edge of the box
+  // [-m, W+m] x [-m, H+m].
+  function reach(px, py, ux, uy, W, H, m) {
+    var tx = ux > 0 ? (W + m - px) / ux : ux < 0 ? (-m - px) / ux : Infinity;
+    var ty = uy > 0 ? (H + m - py) / uy : uy < 0 ? (-m - py) / uy : Infinity;
+    return Math.min(tx, ty);
+  }
 
   function spawn(kind) {
     var el = new Image();
     el.className = "sb-fx-item";
     el.alt = "";
+    el.setAttribute("data-kind", kind);
     var W = fx.clientWidth || window.innerWidth, H = fx.clientHeight || window.innerHeight;
-    var m = W < 640 ? 0.6 : 0.9, w, h, dur, sy, ey, r0, r1;
-    if (kind === "star") { w = h = rand(28, 46) * m; dur = rand(1.6, 2.8); el.src = A + "fx_shooting_star.svg"; }
-    else if (kind === "comet") { var s = rand(0.85, 1.05); w = 64 * s; h = 32 * s; dur = (18 - (s - 0.85) * 35) * rand(0.9, 1.1); el.src = COMETS[0]; }
-    else { w = h = rand(16, 30) * m; dur = rand(14, 24); el.src = ROCKS[(Math.random() * 3) | 0]; }
+    var m = W < 640 ? 0.6 : 0.9, w, h, speed, ang;
+    if (kind === "star") {
+      w = h = rand(28, 46) * m; speed = rand(600, 900); el.src = A + "fx_shooting_star.svg";
+      // Shooting stars fall: diagonally down, to the left or to the right.
+      ang = rand(20, 65) * Math.PI / 180;
+      if (Math.random() < 0.5) ang = Math.PI - ang;
+    } else if (kind === "comet") {
+      var sc = rand(0.85, 1.05); w = 64 * sc; h = 32 * sc; speed = rand(70, 120); el.src = COMETS[0];
+      ang = rand(0, 2 * Math.PI);
+    } else {
+      w = h = rand(16, 30) * m; speed = rand(45, 90); el.src = ROCKS[(Math.random() * 3) | 0];
+      ang = rand(0, 2 * Math.PI);
+    }
     el.width = Math.round(w); el.height = Math.round(h);
-    var sx = W + Math.max(w, h) + 50, ex = -Math.max(w, h) - 100, travel = sx - ex;
-    if (kind === "star") { sy = rand(-100, H * 0.4); ey = sy + travel * rand(0.5, 1.5); }
-    else if (kind === "comet") { sy = rand(-100, H * 0.6); ey = sy + travel * rand(0.2, 0.8); }
-    else { sy = rand(-100, H * 0.8); ey = sy + travel * rand(0.1, 1.2); }
-    var ang = Math.atan2(ey - sy, ex - sx);
+    // A random point on screen, and a random line through it from edge to edge.
+    var ux = Math.cos(ang), uy = Math.sin(ang), mg = Math.max(w, h) + 20;
+    var px = rand(0.1, 0.9) * W, py = rand(0.1, 0.9) * H;
+    var back = reach(px, py, -ux, -uy, W, H, mg), fwd = reach(px, py, ux, uy, W, H, mg);
+    var sx = px - ux * back, sy = py - uy * back, ex = px + ux * fwd, ey = py + uy * fwd;
+    var dur = (back + fwd) / speed;
+    dur = kind === "star" ? clamp(dur, 0.9, 3) : kind === "comet" ? clamp(dur, 8, 24) : clamp(dur, 10, 30);
+    var r0, r1;
     if (kind === "rock") { r0 = rand(0, 360); r1 = r0 + rand(120, 420) * (Math.random() < 0.5 ? 1 : -1); }
     else { r0 = r1 = (ang - (kind === "comet" ? Math.PI : 3 * Math.PI / 4)) * 180 / Math.PI; }
+    function at(x, y, r) { return "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) rotate(" + r.toFixed(1) + "deg)"; }
     el.style.opacity = "0";
     fx.appendChild(el);
+    live++;
     var frames = 0;
+    function done() { clearInterval(frames); el.remove(); live--; }
     function go() {
+      if (!el.isConnected) return;
       el.style.opacity = "";
       // Comet tail: 3-frame flip at 12 fps (an image swap, not a per-frame script).
       var fi = 0;
-      if (kind === "comet") frames = setInterval(function () { fi = (fi + 1) % 3; el.src = COMETS[fi]; }, 83);
-      var a = el.animate([
-        { transform: "translate(" + sx + "px," + sy + "px) rotate(" + r0 + "deg)", opacity: 1 },
-        { transform: "translate(" + ex + "px," + ey + "px) rotate(" + r1 + "deg)", opacity: 0.85 }
-      ], { duration: dur * 1000, easing: "linear", fill: "forwards" });
-      a.onfinish = function () { clearInterval(frames); el.remove(); };
+      if (kind === "comet") frames = setInterval(function () { if (!hidden) { fi = (fi + 1) % 3; el.src = COMETS[fi]; } }, 83);
+      var kf = kind === "star"
+        ? [{ transform: at(sx, sy, r0), opacity: 0 }, { opacity: 1, offset: 0.12 }, { opacity: 1, offset: 0.75 }, { transform: at(ex, ey, r1), opacity: 0 }]
+        : [{ transform: at(sx, sy, r0), opacity: 1 }, { transform: at(ex, ey, r1), opacity: 0.85 }];
+      var a = el.animate(kf, { duration: dur * 1000, easing: "linear", fill: "forwards" });
+      if (hidden) a.pause();
+      a.onfinish = done;
+      a.oncancel = done;
     }
     if (el.decode) el.decode().then(go, go); else el.onload = go;
   }
 
+  function pickKind() {
+    var r = Math.random();
+    return r < 0.55 ? "star" : r < 0.8 ? "comet" : "rock";
+  }
   function schedule() {
-    var gap = small ? rand(9000, 16000) : rand(3800, 8200);
+    // Desktop: an event every 3.8-8.2 s (as on the old site). Phones and
+    // reading pages: every 9-16 s.
+    var gap = small || calm ? rand(9000, 16000) : rand(3800, 8200);
     setTimeout(function () {
-      if (!hidden && !mqReduce.matches) {
-        var r = Math.random();
-        // Small screens: shooting stars only.
-        spawn(small ? "star" : r < 0.58 ? "star" : r < 0.8 ? "comet" : "rock");
-      }
+      if (!hidden && !mqReduce.matches && live < MAX_LIVE) spawn(pickKind());
       schedule();
     }, gap);
   }
-  // Reading pages (devlog, about, contact) get no comets or shooting stars:
-  // nothing bright should pass behind long text.
-  if (!saveData && !calm) {
+  if (mqReduce.addEventListener) mqReduce.addEventListener("change", function () {
+    if (mqReduce.matches && fx.getAnimations) fx.getAnimations({ subtree: true }).forEach(function (a) { a.cancel(); });
+  });
+  if (!saveData) {
     COMETS.forEach(function (s) { new Image().src = s; });
     setTimeout(schedule, rand(1200, 2800));
   }
