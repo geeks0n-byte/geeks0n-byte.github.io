@@ -44,6 +44,7 @@
 /* Reading pages (devlog, about, contact): calmer, dimmer sky behind long text. */
 .space-bg.sb-calm .sb-dust .sb-y { opacity: .5; }
 .space-bg.sb-calm .sb-stars { opacity: .7; }
+.space-bg.sb-calm .sb-fx { opacity: .6; }
 
 /* Let the animated sky show where the page used the static starfield.
    Cards, thumbnails, the header, jump nav and ad bands keep their own opaque backgrounds. */
