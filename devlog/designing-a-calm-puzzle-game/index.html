@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Designing a Calm Puzzle Game – geeks0n-byte</title>
+  <title>Designing a Calm Puzzle Game – Spaceblox Devlog</title>
   <meta name="description" content="Why Spaceblox has optional stars instead of a game-over timer, how hints and undo keep players moving, and the accessibility choices behind it." />
   <link rel="canonical" href="https://geeks0n-byte.github.io/devlog/designing-a-calm-puzzle-game/" />
   <meta name="google-adsense-account" content="ca-pub-1624206851803206" />
@@ -13,15 +13,15 @@
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://geeks0n-byte.github.io/devlog/designing-a-calm-puzzle-game/" />
   <meta property="og:description" content="Why Spaceblox has optional stars instead of a game-over timer, how hints and undo keep players moving, and the accessibility choices behind it." />
-  <meta property="og:site_name" content="geeks0n-byte" />
-  <meta property="og:title" content="Designing a Calm Puzzle Game – geeks0n-byte" />
+  <meta property="og:site_name" content="Spaceblox" />
+  <meta property="og:title" content="Designing a Calm Puzzle Game – Spaceblox Devlog" />
   <meta property="og:image" content="https://geeks0n-byte.github.io/spaceblox/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:alt" content="The SPACEBLOX title over a pixel space background, with the main menu and a puzzle in progress" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Designing a Calm Puzzle Game – geeks0n-byte" />
+  <meta name="twitter:title" content="Designing a Calm Puzzle Game – Spaceblox Devlog" />
   <meta name="twitter:description" content="Why Spaceblox has optional stars instead of a game-over timer, how hints and undo keep players moving, and the accessibility choices behind it." />
   <meta name="twitter:image" content="https://geeks0n-byte.github.io/spaceblox/og-image.png" />
   <meta name="twitter:image:alt" content="The SPACEBLOX title over a pixel space background, with the main menu and a puzzle in progress" />
@@ -30,7 +30,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"BlogPosting","headline":"Designing a calm puzzle game","description":"Why Spaceblox has optional stars instead of a game-over timer, how hints and undo keep players moving, and the accessibility choices behind it.","datePublished":"2026-10-02","dateModified":"2026-10-02","author":{"@type":"Person","name":"Giga Sichinava","url":"https://geeks0n-byte.github.io/about/"},"publisher":{"@type":"Person","name":"Giga Sichinava"},"image":"https://geeks0n-byte.github.io/spaceblox/og-image.png","mainEntityOfPage":"https://geeks0n-byte.github.io/devlog/designing-a-calm-puzzle-game/"}
+  {"@context":"https://schema.org","@type":"BlogPosting","headline":"Designing a calm puzzle game","description":"Why Spaceblox has optional stars instead of a game-over timer, how hints and undo keep players moving, and the accessibility choices behind it.","datePublished":"2026-10-02","dateModified":"2026-10-02","author":{"@type":"Person","name":"Giga \"gix0n\" Sichinava","url":"https://geeks0n-byte.github.io/about/"},"publisher":{"@type":"Person","name":"Giga \"gix0n\" Sichinava"},"image":"https://geeks0n-byte.github.io/spaceblox/og-image.png","mainEntityOfPage":"https://geeks0n-byte.github.io/devlog/designing-a-calm-puzzle-game/"}
   </script>
   <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/site.css" />
@@ -40,8 +40,8 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="container">
-    <a class="brand" href="/"><img src="/favicon.svg" alt="" width="32" height="32" />geeks0n-byte</a>
-    <nav class="nav site-nav" id="site-nav" aria-label="Main"><a href="/">Home</a><a href="/spaceblox/">Spaceblox</a><a href="/devlog/" aria-current="page">Devlog</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>
+    <a class="brand" href="/"><img src="/favicon.svg" alt="" width="32" height="32" />Spaceblox</a>
+    <nav class="nav site-nav" id="site-nav" aria-label="Main"><a href="/">Home</a><a href="/spaceblox/">Guide</a><a href="/devlog/" aria-current="page">Devlog</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><i aria-hidden="true"></i>Menu</button>
   </div>
 </header>
@@ -50,7 +50,7 @@
     <a class="back-link" href="/devlog/">← Devlog</a>
     <article>
     <h1>Designing a calm puzzle game</h1>
-    <p class="post-meta">By Giga Sichinava · <time datetime="2026-10-02">2 October 2026</time></p>
+    <p class="post-meta">By Giga "gix0n" Sichinava · <time datetime="2026-10-02">2 October 2026</time></p>
     <p>When I describe Spaceblox, the word I use most is <em>calm</em>. That is not just about the soft pixel-space art. It shaped a lot of concrete design decisions. Here are the main ones.</p>
     <h2>Pressure is optional</h2>
     <p>Every campaign level has three stars: one for solving it, one for solving it without hints, and one for finishing within a time limit (or, on boards with purple tiles, within a limited number of hops). The important word is <em>optional</em>. The time limit only decides whether you earn that star: a level never fails because time runs out. If you want to sit with a hard board for twenty minutes, you can. If you want a challenge, replay it later and chase all three.</p>
@@ -71,7 +71,7 @@
     <h2>Teach one rule at a time</h2>
     <p>Spaceblox has several rules, and dumping them on the first screen would be overwhelming. The tutorial introduces them one by one, each on a small board with a highlighted cell to practise on. After that, the How to Play guide — with valid and invalid examples for every rule — is always one tap away, even mid-level.</p>
     <h2>Ads between moments, not during them</h2>
-    <p>The games are free and supported by ads, so where ads appear matters. Full-screen ads are held back until a player has cleared several levels, and then they appear only between levels, never in the middle of a puzzle. Ads for extra hints are always the player's choice. On the website, a consent message lets you decide whether advertising and analytics cookies may be used, and you can change that choice at any time.</p>
+    <p>Spaceblox is free and supported by ads, so where ads appear matters. Full-screen ads are held back until a player has cleared several levels, and then they appear only between levels, never in the middle of a puzzle. Ads for extra hints are always the player's choice. On the website, a consent message lets you decide whether advertising and analytics cookies may be used, and you can change that choice at any time.</p>
     <h2>Don't rely on color alone</h2>
     <p>A color puzzle is a strange thing to make accessible, but it matters. Spaceblox has an optional colorblind mode that adds patterns to the tiles, with a palette adjusted for better separation, and screen-reader labels across the menus and game screen. Both are in the browser version now and arrive on Android with the upcoming 1.1.0 update. It is translated into seven languages, including Polish, Georgian and Ukrainian.</p>
     <p>None of these ideas are new on their own. Together they are what I mean by a calm puzzle game: one where the only thing pushing back on you is the puzzle.</p>
@@ -100,15 +100,15 @@
   <div class="container">
     <div class="footer-grid">
       <div class="f-brand">
-        <a class="brand" href="/"><img src="/favicon.svg" alt="" width="32" height="32" />geeks0n-byte</a>
-        <p class="small">Calm, logic-first puzzle games made solo in Godot by Giga Sichinava in Poland.</p>
+        <a class="brand" href="/"><img src="/favicon.svg" alt="" width="32" height="32" />Spaceblox</a>
+        <p class="small">A calm color-logic puzzle for Android and the web.<br />Made by Giga "gix0n" Sichinava.</p>
       </div>
-      <nav aria-labelledby="f-sb"><h2 id="f-sb">Spaceblox</h2><ul>
-        <li><a href="/spaceblox/">Game page &amp; guide</a></li>
+      <nav aria-labelledby="f-sb"><h2 id="f-sb">Play</h2><ul>
         <li><a href="/spaceblox/play/">Play in browser</a></li>
         <li><a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a></li>
       </ul></nav>
-      <nav aria-labelledby="f-studio"><h2 id="f-studio">Studio</h2><ul>
+      <nav aria-labelledby="f-more"><h2 id="f-more">Learn more</h2><ul>
+        <li><a href="/spaceblox/">How to play &amp; guide</a></li>
         <li><a href="/devlog/">Devlog</a></li>
         <li><a href="/about/">About</a></li>
         <li><a href="/contact/">Contact</a></li>
