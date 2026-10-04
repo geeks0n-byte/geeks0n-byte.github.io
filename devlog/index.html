@@ -9,7 +9,7 @@
   <meta name="google-adsense-account" content="ca-pub-1624206851803206" />
   <script src="/ga.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1624206851803206" crossorigin="anonymous"></script>
-  <meta name="theme-color" content="#14181f" />
+  <meta name="theme-color" content="#00123a" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://geeks0n-byte.github.io/devlog/" />
   <meta property="og:description" content="Development notes from geeks0n-byte: how Spaceblox&#x27;s puzzle rules work, design decisions behind a calm puzzle game, and game updates." />
@@ -29,52 +29,57 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
+  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/site.css" />
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <div class="wrap">
-    <header class="site-header">
-      <a class="site-brand" href="/"><img src="/favicon.svg" width="28" height="28" alt="" />geeks0n-byte</a>
-      <nav class="site-nav" aria-label="Main">
-        <a href="/">Home</a>
-        <a href="/spaceblox/">Spaceblox</a>
-        <a href="/devlog/" aria-current="page">Devlog</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-      </nav>
-    </header>
-    <main id="main" class="prose">
-    <h1>Devlog</h1>
-    <p>Notes from making Spaceblox: how the puzzle rules work, design decisions, updates and behind-the-scenes work. Written by Giga Sichinava, the solo developer behind geeks0n-byte.</p>
-    <ul class="post-list">
-      <li>
-        <img class="thumb" src="/spaceblox/assets/shot_how_to_play.png" alt="" width="1080" height="1920" loading="lazy" />
-        <div>
-        <h2><a href="/devlog/how-spaceblox-color-rules-work/">How Spaceblox&#x27;s color rules work</a></h2>
-        <time datetime="2026-10-02">2 October 2026</time>
-        <p>A plain-language tour of Spaceblox&#x27;s puzzle rules: Rule of Two, Equal Balance, green tiles that count twice, purple shifters and = / × links.</p>
-        </div>
-      </li>
-      <li>
-        <img class="thumb" src="/spaceblox/assets/shot_victory.png" alt="" width="1080" height="1920" loading="lazy" />
-        <div>
-        <h2><a href="/devlog/designing-a-calm-puzzle-game/">Designing a calm puzzle game</a></h2>
-        <time datetime="2026-10-02">2 October 2026</time>
-        <p>Why Spaceblox has optional stars instead of a game-over timer, how hints and undo keep players moving, and the accessibility choices behind it.</p>
-        </div>
-      </li>
-    </ul>
-    </main>
-    <footer class="site-footer">
-      <nav aria-label="Footer">
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-        <a href="/privacy-policy/">Privacy Policy</a>
-        <a href="/privacy-policy/" data-privacy-settings>Privacy settings</a>
-      </nav>
-      <div>© 2026 Giga Sichinava</div>
-    </footer>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/"><img src="/favicon.svg" alt="" width="32" height="32" />geeks0n-byte</a>
+    <nav class="nav site-nav" id="site-nav" aria-label="Main"><a href="/">Home</a><a href="/spaceblox/">Spaceblox</a><a href="/devlog/" aria-current="page">Devlog</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><i aria-hidden="true"></i>Menu</button>
   </div>
+</header>
+<main id="main" class="reading">
+<div class="container">
+  <p class="eyebrow">Studio notes</p>
+  <h1>Devlog</h1>
+  <p class="lead prose devlog-intro">Notes from making Spaceblox: how the puzzle rules work, design decisions, updates and behind-the-scenes work. Written by Giga Sichinava, the solo developer behind geeks0n-byte.</p>
+  <ul class="post-list">
+    <li><a class="card post-card" href="/devlog/how-spaceblox-color-rules-work/"><div class="thumb sky"><img src="/spaceblox/assets/shot_how_to_play.webp" alt="" width="600" height="1067" loading="lazy" /></div><div class="card-pad"><time class="small" datetime="2026-10-02">2 October 2026</time><h2>How Spaceblox&#x27;s color rules work</h2><p>A plain-language tour of Spaceblox&#x27;s puzzle rules: Rule of Two, Equal Balance, green tiles that count twice, purple shifters and = / × links.</p></div></a></li>
+    <li><a class="card post-card" href="/devlog/designing-a-calm-puzzle-game/"><div class="thumb sky"><img src="/spaceblox/assets/shot_victory.webp" alt="" width="600" height="1067" loading="lazy" /></div><div class="card-pad"><time class="small" datetime="2026-10-02">2 October 2026</time><h2>Designing a calm puzzle game</h2><p>Why Spaceblox has optional stars instead of a game-over timer, how hints and undo keep players moving, and the accessibility choices behind it.</p></div></a></li>
+  </ul>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="f-brand">
+        <a class="brand" href="/"><img src="/favicon.svg" alt="" width="32" height="32" />geeks0n-byte</a>
+        <p class="small">Calm, logic-first puzzle games made solo in Godot by Giga Sichinava in Poland.</p>
+      </div>
+      <nav aria-labelledby="f-sb"><h2 id="f-sb">Spaceblox</h2><ul>
+        <li><a href="/spaceblox/">Game page &amp; guide</a></li>
+        <li><a href="/spaceblox/play/">Play in browser</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a></li>
+      </ul></nav>
+      <nav aria-labelledby="f-studio"><h2 id="f-studio">Studio</h2><ul>
+        <li><a href="/devlog/">Devlog</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul></nav>
+      <nav aria-labelledby="f-legal"><h2 id="f-legal">Legal</h2><ul>
+        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+        <li><a href="/spaceblox/privacy-policy.html">Spaceblox privacy policy</a></li>
+        <li><a href="/privacy-policy/" data-privacy-settings>Privacy settings</a></li>
+        <li><a class="mono" href="/ads.txt">ads.txt</a></li>
+        <li><a class="mono" href="/app-ads.txt">app-ads.txt</a></li>
+      </ul></nav>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Giga Sichinava</span><span>Google Play and the Google Play logo are trademarks of Google LLC.</span></div>
+  </div>
+</footer>
+<script src="/site.js" defer></script>
 </body>
 </html>

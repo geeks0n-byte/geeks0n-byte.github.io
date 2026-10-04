@@ -6,12 +6,13 @@ Giga's GitHub Pages site for his games. Static HTML, CSS, and JS. No build step:
 
 ## Layout
 
-- `index.html` — home. `about/`, `contact/`, `privacy-policy/`, `devlog/` (index + one folder per post). `site.css` — shared styles for every page, including the header, nav, footer, skip link and focus ring; fonts are self-hosted in `assets/fonts/`. `spaceblox/shared.css` only adds the Spaceblox game theme on top of `/site.css`.
-- `ga.js` — GA4 with Consent Mode v2 (defaults denied), the footer "Privacy settings" link, and the Spaceblox web game bridge. Every page loads it before the AdSense tag. Consent is handled by Google's CMP (AdSense > Privacy & messaging); there is no home-made banner.
+- `index.html` — home. `about/`, `contact/`, `privacy-policy/`, `devlog/` (index + one folder per post). `site.css` — the "soft pixel space" design (tokens, header/menu, footer, buttons, cards, ad bands, home, reading pages, privacy, 404); Inter (body) is self-hosted in `assets/fonts/`, PressStart2P (headings, buttons) is `spaceblox/assets/PressStart2P.ttf`. `spaceblox/shared.css` adds the /spaceblox/ page layout on top of `/site.css`. `site.js` — mobile menu, screenshot carousel (manual only), click-to-load trailer. Design spec: Mira's STYLE-SPEC (one breakpoint at 720px).
+- `ga.js` — GA4 with Consent Mode v2 (defaults denied), the footer "Privacy settings" link, the Spaceblox web game bridge, and the display ad bands: every `.ad-band` ships `hidden` and stays hidden while `ADS_LIVE = false`; after AdSense approval, add each band's `data-ad-slot` and flip `ADS_LIVE`. Bands with no slot id, unfilled, or not filled within 5 s stay hidden. Every page loads it before the AdSense tag. Consent is handled by Google's CMP (AdSense > Privacy & messaging); there is no home-made banner.
 - `app-ads.txt` and `ads.txt` — AdMob and AdSense authorization. Site root only.
 - `spaceblox/` — game guide and landing; `spaceblox/privacy-policy.html` mirrors `/privacy-policy/` (canonical) because the app links to it. `spaceblox/play/` — exported Godot web build.
 - Icons: `favicon.ico`, `favicon.svg` (pixel "G" studio mark), `apple-touch-icon.png`, `assets/icon-192.png`, `assets/icon-512.png`, listed in `site.webmanifest`. Social cards (1200×630): `assets/og-image.png` (studio pages) and `spaceblox/og-image.png` (Spaceblox and devlog posts).
 - `404.html`, `robots.txt`, `sitemap.xml`, `.nojekyll`.
+- Ad placements (bands, hidden until live): home between "Why these games…" and "From the devlog"; /spaceblox/ after Rules and before FAQ; each devlog post after the article; play shell right rail only at ≥1280px with room beside the canvas. No ads on privacy pages, about, contact, 404, or over the game canvas.
 
 ## Run
 
@@ -31,3 +32,5 @@ Small readable changes. Subtract before adding. Prove it works before claiming d
 - Every page needs the same head (title as "Page – geeks0n-byte", description, canonical, `google-adsense-account` meta, `/ga.js`, then `adsbygoogle.js`, og/twitter tags with 1200×630 image size, the icon links and `site.webmanifest`), the skip link, the site header nav (Home, Spaceblox, Devlog, About, Contact) and the footer with the "Privacy settings" link. Copy an existing page when adding one, and add it to `sitemap.xml`.
 - The play export shell (spaceblox repo `web/shell.html`) must not load `/consent.js` (removed). The game has no in-game consent screen on web; Google's consent message handles it, and `/ga.js` only adds the AdSense tag with the 30 s ad cadence on the play page.
 - The play export keeps cross-origin isolation off so AdSense and Analytics can load.
+- The play shell has a site top bar (56px, 44px on mobile) above the canvas; `fitPlayCanvas` subtracts its height. Keep nothing on top of the canvas (the game's own pause button sits top-left).
+- WebP screenshots (`spaceblox/assets/shot_*.webp`, 600px wide) are derived from the PNGs; regenerate both if a screenshot changes.

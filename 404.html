@@ -9,40 +9,62 @@
   <meta name="google-adsense-account" content="ca-pub-1624206851803206" />
   <script src="/ga.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1624206851803206" crossorigin="anonymous"></script>
-  <meta name="theme-color" content="#14181f" />
+  <meta name="theme-color" content="#00123a" />
   <link rel="icon" href="/favicon.ico" sizes="32x32" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
+  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/site.css" />
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <div class="wrap">
-    <header class="site-header">
-      <a class="site-brand" href="/"><img src="/favicon.svg" width="28" height="28" alt="" />geeks0n-byte</a>
-      <nav class="site-nav" aria-label="Main">
-        <a href="/">Home</a>
-        <a href="/spaceblox/">Spaceblox</a>
-        <a href="/devlog/">Devlog</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-      </nav>
-    </header>
-    <main id="main" class="prose">
-    <h1>Page not found</h1>
-    <p>That URL is not on this site.</p>
-    <p><a href="/">Back to the games</a> or read the <a href="/devlog/">devlog</a>.</p>
-    </main>
-    <footer class="site-footer">
-      <nav aria-label="Footer">
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-        <a href="/privacy-policy/">Privacy Policy</a>
-        <a href="/privacy-policy/" data-privacy-settings>Privacy settings</a>
-      </nav>
-      <div>© 2026 Giga Sichinava</div>
-    </footer>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/"><img src="/favicon.svg" alt="" width="32" height="32" />geeks0n-byte</a>
+    <nav class="nav site-nav" id="site-nav" aria-label="Main"><a href="/">Home</a><a href="/spaceblox/">Spaceblox</a><a href="/devlog/">Devlog</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><i aria-hidden="true"></i>Menu</button>
   </div>
+</header>
+<main id="main">
+<section class="nf hero sky-deep">
+  <img class="deco" src="/spaceblox/assets/fx_asteroid_1.svg" width="64" height="64" alt="" style="left:72%;top:22%" />
+  <div class="container nf-inner hero-copy">
+    <p class="eyebrow">Error 404</p>
+    <h1>Page not found</h1>
+    <p class="lead">That URL is not on this site.</p>
+    <div class="cta-row"><a class="btn btn-primary" href="/">Back to home</a><a class="btn btn-secondary" href="/devlog/">Read the devlog</a></div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="f-brand">
+        <a class="brand" href="/"><img src="/favicon.svg" alt="" width="32" height="32" />geeks0n-byte</a>
+        <p class="small">Calm, logic-first puzzle games made solo in Godot by Giga Sichinava in Poland.</p>
+      </div>
+      <nav aria-labelledby="f-sb"><h2 id="f-sb">Spaceblox</h2><ul>
+        <li><a href="/spaceblox/">Game page &amp; guide</a></li>
+        <li><a href="/spaceblox/play/">Play in browser</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a></li>
+      </ul></nav>
+      <nav aria-labelledby="f-studio"><h2 id="f-studio">Studio</h2><ul>
+        <li><a href="/devlog/">Devlog</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul></nav>
+      <nav aria-labelledby="f-legal"><h2 id="f-legal">Legal</h2><ul>
+        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+        <li><a href="/spaceblox/privacy-policy.html">Spaceblox privacy policy</a></li>
+        <li><a href="/privacy-policy/" data-privacy-settings>Privacy settings</a></li>
+        <li><a class="mono" href="/ads.txt">ads.txt</a></li>
+        <li><a class="mono" href="/app-ads.txt">app-ads.txt</a></li>
+      </ul></nav>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Giga Sichinava</span><span>Google Play and the Google Play logo are trademarks of Google LLC.</span></div>
+  </div>
+</footer>
+<script src="/site.js" defer></script>
 </body>
 </html>

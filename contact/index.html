@@ -9,7 +9,7 @@
   <meta name="google-adsense-account" content="ca-pub-1624206851803206" />
   <script src="/ga.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1624206851803206" crossorigin="anonymous"></script>
-  <meta name="theme-color" content="#14181f" />
+  <meta name="theme-color" content="#00123a" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://geeks0n-byte.github.io/contact/" />
   <meta property="og:description" content="Contact Giga Sichinava, the developer of Spaceblox: bug reports, feedback, translation fixes, privacy requests and press enquiries." />
@@ -29,22 +29,20 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
+  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/site.css" />
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <div class="wrap">
-    <header class="site-header">
-      <a class="site-brand" href="/"><img src="/favicon.svg" width="28" height="28" alt="" />geeks0n-byte</a>
-      <nav class="site-nav" aria-label="Main">
-        <a href="/">Home</a>
-        <a href="/spaceblox/">Spaceblox</a>
-        <a href="/devlog/">Devlog</a>
-        <a href="/about/">About</a>
-        <a href="/contact/" aria-current="page">Contact</a>
-      </nav>
-    </header>
-    <main id="main" class="prose">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/"><img src="/favicon.svg" alt="" width="32" height="32" />geeks0n-byte</a>
+    <nav class="nav site-nav" id="site-nav" aria-label="Main"><a href="/">Home</a><a href="/spaceblox/">Spaceblox</a><a href="/devlog/">Devlog</a><a href="/about/">About</a><a href="/contact/" aria-current="page">Contact</a></nav>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><i aria-hidden="true"></i>Menu</button>
+  </div>
+</header>
+<main id="main" class="reading">
+<div class="container"><div class="article">
     <h1>Contact</h1>
     <p>geeks0n-byte is a one-person studio, so messages go straight to the developer, <strong>Giga Sichinava</strong>.</p>
     <p><strong>Email:</strong> <a href="mailto:giga.sichinava@gmail.com">giga.sichinava@gmail.com</a></p>
@@ -68,16 +66,36 @@
     <h2>What to expect</h2>
     <p>I read every message and reply as soon as I can. As a solo developer I can't promise a fixed response time, and some bug reports may not get an individual reply, but every report is read and considered for future updates. Messages in English are best.</p>
     <p>Please do not send passwords, payment details or other sensitive personal information by email.</p>
-    </main>
-    <footer class="site-footer">
-      <nav aria-label="Footer">
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-        <a href="/privacy-policy/">Privacy Policy</a>
-        <a href="/privacy-policy/" data-privacy-settings>Privacy settings</a>
-      </nav>
-      <div>© 2026 Giga Sichinava</div>
-    </footer>
+    </div></div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="f-brand">
+        <a class="brand" href="/"><img src="/favicon.svg" alt="" width="32" height="32" />geeks0n-byte</a>
+        <p class="small">Calm, logic-first puzzle games made solo in Godot by Giga Sichinava in Poland.</p>
+      </div>
+      <nav aria-labelledby="f-sb"><h2 id="f-sb">Spaceblox</h2><ul>
+        <li><a href="/spaceblox/">Game page &amp; guide</a></li>
+        <li><a href="/spaceblox/play/">Play in browser</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a></li>
+      </ul></nav>
+      <nav aria-labelledby="f-studio"><h2 id="f-studio">Studio</h2><ul>
+        <li><a href="/devlog/">Devlog</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul></nav>
+      <nav aria-labelledby="f-legal"><h2 id="f-legal">Legal</h2><ul>
+        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+        <li><a href="/spaceblox/privacy-policy.html">Spaceblox privacy policy</a></li>
+        <li><a href="/privacy-policy/" data-privacy-settings>Privacy settings</a></li>
+        <li><a class="mono" href="/ads.txt">ads.txt</a></li>
+        <li><a class="mono" href="/app-ads.txt">app-ads.txt</a></li>
+      </ul></nav>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Giga Sichinava</span><span>Google Play and the Google Play logo are trademarks of Google LLC.</span></div>
   </div>
+</footer>
+<script src="/site.js" defer></script>
 </body>
 </html>
