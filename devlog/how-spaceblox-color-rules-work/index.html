@@ -9,7 +9,7 @@
   <meta name="google-adsense-account" content="ca-pub-1624206851803206" />
   <script src="/ga.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1624206851803206" crossorigin="anonymous"></script>
-  <meta name="theme-color" content="#14181f" />
+  <meta name="theme-color" content="#00123a" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://geeks0n-byte.github.io/devlog/how-spaceblox-color-rules-work/" />
   <meta property="og:description" content="A plain-language tour of Spaceblox&#x27;s puzzle rules: Rule of Two, Equal Balance, green tiles that count twice, purple shifters and = / × links." />
@@ -32,22 +32,20 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BlogPosting","headline":"How Spaceblox's color rules work","description":"A plain-language tour of Spaceblox's puzzle rules: Rule of Two, Equal Balance, green tiles that count twice, purple shifters and = / × links.","datePublished":"2026-10-02","dateModified":"2026-10-02","author":{"@type":"Person","name":"Giga Sichinava","url":"https://geeks0n-byte.github.io/about/"},"publisher":{"@type":"Person","name":"Giga Sichinava"},"image":"https://geeks0n-byte.github.io/spaceblox/og-image.png","mainEntityOfPage":"https://geeks0n-byte.github.io/devlog/how-spaceblox-color-rules-work/"}
   </script>
+  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/site.css" />
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <div class="wrap">
-    <header class="site-header">
-      <a class="site-brand" href="/"><img src="/favicon.svg" width="28" height="28" alt="" />geeks0n-byte</a>
-      <nav class="site-nav" aria-label="Main">
-        <a href="/">Home</a>
-        <a href="/spaceblox/">Spaceblox</a>
-        <a href="/devlog/" aria-current="true">Devlog</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-      </nav>
-    </header>
-    <main id="main" class="prose">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/"><img src="/favicon.svg" alt="" width="32" height="32" />geeks0n-byte</a>
+    <nav class="nav site-nav" id="site-nav" aria-label="Main"><a href="/">Home</a><a href="/spaceblox/">Spaceblox</a><a href="/devlog/" aria-current="page">Devlog</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><i aria-hidden="true"></i>Menu</button>
+  </div>
+</header>
+<main id="main" class="reading">
+<div class="container"><div class="article">
     <a class="back-link" href="/devlog/">← Devlog</a>
     <article>
     <h1>How Spaceblox&#x27;s color rules work</h1>
@@ -88,12 +86,10 @@
     <p>Each rule appears in the tutorial on its own small board, with a highlighted cell to practise on, before the next one is introduced. The full rule guide, with valid and invalid examples, is one tap away during any level. The goal is that you never lose a level because you forgot a rule — only because a puzzle made you think.</p>
     <p><a href="/spaceblox/play/">Play Spaceblox in your browser</a> or read the <a href="/spaceblox/">full guide and tips</a>.</p>
         <footer class="post-end">
-      <div class="post-cta">
+      <div class="card card-pad end-card">
+        <img class="wordmark-sm" src="/spaceblox/assets/title_spaceblox.png" alt="Spaceblox" width="270" height="45" />
         <p>Try the rules yourself: Spaceblox is free in your browser and on Android.</p>
-        <div class="cta-row">
-          <a class="pixel-btn" href="/spaceblox/play/">Play in browser</a>
-          <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game"><img src="/spaceblox/assets/google-play-badge.png" alt="Get it on Google Play" width="215" height="83" /></a>
-        </div>
+        <div class="cta-row"><a class="btn btn-primary" href="/spaceblox/play/"><img class="ico" src="/assets/icon_play_dark.svg" alt="" width="16" height="16" />Play in browser</a><a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game"><img src="/spaceblox/assets/google-play-badge.png" alt="Get it on Google Play" width="646" height="250" /></a></div>
       </div>
       <nav class="post-nav" aria-label="More posts">
         <span></span>
@@ -101,16 +97,42 @@
       </nav>
     </footer>
     </article>
-    </main>
-    <footer class="site-footer">
-      <nav aria-label="Footer">
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-        <a href="/privacy-policy/">Privacy Policy</a>
-        <a href="/privacy-policy/" data-privacy-settings>Privacy settings</a>
-      </nav>
-      <div>© 2026 Giga Sichinava</div>
-    </footer>
+    </div></div>
+</main>
+<aside class="ad-band" aria-label="Advertisement" data-ad-placement="devlog-post" hidden>
+  <div class="ad-slot">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1624206851803206" data-ad-format="auto" data-full-width-responsive="true"></ins>
   </div>
+</aside>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="f-brand">
+        <a class="brand" href="/"><img src="/favicon.svg" alt="" width="32" height="32" />geeks0n-byte</a>
+        <p class="small">Calm, logic-first puzzle games made solo in Godot by Giga Sichinava in Poland.</p>
+      </div>
+      <nav aria-labelledby="f-sb"><h2 id="f-sb">Spaceblox</h2><ul>
+        <li><a href="/spaceblox/">Game page &amp; guide</a></li>
+        <li><a href="/spaceblox/play/">Play in browser</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a></li>
+      </ul></nav>
+      <nav aria-labelledby="f-studio"><h2 id="f-studio">Studio</h2><ul>
+        <li><a href="/devlog/">Devlog</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul></nav>
+      <nav aria-labelledby="f-legal"><h2 id="f-legal">Legal</h2><ul>
+        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+        <li><a href="/spaceblox/privacy-policy.html">Spaceblox privacy policy</a></li>
+        <li><a href="/privacy-policy/" data-privacy-settings>Privacy settings</a></li>
+        <li><a class="mono" href="/ads.txt">ads.txt</a></li>
+        <li><a class="mono" href="/app-ads.txt">app-ads.txt</a></li>
+      </ul></nav>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Giga Sichinava</span><span>Google Play and the Google Play logo are trademarks of Google LLC.</span></div>
+  </div>
+</footer>
+<script src="/site.js" defer></script>
 </body>
 </html>

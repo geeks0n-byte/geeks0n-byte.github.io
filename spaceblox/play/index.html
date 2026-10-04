@@ -35,6 +35,14 @@
 	font-display: block;
 }
 
+@font-face {
+	font-family: "Inter";
+	src: url("/assets/fonts/inter-latin.woff2") format("woff2");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
 html, body, #canvas {
 	margin: 0;
 	padding: 0;
@@ -43,9 +51,50 @@ html, body, #canvas {
 
 html, body {
 	color: white;
-	background-color: #00123a;
+	background: url("/assets/starfield_480.png") 0 0 / 480px 480px repeat, #00123a;
+	image-rendering: pixelated;
 	overflow: hidden;
 	touch-action: none;
+	height: 100%;
+}
+
+/* Site shell around the game (STYLE-SPEC "soft pixel space"). Nothing overlays the canvas. */
+:root { --bar-h: 56px; }
+body { font: 400 15px/1.55 Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+.play-bar { position: fixed; top: 0; left: 0; right: 0; height: var(--bar-h); z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 16px; box-sizing: border-box; background: rgba(0, 10, 36, .92); border-bottom: 1px solid #2b3e7a; image-rendering: auto; }
+.play-bar a, .play-bar button { color: #f4f1e6; }
+.play-bar .back { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px 0 10px; text-decoration: none; font: 600 15px/1 Inter, system-ui, sans-serif; border-radius: 4px; }
+.play-bar .back:hover { background: #0a1c4a; color: #ffd600; }
+.play-bar .title { font: 400 12px/1 "Press Start 2P", monospace; color: #ffd600; position: absolute; left: 50%; transform: translateX(-50%); }
+.play-bar .tools { display: flex; gap: 8px; }
+.tbtn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; background: #0a1c4a; border: 1px solid #6878b8; border-radius: 4px; font: 600 14px/1 Inter, system-ui, sans-serif; text-decoration: none; cursor: pointer; }
+.tbtn:hover { border-color: #ffd600; color: #ffd600; }
+.tbtn[hidden] { display: none; }
+.play-bar :focus-visible, .side-card :focus-visible { outline: 3px solid #ffffff; outline-offset: 3px; }
+#canvas { box-shadow: 0 0 0 1px #2b3e7a, 0 0 60px rgba(0, 0, 0, .5); }
+.side-card, .play-rail { display: none; position: fixed; top: calc(var(--bar-h) + (100% - var(--bar-h)) / 2); transform: translateY(-50%); z-index: 2; image-rendering: auto; }
+.side-card { right: calc(50% + var(--canvas-w, 400px) / 2 + 48px); width: 260px; box-sizing: border-box; padding: 24px; background: #0a1c4a; border: 1px solid #2b3e7a; border-radius: 6px; box-shadow: 0 8px 0 rgba(0, 4, 20, .45); color: #c5cce3; }
+.side-card h2 { margin: 0 0 12px; font: 400 12px/1.6 "Press Start 2P", monospace; color: #ffd600; text-transform: uppercase; }
+.side-card ul { margin: 0 0 12px; padding-left: 18px; }
+.side-card li { margin: 4px 0; }
+.side-card li::marker { color: #29adff; }
+.side-card p { margin: 0 0 12px; font-size: 14px; color: #9aa6cc; }
+.side-card a { color: #7fd0ff; }
+.side-card a:hover { color: #ffd600; }
+.side-card .play-badge { display: inline-block; line-height: 0; margin: 0 0 4px -12px; }
+.side-card .play-badge img { height: 78px; width: auto; }
+.side-card .legal { margin: 0; }
+body.room-side .side-card { display: block; }
+.play-rail { left: calc(50% + var(--canvas-w, 400px) / 2 + 48px); flex-direction: column; align-items: center; gap: 6px; }
+.play-rail .ad-label { font: 600 11px/1 Inter, system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #9aa6cc; }
+.play-rail ins.adsbygoogle { display: block; width: 300px; height: 600px; }
+body.room-rail .play-rail:not([hidden]) { display: flex; }
+.play-rail[hidden] { display: none !important; }
+@media (max-width: 719px) {
+	:root { --bar-h: 44px; }
+	.play-bar { padding: 0 8px; }
+	.play-bar .title, .play-bar .tools { display: none; }
+	.play-bar .back { min-height: 40px; font-size: 14px; }
 }
 
 #canvas {
@@ -65,7 +114,8 @@ html, body {
 }
 
 #status {
-	background-color: #00123a;
+	top: var(--bar-h);
+	background-color: transparent;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -73,13 +123,31 @@ html, body {
 	visibility: hidden;
 }
 
-/* Match in-game LoadingOverlay dim on the boot void. */
+/* Loading: gold label and a thin gold progress bar over the starfield. */
 #status::before {
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: rgba(0, 0, 0, 0.35);
+	background: rgba(0, 18, 58, 0.35);
 	pointer-events: none;
+}
+#load-bar {
+	position: absolute;
+	left: 50%;
+	top: calc(50% + 32px);
+	transform: translateX(-50%);
+	z-index: 1;
+	width: min(240px, 60vw);
+	height: 4px;
+	background: #2b3e7a;
+	display: none;
+}
+#load-bar i {
+	display: block;
+	height: 100%;
+	width: 0;
+	background: #ffd600;
+	transition: width .2s linear;
 }
 
 #status-splash {
@@ -118,7 +186,7 @@ html, body {
 	/* 36px on the 1080×1920 game view, same scale the in-game label uses. */
 	font-size: clamp(12px, min(3.333vw, 1.875vh), 36px);
 	line-height: 1.35;
-	color: #ffffff;
+	color: #ffd600;
 	text-align: left;
 	letter-spacing: 0.02em;
 	image-rendering: pixelated;
@@ -156,31 +224,6 @@ html, body {
 	75%, 100% { opacity: 0; }
 }
 
-/* Way back to the site. Shown only on wide landscape screens, where the
-   letterboxed 9:16 game leaves at least ~190px free on each side. */
-#back-link {
-	display: none;
-	position: fixed;
-	top: 16px;
-	left: 16px;
-	z-index: 2;
-	align-items: center;
-	min-height: 44px;
-	padding: 0 14px;
-	font-family: "Press Start 2P", monospace;
-	font-size: 12px;
-	color: #ffffff;
-	text-decoration: none;
-	background: rgba(0, 0, 0, 0.35);
-	border: 1px solid #334155;
-	border-radius: 8px;
-}
-#back-link:hover { color: #facc15; }
-#back-link:focus-visible { outline: 2px solid #f7cc1a; outline-offset: 3px; }
-@media (min-width: 900px) and (min-aspect-ratio: 1/1) {
-	#back-link { display: inline-flex; }
-}
-
 .visually-hidden {
 	position: absolute;
 	width: 1px;
@@ -214,7 +257,29 @@ html, body {
 	</head>
 	<body>
 		<h1 class="visually-hidden">Spaceblox</h1>
-		<a id="back-link" href="/spaceblox/">← Spaceblox</a>
+		<header class="play-bar">
+			<a class="back" href="/spaceblox/"><span aria-hidden="true">◀</span> Spaceblox</a>
+			<span class="title" aria-hidden="true">SPACEBLOX</span>
+			<div class="tools">
+				<a class="tbtn" href="/spaceblox/#how-to-play">Rules</a>
+				<button class="tbtn" type="button" id="fullscreen-btn" hidden>⛶ Fullscreen</button>
+			</div>
+		</header>
+		<aside class="side-card" aria-labelledby="side-h">
+			<h2 id="side-h">Controls</h2>
+			<ul>
+				<li>Click a cell to cycle Yellow → Blue → Green</li>
+				<li>Click and hold about a second to clear</li>
+				<li>Click a purple tile to slide it</li>
+			</ul>
+			<p>Progress saves in this browser only.</p>
+			<a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game"><img src="/spaceblox/assets/google-play-badge.png" alt="Get it on Google Play" width="646" height="250"></a>
+			<p class="legal"><a href="/spaceblox/privacy-policy.html">Privacy policy</a> · <a href="/privacy-policy/" data-privacy-settings>Privacy settings</a></p>
+		</aside>
+		<aside class="ad-band play-rail" aria-label="Advertisement" data-ad-placement="play-rail" data-min-width="1280" hidden>
+			<span class="ad-label">Advertisement</span>
+			<ins class="adsbygoogle" data-ad-client="ca-pub-1624206851803206" data-ad-format="vertical"></ins>
+		</aside>
 		<canvas id="canvas" aria-label="Spaceblox game">
 			Your browser does not support the canvas tag.
 		</canvas>
@@ -225,6 +290,7 @@ html, body {
 
 		<div id="status">
 			<img id="status-splash" class="show-image--false fullsize--true use-filter--true" src="index.png" alt="">
+			<div id="load-bar" aria-hidden="true"><i></i></div>
 			<div id="status-loading" aria-label="Loading">LOADING<span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span></div>
 			<progress id="status-progress"></progress>
 			<div id="status-notice"></div>
@@ -300,9 +366,15 @@ const engine = new Engine(GODOT_CONFIG);
 	const baseAspect = 1080 / 1920;
 
 	// canvas_resize_policy 0: Godot uses the canvas buffer as the window.
+	// The site's top bar sits above the game, so the canvas fits the space below it.
+	function playBarHeight() {
+		const bar = document.querySelector('.play-bar');
+		return bar ? bar.offsetHeight : 0;
+	}
 	function fitPlayCanvas() {
+		const barH = playBarHeight();
 		const vw = window.innerWidth;
-		const vh = window.innerHeight;
+		const vh = window.innerHeight - barH;
 		if (vw < 1 || vh < 1) {
 			return;
 		}
@@ -325,7 +397,28 @@ const engine = new Engine(GODOT_CONFIG);
 		canvas.style.width = cssW + 'px';
 		canvas.style.height = cssH + 'px';
 		canvas.style.left = Math.floor((vw - cssW) / 2) + 'px';
-		canvas.style.top = Math.floor((vh - cssH) / 2) + 'px';
+		canvas.style.top = (barH + Math.floor((vh - cssH) / 2)) + 'px';
+		// Side card (Controls) and the optional ad rail sit beside the canvas, never over it.
+		const room = (vw - cssW) / 2;
+		document.documentElement.style.setProperty('--canvas-w', cssW + 'px');
+		document.body.classList.toggle('room-side', vw >= 1100 && room >= 260 + 48 + 16);
+		document.body.classList.toggle('room-rail', vw >= 1280 && room >= 300 + 48 + 16);
+	}
+
+	const fsBtn = document.getElementById('fullscreen-btn');
+	if (fsBtn && document.fullscreenEnabled) {
+		fsBtn.hidden = false;
+		fsBtn.addEventListener('click', function () {
+			if (document.fullscreenElement) {
+				document.exitFullscreen();
+			} else {
+				document.documentElement.requestFullscreen().catch(function () {});
+			}
+			canvas.focus();
+		});
+		document.addEventListener('fullscreenchange', function () {
+			fsBtn.textContent = document.fullscreenElement ? '⛶ Exit fullscreen' : '⛶ Fullscreen';
+		});
 	}
 
 	window.addEventListener('resize', fitPlayCanvas);
@@ -337,6 +430,7 @@ const engine = new Engine(GODOT_CONFIG);
 	const statusOverlay = document.getElementById('status');
 	const statusProgress = document.getElementById('status-progress');
 	const statusLoading = document.getElementById('status-loading');
+	const loadBar = document.getElementById('load-bar');
 	const statusNotice = document.getElementById('status-notice');
 
 	let initializing = true;
@@ -354,6 +448,9 @@ const engine = new Engine(GODOT_CONFIG);
 		statusOverlay.style.visibility = 'visible';
 		if (statusLoading) {
 			statusLoading.style.display = mode === 'progress' ? 'block' : 'none';
+		}
+		if (loadBar) {
+			loadBar.style.display = mode === 'progress' ? 'block' : 'none';
 		}
 		statusProgress.style.display = 'none';
 		statusNotice.style.display = mode === 'notice' ? 'block' : 'none';
@@ -424,8 +521,11 @@ const engine = new Engine(GODOT_CONFIG);
 		// Paint the CSS dots before wasm compilation blocks the main thread.
 		const start = () => {
 			engine.startGame({
-				'onProgress': function (_current, _total) {
-					// Keep the animated LOADING label; no native progress bar.
+				'onProgress': function (current, total) {
+					// Thin gold bar under the LOADING label.
+					if (loadBar && total > 0) {
+						loadBar.firstChild.style.width = Math.min(100, (current / total) * 100) + '%';
+					}
 				},
 			}).then(() => {
 				setStatusMode('hidden');
