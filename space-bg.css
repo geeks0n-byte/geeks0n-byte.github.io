@@ -1,0 +1,63 @@
+/* Animated space background (bg_1..bg_4 parallax in three layers, comets, shooting stars).
+   /space-bg.js builds it and adds html.space-bg-on; without JS the static
+   starfield from site.css stays. It sits behind all content (z-index -1),
+   is GPU-only (transform/opacity CSS animations) and stops under
+   prefers-reduced-motion or when the tab is hidden. */
+.space-bg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100lvh;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+.space-bg .sb-x { position: absolute; inset: 0; will-change: transform; animation: sb-x var(--sb-dx, 120s) linear infinite; animation-delay: var(--sb-ox, 0s); }
+.space-bg .sb-y {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(100% + var(--sb-tw, 720px));
+  height: calc(100% + var(--sb-th, 1280px));
+  background-repeat: repeat;
+  background-size: var(--sb-tw, 720px) var(--sb-th, 1280px);
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  will-change: transform, opacity;
+  animation: sb-y var(--sb-dy, 600s) linear infinite var(--sb-oy, 0s);
+}
+.space-bg .sb-dust .sb-y { background-image: url("/spaceblox/assets/bg_1_far_dust.svg"); opacity: .8; }
+.space-bg .sb-stars .sb-y { background-image: url("/spaceblox/assets/bg_2_medium_stars.svg"); animation: sb-y var(--sb-dy, 600s) linear infinite var(--sb-oy, 0s), sb-twinkle 9s ease-in-out infinite var(--sb-tw-d, 0s); }
+.space-bg .sb-front .sb-y { background-image: url("/spaceblox/assets/bg_4_sparkler_crosses.svg"), url("/spaceblox/assets/bg_3_foreground_accents.svg"); animation: sb-y var(--sb-dy, 600s) linear infinite var(--sb-oy, 0s), sb-pulse 7s ease-in-out infinite var(--sb-tw-d, 0s); }
+/* sb-x / sb-y drift keyframes are written by space-bg.js with plain pixel
+   values for the current tile size: var() inside keyframes would keep the
+   animation off the compositor. */
+@keyframes sb-twinkle { 0%, 100% { opacity: 1; } 50% { opacity: .55; } }
+@keyframes sb-pulse { 0%, 100% { opacity: .8; } 50% { opacity: 1; } }
+
+.space-bg .sb-fx { position: absolute; inset: 0; }
+.space-bg .sb-fx-item { position: absolute; left: 0; top: 0; image-rendering: pixelated; will-change: transform, opacity; }
+
+/* Reading pages (devlog, about, contact): calmer, dimmer sky behind long text. */
+.space-bg.sb-calm .sb-dust .sb-y { opacity: .5; }
+.space-bg.sb-calm .sb-stars { opacity: .7; }
+
+/* Let the animated sky show where the page used the static starfield.
+   Cards, thumbnails, the header, jump nav and ad bands keep their own opaque backgrounds. */
+html.space-bg-on body { background: transparent; }
+html.space-bg-on main > .sky { background: transparent; }
+html.space-bg-on main > .sky-deep { background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(11, 36, 99, .85) 0%, rgba(0, 18, 58, 0) 70%); }
+/* A blurred header over moving stars would re-blur every frame; use a solid bar instead. */
+html.space-bg-on .site-header { -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(0, 10, 36, .96); }
+
+/* Tab hidden: freeze everything. */
+html.sb-paused .space-bg *, html.sb-static .space-bg * { animation-play-state: paused !important; }
+
+/* Reduced motion: same layers, no movement, no comets or shooting stars. */
+@media (prefers-reduced-motion: reduce) {
+  .space-bg .sb-x, .space-bg .sb-y { animation: none !important; transform: none !important; will-change: auto; }
+  .space-bg .sb-fx { display: none !important; }
+}

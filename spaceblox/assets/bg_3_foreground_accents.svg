@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 640" width="1080" height="1920" shape-rendering="crispEdges">
+  <g fill="#ffffff">
+    <path d="M90 120h1v1h-1z M280 280h1v1h-1z M100 480h1v1h-1z M250 420h1v1h-1z M40 220h1v1h-1z M310 520h1v1h-1z M180 600h1v1h-1z M300 200h1v1h-1z" />
+    <path d="M75 375h1v1h-1z M210 510h1v1h-1z M195 95h1v1h-1z M135 135h1v1h-1z M315 315h1v1h-1z M65 265h1v1h-1z" />
+  </g>
+  <g fill="#abffe6">
+    <path d="M30 60h1v1h-1z M200 100h1v1h-1z M80 280h1v1h-1z M220 380h1v1h-1z M40 450h1v1h-1z M120 180h1v1h-1z M340 500h1v1h-1z M65 590h1v1h-1z" />
+  </g>
+  <g fill="#ff77a8">
+    <path d="M120 70h1v1h-1z M40 220h1v1h-1z M160 320h1v1h-1z M280 360h1v1h-1z M90 520h1v1h-1z M310 240h1v1h-1z" />
+  </g>
+</svg>
