@@ -123,31 +123,14 @@ body.room-rail .play-rail:not([hidden]) { display: flex; }
 	visibility: hidden;
 }
 
-/* Loading: gold label and a thin gold progress bar over the starfield. */
+/* Loading: matches the in-game LoadingOverlay (scenes/loading_overlay.tscn):
+   35% black dim, white Press Start "LOADING" with 1-2-3-blank dots every 0.45 s, no bar. */
 #status::before {
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: rgba(0, 18, 58, 0.35);
+	background: rgba(0, 0, 0, 0.35);
 	pointer-events: none;
-}
-#load-bar {
-	position: absolute;
-	left: 50%;
-	top: calc(50% + 32px);
-	transform: translateX(-50%);
-	z-index: 1;
-	width: min(240px, 60vw);
-	height: 4px;
-	background: #2b3e7a;
-	display: none;
-}
-#load-bar i {
-	display: block;
-	height: 100%;
-	width: 0;
-	background: #ffd600;
-	transition: width .2s linear;
 }
 
 #status-splash {
@@ -186,7 +169,7 @@ body.room-rail .play-rail:not([hidden]) { display: flex; }
 	/* 36px on the 1080×1920 game view, same scale the in-game label uses. */
 	font-size: clamp(12px, min(3.333vw, 1.875vh), 36px);
 	line-height: 1.35;
-	color: #ffd600;
+	color: #ffffff;
 	text-align: left;
 	letter-spacing: 0.02em;
 	image-rendering: pixelated;
@@ -290,7 +273,6 @@ body.room-rail .play-rail:not([hidden]) { display: flex; }
 
 		<div id="status">
 			<img id="status-splash" class="show-image--false fullsize--true use-filter--true" src="index.png" alt="">
-			<div id="load-bar" aria-hidden="true"><i></i></div>
 			<div id="status-loading" aria-label="Loading">LOADING<span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span></div>
 			<progress id="status-progress"></progress>
 			<div id="status-notice"></div>
@@ -430,7 +412,6 @@ const engine = new Engine(GODOT_CONFIG);
 	const statusOverlay = document.getElementById('status');
 	const statusProgress = document.getElementById('status-progress');
 	const statusLoading = document.getElementById('status-loading');
-	const loadBar = document.getElementById('load-bar');
 	const statusNotice = document.getElementById('status-notice');
 
 	let initializing = true;
@@ -448,9 +429,6 @@ const engine = new Engine(GODOT_CONFIG);
 		statusOverlay.style.visibility = 'visible';
 		if (statusLoading) {
 			statusLoading.style.display = mode === 'progress' ? 'block' : 'none';
-		}
-		if (loadBar) {
-			loadBar.style.display = mode === 'progress' ? 'block' : 'none';
 		}
 		statusProgress.style.display = 'none';
 		statusNotice.style.display = mode === 'notice' ? 'block' : 'none';
@@ -521,11 +499,8 @@ const engine = new Engine(GODOT_CONFIG);
 		// Paint the CSS dots before wasm compilation blocks the main thread.
 		const start = () => {
 			engine.startGame({
-				'onProgress': function (current, total) {
-					// Thin gold bar under the LOADING label.
-					if (loadBar && total > 0) {
-						loadBar.firstChild.style.width = Math.min(100, (current / total) * 100) + '%';
-					}
+				'onProgress': function (_current, _total) {
+					// Keep the animated LOADING label; no native progress bar (as in the game).
 				},
 			}).then(() => {
 				setStatusMode('hidden');
