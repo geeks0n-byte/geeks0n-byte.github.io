@@ -1,5 +1,11 @@
 # geeks0n-byte.github.io
 
+## URL layout (2026-10)
+
+Public marketing site lives under `/spaceblox/` (home, guide, about, contact, devlog, assets, CSS/JS, 404). Root `https://geeks0n-byte.github.io/` keeps Google files (`ads.txt`, `app-ads.txt`, `google03499aee60edbd13.html`, `robots.txt`, `ga.js`) and `/privacy-policy/` (published Play/AdSense URL; text must stay unchanged), and redirects visitors to `/spaceblox/`. Old `/about/`, `/contact/`, `/devlog/` paths are redirect stubs. Guide is `/spaceblox/guide/`; play stays `/spaceblox/play/`.
+
+Background: parallax drifts left+up (game `base_scroll_speed` −15,−5); FX spawn on the right and travel left/down (game `SpaceBackgroundFx`).
+
 This file lives in `.github/` so GitHub Pages does not serve it (the site publishes the repo root; `.github/` is not published).
 
 The Spaceblox website. The site is only about the game: no studio name or location in the copy, and Giga Sichinava appears only as the creator ("Made by Giga Sichinava"). The header brand is "Spaceblox". The privacy-policy text is the exception: its controller details must match the Play listing, so change it only on Giga's say-so. Static HTML, CSS, and JS. No build step: a push to `main` publishes the repo root (Pages: branch `main`, folder `/`).
