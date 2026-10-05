@@ -1,4 +1,4 @@
-/* /spaceblox/ game page. Loaded after /site.css (tokens and components live there). */
+/* /spaceblox/ game page. Loaded after /spaceblox/site.css (tokens and components live there). */
 .sb-hero { padding: var(--s8) 0; border-bottom: 1px solid var(--line); }
 .sb-hero-grid { display: grid; grid-template-columns: 1fr 300px; gap: var(--s8); align-items: center; position: relative; }
 .crumbs { margin-bottom: var(--s5); }
