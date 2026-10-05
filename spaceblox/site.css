@@ -170,6 +170,9 @@ a.card:focus-visible { outline-offset: 4px; border-radius: 6px; }
 .timeline li:first-child { border-color: var(--gold); }
 .timeline .chip { justify-self: start; }
 .timeline h3 { font-size: 18px; margin-bottom: 16px; }
+.timeline .whats-new p { margin: 0; }
+.timeline .whats-new ul { list-style: disc; margin: 4px 0 0; padding-left: 1.25em; display: grid; gap: 2px; }
+.timeline .whats-new li { display: list-item; padding-left: 0; border-left: none; font-size: inherit; line-height: inherit; }
 
 /* ===== Reading pages: devlog, about, contact, privacy ===== */
 .page-head { padding: var(--s8) 0 0; }
