@@ -3,67 +3,28 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Page Not Found – Spaceblox</title>
-  <meta name="description" content="That URL is not on this site." />
+  <title>Page not found – Spaceblox</title>
   <meta name="robots" content="noindex" />
-  <meta name="google-adsense-account" content="ca-pub-1624206851803206" />
-  <script src="/ga.js"></script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1624206851803206" crossorigin="anonymous"></script>
-  <meta name="theme-color" content="#00123a" />
-  <link rel="icon" href="/favicon.ico" sizes="32x32" />
-  <link rel="icon" href="/assets/icon-192.png" sizes="192x192" type="image/png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="/site.css" />
-  <link rel="stylesheet" href="/space-bg.css" />
+  <link rel="canonical" href="https://geeks0n-byte.github.io/spaceblox/" />
+  <style>body{font-family:system-ui,sans-serif;background:#00123a;color:#e8eefc;margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;text-align:center}a{color:#7eb6ff}</style>
+  <script>
+  (function(){
+    var p = location.pathname.replace(/\/+$/,'') || '/';
+    var map = {
+      '/about':'/spaceblox/about/',
+      '/contact':'/spaceblox/contact/',
+      '/devlog':'/spaceblox/devlog/',
+      '/spaceblox':'/spaceblox/'
+    };
+    if (map[p]) { location.replace(map[p]); return; }
+    if (p.indexOf('/devlog/')===0) { location.replace('/spaceblox'+p+(p.endsWith('/')?'':'/')); return; }
+  })();
+  </script>
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header">
-  <div class="container">
-    <a class="brand" href="/"><img src="/assets/icon-64.png" alt="" width="32" height="32" />Spaceblox</a>
-    <nav class="nav site-nav" id="site-nav" aria-label="Main"><a href="/">Home</a><a href="/spaceblox/">Guide</a><a href="/devlog/">Devlog</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>
-    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><i aria-hidden="true"></i>Menu</button>
-  </div>
-</header>
-<main id="main">
-<section class="nf hero sky-deep">
-  <div class="container nf-inner hero-copy">
-    <p class="eyebrow">Error 404</p>
+  <div>
     <h1>Page not found</h1>
-    <p class="lead">That URL is not on this site.</p>
-    <div class="cta-row"><a class="btn btn-primary" href="/">Back to home</a><a class="btn btn-secondary" href="/devlog/">Read the devlog</a></div>
+    <p>The Spaceblox site lives at <a href="/spaceblox/">/spaceblox/</a>.</p>
   </div>
-</section>
-</main>
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="f-brand">
-        <a class="brand" href="/"><img src="/assets/icon-64.png" alt="" width="32" height="32" />Spaceblox</a>
-        <p class="small">A calm color-logic puzzle for Android and the web. Made by Giga "gix0n" Sichinava.</p>
-      </div>
-      <nav aria-labelledby="f-sb"><h2 id="f-sb">Play</h2><ul>
-        <li><a href="/spaceblox/play/">Play in browser</a></li>
-        <li><a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a></li>
-      </ul></nav>
-      <nav aria-labelledby="f-more"><h2 id="f-more">Learn more</h2><ul>
-        <li><a href="/spaceblox/">How to play &amp; guide</a></li>
-        <li><a href="/devlog/">Devlog</a></li>
-        <li><a href="/about/">About</a></li>
-        <li><a href="/contact/">Contact</a></li>
-      </ul></nav>
-      <nav aria-labelledby="f-legal"><h2 id="f-legal">Legal</h2><ul>
-        <li><a href="/privacy-policy/">Privacy Policy</a></li>
-        <li><a href="/spaceblox/privacy-policy.html">Spaceblox privacy policy</a></li>
-        <li><a href="/privacy-policy/" data-privacy-settings>Privacy settings</a></li>
-      </ul></nav>
-    </div>
-    <div class="footer-bottom"><span>© 2026 Giga "gix0n" Sichinava</span><span>Google Play and the Google Play logo are trademarks of Google LLC.</span></div>
-  </div>
-</footer>
-<script src="/site.js" defer></script>
-<script src="/space-bg.js" defer></script>
 </body>
 </html>
