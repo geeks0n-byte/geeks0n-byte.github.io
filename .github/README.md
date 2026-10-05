@@ -7,13 +7,13 @@ GitHub Pages site for Spaceblox, a calm color-logic puzzle made by Giga Sichinav
 | URL | Purpose |
 | --- | --- |
 | https://geeks0n-byte.github.io/ | Home (Spaceblox landing page) |
-| https://geeks0n-byte.github.io/about/ , /contact/ , /privacy-policy/ | About, contact, site privacy policy |
-| https://geeks0n-byte.github.io/devlog/ | Devlog index and posts |
+| https://geeks0n-byte.github.io/about/ , /contact/ | About, contact (root paths redirect into `/spaceblox/`) |
+| https://geeks0n-byte.github.io/devlog/ | Devlog index and posts (root path redirects) |
 | https://geeks0n-byte.github.io/app-ads.txt | AdMob authorization (**site root**) |
 | https://geeks0n-byte.github.io/ads.txt | AdSense authorization (**site root**) |
 | https://geeks0n-byte.github.io/spaceblox/ | Spaceblox guide and landing |
 | https://geeks0n-byte.github.io/spaceblox/play/ | Spaceblox web (HTML5) build |
-| https://geeks0n-byte.github.io/spaceblox/privacy-policy.html | Copy of /privacy-policy/ (the app links here) |
+| https://geeks0n-byte.github.io/spaceblox/privacy-policy.html | Privacy policy (Play/AdSense and the app link here) |
 
 AdMob crawls `app-ads.txt` at the **root** of the Play Console developer website
 (`https://geeks0n-byte.github.io/app-ads.txt`). Keep only that root file — not under game folders.
@@ -33,7 +33,7 @@ AdMob crawls `app-ads.txt` at the **root** of the Play Console developer website
   index.html           ← home
   site.css             ← shared styles (fonts in assets/fonts/)
   ga.js                ← GA4 + Consent Mode v2, Privacy settings link, game bridge
-  about/ contact/ privacy-policy/ devlog/
+  about/ contact/ devlog/   ← redirect stubs into /spaceblox/
   app-ads.txt / ads.txt
   robots.txt / sitemap.xml
   google03499aee60edbd13.html
