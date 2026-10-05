@@ -32,7 +32,7 @@ AdMob crawls `app-ads.txt` at the **root** of the Play Console developer website
 /
   index.html           ← home
   site.css             ← shared styles (fonts in assets/fonts/)
-  ga.js                ← GA4 + Consent Mode v2, Privacy settings link, game bridge
+  ga.js                ← GA4 + Consent Mode v2, game bridge
   about/ contact/ devlog/   ← redirect stubs into /spaceblox/
   app-ads.txt / ads.txt
   robots.txt / sitemap.xml
@@ -44,5 +44,5 @@ AdMob crawls `app-ads.txt` at the **root** of the Play Console developer website
 ## Notes
 
 - Play export keeps **cross-origin isolation off** (`ensure_cross_origin_isolation_headers=false` in the Web preset) so AdSense and Analytics can load. The custom shell loads `/ga.js`, which adds AdSense with the H5 games cadence.
-- Consent: Google's certified CMP from AdSense **Privacy & messaging**. Every page loads `adsbygoogle.js` directly; GA4 runs with Consent Mode v2 defaults denied. The footer "Privacy settings" link reopens the consent message.
+- Consent: Google's certified CMP from AdSense **Privacy & messaging**. Every page loads `adsbygoogle.js` directly; GA4 runs with Consent Mode v2 defaults denied. Consent choices are managed by Google's CMP message when it is shown.
 - Analytics config lives in root `/ga.js` only.
