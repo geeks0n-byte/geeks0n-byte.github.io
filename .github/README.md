@@ -13,6 +13,7 @@ GitHub Pages site for Spaceblox, a calm color-logic puzzle made by Giga Sichinav
 | https://geeks0n-byte.github.io/ads.txt | AdSense authorization (**site root**) |
 | https://geeks0n-byte.github.io/spaceblox/ | Spaceblox guide and landing |
 | https://geeks0n-byte.github.io/spaceblox/play/ | Spaceblox web (HTML5) build |
+| https://geeks0n-byte.github.io/spaceblox/press/ | Press kit (factsheet, assets, ZIP download) |
 | https://geeks0n-byte.github.io/spaceblox/privacy-policy.html | Privacy policy (Play/AdSense and the app link here) |
 
 AdMob crawls `app-ads.txt` at the **root** of the Play Console developer website
