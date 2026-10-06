@@ -320,14 +320,6 @@ a.card:focus-visible { outline-offset: 4px; border-radius: 6px; }
 /* press kit (/spaceblox/press/) */
 .press-cta { margin: var(--s5) 0 var(--s3); }
 .btn.press-download { min-height: 64px; padding: 0 32px; font-size: 15px; line-height: 1.4; text-align: center; }
-.press-art { padding: 0; overflow: hidden; }
-.press-art img { width: 100%; image-rendering: pixelated; }
-.press-logo img { width: 100%; max-width: 540px; image-rendering: pixelated; }
-.press-icon img { width: 128px; height: 128px; }
-.press-shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s5); margin: var(--s4) 0 var(--s6); }
-.press-shots figcaption { font-size: 13px; overflow-wrap: anywhere; }
 @media (max-width: 719px) {
   .btn.press-download { font-size: 13px; padding: 12px 16px; }
-  .press-shots { grid-template-columns: 1fr 1fr; gap: var(--s4); }
-  .press-shots figcaption { font-size: 12px; }
 }
