@@ -79,6 +79,8 @@ strong { color: var(--ink); font-weight: 600; }
 .btn-text { font: 600 16px/1 var(--sans); color: var(--link); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; gap: 6px; }
 .btn-text:hover { color: var(--gold); }
 .play-badge { display: inline-block; line-height: 0; }
+.pp-badge { margin: var(--s3) 0 0; line-height: 0; }
+.pp-badge img { max-width: 100%; height: auto; }
 .play-badge img { height: 78px; width: auto; } /* Google's 646x250 badge, unaltered; its padding is the required clear space */
 .cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 28px; }
 
@@ -247,6 +249,7 @@ a.card:focus-visible { outline-offset: 4px; border-radius: 6px; }
   .btn { width: 100%; min-height: 52px; }
   .cta-row { flex-direction: column; align-items: stretch; gap: 16px; }
   .cta-row .play-badge { align-self: center; }
+  .pp-badge { text-align: center; }
   .ad-slot ins.adsbygoogle { max-width: 320px; min-height: 100px; }
   .ad-band.ad-rect ins.adsbygoogle { max-width: 300px; min-height: 250px; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--s6) var(--s5); }
