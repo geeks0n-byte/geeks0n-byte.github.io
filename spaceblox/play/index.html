@@ -58,10 +58,16 @@ html, body {
 	height: 100%;
 }
 
-/* Site shell around the game (STYLE-SPEC "soft pixel space"). Nothing overlays the canvas. */
-:root { --bar-h: 56px; }
+/* Site shell around the game (STYLE-SPEC "soft pixel space"). The text band sits above the canvas; nothing overlays it. */
+:root { --bar-h: 56px; --chrome-h: 56px; }
 body { font: 400 15px/1.55 Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
-.play-bar { position: fixed; top: 0; left: 0; right: 0; height: var(--bar-h); z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 16px; box-sizing: border-box; background: rgba(0, 10, 36, .92); border-bottom: 1px solid #2b3e7a; image-rendering: auto; }
+.play-chrome { position: fixed; top: 0; left: 0; right: 0; z-index: 4; }
+.play-bar { position: relative; height: var(--bar-h); display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 16px; box-sizing: border-box; background: rgba(0, 10, 36, .92); border-bottom: 1px solid #2b3e7a; image-rendering: auto; }
+.play-copy { image-rendering: auto; padding: 12px 16px 14px; background: rgba(0, 10, 36, .96); border-bottom: 1px solid #2b3e7a; color: #c5cce3; }
+.play-copy h2 { margin: 0 0 8px; font: 700 16px/1.4 Inter, system-ui, sans-serif; color: #f4f1e6; }
+.play-copy p { margin: 0; max-width: 72ch; font-size: 14px; line-height: 1.5; }
+.play-copy a { color: #7fd0ff; }
+.play-copy a:hover { color: #ffd600; }
 .play-bar a, .play-bar button { color: #f4f1e6; }
 .play-bar .back { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px 0 10px; text-decoration: none; font: 600 15px/1 Inter, system-ui, sans-serif; border-radius: 4px; }
 .play-bar .back:hover { background: #0a1c4a; color: #ffd600; }
@@ -72,7 +78,7 @@ body { font: 400 15px/1.55 Inter, system-ui, -apple-system, "Segoe UI", Roboto, 
 .tbtn[hidden] { display: none; }
 .play-bar :focus-visible, .side-card :focus-visible { outline: 3px solid #ffffff; outline-offset: 3px; }
 #canvas { box-shadow: 0 0 0 1px #2b3e7a, 0 0 60px rgba(0, 0, 0, .5); }
-.side-card, .play-rail { display: none; position: fixed; top: calc(var(--bar-h) + (100% - var(--bar-h)) / 2); transform: translateY(-50%); z-index: 2; image-rendering: auto; }
+.side-card { display: none; position: fixed; top: calc(var(--chrome-h) + (100% - var(--chrome-h)) / 2); transform: translateY(-50%); z-index: 2; image-rendering: auto; max-height: calc(100% - var(--chrome-h) - 24px); overflow: auto; }
 .side-card { right: calc(50% + var(--canvas-w, 400px) / 2 + 48px); width: 260px; box-sizing: border-box; padding: 24px; background: #0a1c4a; border: 1px solid #2b3e7a; border-radius: 6px; box-shadow: 0 8px 0 rgba(0, 4, 20, .45); color: #c5cce3; }
 .side-card h2 { margin: 0 0 12px; font: 400 12px/1.6 "Press Start 2P", monospace; color: #ffd600; text-transform: uppercase; }
 .side-card ul { margin: 0 0 12px; padding-left: 18px; }
@@ -85,11 +91,6 @@ body { font: 400 15px/1.55 Inter, system-ui, -apple-system, "Segoe UI", Roboto, 
 .side-card .play-badge img { height: 78px; width: auto; }
 .side-card .legal { margin: 0; }
 body.room-side .side-card { display: block; }
-.play-rail { left: calc(50% + var(--canvas-w, 400px) / 2 + 48px); flex-direction: column; align-items: center; gap: 6px; }
-.play-rail .ad-label { font: 600 11px/1 Inter, system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #9aa6cc; }
-.play-rail ins.adsbygoogle { display: block; width: 300px; height: 600px; }
-body.room-rail .play-rail:not([hidden]) { display: flex; }
-.play-rail[hidden] { display: none !important; }
 @media (max-width: 719px) {
 	:root { --bar-h: 44px; }
 	.play-bar { padding: 0 8px; }
@@ -114,7 +115,7 @@ body.room-rail .play-rail:not([hidden]) { display: flex; }
 }
 
 #status {
-	top: var(--bar-h);
+	top: var(--chrome-h);
 	background-color: transparent;
 	display: flex;
 	flex-direction: column;
@@ -240,6 +241,7 @@ body.room-rail .play-rail:not([hidden]) { display: flex; }
 	</head>
 	<body>
 		<h1 class="visually-hidden">Spaceblox</h1>
+		<div class="play-chrome">
 		<header class="play-bar">
 			<a class="back" href="/spaceblox/"><span aria-hidden="true">◀</span> Spaceblox</a>
 			<span class="title" aria-hidden="true">SPACEBLOX</span>
@@ -248,6 +250,11 @@ body.room-rail .play-rail:not([hidden]) { display: flex; }
 				<button class="tbtn" type="button" id="fullscreen-btn" hidden>⛶ Fullscreen</button>
 			</div>
 		</header>
+		<section class="play-copy" aria-labelledby="play-copy-h">
+			<h2 id="play-copy-h">Spaceblox in the browser</h2>
+			<p>This is the browser version of Spaceblox, the color-logic puzzle made by Giga "gix0n" Sichinava. Rules, star goals and beginner tips are in the <a href="/spaceblox/guide/">guide</a>. The <a href="/spaceblox/">home page</a> covers the campaign, platforms and release notes. Questions go to <a href="/spaceblox/contact/">Contact</a>. <a href="/spaceblox/privacy-policy.html">Privacy policy</a>.</p>
+		</section>
+		</div>
 		<aside class="side-card" aria-labelledby="side-h">
 			<h2 id="side-h">Controls</h2>
 			<ul>
@@ -258,10 +265,6 @@ body.room-rail .play-rail:not([hidden]) { display: flex; }
 			<p>Progress saves in this browser only.</p>
 			<a class="play-badge" href="https://play.google.com/store/apps/details?id=com.spaceblox.game"><img src="/spaceblox/assets/google-play-badge.png" alt="Get it on Google Play" width="646" height="250"></a>
 			<p class="legal"><a href="/spaceblox/privacy-policy.html">Privacy policy</a></p>
-		</aside>
-		<aside class="ad-band play-rail" aria-label="Advertisement" data-ad-placement="play-rail" data-min-width="1280" hidden>
-			<span class="ad-label">Advertisement</span>
-			<ins class="adsbygoogle" data-ad-client="ca-pub-1624206851803206" data-ad-format="vertical"></ins>
 		</aside>
 		<canvas id="canvas" aria-label="Spaceblox game">
 			Your browser does not support the canvas tag.
@@ -350,6 +353,12 @@ const engine = new Engine(GODOT_CONFIG);
 	// canvas_resize_policy 0: Godot uses the canvas buffer as the window.
 	// The site's top bar sits above the game, so the canvas fits the space below it.
 	function playBarHeight() {
+		const chrome = document.querySelector('.play-chrome');
+		const h = chrome ? chrome.offsetHeight : 0;
+		if (h > 0) {
+			document.documentElement.style.setProperty('--chrome-h', h + 'px');
+			return h;
+		}
 		const bar = document.querySelector('.play-bar');
 		return bar ? bar.offsetHeight : 0;
 	}
@@ -380,11 +389,10 @@ const engine = new Engine(GODOT_CONFIG);
 		canvas.style.height = cssH + 'px';
 		canvas.style.left = Math.floor((vw - cssW) / 2) + 'px';
 		canvas.style.top = (barH + Math.floor((vh - cssH) / 2)) + 'px';
-		// Side card (Controls) and the optional ad rail sit beside the canvas, never over it.
+		// Controls sit beside the canvas when there is room, never over it.
 		const room = (vw - cssW) / 2;
 		document.documentElement.style.setProperty('--canvas-w', cssW + 'px');
 		document.body.classList.toggle('room-side', vw >= 1100 && room >= 260 + 48 + 16);
-		document.body.classList.toggle('room-rail', vw >= 1280 && room >= 300 + 48 + 16);
 	}
 
 	const fsBtn = document.getElementById('fullscreen-btn');
@@ -404,6 +412,10 @@ const engine = new Engine(GODOT_CONFIG);
 	}
 
 	window.addEventListener('resize', fitPlayCanvas);
+	var playChrome = document.querySelector('.play-chrome');
+	if (playChrome && window.ResizeObserver) {
+		new ResizeObserver(fitPlayCanvas).observe(playChrome);
+	}
 	if (window.visualViewport) {
 		window.visualViewport.addEventListener('resize', fitPlayCanvas);
 	}
