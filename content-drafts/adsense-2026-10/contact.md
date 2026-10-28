@@ -18,7 +18,7 @@ If something in Spaceblox does not do what the rules or the buttons say, I can a
 
 - Where you played: the Android app, or the browser version.
 - The device. On Android, the model and the Android version. In a browser, which browser and which operating system.
-- The level number, or the name of the screen, where it happened. "Level select", "a purple hopper board", or "the daily puzzle" are all more useful than "in the game."
+- The level number, or the name of the screen, where it happened. "Level select", "a purple hopper board", or "the pause menu" are all more useful than "in the game." The current public version is 1.1.0. If you are on the original Play upload, say v1.0, the 1 September 2026 launch.
 - What you expected, and what happened instead. A screenshot helps a lot, especially when the report is about a red highlight, a link, or a tile that looks out of place.
 
 Version 1.1.0 on Android added Firebase Crashlytics, which sends me a crash report when the app actually crashes: device model, operating system version, and the state of the app at the time. That does not replace a letter. A crash report does not tell me what you were trying to do. If the game is wrong and still running, Crashlytics will not see it, and the email will.
@@ -27,13 +27,11 @@ Please do not send passwords, payment details, or other sensitive personal infor
 
 ## Feedback and puzzle ideas
 
-A note that a level was too easy, or too hard, is useful. So is a note that a rule was confusing, or an idea for a new tile. I cannot promise that an idea becomes a tile. I can promise I will read it. The campaign is built so a level can be solved by reasoning, with automated checks on validation and on every campaign level. If you found a board where that seems false, I want the level and the placement that stuck you, not a general "this one is unfair."
-
-The 1.2.0 notes describe a Practice mode of unlimited random puzzles. Those notes are ahead of the version the live press page lists as current, which is 1.1.0 from 5 October 2026. If you are writing about a random board, say so, and say which difficulty you had selected. If you are writing about the daily puzzle, the date matters, because that board changes at 07:00 UTC and is the same board for everyone on that day.
+A note that a level was too easy, or too hard, is useful. So is a note that a rule was confusing, or an idea for a new tile. I cannot promise that an idea becomes a tile. I can promise I will read it. The campaign is built so a level can be solved by reasoning, with automated checks on validation and on every campaign level. If you found a board where that seems false, I want the level and the placement that stuck you, not a general "this one is unfair." Say whether the level was easy, medium, or hard if you can tell, and whether you were on Android 1.1.0, on v1.0, or in the browser.
 
 ## Translations
 
-Spaceblox is in English, Spanish, German, French, Polish, Georgian, and Ukrainian. If you see a typo or an awkward phrase, send three things: the language, the screen, and the corrected text. "German, the pause menu, this button should say …" is enough for me to find the string. A screenshot of the bad line is a good addition. The 1.2.0 font notes mention better accented letters, full Ukrainian support, and a separate font for Georgian. If a character is missing or clipped, that is a bug report, and the language plus the screen still matter.
+Spaceblox is in English, Spanish, German, French, Polish, Georgian, and Ukrainian. If you see a typo or an awkward phrase, send three things: the language, the screen, and the corrected text. "German, the pause menu, this button should say …" is enough for me to find the string. A screenshot of the bad line is a good addition. If a character is missing or a word is clipped on the phone, treat that as a bug report too: language, screen, and what you expected to read.
 
 Messages in English are the easiest for me to answer quickly. A correction written in the language it corrects is still welcome. I would rather receive the right Polish sentence from you than a rough description of where it sits.
 

@@ -1,6 +1,6 @@
 ---
 title: "Spaceblox: a calm color-logic puzzle"
-description: "What Spaceblox includes: campaign, tutorial, hints, undo, stars, colorblind mode, a screen reader, seven languages, and Android-only 1.2.0 modes."
+description: "What Spaceblox includes: a campaign, tutorial, hints, undo, stars, colorblind mode, a screen reader, and seven languages. Current version 1.1.0."
 path: /spaceblox/
 ---
 
@@ -8,7 +8,7 @@ path: /spaceblox/
 
 I am Giga Sichinava. On Google Play my name is gix0n. Spaceblox is the puzzle I designed, programmed, and published. It is a color-logic grid, not a match-3. You fill empty cells with yellow, blue, and green tiles until every rule on the board holds. A few tiles are already placed. Some of those are locked. Later levels add purple tiles that hop, and "=" or "×" links between cells.
 
-You can get it on [Google Play](https://play.google.com/store/apps/details?id=com.spaceblox.game) or play the [browser version](/spaceblox/play/). The Android app is free and contains ads. The browser version is free too. I released Spaceblox on Google Play on 1 September 2026. The current public listing, as the press page states it, is version 1.1.0 from 5 October 2026. Version 1.2.0 is written up on the [changelog](/spaceblox/changelog/). Daily puzzle, Practice, and leaderboards from that update are mobile-app only.
+You can get it on [Google Play](https://play.google.com/store/apps/details?id=com.spaceblox.game) or play the [browser version](/spaceblox/play/). The Android app is free and contains ads. The browser version is free too. The Google Play launch on 1 September 2026 is v1.0. The current public version is 1.1.0, dated 5 October 2026 on the press page. The [changelog](/spaceblox/changelog/) is the longer note on those two versions.
 
 The game is built in Godot. The Android app and the browser build come from the same project. The browser version is laid out in portrait, and it runs in a modern browser on a desktop or a phone.
 
@@ -50,17 +50,17 @@ Colorblind mode is optional. It adds patterns to the tiles and uses a palette ad
 
 The game text is in seven languages: English, Spanish, German, French, Polish, Georgian, and Ukrainian. If a phrase is wrong, the contact page is the place to send the language, the screen, and the corrected text.
 
-Other settings are plain on purpose. You can choose a dynamic or a static space background, and music and sound effects are separate. Version 1.2.0, in the patch notes, also refreshes the tiles, menus, How to Play, and the pixel font.
+Other settings are plain on purpose. You can choose a dynamic or a static space background, and music and sound effects are separate.
 
-## What version 1.2.0 adds on the phone
+## v1.0 and the current version, 1.1.0
 
-The 1.2.0 notes add three modes that the browser build does not play. On the web they show as **APP ONLY**, with a short note. To use them, get Spaceblox on [Google Play](https://play.google.com/store/apps/details?id=com.spaceblox.game).
+v1.0, on 1 September 2026, is the campaign. Easy, medium, and hard levels, the tutorial, hints, undo, and the three star goals all shipped then. The color rules did not wait for a later update. Yellow, blue, green, purple hoppers, locks, and "=" / "×" links are the v1.0 puzzle. Seven languages shipped with it. So did on-device saves, and ads that stay between levels.
 
-The daily puzzle is one new board every day at 07:00 UTC, the same board for every player. You pick easy, medium, or hard. Board sizes vary: 5–6, 7–8, or 9×9. Undo is allowed. Hints are not. The score starts at 10,000 / 20,000 / 30,000, then loses 10 points per second and 50 points per hopper slide. Undoing a slide still counts. The score does not go below 100. Higher is better, and only your first clear counts. Three Google Play Games leaderboards, one per difficulty, hold those scores.
+1.1.0, on 5 October 2026, is the current public version on Google Play. On Android it adds four things the home page lists: achievements, cloud saves, colorblind mode, and TalkBack support. Achievements, the colorblind patterns, and the screen-reader labels were already in the browser build. Cloud save was not. From 1.1.0 you can sign in to Google Play Games if you want a cloud copy of progress, settings, and achievements. In-progress levels are not uploaded. Signing in is never required. The browser version still keeps its save in that browser only.
 
-Practice is separate. It gives you unlimited random puzzles in easy, medium, or hard, and hints are allowed there. A Stats screen shows how you are doing across the campaign, daily puzzles, and practice. Notifications are opt-in. You can get a ping when the daily puzzle is ready or when an update lands. Promo notifications are off by default.
+The same Android update adds Firebase Analytics and Firebase Crashlytics. Earlier app versions, including v1.0, do not include Firebase. Analytics records events such as a level started, a level completed, or a hint used. Crashlytics sends a crash report. The [privacy policy](/spaceblox/privacy-policy.html) is the full description. None of that changes how a cell is filled.
 
-I have not put a public release date for 1.2.0 on the live press page, which still lists 1.1.0. The [changelog](/spaceblox/changelog/) marks that gap.
+If you installed the game on 1 September 2026 and you have not updated, you are on v1.0, and the Android copy does not yet have cloud save, colorblind mode, or TalkBack. Update to 1.1.0 for those. The rules of a level are the same either way. The [browser version](/spaceblox/play/) is there if you want a campaign board without installing anything.
 
 ## How it is paced, and how the ads work
 

@@ -170,7 +170,7 @@ Y P B
 
 The count is one yellow and one blue. The purple is the extra cell that lets the odd length work.
 
-The published rules do not say that purple counts as yellow or blue for the Rule of Two. That "counts as both" sentence is only about green. So purple is not a second copy of green. `Y Y P` is not the green pattern `Y Y G`. Read purple as its own tile: it occupies a cell, it hops, and it stays out of the yellow/blue tally.
+The published rules do not say that purple counts as yellow or blue for the Rule of Two. That "counts as both" sentence is only about green. So purple is not a second copy of green. `Y Y P` is not the green pattern `Y Y G`. Read purple as its own tile: it fills a cell, it hops, and it stays out of the yellow/blue tally.
 
 Some levels replace the time star with a hop limit. The star then asks you to solve the board with no more than a set number of purple hops. Extra hops do not fail the level. They only leave that star empty. Planning where each hopper should rest, before you fill the cells around it, matters on those boards, because a hop also changes which cell is empty.
 
@@ -222,7 +222,7 @@ The other direction works too:
 B × . = .     becomes     B × Y = Y
 ```
 
-A hint uses these same marks. When you ask for a hint, the game reveals a helpful "=" or "×" on the board instead of filling a cell. You still place the color. Each campaign level includes a small number of hints, more on harder levels. An optional ad can add three more. The daily puzzle, which is mobile-only, does not allow hints at all.
+A hint uses these same marks. When you ask for a hint, the game reveals a helpful "=" or "×" on the board instead of filling a cell. You still place the color. Each campaign level includes a small number of hints, more on harder levels. An optional ad can add three more. Using one spends the no-hint star for that attempt. You can replay the level later without a hint and still earn it.
 
 [CONFIRM] An older press-kit paragraph said that on a link, green counts as a match either way, and purple only matches purple. The live guide and the live press page do not say that. They only say "=" is the same color and "×" is a different color. I have not used the older sentence in the examples above. Until it is confirmed, play "=" and "×" as same color and different color, and let the red highlight show you if a green or a purple on that link is rejected.
 

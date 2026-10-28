@@ -159,6 +159,6 @@ A hint in Spaceblox reveals one of these links. It does not drop a finished colo
 
 A newspaper takuzu does not kick you out for thinking. Spaceblox is built the same way, with a few extra tools the paper grid does not have. There is no energy meter and no game-over clock. Time, on a campaign level, only decides an optional star. Undo and Redo are unlimited there. A broken rule turns red on the cells involved, so the grid tells you which constraint you hit. You can reopen How to Play in the middle of a level.
 
-The daily puzzle, on the Android app only, is closer to a scored paper contest: one shared board each day at 07:00 UTC, no hints, undo still allowed, and a score that falls by 10 points a second and by 50 points a hopper slide. That mode is not in the browser build. The browser shows it as **APP ONLY**. The campaign, which is the takuzu-like part of the game, is in both.
+The campaign is that paper pace, on both platforms. v1.0 on Google Play, 1 September 2026, is the easy, medium, and hard set. The current public version is 1.1.0, and it did not change these color rules. Android and the browser play the same campaign. Cloud save is the Android 1.1.0 extra, not a new deduction.
 
 If you already like binary puzzles, start Spaceblox on the early campaign boards and use the pair, the sandwich, and the halfway count. When the first green shows up, stop treating the grid as two symbols. From that level on, one cell is allowed to be both, and neither, and only once per line.

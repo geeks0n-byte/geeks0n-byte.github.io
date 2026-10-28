@@ -1,12 +1,12 @@
 ---
 title: "Spaceblox FAQ"
-description: "Answers on Spaceblox platforms, price, ads, saves, offline play, accessibility, languages, stars, hints, the daily puzzle, and contact."
+description: "Answers on Spaceblox platforms, price, ads, saves, offline play, accessibility, languages, stars, hints, versions, and contact."
 path: /spaceblox/faq/
 ---
 
 # Spaceblox FAQ
 
-Short answers from the published pages and the 1.2.0 patch notes. Where an older press-kit line disagrees with the live guide, the answer says so. Play Spaceblox on [Google Play](https://play.google.com/store/apps/details?id=com.spaceblox.game) or in the [browser](/spaceblox/play/).
+Short answers from the published pages. Where an older press-kit line disagrees with the live guide, the answer says so. Play Spaceblox on [Google Play](https://play.google.com/store/apps/details?id=com.spaceblox.game) or in the [browser](/spaceblox/play/). The current public version is 1.1.0. The Play launch on 1 September 2026 is v1.0.
 
 ## Is Spaceblox free?
 
@@ -18,9 +18,7 @@ Full-screen ads are held back until you have cleared several levels. After that 
 
 ## Which platforms is it on?
 
-Android, on [Google Play](https://play.google.com/store/apps/details?id=com.spaceblox.game), and a browser build at [/spaceblox/play/](/spaceblox/play/). The browser version is laid out in portrait and runs in a modern browser on a desktop or a phone. I released the Play version on 1 September 2026. The press page lists the current public version as 1.1.0, dated 5 October 2026. I have not published an iOS version.
-
-Daily puzzle, Practice, and the daily leaderboards are in the mobile app only. In the browser they show as **APP ONLY**.
+Android, on [Google Play](https://play.google.com/store/apps/details?id=com.spaceblox.game), and a browser build at [/spaceblox/play/](/spaceblox/play/). The browser version is laid out in portrait and runs in a modern browser on a desktop or a phone. v1.0 launched on Google Play on 1 September 2026. The press page lists the current public version as 1.1.0, dated 5 October 2026. I have not published an iOS version. The campaign is on both Android and the web. Cloud save is Android-only, and only from 1.1.0.
 
 ## Do I need an account?
 
@@ -36,15 +34,13 @@ No. The web version saves in that browser's storage on that device. Cloud sync e
 
 The browser build includes an offline page that says the application needs an internet connection to run for the first time. I have not published a separate promise that later browser sessions work with no connection. Saves themselves are local: the app keeps progress on the device, and the browser keeps it in that browser.
 
-Ads use Google's services, so they need a connection when they are shown. Optional Play Games sign-in, cloud save, and the daily leaderboards also use Google's services. The daily puzzle is an online-dated board (a new one at 07:00 UTC), and its leaderboards are in Play Games. I have not written a claim that a campaign level you already have on the phone requires a connection to solve.
+Ads use Google's services, so they need a connection when they are shown. Optional Play Games sign-in and cloud save also use Google's services. I have not written a claim that a campaign level you already have on the phone requires a connection to solve.
 
 ## Is there a timer? Can I fail a level?
 
 Each campaign level can have a time limit, and that limit only applies to the optional time star. If the clock runs out, the star stays empty. The level does not end, and there is no game-over. You can take as long as you want and still solve the board. There is no energy system.
 
-On boards with purple tiles, that third star can instead ask you to stay under a set number of hops. Extra hops work the same way as extra time. The level remains solvable. The star stays empty.
-
-The daily puzzle does use time in its score. You lose 10 points per second from a starting score of 10,000, 20,000, or 30,000. That score is only for the daily. It is not a campaign fail state.
+On boards with purple tiles, that third star can instead ask you to stay under a set number of hops. Extra hops work the same way as extra time. The level remains solvable. The star stays empty. The campaign has no separate score that ticks down while you think. Time and hops only decide that one optional star.
 
 ## What are the three stars?
 
@@ -58,23 +54,19 @@ Stars are optional. One star is enough to clear the level. You can replay it lat
 
 A hint reveals a helpful "=" or "×" link. It does not fill a cell. You still make the placement. Each campaign level gives you a small number of hints, and harder levels give you more. If you run out, you can watch an optional ad for three more.
 
-The no-hint star applies to the attempt where you used help. Replaying without a hint can still earn it. The daily puzzle does not allow hints. Practice mode does.
+The no-hint star applies to the attempt where you used help. Replaying without a hint can still earn it.
 
-## What is the daily puzzle, and what is Practice?
+## What version am I on?
 
-Both are in the 1.2.0 notes, and both are mobile-app only.
+v1.0 is the Google Play launch on 1 September 2026: the color-logic campaign, easy, medium, and hard. The current public version is 1.1.0, dated 5 October 2026. If the Android app offers cloud save, colorblind mode, and TalkBack, you are on 1.1.0. v1.0 on Android did not include those three. The browser build had achievements, colorblind patterns, and screen-reader labels before the Android update. The browser build still has no cloud save.
 
-The daily puzzle is one board a day, at 07:00 UTC, the same board for everyone. You choose easy, medium, or hard. Sizes vary: 5–6, 7–8, or 9×9. Undo is allowed. Hints are not. The score starts at 10,000 / 20,000 / 30,000, then subtracts 10 per second and 50 per hopper slide. [CONFIRM] Those three starts are written in the same order as easy, medium, and hard. The notes do not add the sentence "easy is 10,000." Undoing a slide still counts. The minimum score is 100. Higher is better. Only your first clear counts. Three Google Play Games leaderboards, one per difficulty, record those scores.
+## What did 1.1.0 add?
 
-Practice gives you unlimited random puzzles in easy, medium, or hard, with hints allowed. A Stats screen covers the campaign, daily puzzles, and practice. Notifications are opt-in: a ping when the daily puzzle is ready, or when an update lands. Promo notifications are off by default.
-
-[CONFIRM] The live press page still lists the public version as 1.1.0 (5 October 2026). I do not have a public ship date for 1.2.0 in the live pages. The answers above describe the patch notes, not a date the store has posted on the site.
+On Android, the home page lists achievements, cloud saves, colorblind mode, and TalkBack support. Achievements use bronze, silver, and gold tiers, plus hidden ones, for milestones, star goals, and a few secret feats. Cloud save is optional Google Play Games sign-in. Google stores progress, settings, and achievements. In-progress levels are not uploaded. Colorblind mode adds patterns and a palette adjusted for better separation. TalkBack is the screen-reader support named in that Android update. The privacy policy also says 1.1.0 adds Firebase Analytics and Firebase Crashlytics. v1.0 of the app does not include Firebase. The color rules are the same in both versions.
 
 ## Is every puzzle solvable without guessing?
 
-Campaign levels are designed to be solved by logic, and automated checks cover puzzle validation and every campaign level before it ships. If a board feels like a guess, look again for pairs, sandwiches, and halfway counts, or use a hint. The game highlights broken rules in red while you play.
-
-Practice boards are described as unlimited random puzzles. The closed-test note asked testers whether those random boards feel fair. I am not claiming a separate published proof for every random board beyond that.
+Campaign levels are designed to be solved by logic, and automated checks cover puzzle validation and every campaign level before it ships. If a board feels like a guess, look again for pairs, sandwiches, and halfway counts, or use a hint. The game highlights broken rules in red while you play. I have not published a level count, so I will not estimate how many boards those checks cover.
 
 ## Is there a colorblind mode?
 
@@ -86,7 +78,7 @@ Screen-reader labels cover the menus and the game screen. The 1.1.0 Android note
 
 ## What languages is it in?
 
-English, Spanish, German, French, Polish, Georgian, and Ukrainian. Version 1.2.0's notes mention a new pixel font with better accented letters and full Ukrainian support. Georgian keeps its own font. If you spot a typo or an awkward phrase, tell me the language, the screen, and the corrected text.
+English, Spanish, German, French, Polish, Georgian, and Ukrainian. If you spot a typo or an awkward phrase, tell me the language, the screen, and the corrected text. Language is a setting, stored with sound, background, and colorblind mode.
 
 ## Does my progress save in the middle of a level?
 

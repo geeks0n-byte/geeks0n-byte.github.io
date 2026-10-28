@@ -12,9 +12,9 @@ I am Giga. Spaceblox is on [Google Play](https://play.google.com/store/apps/deta
 
 ## The even sum, on a line you can see
 
-Take a finished line and count only yellow and blue. Suppose the line has three yellows. Equal Balance says it also has three blues. Three plus three is six. Suppose it has one yellow. Then it has one blue. The yellow-and-blue cells occupy two places. There is no integer that makes the two sides equal and the total odd. One and one is two. Two and two is four. Three and three is six. Zero and zero is a line with no yellow and no blue at all.
+Take a finished line and count only yellow and blue. Suppose the line has three yellows. Equal Balance says it also has three blues. Three plus three is six. Suppose it has one yellow. Then it has one blue. The yellow-and-blue cells fill two places. There is no integer that makes the two sides equal and the total odd. One and one is two. Two and two is four. Three and three is six. Zero and zero is a line with no yellow and no blue at all.
 
-So if a line has 3, 5, or 7 cells, and every cell is yellow or blue, the counts cannot match. Those three lengths are the odd lengths the rules mention. The same arithmetic applies to any odd length. A 9-cell line, which shows up as a daily-puzzle size in the 1.2.0 notes, has the same problem if it is only yellow and blue.
+So if a line has 3, 5, or 7 cells, and every cell is yellow or blue, the counts cannot match. Those three lengths are the odd lengths the rules mention. The same arithmetic applies to any odd length. A line of 7 with only yellow and blue is three plus four, or some other uneven split. It cannot be three plus three, because that uses six cells, and the seventh cell would have to be yellow or blue and would tip the count.
 
 Here is a five-cell attempt that uses every trick available inside two colors. Alternating feels balanced, and it is not:
 
@@ -46,7 +46,7 @@ Three and three. A four-cell line does not need help either: `Y Y B B` is two an
 
 ## What the extra cell is allowed to be
 
-The extra cell has to occupy space and add nothing to either count. Spaceblox has two tiles that do that. Green is one. Purple is the other. Both "fill a cell without counting toward Equal Balance." After you set one of them aside, the cells that remain are even in number, and those cells can be split into equal yellow and blue.
+The extra cell has to fill a place and add nothing to either count. Spaceblox has two tiles that do that. Green is one. Purple is the other. Both "fill a cell without counting toward Equal Balance." After you set one of them aside, the cells that remain are even in number, and those cells can be split into equal yellow and blue.
 
 A five-cell line with one ignored cell has four cells that count. Four cells can be two yellow and two blue. A three-cell line with one ignored cell has two cells that count: one yellow and one blue. A seven-cell line with one ignored cell has six: three and three.
 

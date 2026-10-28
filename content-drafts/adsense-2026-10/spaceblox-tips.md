@@ -167,7 +167,7 @@ Sketch the rest position first:
 P→  .        or, after one hop,        .  P
 ```
 
-If a second purple already occupies the destination, the first hop is illegal until you move the blocker. On a star that limits hops, each slide costs one of those hops, so a hop you take and then undo still happened. In the daily puzzle the cost is numeric: 50 points per hopper slide, and undoing the slide still counts. Campaign hop stars do not use that point formula. They only care whether you stayed under the hop number printed for the star.
+If a second purple tile is already on the destination, the first hop is illegal until you move the blocker. On a star that limits hops, the star asks you to stay under a set number of hops. Extra hops do not fail the level. They leave that star empty. Decide the resting cell before you fill both ends of the arrow.
 
 Purple also completes an odd line without being green. A three-cell line can be:
 
@@ -216,6 +216,4 @@ Before you spend the hint, scan once more for:
 - a green that has already closed its row and its column
 - an "=" or "×" chain you have not copied to the end
 
-The no-hint star is lost for that attempt as soon as you use one hint. You can replay the level later and try again with the star still available. Nothing in the campaign locks you out for using help.
-
-On the daily puzzle, this choice does not exist. Hints are off, undo is on, and only the first clear is the score that counts. Practice mode is the opposite: random boards, hints allowed, no daily board to protect. If you want to drill a pattern from this page, Practice on the Android app is the mode that lets you repeat it. The browser build shows Daily, Practice, and leaderboards as **APP ONLY**.
+The no-hint star is lost for that attempt as soon as you use one hint. You can replay the level later and try again with the star still available. Nothing in the campaign locks you out for using help. The same level is in the Android app and in the browser build. Replay it on whichever one you already have open. The patterns on this page, pairs and sandwiches and halfway counts, are the campaign patterns from v1.0, and 1.1.0 did not change them.

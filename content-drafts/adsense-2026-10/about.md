@@ -8,7 +8,7 @@ path: /spaceblox/about/
 
 I am Giga Sichinava. On Google Play my developer name is gix0n. Spaceblox is my game. I designed it, programmed it, directed the art, tested it, wrote the store pages, published it, and built this website. I do that work myself.
 
-Spaceblox is a calm color-logic puzzle for Android and the browser. It is not a match-3. You fill a grid with yellow, blue, and green tiles so that a handful of rules all hold at once. Later levels add purple tiles that hop, locks, and "=" and "×" links. I released it on Google Play on 1 September 2026. The press page lists the current public version as 1.1.0, dated 5 October 2026.
+Spaceblox is a calm color-logic puzzle for Android and the browser. It is not a match-3. You fill a grid with yellow, blue, and green tiles so that a handful of rules all hold at once. Later levels add purple tiles that hop, locks, and "=" and "×" links. v1.0 is the Google Play launch on 1 September 2026. The press page lists the current public version as 1.1.0, dated 5 October 2026.
 
 You can get it on [Google Play](https://play.google.com/store/apps/details?id=com.spaceblox.game) or play the [browser version](/spaceblox/play/). Both are free. The Play listing contains ads. A short overview of the campaign and the feature list lives on the [Spaceblox page](/spaceblox/). The rules, with examples, are in the [guide](/spaceblox/guide/).
 
@@ -24,7 +24,7 @@ The browser build keeps progress in local storage on that device. From Android v
 
 Colorblind mode is optional. It adds patterns to the tiles and uses a palette adjusted for better separation, so the color rules do not depend on hue alone. Screen-reader labels cover the menus and the game screen. Those options are in the browser build. On Android they are in version 1.1.0, which lists TalkBack support alongside colorblind mode and cloud save. Achievements, with bronze, silver, and gold tiers plus hidden ones, followed the same split: browser first, Android in 1.1.0.
 
-The game text is in seven languages: English, Spanish, German, French, Polish, Georgian, and Ukrainian. A wrong or awkward line is worth sending. Tell me the language, the screen, and the text you would use instead. The 1.2.0 notes, which are not yet what the live press page calls the current version, mention a pixel font with better accented letters and full Ukrainian support. Georgian keeps its own font.
+The game text is in seven languages: English, Spanish, German, French, Polish, Georgian, and Ukrainian. A wrong or awkward line is worth sending. Tell me the language, the screen, and the text you would use instead. Language is a setting, with sound, background, and colorblind mode.
 
 ## How the game is funded
 
