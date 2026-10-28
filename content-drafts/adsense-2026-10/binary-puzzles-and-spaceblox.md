@@ -145,13 +145,13 @@ Three more Spaceblox ideas have no takuzu equivalent.
 
 **Purple** tiles hop. A purple tile sits on one of two linked cells. You tap it and it slides along its arrow. If another purple tile is already on the destination, the hop is blocked. Like green, purple fills a cell and does not count toward Equal Balance. Unlike green, the rules do not say that purple counts as yellow and blue for the Rule of Two. `Y P B` can balance a three-cell line (one yellow, one blue, purple ignored) without being a green. A hop also changes which cell is empty, so the "fill every cell" goal and the purple's position are the same problem. Some stars limit how many hops you may use. Extra hops do not fail the level. They only leave that star empty.
 
-**Links** are marks between cells. "=" means the two cells are the same color. "×" means they are different colors. On a yellow-and-blue board, an "×" is a copy of the opposite symbol, which is a very fast takuzu-style deduction:
+**Links** are marks between cells. = means they must match and × means they must differ. On a board that is only yellow and blue, knowing one cell of an × tells you the other:
 
 ```
 Y = . × .     becomes     Y = Y × B
 ```
 
-A hint in Spaceblox reveals one of these links. It does not drop a finished color into a cell the way a pencil mark in a newspaper takuzu might fill a digit. You still have to read the link. [CONFIRM] An older press-kit line said green counts as a match either way on a link, and that purple only matches purple. The live rules do not say that. I am not teaching it as a takuzu variant until it is confirmed.
+A hint in Spaceblox reveals one of these links. It does not drop a finished color into a cell the way a pencil mark in a newspaper takuzu might fill a digit. You still have to read the link.
 
 **Locks** are the givens. They play the role of the printed 0s and 1s. The rest of the board is what you place, cycling Yellow, then Blue, then Green. You do not cycle a cell into purple. Purple is already on the board, waiting to hop.
 
@@ -159,6 +159,6 @@ A hint in Spaceblox reveals one of these links. It does not drop a finished colo
 
 A newspaper takuzu does not kick you out for thinking. Spaceblox is built the same way, with a few extra tools the paper grid does not have. There is no energy meter and no game-over clock. Time, on a campaign level, only decides an optional star. Undo and Redo are unlimited there. A broken rule turns red on the cells involved, so the grid tells you which constraint you hit. You can reopen How to Play in the middle of a level.
 
-The campaign is that paper pace, on both platforms. v1.0 on Google Play, 1 September 2026, is the easy, medium, and hard set. The current public version is 1.1.0, and it did not change these color rules. Android and the browser play the same campaign. Cloud save is the Android 1.1.0 extra, not a new deduction.
+The campaign is that paper pace. v1.0 on Google Play, 1 September 2026, is the easy, medium, and hard set, on the app only. The browser version arrived with 1.1.0. The current public version is 1.1.0, and it did not change these color rules. The Play app and the browser play the same campaign. Cloud save is the Android-only part of 1.1.0, not a new deduction.
 
 If you already like binary puzzles, start Spaceblox on the early campaign boards and use the pair, the sandwich, and the halfway count. When the first green shows up, stop treating the grid as two symbols. From that level on, one cell is allowed to be both, and neither, and only once per line.

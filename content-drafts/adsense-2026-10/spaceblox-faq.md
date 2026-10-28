@@ -6,7 +6,7 @@ path: /spaceblox/faq/
 
 # Spaceblox FAQ
 
-Short answers from the published pages. Where an older press-kit line disagrees with the live guide, the answer says so. Play Spaceblox on [Google Play](https://play.google.com/store/apps/details?id=com.spaceblox.game) or in the [browser](/spaceblox/play/). The current public version is 1.1.0. The Play launch on 1 September 2026 is v1.0.
+Short answers from the published pages. Play Spaceblox on [Google Play](https://play.google.com/store/apps/details?id=com.spaceblox.game) or, from 1.1.0, in the [browser](/spaceblox/play/). The current public version is 1.1.0. The Play launch on 1 September 2026 is v1.0, app only.
 
 ## Is Spaceblox free?
 
@@ -18,7 +18,11 @@ Full-screen ads are held back until you have cleared several levels. After that 
 
 ## Which platforms is it on?
 
-Android, on [Google Play](https://play.google.com/store/apps/details?id=com.spaceblox.game), and a browser build at [/spaceblox/play/](/spaceblox/play/). The browser version is laid out in portrait and runs in a modern browser on a desktop or a phone. v1.0 launched on Google Play on 1 September 2026. The press page lists the current public version as 1.1.0, dated 5 October 2026. I have not published an iOS version. The campaign is on both Android and the web. Cloud save is Android-only, and only from 1.1.0.
+Android, on [Google Play](https://play.google.com/store/apps/details?id=com.spaceblox.game), and, from 1.1.0, a browser build at [/spaceblox/play/](/spaceblox/play/). The browser version is laid out in portrait and runs in a modern browser on a desktop or a phone. v1.0 launched on Google Play on 1 September 2026 and did not include a web build. The browser version was released with 1.1.0 on 5 October 2026. The press page lists that as the current public version. I have not published an iOS version. Cloud save is Android-only, and only from 1.1.0.
+
+## Is there a browser version?
+
+Yes. It was released with version 1.1.0 on 5 October 2026. Get the app on [Google Play](https://play.google.com/store/apps/details?id=com.spaceblox.game) first, or play in the browser at [/spaceblox/play/](/spaceblox/play/). v1.0, the 1 September 2026 Play launch, is the app only. The web version keeps progress in that browser. It does not have cloud save, and it does not copy a save onto the phone.
 
 ## Do I need an account?
 
@@ -52,17 +56,17 @@ Stars are optional. One star is enough to clear the level. You can replay it lat
 
 ## How do hints work?
 
-A hint reveals a helpful "=" or "×" link. It does not fill a cell. You still make the placement. Each campaign level gives you a small number of hints, and harder levels give you more. If you run out, you can watch an optional ad for three more.
+A hint reveals a helpful "=" or "×" link. = means they must match and × means they must differ. It does not fill a cell. You still make the placement. Each campaign level gives you a small number of hints, and harder levels give you more. If you run out, you can watch an optional ad for three more.
 
 The no-hint star applies to the attempt where you used help. Replaying without a hint can still earn it.
 
 ## What version am I on?
 
-v1.0 is the Google Play launch on 1 September 2026: the color-logic campaign, easy, medium, and hard. The current public version is 1.1.0, dated 5 October 2026. If the Android app offers cloud save, colorblind mode, and TalkBack, you are on 1.1.0. v1.0 on Android did not include those three. The browser build had achievements, colorblind patterns, and screen-reader labels before the Android update. The browser build still has no cloud save.
+v1.0 is the Google Play launch on 1 September 2026: the color-logic campaign, easy, medium, and hard, on Android only. The current public version is 1.1.0, dated 5 October 2026. If the Android app offers cloud save, colorblind mode, and TalkBack, you are on 1.1.0. The browser version exists only from that same 1.1.0 release. It still has no cloud save.
 
 ## What did 1.1.0 add?
 
-On Android, the home page lists achievements, cloud saves, colorblind mode, and TalkBack support. Achievements use bronze, silver, and gold tiers, plus hidden ones, for milestones, star goals, and a few secret feats. Cloud save is optional Google Play Games sign-in. Google stores progress, settings, and achievements. In-progress levels are not uploaded. Colorblind mode adds patterns and a palette adjusted for better separation. TalkBack is the screen-reader support named in that Android update. The privacy policy also says 1.1.0 adds Firebase Analytics and Firebase Crashlytics. v1.0 of the app does not include Firebase. The color rules are the same in both versions.
+On Android, the home page lists achievements, cloud saves, colorblind mode, and TalkBack support. The same version adds the browser build at [/spaceblox/play/](/spaceblox/play/). Achievements use bronze, silver, and gold tiers, plus hidden ones, for milestones, star goals, and a few secret feats. Cloud save is optional Google Play Games sign-in, on Android only. Google stores progress, settings, and achievements. In-progress levels are not uploaded. Colorblind mode adds patterns and a palette adjusted for better separation. TalkBack is the screen-reader support named in that Android update. The browser version released with 1.1.0 has the patterns and the screen-reader labels. The privacy policy also says 1.1.0 adds Firebase Analytics and Firebase Crashlytics on Android. v1.0 of the app does not include Firebase, and it does not include the web version. The color rules are the same in v1.0 and in 1.1.0.
 
 ## Is every puzzle solvable without guessing?
 
@@ -70,11 +74,11 @@ Campaign levels are designed to be solved by logic, and automated checks cover p
 
 ## Is there a colorblind mode?
 
-Yes. Colorblind mode is optional. It adds patterns to the tiles and uses a palette adjusted for better separation, so you can tell tiles apart by pattern as well as by color. It is a setting, grouped with language, sound, and background. It is in the browser build, and on Android from version 1.1.0. I have not published the exact pattern shapes on this site, so I will not describe them from memory here.
+Yes. Colorblind mode is optional. It adds patterns to the tiles and uses a palette adjusted for better separation, so you can tell tiles apart by pattern as well as by color. It is a setting, grouped with language, sound, and background. It is in 1.1.0, on Android and in the browser version released with that update. It is not in the v1.0 Play app. I have not published the exact pattern shapes on this site, so I will not describe them from memory here.
 
 ## Does it work with a screen reader?
 
-Screen-reader labels cover the menus and the game screen. The 1.1.0 Android notes list TalkBack support. Those labels were already in the browser version before the Android update. I have not published a list of every control that is labelled, beyond menus and the game screen.
+Screen-reader labels cover the menus and the game screen. The 1.1.0 Android notes list TalkBack support. The browser version released with 1.1.0 has the labels as well. I have not published a list of every control that is labelled, beyond menus and the game screen.
 
 ## What languages is it in?
 

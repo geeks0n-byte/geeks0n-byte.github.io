@@ -186,9 +186,9 @@ The yellow on the left and the blue on the right are facts. On a four-cell line 
 
 ## = and × links
 
-An **=** between two cells means those cells must be the same color. An **×** means they must be different colors.
+= means they must match and × means they must differ.
 
-If one side of an equals link is a known yellow, the other side is yellow:
+If one side of an = link is a known yellow, the other side matches it:
 
 ```
 Y = .
@@ -196,7 +196,7 @@ Y = .
 
 becomes `Y = Y`.
 
-If one side of a difference link is yellow, the other side is not yellow. On a yellow-and-blue board, it is blue:
+If one side of an × link is yellow, the other side differs. On a board that is only yellow and blue, the other side is blue:
 
 ```
 Y × .
@@ -210,7 +210,7 @@ Links chain. Read them from the cell you know.
 Y = . × .
 ```
 
-The first empty matches the yellow, so it is yellow. The second empty differs from that yellow. On a two-color board it is blue:
+The first empty matches the yellow, so it is yellow. The second empty differs from that yellow. On a board that is only yellow and blue, it is blue:
 
 ```
 Y = Y × B
@@ -223,8 +223,6 @@ B × . = .     becomes     B × Y = Y
 ```
 
 A hint uses these same marks. When you ask for a hint, the game reveals a helpful "=" or "×" on the board instead of filling a cell. You still place the color. Each campaign level includes a small number of hints, more on harder levels. An optional ad can add three more. Using one spends the no-hint star for that attempt. You can replay the level later without a hint and still earn it.
-
-[CONFIRM] An older press-kit paragraph said that on a link, green counts as a match either way, and purple only matches purple. The live guide and the live press page do not say that. They only say "=" is the same color and "×" is a different color. I have not used the older sentence in the examples above. Until it is confirmed, play "=" and "×" as same color and different color, and let the red highlight show you if a green or a purple on that link is rejected.
 
 ## What "solved" means
 

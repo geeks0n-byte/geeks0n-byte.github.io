@@ -8,9 +8,9 @@ path: /spaceblox/
 
 I am Giga Sichinava. On Google Play my name is gix0n. Spaceblox is the puzzle I designed, programmed, and published. It is a color-logic grid, not a match-3. You fill empty cells with yellow, blue, and green tiles until every rule on the board holds. A few tiles are already placed. Some of those are locked. Later levels add purple tiles that hop, and "=" or "×" links between cells.
 
-You can get it on [Google Play](https://play.google.com/store/apps/details?id=com.spaceblox.game) or play the [browser version](/spaceblox/play/). The Android app is free and contains ads. The browser version is free too. The Google Play launch on 1 September 2026 is v1.0. The current public version is 1.1.0, dated 5 October 2026 on the press page. The [changelog](/spaceblox/changelog/) is the longer note on those two versions.
+You can get it on [Google Play](https://play.google.com/store/apps/details?id=com.spaceblox.game) or play the [browser version](/spaceblox/play/). The Android app is free and contains ads. The browser version is free too. The Google Play launch on 1 September 2026 is v1.0, and that upload is the app only. The current public version is 1.1.0, dated 5 October 2026 on the press page. The browser version was released with 1.1.0. The [changelog](/spaceblox/changelog/) is the longer note on those two versions.
 
-The game is built in Godot. The Android app and the browser build come from the same project. The browser version is laid out in portrait, and it runs in a modern browser on a desktop or a phone.
+The game is built in Godot. The Android app and the browser build come from the same project. The browser version, from 1.1.0, is laid out in portrait, and it runs in a modern browser on a desktop or a phone.
 
 ## What a level asks you to do
 
@@ -28,7 +28,7 @@ The first time you press Play, Spaceblox offers a guided tutorial. It teaches on
 
 After the tutorial, the campaign runs through easy, medium, and hard levels. They unlock as you go. Early boards stay with yellow and blue. Later boards bring in green, then purple hoppers, locks, and links. I have not published a level count, so I will not guess one here. The in-game How to Play button opens the rule guide, with valid and invalid examples, at any time, including in the middle of a level.
 
-The rules themselves are short. The Rule of Two says you may not place three tiles of the same color next to each other in a row or a column. Two yellows side by side are allowed. A third is not. Equal Balance says a finished row or column must contain the same number of yellow tiles and blue tiles. Green counts as both yellow and blue for the Rule of Two, and as neither for Equal Balance. A line may hold at most one green tile. That is the Rule of One. Purple fills a cell and, like green, does not add to the yellow or blue count. A lock icon means the tile is fixed. An "=" link means the two cells must be the same color. An "×" link means they must be different colors. The full walkthrough, with text grids, is on the [how to play](/spaceblox/how-to-play/) page.
+The rules themselves are short. The Rule of Two says you may not place three tiles of the same color next to each other in a row or a column. Two yellows side by side are allowed. A third is not. Equal Balance says a finished row or column must contain the same number of yellow tiles and blue tiles. Green counts as both yellow and blue for the Rule of Two, and as neither for Equal Balance. A line may hold at most one green tile. That is the Rule of One. Purple fills a cell and, like green, does not add to the yellow or blue count. A lock icon means the tile is fixed. = means they must match and × means they must differ. The full walkthrough, with text grids, is on the [how to play](/spaceblox/how-to-play/) page.
 
 ## Hints, undo, and stars
 
@@ -46,7 +46,7 @@ The clock never ends the level. If you miss the time, that star stays empty and 
 
 ## Colorblind mode, screen reader, and languages
 
-Colorblind mode is optional. It adds patterns to the tiles and uses a palette adjusted for better separation, so a color is not the only way to tell tiles apart. Screen-reader labels cover the menus and the game screen. On Android, version 1.1.0 lists TalkBack support together with colorblind mode. Both were already in the browser build before that Android update, and the home page now marks them as on Android in 1.1.0 as well.
+Colorblind mode is optional. It adds patterns to the tiles and uses a palette adjusted for better separation, so a color is not the only way to tell tiles apart. Screen-reader labels cover the menus and the game screen. On Android, version 1.1.0 lists TalkBack support together with colorblind mode. The browser version released with that same update has the patterns and the labels too. v1.0, the Play app from 1 September 2026, does not.
 
 The game text is in seven languages: English, Spanish, German, French, Polish, Georgian, and Ukrainian. If a phrase is wrong, the contact page is the place to send the language, the screen, and the corrected text.
 
@@ -56,11 +56,11 @@ Other settings are plain on purpose. You can choose a dynamic or a static space 
 
 v1.0, on 1 September 2026, is the campaign. Easy, medium, and hard levels, the tutorial, hints, undo, and the three star goals all shipped then. The color rules did not wait for a later update. Yellow, blue, green, purple hoppers, locks, and "=" / "×" links are the v1.0 puzzle. Seven languages shipped with it. So did on-device saves, and ads that stay between levels.
 
-1.1.0, on 5 October 2026, is the current public version on Google Play. On Android it adds four things the home page lists: achievements, cloud saves, colorblind mode, and TalkBack support. Achievements, the colorblind patterns, and the screen-reader labels were already in the browser build. Cloud save was not. From 1.1.0 you can sign in to Google Play Games if you want a cloud copy of progress, settings, and achievements. In-progress levels are not uploaded. Signing in is never required. The browser version still keeps its save in that browser only.
+1.1.0, on 5 October 2026, is the current public version. On Android it adds four things the home page lists: achievements, cloud saves, colorblind mode, and TalkBack support. The same version is the first web release. Play stays first, on [Google Play](https://play.google.com/store/apps/details?id=com.spaceblox.game). The [browser version](/spaceblox/play/) is second. It has the campaign. It does not have cloud save. From 1.1.0 on Android you can sign in to Google Play Games if you want a cloud copy of progress, settings, and achievements. In-progress levels are not uploaded. Signing in is never required. The browser save stays in that browser.
 
 The same Android update adds Firebase Analytics and Firebase Crashlytics. Earlier app versions, including v1.0, do not include Firebase. Analytics records events such as a level started, a level completed, or a hint used. Crashlytics sends a crash report. The [privacy policy](/spaceblox/privacy-policy.html) is the full description. None of that changes how a cell is filled.
 
-If you installed the game on 1 September 2026 and you have not updated, you are on v1.0, and the Android copy does not yet have cloud save, colorblind mode, or TalkBack. Update to 1.1.0 for those. The rules of a level are the same either way. The [browser version](/spaceblox/play/) is there if you want a campaign board without installing anything.
+If you installed the game on 1 September 2026 and you have not updated, you are on v1.0. That copy is Play only. It does not yet have cloud save, colorblind mode, or TalkBack, and it is not the web build. Update to 1.1.0 for those Android additions, or open the [browser version](/spaceblox/play/) that shipped with 1.1.0. The color rules are the same in v1.0 and in 1.1.0.
 
 ## How it is paced, and how the ads work
 

@@ -153,6 +153,6 @@ On an odd line, before you cycle a string of yellows and blues, find the cell th
 
 On an even line, you may not need a green at all. A six-cell row can be three and three. Dropping a green into it anyway means the other five cells have to balance, which is impossible with one green, because five is odd. An even line that contains a green needs another ignored cell, or it cannot balance. That second ignored cell would be a purple, or you remove the green. This is the flip side of the odd-line rule, and it catches a green placed "just in case" on a line that was already even.
 
-The red highlight is there for the moment the check fails. It marks the cells in the broken rule while the level is still open. Undo is unlimited on a campaign level, so you can take the green back. A hint will not place the green for you. It adds an "=" or "×" link, and you still choose the cell.
+The red highlight is there for the moment the check fails. It marks the cells in the broken rule while the level is still open. Undo is unlimited on a campaign level, so you can take the green back. A hint will not place the green for you. It adds an = or × link. = means they must match and × means they must differ. You still choose the cell.
 
 That is the whole design of the tile. Odd length needs a cell the count cannot see. Green is that cell, once per line, and it refuses to sit quietly next to a pair.

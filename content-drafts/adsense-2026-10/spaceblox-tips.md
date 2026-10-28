@@ -129,15 +129,15 @@ When a lock sits beside another tile of the same color, the pair rule fires imme
 Y* Y .     the empty cell cannot be Y or G
 ```
 
-## 8. Use an × as a copy of the opposite color
+## 8. Read = and × before you count
 
-On a yellow-and-blue board, an "×" link means the two cells are opposites. Knowing one tells you the other.
+= means they must match and × means they must differ. On a board that is only yellow and blue, knowing one cell tells you the other.
 
 ```
 Y × .     becomes     Y × B
 ```
 
-An "=" link copies the same color:
+An = link must match, so a known blue forces the other cell:
 
 ```
 B = .     becomes     B = B
@@ -153,9 +153,7 @@ Y = . × .     becomes     Y = Y × B
 B × . = .     becomes     B × Y = Y
 ```
 
-Mark the chain before you count, because a copied color can complete a pair or reach the halfway count in a line you thought was still open.
-
-[CONFIRM] I am not telling you to treat green as "a match either way" on these links. An older press-kit line said that, and said purple only matches purple. The live rules only say same color and different color. If a green on a link turns red, believe the highlight.
+Mark the chain before you count, because a matched or differing color can complete a pair or reach the halfway count in a line you thought was still open.
 
 ## 9. Park purple hoppers before you fill around them
 

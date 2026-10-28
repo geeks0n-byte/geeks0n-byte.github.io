@@ -8,7 +8,7 @@ path: /spaceblox/devlog/designing-accessible-color-puzzles/
 
 Spaceblox is a puzzle whose rules are colors. Yellow and blue have to stay balanced. Three of a color in a row is illegal. Green counts as both of those colors when you check the row, and as neither when you check the count. If the only way to know a tile's identity is the hue, then a player who cannot separate those hues cannot play the rules. I am Giga, and I built Spaceblox. This page is what I have actually shipped for that problem, and what I have not claimed.
 
-The game is on [Google Play](https://play.google.com/store/apps/details?id=com.spaceblox.game) and in the [browser version](/spaceblox/play/). Colorblind mode and the screen-reader labels are in the browser build. On Android they arrived in version 1.1.0, which the home page dates to 5 October 2026. The Android line for the screen reader says TalkBack support.
+The game is on [Google Play](https://play.google.com/store/apps/details?id=com.spaceblox.game) and, from 1.1.0, in the [browser version](/spaceblox/play/). Colorblind mode and the screen-reader labels are in that 1.1.0 release, on Android and on the web. The home page dates 1.1.0 to 5 October 2026. The Android line for the screen reader says TalkBack support. v1.0, the 1 September 2026 Play launch, did not include the browser build.
 
 ## Why color is load-bearing here
 
@@ -16,7 +16,7 @@ In a lot of games, color is a coat of paint on a shape you could still read. A r
 
 A general rule for this kind of puzzle is easy to say and easy to skip. Do not make color the only channel. Give the same fact a second form: a pattern, a symbol, a letter, a spoken label. I am stating that as the general rule. The rest of this page is the narrower list of what Spaceblox does.
 
-The tiles you cycle are yellow, then blue, then green. Purple is already on the board and hops. A lock is an icon on a fixed tile. An "=" between two cells means they are the same color. An "×" means they are different. Those marks are symbols, which helps, and they do not replace the need to tell yellow from blue from green. You can know that two linked cells must match and still be unable to see which color the known cell is.
+The tiles you cycle are yellow, then blue, then green. Purple is already on the board and hops. A lock is an icon on a fixed tile. = means they must match and × means they must differ. Those marks are symbols, which helps, and they do not replace the need to tell yellow from blue from green. You can know that two linked cells must match and still be unable to see which color the known cell is.
 
 ## What colorblind mode changes
 
@@ -32,11 +32,11 @@ When a placement breaks a rule, Spaceblox highlights the affected cells in red. 
 
 What the red is documented to do is name a place. It is not a loose glow over the whole grid. It sits on the cells involved in the broken rule. If you can see it, you can ask which rule those cells violate: three in a row, with green counted as both; a finished line whose yellows and blues differ, with green and purple ignored; two greens in one line; an "=" pair that does not match; an "×" pair that does. Undo is unlimited on a campaign level, so the highlight is something you can answer and then remove. That is a useful loop for players who can see the red. It is not, by itself, the accessibility feature. The patterns are.
 
-Here is the same deduction written with letters, which is the point of a second channel. `Y Y .` cannot take another Y in the gap, and it cannot take G either, because green counts as yellow. The neighbour is B: `Y Y B`. A player who has patterns turned on is matching pattern to pattern, then applying that same neighbour rule. The letter grid is how this page shows the rule. In the game, the pattern on the tile is what stands in for the letter. Colorblind mode has been in the browser build from early on, and on Android since 1.1.0. v1.0 on Google Play, 1 September 2026, is the campaign. The Android colorblind option is part of the 5 October 2026 update, not part of that first upload.
+Here is the same deduction written with letters, which is the point of a second channel. `Y Y .` cannot take another Y in the gap, and it cannot take G either, because green counts as yellow. The neighbour is B: `Y Y B`. A player who has patterns turned on is matching pattern to pattern, then applying that same neighbour rule. The letter grid is how this page shows the rule. In the game, the pattern on the tile is what stands in for the letter. Colorblind mode is in 1.1.0, on Android and in the browser version released that day. v1.0 on Google Play, 1 September 2026, is the campaign on the app only. The colorblind option is part of the 5 October 2026 update, not part of that first upload.
 
 ## Screen-reader labels
 
-Screen-reader labels cover the menus and the game screen. On Android 1.1.0 the what's-new line calls this TalkBack support. TalkBack is the screen reader that ships with Android. The labels were already in the browser version before that update. The home page's footnote says the 1.1.0 items are on Android now, and in the browser where they had already shipped. Cloud save is the one item in that update that the browser does not have. The labels are not in that exception.
+Screen-reader labels cover the menus and the game screen. On Android 1.1.0 the what's-new line calls this TalkBack support. TalkBack is the screen reader that ships with Android. The browser version released with 1.1.0 has the labels too. It did not exist before that release. Cloud save is the 1.1.0 item the browser does not have. The labels are in both the Android update and the new web build.
 
 I have not published the wording of the labels. I will not guess the phrase a screen reader speaks for a yellow tile, a locked tile, or a hopper. "Menus and the game screen" is the scope I have written down. Menus include the places you start a level, change settings, and read How to Play. The game screen is the board you play on. If a control outside those two phrases is unlabeled, I have not documented it, and I would rather hear about it than imply it is covered.
 
@@ -52,7 +52,7 @@ If a translation is wrong, I want the correction in a form I can apply. The lang
 
 ## What I kept optional, and what stays on for everyone
 
-Colorblind mode is optional. The screen-reader labels are part of the build, not a mode you have to discover before the menus can be read. I have described them as labels across menus and the game screen, present in the browser and, from 1.1.0, on Android with TalkBack named in the release line.
+Colorblind mode is optional. The screen-reader labels are part of the build, not a mode you have to discover before the menus can be read. I have described them as labels across menus and the game screen, in the browser version and on Android from 1.1.0, with TalkBack named on the Android release line.
 
 Some supports are not behind a setting, because they are rules of the game rather than display options. Locks use an icon. Hoppers use an arrow. Links use "=" and "×". You can replay the tutorial from the main menu, and you can open How to Play mid-level, so the rule text is not a one-time screen you have to memorize. Hints add a link instead of filling a cell, which means a hint is another symbol on the board, not a color dropped in for you. None of those is a substitute for the pattern mode. They are extra channels the rules already had, and they remain useful when the patterns are on.
 
