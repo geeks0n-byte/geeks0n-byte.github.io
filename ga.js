@@ -1,7 +1,3 @@
-// Analytics for every page. Consent Mode v2 starts denied. Google's consent
-// message (AdSense > Privacy & messaging) updates it.
-// Content pages load the AdSense library with their own script tag.
-// This file does not. The player, the privacy policy, and 404 do not load it.
 window.dataLayer = window.dataLayer || [];
 function gtag() {
   dataLayer.push(arguments);

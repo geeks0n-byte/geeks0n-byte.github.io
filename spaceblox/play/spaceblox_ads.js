@@ -1,7 +1,3 @@
-/**
- * Player ad calls return immediately.
- * This page does not load the AdSense library, so a level clear or hint must not wait.
- */
 (function (global) {
   "use strict";
 
