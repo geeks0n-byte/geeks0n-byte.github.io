@@ -326,3 +326,6 @@ a.card:focus-visible { outline-offset: 4px; border-radius: 6px; }
 @media (max-width: 719px) {
   .btn.press-download { font-size: 13px; padding: 12px 16px; }
 }
+
+.article pre, .prose pre { overflow-x: auto; margin: 0 0 var(--s4); padding: 12px 16px; background: rgba(0, 0, 0, .28); border: 1px solid var(--line); border-radius: 4px; font: 14px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.article code, .prose code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }

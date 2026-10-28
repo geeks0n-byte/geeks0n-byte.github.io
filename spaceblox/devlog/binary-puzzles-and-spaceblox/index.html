@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Binary puzzles, and how Spaceblox twists them</title>
+  <meta name="description" content="A beginner&#x27;s guide to takuzu-style binary puzzles, and the color, green, purple, and link rules that make Spaceblox different." />
+  <link rel="canonical" href="https://geeks0n-byte.github.io/spaceblox/devlog/binary-puzzles-and-spaceblox/" />
+  <meta name="google-adsense-account" content="ca-pub-1624206851803206" />
+  <script src="/ga.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1624206851803206" crossorigin="anonymous"></script>
+  <meta name="theme-color" content="#00123a" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://geeks0n-byte.github.io/spaceblox/devlog/binary-puzzles-and-spaceblox/" />
+  <meta property="og:description" content="A beginner&#x27;s guide to takuzu-style binary puzzles, and the color, green, purple, and link rules that make Spaceblox different." />
+  <meta property="og:site_name" content="Spaceblox" />
+  <meta property="og:title" content="Binary puzzles, and how Spaceblox twists them" />
+  <meta property="og:image" content="https://geeks0n-byte.github.io/spaceblox/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:alt" content="The SPACEBLOX title over a pixel space background, with the main menu and a puzzle in progress" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Binary puzzles, and how Spaceblox twists them" />
+  <meta name="twitter:description" content="A beginner&#x27;s guide to takuzu-style binary puzzles, and the color, green, purple, and link rules that make Spaceblox different." />
+  <meta name="twitter:image" content="https://geeks0n-byte.github.io/spaceblox/og-image.png" />
+  <meta name="twitter:image:alt" content="The SPACEBLOX title over a pixel space background, with the main menu and a puzzle in progress" />
+  <link rel="icon" href="/spaceblox/favicon.ico" sizes="32x32" />
+  <link rel="icon" href="/spaceblox/assets/icon-192.png" sizes="192x192" type="image/png" />
+  <link rel="apple-touch-icon" href="/spaceblox/apple-touch-icon.png" />
+  <link rel="manifest" href="/spaceblox/site.webmanifest" />
+  <link rel="preload" href="/spaceblox/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/spaceblox/site.css" />
+  <link rel="stylesheet" href="/spaceblox/space-bg.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/spaceblox/"><img src="/spaceblox/assets/icon-64.png" alt="" width="32" height="32" />Spaceblox</a>
+    <nav class="nav site-nav" id="site-nav" aria-label="Main"><a href="/spaceblox/">Home</a><a href="/spaceblox/guide/">Guide</a><a href="/spaceblox/tips/">Tips</a><a href="/spaceblox/faq/">FAQ</a><a href="/spaceblox/devlog/" aria-current="page">Devlog</a><a href="/spaceblox/about/">About</a><a href="/spaceblox/contact/">Contact</a></nav>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><i aria-hidden="true"></i>Menu</button>
+  </div>
+</header>
+<main id="main" class="reading">
+<div class="container"><div class="article">
+<h1>Binary puzzles, and how Spaceblox twists them</h1>
+<p>A binary puzzle, often called takuzu or binairo, asks you to fill a grid with two symbols. Spaceblox starts from that idea and then changes it. I am Giga, the person who makes Spaceblox. This page teaches the classic deductions first, on tiny lines I drew for the lesson, and then shows the places where my game does not follow the classic grid. Nothing below is a campaign level.</p>
+<p>You can play the result on <a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a> or in the <a href="/spaceblox/play/">browser version</a>. The in-game tutorial teaches the Spaceblox rules one at a time. This article is the longer &quot;why does this feel familiar?&quot; version.</p>
+<h2>Two symbols, two rules</h2>
+<p>Classic takuzu uses 0 and 1. Some books use black and white. The names do not matter. What matters is that there are two of them, and that every row and every column has to satisfy the same pair of rules.</p>
+<p>The first rule is about neighbours. You may not have three identical symbols in a row, horizontally or vertically. Two is allowed. Three touching copies is not. A diagonal does not count. People sometimes say &quot;no more than two the same, side by side.&quot; That sentence and &quot;no three in a row&quot; are the same rule.</p>
+<p>The second rule is about counts. A finished row must contain the same number of 0s and 1s. A finished column must do the same. Two of each on a four-cell line. Three of each on a six-cell line. Because the two counts match, their sum is even, so a classic line has an even length. A 5×5 takuzu grid, under this count rule alone, does not have a way to fill a row with only 0 and 1.</p>
+<p>A third classic rule is uniqueness. No two rows may be identical, and no two columns may be identical. I mention it because you will meet it if you look up takuzu in a puzzle book. <strong>Spaceblox does not publish that rule.</strong> I am not asking you to compare whole rows for duplicates when you play my game. If two Spaceblox rows come out the same and every color rule holds, the duplicate is not, by itself, a reason the board is wrong.</p>
+<h2>A four-cell line, solved without a guess</h2>
+<p>Start with two 1s touching, and two empty cells:</p>
+<pre><code>1 1 . .</code></pre>
+<p>The third cell cannot be 1, because <code>1 1 1</code> is three in a row. So:</p>
+<pre><code>1 1 0 .</code></pre>
+<p>Now count. The line needs two 1s and two 0s. There is already a second 1 waiting in the first two cells, so a third 1 is one too many even before you look at neighbours. The last cell has to be 0:</p>
+<pre><code>1 1 0 0</code></pre>
+<p>Check both rules. The pairs are length two, which is allowed. The counts are two and two. That is the whole deduction. You did not try a color and delete it. The empty cells were forced.</p>
+<p>The mirror image is the same lesson:</p>
+<pre><code>0 0 . .     becomes     0 0 1 1</code></pre>
+<p>A sandwich is the neighbour rule from the other direction:</p>
+<pre><code>1 . 1     becomes     1 0 1</code></pre>
+<p><code>1 1 1</code> is illegal, so the gap is 0. On a longer line you still have to finish the counts. The sandwich only tells you the middle.</p>
+<h2>Where beginners usually guess, and why they do not need to</h2>
+<p>The tempting moment is a line that is half full and looks open:</p>
+<pre><code>1 0 . .</code></pre>
+<p>Nothing is three in a row yet. The counts are one and zero, on a line that needs two and two. Several endings still look possible, until you use both rules on the whole line rather than on one cell.</p>
+<p><code>1 0 1 1</code> has three 1s. The count fails, and the last two 1s are only a pair, so the count is the rule that caught it. <code>1 0 0 0</code> has three 0s in a row and the wrong count. <code>1 0 1 0</code> has two of each and no triple. <code>1 0 0 1</code> also has two of each and no triple. So this particular line is not fully forced. That is useful to notice. A binary puzzle is not &quot;every gap has one answer the moment you see it.&quot; Some gaps wait until a column, or another clue, removes one of the legal endings.</p>
+<p>Givens do that removing. A printed 1 or 0 is a fact you may not flip. Spaceblox uses the same idea. A tile with a lock icon is fixed. You build out from it. You do not spend a move &quot;testing&quot; the lock, because the game will not let you clear it.</p>
+<p>If you want a method that works in both games, use this order. First mark every cell that would make three in a row. Then count the line, and if one symbol has already reached half the cells, fill the rest with the other symbol, and check that the fill did not create a triple. Then move to the crossing line, because the cell you just wrote belongs to a column too. Repeat. Guessing is what you do when that loop finds nothing, and on a campaign board in Spaceblox the loop is supposed to find something. The campaign levels are designed to be solved by reasoning, and the game turns the broken cells red as soon as a placement fails.</p>
+<h2>The same two rules, with yellow and blue</h2>
+<p>Spaceblox uses yellow and blue where takuzu uses 1 and 0. I call the neighbour rule the <strong>Rule of Two</strong>. Two yellows may touch. A third may not. The same goes for blue. I call the count rule <strong>Equal Balance</strong>. A finished row, and a finished column, must contain the same number of yellow tiles and blue tiles.</p>
+<p>Here is the four-cell line again, in my colors:</p>
+<pre><code>Y Y . .     becomes     Y Y B B</code></pre>
+<p>And the sandwich:</p>
+<pre><code>Y . Y     becomes     Y B Y</code></pre>
+<pre><code>B . B     becomes     B Y B</code></pre>
+<p>On a six-cell line with only yellow and blue, half is three. Three yellows already placed means the empty cells are blue, provided those blues do not form a triple of their own:</p>
+<pre><code>Y B Y B Y .     becomes     Y B Y B Y B</code></pre>
+<p>Three of each, no three touching. If the line had been <code>Y Y Y . . .</code>, it would already be illegal before you filled it. The Rule of Two does not wait for the count.</p>
+<p>Early Spaceblox levels live in this two-color world. If you have played takuzu, those levels will feel like a board you already know how to start. Pairs first, then sandwiches, then the halfway count. I even recommend that order in the tips.</p>
+<h2>The twist that classic grids do not have: green</h2>
+<p>Equal Balance is an even-number rule. Yellows plus blues is always even, because the two sides match. A line of five cells cannot be filled with only yellow and blue. Classic takuzu simply does not ask you to fill odd lines. Spaceblox does. <strong>Green</strong> is the tile that makes those lines possible.</p>
+<p>Green does not behave like a third ordinary color, and it does not behave like a 0 or a 1.</p>
+<p>For the Rule of Two, green counts as <strong>both</strong> yellow and blue. <code>Y Y G</code> is three yellows. <code>B G B</code> is three blues. <code>Y G Y</code> is three yellows even with the green in the middle. In takuzu there is no symbol that counts as both digits at once. That is the first twist, and it is why a green beside a pair is a mistake rather than a clever save.</p>
+<p>For Equal Balance, green counts as <strong>neither</strong>. It fills a cell and adds zero to both counts. A five-cell line with one green has four cells left, and four cells can be two yellow and two blue:</p>
+<pre><code>Y B G Y B</code></pre>
+<p>Count the triples before you trust it. <code>Y B G</code> is two yellows (the Y and the green) and two blues (the B and the green). <code>B G Y</code> and <code>G Y B</code> come out the same way. The balance ignores G, so the line is two and two. Legal.</p>
+<p>This one is the trap:</p>
+<pre><code>Y G Y B B</code></pre>
+<p>The balance would have been two and two, and <code>Y G Y</code> is still three yellows. In a classic binary line you never have to ask &quot;does this symbol count as both of the others?&quot; In Spaceblox that question is the green question, and you ask it every time.</p>
+<p>There is a third green rule, the <strong>Rule of One</strong>. A row may hold at most one green. A column may hold at most one green. A classic grid has no &quot;at most one wild symbol&quot; rule, because it has no wild symbol. In Spaceblox, placing the green spends it for the whole row and the whole column. The interesting question on an odd board is often not &quot;what color is this cell?&quot; but &quot;which single cell is the green?&quot;</p>
+<p>On a three-cell line the position is freer than people expect, and the colors around it are not. One green, one yellow, and one blue is legal in any order:</p>
+<pre><code>Y G B
+Y B G
+G Y B
+B G Y</code></pre>
+<p>Each of those triples is two yellows and two blues once green is counted twice, and one of each once green is ignored. Two yellows plus a green fails in every position: <code>Y Y G</code>, <code>Y G Y</code>, and <code>G Y Y</code>. So on a 3-line, find the green, then make the other two cells different from each other.</p>
+<h2>Purple, links, and locks</h2>
+<p>Three more Spaceblox ideas have no takuzu equivalent.</p>
+<p><strong>Purple</strong> tiles hop. A purple tile sits on one of two linked cells. You tap it and it slides along its arrow. If another purple tile is already on the destination, the hop is blocked. Like green, purple fills a cell and does not count toward Equal Balance. Unlike green, the rules do not say that purple counts as yellow and blue for the Rule of Two. <code>Y P B</code> can balance a three-cell line (one yellow, one blue, purple ignored) without being a green. A hop also changes which cell is empty, so the &quot;fill every cell&quot; goal and the purple&#x27;s position are the same problem. Some stars limit how many hops you may use. Extra hops do not fail the level. They only leave that star empty.</p>
+<p><strong>Links</strong> are marks between cells. = means they must match and × means they must differ. On a board that is only yellow and blue, knowing one cell of an × tells you the other:</p>
+<pre><code>Y = . × .     becomes     Y = Y × B</code></pre>
+<p>A hint in Spaceblox reveals one of these links. It does not drop a finished color into a cell the way a pencil mark in a newspaper takuzu might fill a digit. You still have to read the link.</p>
+<p><strong>Locks</strong> are the givens. They play the role of the printed 0s and 1s. The rest of the board is what you place, cycling Yellow, then Blue, then Green. You do not cycle a cell into purple. Purple is already on the board, waiting to hop.</p>
+<h2>What I kept from the calm side of paper puzzles</h2>
+<p>A newspaper takuzu does not kick you out for thinking. Spaceblox is built the same way, with a few extra tools the paper grid does not have. There is no energy meter and no game-over clock. Time, on a campaign level, only decides an optional star. Undo and Redo are unlimited there. A broken rule turns red on the cells involved, so the grid tells you which constraint you hit. You can reopen How to Play in the middle of a level.</p>
+<p>The campaign is that paper pace. v1.0 on Google Play, 1 September 2026, is the easy, medium, and hard set, on the app only. The browser version arrived with 1.1.0. The current public version is 1.1.0, and it did not change these color rules. The Play app and the browser play the same campaign. Cloud save is the Android-only part of 1.1.0, not a new deduction.</p>
+<p>If you already like binary puzzles, start Spaceblox on the early campaign boards and use the pair, the sandwich, and the halfway count. When the first green shows up, stop treating the grid as two symbols. From that level on, one cell is allowed to be both, and neither, and only once per line.</p>
+    </div></div>
+</main>
+<aside class="ad-band" aria-label="Advertisement" data-ad-placement="devlog-post" hidden>
+  <div class="ad-slot">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1624206851803206" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div>
+</aside>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="f-brand">
+        <a class="brand" href="/spaceblox/"><img src="/spaceblox/assets/icon-64.png" alt="" width="32" height="32" />Spaceblox</a>
+        <p class="small">A calm color-logic puzzle for Android and the web. Made by Giga "gix0n" Sichinava.</p>
+      </div>
+      <nav aria-labelledby="f-sb"><h2 id="f-sb">Play</h2><ul>
+        <li><a href="/spaceblox/play/">Play in browser</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a></li>
+      </ul></nav>
+      <nav aria-labelledby="f-more"><h2 id="f-more">Learn more</h2><ul>
+        <li><a href="/spaceblox/guide/">How to play &amp; guide</a></li>
+        <li><a href="/spaceblox/tips/">Tips</a></li>
+        <li><a href="/spaceblox/faq/">FAQ</a></li>
+        <li><a href="/spaceblox/#release-notes">Release notes</a></li>
+        <li><a href="/spaceblox/devlog/">Devlog</a></li>
+        <li><a href="/spaceblox/about/">About</a></li>
+        <li><a href="/spaceblox/contact/">Contact</a></li>
+        <li><a href="/spaceblox/press/">Press kit</a></li>
+      </ul></nav>
+      <nav aria-labelledby="f-legal"><h2 id="f-legal">Legal</h2><ul>
+        <li><a href="/spaceblox/privacy-policy.html">Privacy policy</a></li>
+      </ul></nav>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Giga "gix0n" Sichinava</span><span>Google Play and the Google Play logo are trademarks of Google LLC.</span></div>
+  </div>
+</footer>
+<script src="/spaceblox/site.js" defer></script>
+<script src="/spaceblox/space-bg.js" defer></script>
+</body>
+</html>

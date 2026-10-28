@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Why odd Spaceblox grids need a wildcard</title>
+  <meta name="description" content="Why an odd Spaceblox line cannot balance with only yellow and blue, and how green counts as both colors and as neither." />
+  <link rel="canonical" href="https://geeks0n-byte.github.io/spaceblox/devlog/why-odd-grids-need-a-wildcard/" />
+  <meta name="google-adsense-account" content="ca-pub-1624206851803206" />
+  <script src="/ga.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1624206851803206" crossorigin="anonymous"></script>
+  <meta name="theme-color" content="#00123a" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://geeks0n-byte.github.io/spaceblox/devlog/why-odd-grids-need-a-wildcard/" />
+  <meta property="og:description" content="Why an odd Spaceblox line cannot balance with only yellow and blue, and how green counts as both colors and as neither." />
+  <meta property="og:site_name" content="Spaceblox" />
+  <meta property="og:title" content="Why odd Spaceblox grids need a wildcard" />
+  <meta property="og:image" content="https://geeks0n-byte.github.io/spaceblox/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:alt" content="The SPACEBLOX title over a pixel space background, with the main menu and a puzzle in progress" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Why odd Spaceblox grids need a wildcard" />
+  <meta name="twitter:description" content="Why an odd Spaceblox line cannot balance with only yellow and blue, and how green counts as both colors and as neither." />
+  <meta name="twitter:image" content="https://geeks0n-byte.github.io/spaceblox/og-image.png" />
+  <meta name="twitter:image:alt" content="The SPACEBLOX title over a pixel space background, with the main menu and a puzzle in progress" />
+  <link rel="icon" href="/spaceblox/favicon.ico" sizes="32x32" />
+  <link rel="icon" href="/spaceblox/assets/icon-192.png" sizes="192x192" type="image/png" />
+  <link rel="apple-touch-icon" href="/spaceblox/apple-touch-icon.png" />
+  <link rel="manifest" href="/spaceblox/site.webmanifest" />
+  <link rel="preload" href="/spaceblox/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/spaceblox/site.css" />
+  <link rel="stylesheet" href="/spaceblox/space-bg.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/spaceblox/"><img src="/spaceblox/assets/icon-64.png" alt="" width="32" height="32" />Spaceblox</a>
+    <nav class="nav site-nav" id="site-nav" aria-label="Main"><a href="/spaceblox/">Home</a><a href="/spaceblox/guide/">Guide</a><a href="/spaceblox/tips/">Tips</a><a href="/spaceblox/faq/">FAQ</a><a href="/spaceblox/devlog/" aria-current="page">Devlog</a><a href="/spaceblox/about/">About</a><a href="/spaceblox/contact/">Contact</a></nav>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><i aria-hidden="true"></i>Menu</button>
+  </div>
+</header>
+<main id="main" class="reading">
+<div class="container"><div class="article">
+<h1>Why odd Spaceblox grids need a wildcard</h1>
+<p>Equal Balance is a small rule with a sharp edge. A finished row or column in Spaceblox must contain the same number of yellow tiles and blue tiles. Same number plus same number is always even. A line with an odd number of cells cannot be filled with only those two colors. I added green so those lines could exist. This page is the design, in the form of counts and text grids, not a story about a particular week of development. I do not have that kind of note written down, and I will not invent one.</p>
+<p>I am Giga. Spaceblox is on <a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a> and in the <a href="/spaceblox/play/">browser</a>. The in-game guide calls the pieces of this rule by name: Equal Balance, the Rule of Two, and the Rule of One. The tips on the site also call green a wildcard that can block itself. That phrase is right, as long as you remember the wildcard is not free.</p>
+<h2>The even sum, on a line you can see</h2>
+<p>Take a finished line and count only yellow and blue. Suppose the line has three yellows. Equal Balance says it also has three blues. Three plus three is six. Suppose it has one yellow. Then it has one blue. The yellow-and-blue cells fill two places. There is no integer that makes the two sides equal and the total odd. One and one is two. Two and two is four. Three and three is six. Zero and zero is a line with no yellow and no blue at all.</p>
+<p>So if a line has 3, 5, or 7 cells, and every cell is yellow or blue, the counts cannot match. Those three lengths are the odd lengths the rules mention. The same arithmetic applies to any odd length. A line of 7 with only yellow and blue is three plus four, or some other uneven split. It cannot be three plus three, because that uses six cells, and the seventh cell would have to be yellow or blue and would tip the count.</p>
+<p>Here is a five-cell attempt that uses every trick available inside two colors. Alternating feels balanced, and it is not:</p>
+<pre><code>Y B Y B Y</code></pre>
+<p>Yellows: three. Blues: two. Illegal. The other alternating pattern is three blues and two yellows:</p>
+<pre><code>B Y B Y B</code></pre>
+<p>Also illegal. Two yellows at one end do not rescue the count:</p>
+<pre><code>Y Y B B Y</code></pre>
+<p>Still three and two. You can rearrange a five-cell line for as long as you like. Three plus two, or four plus one, or five plus zero, are the only integer splits of five, and none of them are equal pairs.</p>
+<p>A six-cell line does not need help:</p>
+<pre><code>Y B Y B Y B</code></pre>
+<p>Three and three. A four-cell line does not need help either: <code>Y Y B B</code> is two and two, and it also obeys the Rule of Two, because the pairs stop at two. Odd lines are the ones that run out of room.</p>
+<h2>What the extra cell is allowed to be</h2>
+<p>The extra cell has to fill a place and add nothing to either count. Spaceblox has two tiles that do that. Green is one. Purple is the other. Both &quot;fill a cell without counting toward Equal Balance.&quot; After you set one of them aside, the cells that remain are even in number, and those cells can be split into equal yellow and blue.</p>
+<p>A five-cell line with one ignored cell has four cells that count. Four cells can be two yellow and two blue. A three-cell line with one ignored cell has two cells that count: one yellow and one blue. A seven-cell line with one ignored cell has six: three and three.</p>
+<p>Purple can be that ignored cell. <code>Y P B</code> is a legal three-cell balance: one yellow, one blue, purple left out of the tally. Purple has a second job. It hops between two linked cells, and another purple on the destination blocks the hop. The campaign teaches green before those hoppers. Green is a tile you place yourself: you cycle an empty cell Yellow, then Blue, then Green. You do not cycle a cell to purple.</p>
+<p>One ignored cell is the smallest fix. A line can also balance with more than one ignored cell, as long as what remains is even and the two colors match. Two purples and one green on a five-cell line would leave two counting cells, which can be one yellow and one blue. The Rule of One still caps green at one per line. Purple is not under that cap. The clean case, and the one the early boards are about, is a single green doing the whole job.</p>
+<h2>Why green could not be &quot;just empty&quot; for the neighbour rule</h2>
+<p>If green only stepped out of the count, and the Rule of Two ignored it, green would be a gap that happens to look filled. <code>Y Y G</code> would be two yellows and a blank. <code>Y G Y</code> would be two yellows with a hole between them. You could drop green beside any pair and call the triple broken up. The odd-line problem would be solved, and the neighbour rule would get weaker on every board that had a green.</p>
+<p>The published rule does not treat green as a hole. For the <strong>Rule of Two</strong>, green counts as <strong>both</strong> yellow and blue. It is a yellow when you are asking &quot;is this three yellows?&quot; and a blue when you are asking &quot;is this three blues?&quot; These lines are broken:</p>
+<pre><code>Y Y G
+G Y Y
+Y G Y
+B B G
+B G B</code></pre>
+<p><code>Y Y G</code> is three yellows because the green counts as yellow. <code>B G B</code> is three blues because the green counts as blue. <code>Y G Y</code> is three yellows with the wildcard in the middle, which is the case players miss, because the two yellows do not touch.</p>
+<p>So green is a wildcard with a cost. It gives you the cell that Equal Balance is not allowed to see. It charges you a neighbour on both colors at once. The tips phrase this as a wildcard that can block itself. The blocking is the Rule of Two, not a separate hidden rule.</p>
+<p>A legal five-cell line shows the cost and the payment together:</p>
+<pre><code>Y B G Y B</code></pre>
+<p>Balance: the green is invisible, so yellows are the first and the fourth cell, blues are the second and the fifth. Two and two.</p>
+<p>Neighbours, one triple at a time:</p>
+<ul>
+<li><code>Y B G</code>. Yellows: the Y and the green, so two. Blues: the B and the green, so two.</li>
+<li><code>B G Y</code>. Blues: the B and the green. Yellows: the green and the Y. Two and two.</li>
+<li><code>G Y B</code>. Same split.</li>
+</ul>
+<p>Nothing reaches three. Compare it with a line that pays the count and refuses the neighbours:</p>
+<pre><code>Y G Y B B</code></pre>
+<p>Yellows in the whole line, ignoring the &quot;both&quot; rule and only using real yellow tiles: two. Blues: two. Equal Balance would pass. The first triple is <code>Y G Y</code>, which is three yellows. The line is illegal. When you place green, you check the count with green removed, and you check every touching triple with green added to both colors. Skipping either check is how a board turns red.</p>
+<h2>Why only one green per line</h2>
+<p>If a line could hold several greens, the odd-length problem would collapse into a different puzzle. A five-cell line could be five greens, or three greens and one yellow and one blue, or any other mix that left an even remainder. The question &quot;where does the single green go?&quot; would disappear. A lot of the deduction on an odd board is that question.</p>
+<p>The <strong>Rule of One</strong> says a row may contain at most one green, and a column may contain at most one green. One green spends the slot twice: once horizontally, once vertically. On a 3×3 with a green already in the center, the center row and the center column are closed:</p>
+<pre><code>. . .
+. G .
+. . .</code></pre>
+<p>The four corners are the only cells that could still be green, and each corner you spend will close a different row and column. You cannot solve an odd board by painting a green stripe.</p>
+<p>This is also why two odd lines that cross have to share their plan. A five-cell row needs a non-counting cell. A five-cell column needs one too. If they both want a green, and they cross, either they share the green at the crossing, or each of them gets its own green in a cell the other line does not use. Shared green:</p>
+<pre><code>. . . . .
+. . . . .
+. . G . .
+. . . . .
+. . . . .</code></pre>
+<p>That single G can be the ignored cell for its row and for its column at the same time, which is the most efficient spend the Rule of One allows. If the row already used its green somewhere else, the column cannot use a second green in the crossing cell. The column then needs a green in another row, or a purple.</p>
+<p>The constraint stays inside the same three sentences. Both for neighbours. Neither for the count. Once per line. You do not have to remember a fourth exception to place the tile.</p>
+<h2>A three-cell line is the whole design in one triple</h2>
+<p>Three cells, one green, and the other two must be one yellow and one blue. Every arrangement of those three tiles is legal:</p>
+<pre><code>Y G B
+Y B G
+B G Y
+B Y G
+G Y B
+G B Y</code></pre>
+<p>Take <code>G Y B</code>. As a triple it is the whole line. Yellows, counting green: G and Y, so two. Blues, counting green: G and B, so two. Not three. Balance, ignoring green: one yellow, one blue. One green. Done.</p>
+<p>Every arrangement with two yellows and a green fails, in every position:</p>
+<pre><code>Y Y G
+Y G Y
+G Y Y</code></pre>
+<p>Same for two blues. So a 3-line does not ask you where green is allowed to sit relative to a pair. It asks you to make the other two cells different. The position of the green starts to matter once the line is long enough to contain more than one triple, which is the five-cell example above. <code>Y G Y B B</code> fails even though a different arrangement of the same tiles, <code>Y B G Y B</code>, passes. Same multiset of tiles. Different order. The wildcard is sensitive to neighbours, which is what keeps it from being a blank.</p>
+<h2>What I ask you to do with this in a real level</h2>
+<p>On an odd line, before you cycle a string of yellows and blues, find the cell that will not count. If the line has no purple, that cell is the one green. Mark the row and the column as spent. Then fill the remaining even length with equal yellow and blue, and run the Rule of Two with green included in both colors.</p>
+<p>On an even line, you may not need a green at all. A six-cell row can be three and three. Dropping a green into it anyway means the other five cells have to balance, which is impossible with one green, because five is odd. An even line that contains a green needs another ignored cell, or it cannot balance. That second ignored cell would be a purple, or you remove the green. This is the flip side of the odd-line rule, and it catches a green placed &quot;just in case&quot; on a line that was already even.</p>
+<p>The red highlight is there for the moment the check fails. It marks the cells in the broken rule while the level is still open. Undo is unlimited on a campaign level, so you can take the green back. A hint will not place the green for you. It adds an = or × link. = means they must match and × means they must differ. You still choose the cell.</p>
+<p>That is the whole design of the tile. Odd length needs a cell the count cannot see. Green is that cell, once per line, and it refuses to sit quietly next to a pair.</p>
+    </div></div>
+</main>
+<aside class="ad-band" aria-label="Advertisement" data-ad-placement="devlog-post" hidden>
+  <div class="ad-slot">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1624206851803206" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div>
+</aside>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="f-brand">
+        <a class="brand" href="/spaceblox/"><img src="/spaceblox/assets/icon-64.png" alt="" width="32" height="32" />Spaceblox</a>
+        <p class="small">A calm color-logic puzzle for Android and the web. Made by Giga "gix0n" Sichinava.</p>
+      </div>
+      <nav aria-labelledby="f-sb"><h2 id="f-sb">Play</h2><ul>
+        <li><a href="/spaceblox/play/">Play in browser</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a></li>
+      </ul></nav>
+      <nav aria-labelledby="f-more"><h2 id="f-more">Learn more</h2><ul>
+        <li><a href="/spaceblox/guide/">How to play &amp; guide</a></li>
+        <li><a href="/spaceblox/tips/">Tips</a></li>
+        <li><a href="/spaceblox/faq/">FAQ</a></li>
+        <li><a href="/spaceblox/#release-notes">Release notes</a></li>
+        <li><a href="/spaceblox/devlog/">Devlog</a></li>
+        <li><a href="/spaceblox/about/">About</a></li>
+        <li><a href="/spaceblox/contact/">Contact</a></li>
+        <li><a href="/spaceblox/press/">Press kit</a></li>
+      </ul></nav>
+      <nav aria-labelledby="f-legal"><h2 id="f-legal">Legal</h2><ul>
+        <li><a href="/spaceblox/privacy-policy.html">Privacy policy</a></li>
+      </ul></nav>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Giga "gix0n" Sichinava</span><span>Google Play and the Google Play logo are trademarks of Google LLC.</span></div>
+  </div>
+</footer>
+<script src="/spaceblox/site.js" defer></script>
+<script src="/spaceblox/space-bg.js" defer></script>
+</body>
+</html>
