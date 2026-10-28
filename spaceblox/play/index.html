@@ -3,8 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="google-adsense-account" content="ca-pub-1624206851803206">
-		<!-- /ga.js: GA4 with Consent Mode and AdSense with the H5 games ad cadence. Google's consent message (CMP) handles consent. -->
+		<!-- /ga.js is analytics only. This page does not load the AdSense library. -->
 		<script src="/ga.js"></script>
 		<title>Play Spaceblox in Your Browser</title>
 		<!-- The engine sets document.title to the project name at startup; the game puts this page title back on web. -->
@@ -68,6 +67,9 @@ body { font: 400 15px/1.55 Inter, system-ui, -apple-system, "Segoe UI", Roboto, 
 .play-copy p { margin: 0; max-width: 72ch; font-size: 14px; line-height: 1.5; }
 .play-copy a { color: #7fd0ff; }
 .play-copy a:hover { color: #ffd600; }
+.play-nav { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 10px; }
+.play-nav a { color: #7fd0ff; font-weight: 600; text-decoration: none; }
+.play-nav a:hover { color: #ffd600; }
 .play-bar a, .play-bar button { color: #f4f1e6; }
 .play-bar .back { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px 0 10px; text-decoration: none; font: 600 15px/1 Inter, system-ui, sans-serif; border-radius: 4px; }
 .play-bar .back:hover { background: #0a1c4a; color: #ffd600; }
@@ -253,6 +255,7 @@ body.room-side .side-card { display: block; }
 		<section class="play-copy" aria-labelledby="play-copy-h">
 			<h2 id="play-copy-h">Spaceblox in the browser</h2>
 			<p>This is the browser version of Spaceblox, the color-logic puzzle made by Giga "gix0n" Sichinava. Rules, star goals and beginner tips are in the <a href="/spaceblox/guide/">guide</a>. The <a href="/spaceblox/">home page</a> covers the campaign, platforms and release notes. Questions go to <a href="/spaceblox/contact/">Contact</a>. <a href="/spaceblox/privacy-policy.html">Privacy policy</a>.</p>
+			<nav class="play-nav" aria-label="Main"><a href="/spaceblox/">Home</a><a href="/spaceblox/guide/">Guide</a><a href="/spaceblox/devlog/">Devlog</a><a href="/spaceblox/about/">About</a><a href="/spaceblox/contact/">Contact</a></nav>
 		</section>
 		</div>
 		<aside class="side-card" aria-labelledby="side-h">

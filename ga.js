@@ -1,6 +1,7 @@
-// Google tags for every page. Load this before adsbygoogle.js.
-// Consent Mode v2 starts with everything denied. Google's consent message
-// (AdSense > Privacy & messaging, a Google-certified CMP) updates it.
+// Analytics for every page. Consent Mode v2 starts denied. Google's consent
+// message (AdSense > Privacy & messaging) updates it.
+// Content pages load the AdSense library with their own script tag.
+// This file does not. The player, the privacy policy, and 404 do not load it.
 window.dataLayer = window.dataLayer || [];
 function gtag() {
   dataLayer.push(arguments);
@@ -16,25 +17,10 @@ gtag("js", new Date());
 gtag("config", "G-N1W5TP9WDN");
 
 (function () {
-  var ADS_SRC =
-    "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1624206851803206";
-
-  function addScript(src, attrs) {
-    var el = document.createElement("script");
-    el.async = true;
-    el.src = src;
-    for (var k in attrs || {}) el.setAttribute(k, attrs[k]);
-    document.head.appendChild(el);
-  }
-
-  addScript("https://www.googletagmanager.com/gtag/js?id=G-N1W5TP9WDN");
-
-  // Spaceblox web game. Its page shell has no AdSense tag, so add it here with the
-  // H5 Games ad cadence the game needs. Consent is handled by Google's consent
-  // message like every other page; the game no longer has its own start screen.
-  if (location.pathname.indexOf("/spaceblox/play") === 0) {
-    addScript(ADS_SRC, { crossorigin: "anonymous", "data-ad-frequency-hint": "30s" });
-  }
+  var el = document.createElement("script");
+  el.async = true;
+  el.src = "https://www.googletagmanager.com/gtag/js?id=G-N1W5TP9WDN";
+  document.head.appendChild(el);
 })();
 
 // Display ad bands (.ad-band). They ship with `hidden` and stay hidden until
