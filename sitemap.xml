@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://geeks0n-byte.github.io/spaceblox/</loc>
-    <lastmod>2026-10-05</lastmod>
+    <lastmod>2026-10-28</lastmod>
   </url>
   <url>
     <loc>https://geeks0n-byte.github.io/spaceblox/guide/</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-10-28</lastmod>
   </url>
   <url>
     <loc>https://geeks0n-byte.github.io/spaceblox/play/</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-10-28</lastmod>
   </url>
   <url>
     <loc>https://geeks0n-byte.github.io/spaceblox/devlog/</loc>
-    <lastmod>2026-10-05</lastmod>
+    <lastmod>2026-10-28</lastmod>
   </url>
   <url>
     <loc>https://geeks0n-byte.github.io/spaceblox/devlog/how-spaceblox-color-rules-work/</loc>
@@ -26,11 +26,11 @@
   </url>
   <url>
     <loc>https://geeks0n-byte.github.io/spaceblox/about/</loc>
-    <lastmod>2026-10-05</lastmod>
+    <lastmod>2026-10-28</lastmod>
   </url>
   <url>
     <loc>https://geeks0n-byte.github.io/spaceblox/contact/</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-10-28</lastmod>
   </url>
   <url>
     <loc>https://geeks0n-byte.github.io/spaceblox/press/</loc>
@@ -39,5 +39,29 @@
   <url>
     <loc>https://geeks0n-byte.github.io/spaceblox/privacy-policy.html</loc>
     <lastmod>2026-10-05</lastmod>
+  </url>
+  <url>
+    <loc>https://geeks0n-byte.github.io/spaceblox/tips/</loc>
+    <lastmod>2026-10-28</lastmod>
+  </url>
+  <url>
+    <loc>https://geeks0n-byte.github.io/spaceblox/faq/</loc>
+    <lastmod>2026-10-28</lastmod>
+  </url>
+  <url>
+    <loc>https://geeks0n-byte.github.io/spaceblox/devlog/binary-puzzles-and-spaceblox/</loc>
+    <lastmod>2026-10-28</lastmod>
+  </url>
+  <url>
+    <loc>https://geeks0n-byte.github.io/spaceblox/devlog/why-odd-grids-need-a-wildcard/</loc>
+    <lastmod>2026-10-28</lastmod>
+  </url>
+  <url>
+    <loc>https://geeks0n-byte.github.io/spaceblox/devlog/making-spaceblox-solo-in-godot/</loc>
+    <lastmod>2026-10-28</lastmod>
+  </url>
+  <url>
+    <loc>https://geeks0n-byte.github.io/spaceblox/devlog/designing-accessible-color-puzzles/</loc>
+    <lastmod>2026-10-28</lastmod>
   </url>
 </urlset>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Making Spaceblox solo in Godot</title>
+  <meta name="description" content="How Spaceblox is built by one person in Godot: one project for Android and the browser, tested levels, seven languages, and no save server." />
+  <link rel="canonical" href="https://geeks0n-byte.github.io/spaceblox/devlog/making-spaceblox-solo-in-godot/" />
+  <meta name="google-adsense-account" content="ca-pub-1624206851803206" />
+  <script src="/ga.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1624206851803206" crossorigin="anonymous"></script>
+  <meta name="theme-color" content="#00123a" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://geeks0n-byte.github.io/spaceblox/devlog/making-spaceblox-solo-in-godot/" />
+  <meta property="og:description" content="How Spaceblox is built by one person in Godot: one project for Android and the browser, tested levels, seven languages, and no save server." />
+  <meta property="og:site_name" content="Spaceblox" />
+  <meta property="og:title" content="Making Spaceblox solo in Godot" />
+  <meta property="og:image" content="https://geeks0n-byte.github.io/spaceblox/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:alt" content="The SPACEBLOX title over a pixel space background, with the main menu and a puzzle in progress" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Making Spaceblox solo in Godot" />
+  <meta name="twitter:description" content="How Spaceblox is built by one person in Godot: one project for Android and the browser, tested levels, seven languages, and no save server." />
+  <meta name="twitter:image" content="https://geeks0n-byte.github.io/spaceblox/og-image.png" />
+  <meta name="twitter:image:alt" content="The SPACEBLOX title over a pixel space background, with the main menu and a puzzle in progress" />
+  <link rel="icon" href="/spaceblox/favicon.ico" sizes="32x32" />
+  <link rel="icon" href="/spaceblox/assets/icon-192.png" sizes="192x192" type="image/png" />
+  <link rel="apple-touch-icon" href="/spaceblox/apple-touch-icon.png" />
+  <link rel="manifest" href="/spaceblox/site.webmanifest" />
+  <link rel="preload" href="/spaceblox/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/spaceblox/site.css" />
+  <link rel="stylesheet" href="/spaceblox/space-bg.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/spaceblox/"><img src="/spaceblox/assets/icon-64.png" alt="" width="32" height="32" />Spaceblox</a>
+    <nav class="nav site-nav" id="site-nav" aria-label="Main"><a href="/spaceblox/">Home</a><a href="/spaceblox/guide/">Guide</a><a href="/spaceblox/tips/">Tips</a><a href="/spaceblox/faq/">FAQ</a><a href="/spaceblox/devlog/" aria-current="page">Devlog</a><a href="/spaceblox/about/">About</a><a href="/spaceblox/contact/">Contact</a></nav>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><i aria-hidden="true"></i>Menu</button>
+  </div>
+</header>
+<main id="main" class="reading">
+<div class="container"><div class="article">
+<h1>Making Spaceblox solo in Godot</h1>
+<p>Spaceblox is the first game I have released. I am Giga Sichinava. On Google Play the developer name is gix0n. I designed it, programmed it, and published it. The engine is Godot. The scripts are GDScript. The Android app and the browser build come from the same Godot project. This page is how that project is put together, using the facts I have actually published. Where I describe a step that any solo puzzle game has to take, I say so. I do not have a diary of late nights or of a particular bug, and I will not write a fake one.</p>
+<p>You can play the game on <a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a> or in the <a href="/spaceblox/play/">browser version</a>. The <a href="/spaceblox/about/">about page</a> is the short version of who made it. This is the longer one.</p>
+<h2>One person, and the list of jobs</h2>
+<p>The approved about copy names the work as one person&#x27;s: game design, programming, art direction, testing, the store pages, and this website. The live about page says the same thing in fewer words. I designed Spaceblox, programmed it, tested it, and built the site. I also build websites, apart from the games. There is no second department holding the rules while I hold the code. When a rule is hard to explain, the tutorial, the in-game guide, and the store text all have to change together, because they are all mine.</p>
+<p>A generic solo process looks like this. You write a rule. You make one small board that uses only that rule. You play the board. If the rule cannot be taught on that board, you change the rule or you throw the board away. Spaceblox follows that shape in a concrete way. The tutorial introduces one rule at a time, on a small board, with a highlighted cell to practise on. Then it moves to the next rule. You can replay the tutorial from the main menu. During a level, How to Play opens the full guide, with valid and invalid examples, without making you quit.</p>
+<p>I prefer small steps that are tested before they land. I would rather remove something that does not work than pile another system on top of it. That is a working rule I have stated for this project, not a slogan. You can see it in what the game refuses to have. There is no energy meter. There is no game-over countdown. A clock, when a level has one, only decides whether you earn the optional time star. On some purple boards that star is a hop limit instead. Missing it does not fail the level.</p>
+<h2>The rules are the feature list</h2>
+<p>Before there is a campaign, there is a checker. A Spaceblox board is solved only when the published rules all hold. No three of the same color in a row or column. Equal yellow and blue on every finished line. Green counted as both colors for that three-in-a-row test, and as neither color for the balance test, with at most one green per line. Purple filling a cell without joining the yellow/blue count, and hopping only into a cell that is not already purple. Locks left alone. = means they must match and × means they must differ.</p>
+<p>A generic puzzle game turns that checker into levels by adding clues until only one solution remains, then asking a person to solve it with no extra information. I do the campaign half of that with automated logic tests. Those tests check puzzle validation and every campaign level. The point I have published is simple: a level that ships is a level that can be solved. I have not published a level count, so I will not guess how many boards those tests cover. I also have not named the test tool in any public page, so I will not name one here. The set those tests cover is the campaign: easy, medium, and hard, the same campaign v1.0 shipped on Google Play on 1 September 2026. Version 1.1.0 did not replace that checker. It added Android achievements, cloud save, colorblind mode, and TalkBack, and it is when the browser version shipped.</p>
+<h2>One project, two ways to play</h2>
+<p>The browser build shipped with 1.1.0, on 5 October 2026. v1.0 was the Play app only. The web build is a Godot export. The page is portrait, which matches a phone, and it also runs on a desktop browser. Progress for that build stays in the browser&#x27;s own storage on that device. It is not sent to me. The export registers a service worker so that a published update can replace a stale game pack instead of leaving you on an old one. The offline page that ships with the export says the application needs an internet connection the first time it runs. I have not published a stronger offline promise than that sentence.</p>
+<p>The Android app stores progress on the device: unlocked levels, stars, best times, achievements, settings, and an in-progress level if you have one. Settings include language, sound, background, and colorblind mode. From version 1.1.0 you can optionally sign in to Google Play Games. Google then keeps a cloud copy of progress, settings, and achievements. In-progress levels are not part of that upload. I do not run a save server. Signing in is never required to play. The browser build does not have this cloud save. Your browser progress does not move to the phone by itself.</p>
+<p>That split is a decision inside one project. The rules, the tutorial, and the campaign are shared. Cloud save is not. It is optional, Android-only, and it starts at 1.1.0. If you want a cloud copy of progress and achievements, use <a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a> and sign in to Play Games. If you want a campaign level without installing, use the <a href="/spaceblox/play/">browser</a>. The browser save stays in that browser.</p>
+<h2>Teaching, hints, and the decision to keep mistakes cheap</h2>
+<p>A logic puzzle feels worse when one wrong cell costs the whole attempt. The tools in Spaceblox are there to make the cost small, and each one is specific. A broken rule highlights the cells involved, in red, immediately. Undo and Redo step backward and forward, and on a campaign level they are not limited. Press and hold clears one tile. In the browser you hold for about a second. Restart restores the starting layout, including locks. The in-progress board is saved if you close the game.</p>
+<p>Hints were a design choice with a published reason. A hint that fills a cell solves the puzzle and teaches nothing. A Spaceblox hint reveals an &quot;=&quot; or &quot;×&quot; between two cells. You still place the color. Each campaign level includes a small number of hints, more when the level is harder. An optional ad can add three more. Because a star requires a clear with no hints, using one is a decision, not a failure state. You can replay the level without a hint and still earn that star. I have not published a playtest quote about hints, so I will not invent one.</p>
+<h2>Languages and the store text</h2>
+<p>The game is in seven languages: English, Spanish, German, French, Polish, Georgian, and Ukrainian. A generic translation pass on a puzzle game is mostly short strings: button labels, rule names, a star description, a settings row. Those strings have to stay readable on a phone. I have not published a list of which strings were too long. Language is one of the settings stored on the device, next to sound, background, and colorblind mode. If a line is wrong, the contact page is where I ask for the language, the screen, and the corrected text.</p>
+<p>The store page and this website are part of the same solo job. The press kit has the factsheet, the short and long descriptions, the logo, the icon, screenshots, key art, and a gameplay GIF. You may use those assets for coverage of Spaceblox without asking first. If you need a review copy, or you want to name a channel, the contact email is giga.sichinava@gmail.com. Messages in English are the ones I can answer most easily. I read every message. I cannot promise a clock time for the reply.</p>
+<h2>Money, ads, and what I left off the board</h2>
+<p>Spaceblox is free. The Android app shows ads through AdMob. This site shows ads through AdSense. Full-screen ads wait until you have cleared several levels, and then they run between levels. They do not run in the middle of a puzzle. The ad that grants extra hints runs only if you ask for it. Where consent is required, the site uses Google&#x27;s certified consent tool before analytics or advertising cookies. The privacy policy&#x27;s effective date is 1 September 2026, the Play release date. From Android 1.1.0 the app also uses Firebase Analytics and Firebase Crashlytics. Earlier app versions do not. I use the crash reports to fix bugs. That sentence is the published purpose, and it is as specific as the policy gets.</p>
+<p>Version 1.1.0, dated 5 October 2026 on the live site, is when Android gained achievements, cloud save, colorblind mode, and TalkBack support, and when the browser version was released. v1.0 did not have a web build. Cloud save stays on Android. The browser version has the campaign and keeps its save in that browser. One project ships two builds from 1.1.0 on, and cloud save is the piece I left off the web build.</p>
+<h2>What this page is not</h2>
+<p>It is not a Godot tutorial. I have not published a project template, a scene tree, or a script you can copy. It is not a schedule. I have not said how long any version took. It is not a second game. The public game is Spaceblox. v1.0 is the Google Play launch on 1 September 2026. The current public version is 1.1.0, dated 5 October 2026. I build the campaign levels. The pages do not describe a tool for players to build their own.</p>
+<p>If you want the rules instead of the toolchain, the guide on the site walks through them with examples. If you want to tell me that a step in this process produced a wrong level, or a bad translation, use the <a href="/spaceblox/contact/">contact page</a>. A bug report I can use includes the platform, the device or browser, the level, and what you expected to happen.</p>
+    </div></div>
+</main>
+<aside class="ad-band" aria-label="Advertisement" data-ad-placement="devlog-post" hidden>
+  <div class="ad-slot">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1624206851803206" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div>
+</aside>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="f-brand">
+        <a class="brand" href="/spaceblox/"><img src="/spaceblox/assets/icon-64.png" alt="" width="32" height="32" />Spaceblox</a>
+        <p class="small">A calm color-logic puzzle for Android and the web. Made by Giga "gix0n" Sichinava.</p>
+      </div>
+      <nav aria-labelledby="f-sb"><h2 id="f-sb">Play</h2><ul>
+        <li><a href="/spaceblox/play/">Play in browser</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.spaceblox.game">Google Play</a></li>
+      </ul></nav>
+      <nav aria-labelledby="f-more"><h2 id="f-more">Learn more</h2><ul>
+        <li><a href="/spaceblox/guide/">How to play &amp; guide</a></li>
+        <li><a href="/spaceblox/tips/">Tips</a></li>
+        <li><a href="/spaceblox/faq/">FAQ</a></li>
+        <li><a href="/spaceblox/#release-notes">Release notes</a></li>
+        <li><a href="/spaceblox/devlog/">Devlog</a></li>
+        <li><a href="/spaceblox/about/">About</a></li>
+        <li><a href="/spaceblox/contact/">Contact</a></li>
+        <li><a href="/spaceblox/press/">Press kit</a></li>
+      </ul></nav>
+      <nav aria-labelledby="f-legal"><h2 id="f-legal">Legal</h2><ul>
+        <li><a href="/spaceblox/privacy-policy.html">Privacy policy</a></li>
+      </ul></nav>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Giga "gix0n" Sichinava</span><span>Google Play and the Google Play logo are trademarks of Google LLC.</span></div>
+  </div>
+</footer>
+<script src="/spaceblox/site.js" defer></script>
+<script src="/spaceblox/space-bg.js" defer></script>
+</body>
+</html>
